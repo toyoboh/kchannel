@@ -10,7 +10,8 @@ export const UserProvider = ({ children }) => {
     const initialUserData = {
         user_id: "",
         user_name: "",
-        isAuth: false
+        is_auth: false,
+        current_header_item: 0
     }
 
     const [user, setUser] = useState(initialUserData);

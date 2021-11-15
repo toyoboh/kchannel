@@ -1,0 +1,6 @@
+@media(max-width: 480px) {
+    .category {
+        padding: 20px 16px;
+        width: 100%;
+    }
+}
