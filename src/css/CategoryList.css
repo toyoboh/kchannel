@@ -1,19 +1,19 @@
-.category {
+.category-list {
     background-color: var(--base-color);
     min-height: 100vh;
 }
 
 @media(max-width: 480px) {
-    .category {
+    .category-list {
         padding: 20px 16px;
         width: 100%;
     }
 
-    .category-title {
+    .category-list-title {
         margin-bottom: 16px;
     }
 
-    .category-body > .card {
+    .category-list-body > .card {
         margin-bottom: 16px;
     }
 }

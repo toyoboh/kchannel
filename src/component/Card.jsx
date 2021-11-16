@@ -1,6 +1,12 @@
 import React from "react";
 import "../css/Card.css";
 
+/**
+ * @param {string} title           カードのタイトル
+ * @param {num}    count           カードに紐づいている件数
+ * @param {string} createdAt       カードの登録日
+ * @param {string} createdUserName カードを登録したユーザ名
+ */
 function Card({ title, count, createdAt, createdUserName }) {
     return(
         <div className="card">
@@ -20,7 +26,7 @@ function Card({ title, count, createdAt, createdUserName }) {
                     { title }
                 </div>
                 <div className="body-count">
-                    { count }件
+                    { String(count) }件
                 </div>
             </div>
         </div>

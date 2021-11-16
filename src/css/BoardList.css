@@ -1,0 +1,19 @@
+.board-list {
+    background-color: var(--base-color);
+    min-height: 100vh;
+}
+
+@media(max-width: 480px) {
+    .board-list {
+        padding: 20px 16px;
+        width: 100%;
+    }
+
+    .board-list-title {
+        margin-bottom: 16px;
+    }
+
+    .board-list-body > .card {
+        margin-bottom: 16px;
+    }
+}

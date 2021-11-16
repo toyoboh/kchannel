@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from "react";
-import "../css/Category.css";
+import "../css/CategoryList.css";
 import PageTitle from "../component/PageTitle";
 import CategoryIcon from "@material-ui/icons/Category";
 import Card from "../component/Card";
 
-function Category() {
+function CategoryList() {
     const [cardList, setCardList] = useState([]);
     
     useEffect(() => {
@@ -19,22 +19,22 @@ function Category() {
     }, []);
 
     const Cards = cardList.map(function(card) {
-        return <Card key={ card.key} title={ card.title} count={ card.count } />
+        return <Card key={ card.key } title={ card.title } count={ card.count } />
     })
 
     console.log(Cards);
 
     return(
-        <div className="category">
-            <div className="category-title">
+        <div className="category-list">
+            <div className="category-list-title">
                 <PageTitle Icon={ CategoryIcon } title="Category" />
             </div>
 
-            <div className="category-body">
+            <div className="category-list-body">
                 { Cards }
             </div>
         </div>
     )
 }
 
-export default Category;
+export default CategoryList;
