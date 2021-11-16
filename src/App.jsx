@@ -5,6 +5,7 @@ import "./css/App.css";
 import Header from "./component/Header";
 import CategoryList from "./page/CategoryList";
 import BoardList from "./page/BoardList";
+import ThreadList from "./page/ThreadList";
 
 function App() {
     return (
@@ -16,6 +17,9 @@ function App() {
                     </Route>
                     <Route exact path="/boardList/:categoryId">
                         <BoardList />
+                    </Route>
+                    <Route exact path="/threadList/:boardId">
+                        <ThreadList />
                     </Route>
             </Router>
         </div>

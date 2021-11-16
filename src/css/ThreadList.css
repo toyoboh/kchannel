@@ -1,0 +1,19 @@
+.thread-list {
+    background-color: var(--base-color);
+    min-height: 100vh;
+}
+
+@media(max-width: 480px) {
+    .thread-list {
+        padding: 20px 16px;
+        width: 100%;
+    }
+
+    .thread-list-title {
+        margin-bottom: 16px;
+    }
+
+    .thread-list-body > .card {
+        margin-bottom: 16px;
+    }
+}
