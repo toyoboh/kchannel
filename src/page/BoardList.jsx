@@ -16,7 +16,7 @@ function BoardList() {
             { key: 2, title: "board2", count: 2},
             { key: 3, title: "board3", count: 3},
             { key: 4, title: "board4", count: 4},
-            { key: 5, title: "board5", count: 5},
+            { key: 5, title: "board5", count: 5}
         ];
         setBoardList(initialBoardList);
     }, []);
