@@ -16,7 +16,7 @@ function ThreadList() {
             { key: 2, title: "thread2", count: 2, createdAt: "2021/11/17 20:30:12", createdUserName: "sho"},
             { key: 3, title: "thread3", count: 3, createdAt: "2021/11/17 20:30:12", createdUserName: "sho"},
             { key: 4, title: "thread4", count: 4, createdAt: "2021/11/17 20:30:12", createdUserName: "sho"},
-            { key: 5, title: "thread5", count: 5, createdAt: "2021/11/17 20:30:12", createdUserName: "sho"},
+            { key: 5, title: "thread5", count: 5, createdAt: "2021/11/17 20:30:12", createdUserName: "sho"}
         ];
         setThreadList(initialThreadList);
     }, []);
