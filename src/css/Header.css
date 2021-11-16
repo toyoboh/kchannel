@@ -1,5 +1,5 @@
 .header {
-    background-color: white;
+    background-color: var(--base-color);
     position: sticky;
     top: 0px;
     width: 100%;
@@ -7,7 +7,7 @@
 
 @media(max-width: 480px) {
     .header {
-        border-bottom: 1px solid black;
+        border-bottom: 4px double var(--accent-color);
     }
 
     .header-item-wrapper {
@@ -18,8 +18,10 @@
 
     .header-item-wrapper > .header-item {
         align-items: center;
+        color: var(--accent-color);
         display: flex;
         font-size: 18px;
+        font-weight: 900;
         justify-content: center;
         padding-bottom: 8px;
         padding-top: 8px;

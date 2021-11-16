@@ -1,6 +1,19 @@
+.category {
+    background-color: var(--base-color);
+    min-height: 100vh;
+}
+
 @media(max-width: 480px) {
     .category {
         padding: 20px 16px;
         width: 100%;
+    }
+
+    .category-title {
+        margin-bottom: 16px;
+    }
+
+    .category-body > .card {
+        margin-bottom: 16px;
     }
 }
