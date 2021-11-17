@@ -16,4 +16,8 @@
     .thread-space > .explanation-container {
         margin-bottom: 16px;
     }
+
+    .thread-space > .comment-container > .comment {
+        margin-bottom: 16px;
+    }
 }

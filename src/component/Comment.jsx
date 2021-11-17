@@ -1,20 +1,19 @@
 import React from "react";
 import "../css/Comment.css";
 
-function Comment() {
+function Comment({ createdAt, comment, createdUserName }) {
     return(
         <div className="comment">
             <div className="comment-header">
-                2021/11/17 21:31:00
+                { createdAt }
             </div>
 
             <div className="comment-body">
-                こんにちは
-                さようなら
+                { comment }
             </div>
 
             <div className="comment-footer">
-                sho
+                { createdUserName }
             </div>
         </div>
     )

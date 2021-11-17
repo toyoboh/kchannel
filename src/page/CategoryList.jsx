@@ -18,11 +18,9 @@ function CategoryList() {
         setCardList(initialCardList);
     }, []);
 
-    const Cards = cardList.map(function(card) {
+    const cards = cardList.map(function(card) {
         return <Card key={ card.key } title={ card.title } count={ card.count } />
     })
-
-    console.log(Cards);
 
     return(
         <div className="category-list">
@@ -31,7 +29,7 @@ function CategoryList() {
             </div>
 
             <div className="category-list-body">
-                { Cards }
+                { cards }
             </div>
         </div>
     )

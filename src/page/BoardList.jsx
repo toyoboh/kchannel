@@ -21,7 +21,7 @@ function BoardList() {
         setBoardList(initialBoardList);
     }, []);
 
-    const Boards = boardList.map(function(board) {
+    const boards = boardList.map(function(board) {
         return <Card key={ board.key } title={ board.title } count={ board.count } />
     })
 
@@ -32,7 +32,7 @@ function BoardList() {
             </div>
 
             <div className="board-list-body">
-                { Boards }
+                { boards }
             </div>
         </div>
     )
