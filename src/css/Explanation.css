@@ -1,0 +1,37 @@
+@media(max-width: 480px) {
+    .explanation {
+        border: 1px solid black;
+        padding: 6px;
+    }
+
+    .explanation-header {
+        align-items: center;
+        display: flex;
+        justify-content: space-between;
+        margin-bottom: 8px;
+    }
+
+    .explanation-header > .header-title {
+        flex: 1;
+        font-size: 14px;
+    }
+
+    .explanation-header > .header-created-at {
+        flex: 1;
+        font-size: 12px;
+        text-align: right;
+    }
+
+    .explanation-body {
+        border-bottom: 1px dashed var(--accent-color);
+        border-top: 1px dashed var(--accent-color);
+        font-size: 12px;
+        margin-bottom: 8px;
+        padding: 8px 4px;
+    }
+
+    .explanation-footer {
+        font-size: 12px;
+        text-align: right;
+    }
+}

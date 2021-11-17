@@ -6,6 +6,7 @@ import Header from "./component/Header";
 import CategoryList from "./page/CategoryList";
 import BoardList from "./page/BoardList";
 import ThreadList from "./page/ThreadList";
+import ThreadSpace from "./page/ThreadSpace";
 
 function App() {
     return (
@@ -15,11 +16,14 @@ function App() {
                     <Route exact path="/categoryList">
                         <CategoryList />
                     </Route>
-                    <Route exact path="/boardList/:categoryId">
+                    <Route path="/boardList/:categoryId">
                         <BoardList />
                     </Route>
-                    <Route exact path="/threadList/:boardId">
+                    <Route path="/threadList/:boardId">
                         <ThreadList />
+                    </Route>
+                    <Route path="/threadSpace/:threadId">
+                        <ThreadSpace />
                     </Route>
             </Router>
         </div>

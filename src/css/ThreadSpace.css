@@ -1,0 +1,19 @@
+.thread-space {
+    background-color: var(--base-color);
+    min-height: 100vh;
+}
+
+@media(max-width: 480px) {
+    .thread-space {
+        padding: 20px 16px;
+        width: 100%;
+    }
+
+    .thread-space > .title-container {
+        margin-bottom: 16px;
+    }
+
+    .thread-space > .explanation-container {
+        margin-bottom: 16px;
+    }
+}

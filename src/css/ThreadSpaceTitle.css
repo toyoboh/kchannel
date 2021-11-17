@@ -1,0 +1,9 @@
+@media(max-width: 480px) {
+    .thread-space-title {
+        border-left: 4px solid var(--main-color);
+        border-bottom: 2px dotted var(--main-color);
+        font-size: 14px;
+        font-weight: 600;
+        padding: 6px;
+    }
+}
