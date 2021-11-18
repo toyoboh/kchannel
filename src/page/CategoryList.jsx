@@ -3,24 +3,39 @@ import "../css/CategoryList.css";
 import PageTitle from "../component/PageTitle";
 import CategoryIcon from "@material-ui/icons/Category";
 import Card from "../component/Card";
+import axios from "axios";
 
 function CategoryList() {
-    const [cardList, setCardList] = useState([]);
-    
+    const [categoryData, setCategoryData] = useState([]);
+
     useEffect(() => {
-        const initialCardList = [
-            { key: 1, title: "音楽", count: 1 },
-            { key: 2, title: "アイドル", count: 2 },
-            { key: 3, title: "美容", count: 3 },
-            { key: 4, title: "料理", count: 4 },
-            { key: 5, title: "ドラマ", count: 5 }
-        ];
-        setCardList(initialCardList);
+        const fetchCategory = async () => {
+            axios.get(
+                "http://localhost:8888/GitHub/self/kchannel/backend/Api/searchCategoryList.php"
+            )
+            .then((res) => {
+                setCategoryData(res.data);
+            })
+            .catch((err) => {
+                console.log(err);
+            })
+        }
+        fetchCategory();
     }, []);
 
-    const cards = cardList.map(function(card) {
-        return <Card key={ card.key } title={ card.title } count={ card.count } />
-    })
+    //取得されたcategoryの数によって処理を分岐
+    let categoryContent = null;
+    if(categoryData === null) {
+        categoryContent = <div>表示するcategoryはありません</div>
+    } else {
+        categoryContent = categoryData.map(function(category) {
+            return <Card
+                    key={ category.category_id }
+                    title={ category.category_name }
+                    count={ category.count }
+                    />
+        })
+    }
 
     return(
         <div className="category-list">
@@ -29,7 +44,7 @@ function CategoryList() {
             </div>
 
             <div className="category-list-body">
-                { cards }
+                { categoryContent }
             </div>
         </div>
     )
