@@ -13,6 +13,7 @@ function App() {
         <div className="app">
             <Router>
                 <Header />
+                    <Route exact path="/">test</Route>
                     <Route exact path="/categoryList">
                         <CategoryList />
                     </Route>

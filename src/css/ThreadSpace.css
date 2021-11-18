@@ -17,6 +17,12 @@
         margin-bottom: 16px;
     }
 
+    .thread-space > .total-comment-container {
+        font-size: 14px;
+        margin-bottom: 16px;
+        text-align: right;
+    }
+
     .thread-space > .comment-container > .comment {
         margin-bottom: 16px;
     }
