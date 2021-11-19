@@ -1,6 +1,12 @@
 <?php
 
+require __DIR__ . "/../../vendor/autoload.php";
+
+use Kchannel\Classes\DbConnect;
+
 if($_SERVER["REQUEST_METHOD"] === "GET") {
+    $c_db_connect = new DbConnect();
+    var_dump($c_db_connect->getPdo());
     
     //カテゴリ取得
     $category_list = fetchCategoryList();

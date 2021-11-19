@@ -1,5 +1,7 @@
 <?php
 
+namespace Kchannel\Classes;
+
 class DbConnect
 {
     //pdoオブジェクト
@@ -12,10 +14,7 @@ class DbConnect
      */
     public function __construct() {
         $pdo_result = $this->dbConnect();
-
-        if(!$pdo_result) {
-            $this->pdo = $pdo_result;
-        }
+        $this->pdo = $pdo_result;
     }
 
     /**
