@@ -6,15 +6,22 @@ import Card from "../component/Card";
 import axios from "axios";
 
 function CategoryList() {
-    const [categoryData, setCategoryData] = useState([]);
+    // Message when there is no category
+    const [message, setMessage] = useState("");
+    // Database category infomation
+    const [categories, setCategories] = useState([]);
 
     useEffect(() => {
         const fetchCategory = async () => {
             axios.get(
-                "http://localhost:8888/GitHub/self/kchannel/backend/Api/searchCategoryList.php"
+                "http://localhost:8888/GitHub/self/kchannel/backend/Api/categoryList.php"
             )
             .then((res) => {
-                setCategoryData(res.data);
+                if(res.data.data.length > 0) {
+                    setCategories(res.data.data);
+                } else {
+                    setMessage(res.data.message);
+                }
             })
             .catch((err) => {
                 console.log(err);
@@ -23,17 +30,18 @@ function CategoryList() {
         fetchCategory();
     }, []);
 
-    //取得されたcategoryの数によって処理を分岐
-    let categoryContent = null;
-    if(categoryData === null) {
-        categoryContent = <div>表示するcategoryはありません</div>
+    // Category content for display
+    let categoryContent;
+
+    if(message !== "") {
+        categoryContent = <div>{ message }</div>;
     } else {
-        categoryContent = categoryData.map(function(category) {
+        categoryContent = categories.map(function(category) {
             return <Card
                     key={ category.category_id }
                     title={ category.category_name }
-                    count={ category.count }
-                    />
+                    count={ category.board_count }
+                    />;
         })
     }
 
