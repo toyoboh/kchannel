@@ -34,7 +34,7 @@ function BoardList() {
         fetchBoard();
     }, [categoryId]);
 
-    // Category content for display
+    // Board content for display
     let boardContent;
     if(message !== "") {
         boardContent = <div>{ message }</div>;

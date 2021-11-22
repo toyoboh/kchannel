@@ -1,35 +1,54 @@
 import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
+import axios from "axios";
 import "../css/ThreadList.css";
 import PageTitle from "../component/PageTitle";
 import DescriptionIcon from "@material-ui/icons/Description";
 import Card from "../component/Card";
 
 function ThreadList() {
+    // board id received by parameter
     const { boardId } = useParams();
 
-    const [threadList, setThreadList] = useState([]);
+    // Message when there is no threads
+    const [message, setMessage] = useState("");
+    // Database thread infomation
+    const [threads, setThreads] = useState([]);
 
-    useEffect(()=> {
-        const initialThreadList = [
-            { key: 1, title: "thread1", count: 1, createdAt: "2021/11/17 20:30:12", createdUserName: "sho"},
-            { key: 2, title: "thread2", count: 2, createdAt: "2021/11/17 20:30:12", createdUserName: "sho"},
-            { key: 3, title: "thread3", count: 3, createdAt: "2021/11/17 20:30:12", createdUserName: "sho"},
-            { key: 4, title: "thread4", count: 4, createdAt: "2021/11/17 20:30:12", createdUserName: "sho"},
-            { key: 5, title: "thread5", count: 5, createdAt: "2021/11/17 20:30:12", createdUserName: "sho"}
-        ];
-        setThreadList(initialThreadList);
-    }, []);
+    useEffect(() => {
+        const fetchThread = async () => {
+            axios.get(
+                `http://localhost:3000/GitHub/self/kchannel/backend/Api/threadList.php?board_id=${boardId}`
+            )
+            .then((res) => {
+                if(res.data.data.length > 0) {
+                    setThreads(res.data.data);
+                } else {
+                    setMessage(res.data.message);
+                }
+            })
+            .catch((err) => {
+                console.log(err);
+            })
+        }
+        fetchThread();
+    }, [boardId]);
 
-    const Threads = threadList.map(function(thread) {
-        return <Card
-                key={ thread.key }
-                title={ thread.title }
-                count={ thread.count }
-                createdAt={ thread.createdAt }
-                createdUserName={ thread.createdUserName }
-                />
-    })
+    // Thread content for display
+    let threadContent;
+    if(message !== "") {
+        threadContent = <div>{ message }</div>;
+    } else {
+        threadContent = threads.map(function(thread) {
+            return <Card
+                    key={ thread.thread_id }
+                    title={ thread.thread_name }
+                    count={ thread.comment_count }
+                    createdAt={ thread.created_at }
+                    createdUserName={ thread.created_user_name }
+                    />;
+        })
+    }
 
     return(
         <div className="thread-list">
@@ -38,7 +57,7 @@ function ThreadList() {
             </div>
 
             <div className="thread-list-body">
-                { Threads }
+                { threadContent }
             </div>
         </div>
     )
