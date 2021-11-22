@@ -14,7 +14,7 @@ function CategoryList() {
     useEffect(() => {
         const fetchCategory = async () => {
             axios.get(
-                "http://localhost:8888/GitHub/self/kchannel/backend/Api/categoryList.php"
+                "http://localhost:3000/GitHub/self/kchannel/backend/Api/categoryList.php"
             )
             .then((res) => {
                 if(res.data.data.length > 0) {
