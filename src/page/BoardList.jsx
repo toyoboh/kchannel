@@ -1,29 +1,52 @@
 import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
+import axios from "axios";
 import "../css/BoardList.css";
 import PageTitle from "../component/PageTitle";
 import ReceiptIcon from "@material-ui/icons/Receipt";
 import Card from "../component/Card";
 
 function BoardList() {
+    // category id received by parameter
     const { categoryId } = useParams();
 
-    const [boardList, setBoardList] = useState([]);
+    // Message when there is no board
+    const [message, setMessage] = useState("");
+    // Database board infomation
+    const [boards, setBoards] = useState([]);
 
-    useEffect(()=> {
-        const initialBoardList = [
-            { key: 1, title: "board1", count: 1},
-            { key: 2, title: "board2", count: 2},
-            { key: 3, title: "board3", count: 3},
-            { key: 4, title: "board4", count: 4},
-            { key: 5, title: "board5", count: 5}
-        ];
-        setBoardList(initialBoardList);
-    }, []);
+    useEffect(() => {
+        const fetchBoard = async () => {
+            axios.get(
+                `http://localhost:3000/GitHub/self/kchannel/backend/Api/boardList.php?category_id=${categoryId}`
+            )
+            .then((res) => {
+                if(res.data.data.length > 0) {
+                    setBoards(res.data.data);
+                } else {
+                    setMessage(res.data.message);
+                }
+            })
+            .catch((err) => {
+                console.log(err);
+            })
+        }
+        fetchBoard();
+    }, [categoryId]);
 
-    const boards = boardList.map(function(board) {
-        return <Card key={ board.key } title={ board.title } count={ board.count } />
-    })
+    // Category content for display
+    let boardContent;
+    if(message !== "") {
+        boardContent = <div>{ message }</div>;
+    } else {
+        boardContent = boards.map(function(board) {
+            return <Card
+                    key={ board.board_id }
+                    title={ board.board_name }
+                    count={ board.thread_count }
+                    />;
+        })
+    }
 
     return(
         <div className="board-list">
@@ -32,7 +55,7 @@ function BoardList() {
             </div>
 
             <div className="board-list-body">
-                { boards }
+                { boardContent }
             </div>
         </div>
     )
