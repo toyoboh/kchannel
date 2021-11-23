@@ -17,8 +17,8 @@ function CategoryList() {
                 "http://localhost:3000/GitHub/self/kchannel/backend/Api/categoryList.php"
             )
             .then((res) => {
-                if(res.data.data.length > 0) {
-                    setCategories(res.data.data);
+                if(res.data.data.category.length > 0) {
+                    setCategories(res.data.data.category);
                 } else {
                     setMessage(res.data.message);
                 }

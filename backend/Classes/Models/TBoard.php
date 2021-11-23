@@ -50,10 +50,12 @@ class TBoard
         $row_count = $stmt->rowCount();
         
         $board = array();
+        $board["data"] = array();
+
         if($row_count > 0) {
-            $board["data"]    = $stmt->fetchAll();
+            $board["data"]["item"] = $stmt->fetchAll();
         } else {
-            $board["data"]    = array();
+            $board["data"]["item"] = array();
             $board["message"] = "Not Found Board";
         }
 

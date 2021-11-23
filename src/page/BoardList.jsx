@@ -21,8 +21,8 @@ function BoardList() {
                 `http://localhost:3000/GitHub/self/kchannel/backend/Api/boardList.php?category_id=${categoryId}`
             )
             .then((res) => {
-                if(res.data.data.length > 0) {
-                    setBoards(res.data.data);
+                if(res.data.data.item.length > 0) {
+                    setBoards(res.data.data.item);
                 } else {
                     setMessage(res.data.message);
                 }

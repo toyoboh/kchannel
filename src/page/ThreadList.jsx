@@ -21,8 +21,8 @@ function ThreadList() {
                 `http://localhost:3000/GitHub/self/kchannel/backend/Api/threadList.php?board_id=${boardId}`
             )
             .then((res) => {
-                if(res.data.data.length > 0) {
-                    setThreads(res.data.data);
+                if(res.data.data.item.length > 0) {
+                    setThreads(res.data.data.item);
                 } else {
                     setMessage(res.data.message);
                 }

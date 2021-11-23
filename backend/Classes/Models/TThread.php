@@ -47,14 +47,58 @@ class TThread
 
         $row_count = $stmt->rowCount();
         
-        $board = array();
+        $thread = array();
+        $thread["data"] = array();
+
         if($row_count > 0) {
-            $board["data"]    = $stmt->fetchAll();
+            $thread["data"]["item"] = $stmt->fetchAll();
         } else {
-            $board["data"]    = array();
-            $board["message"] = "Not Found Thread";
+            $thread["data"]["item"] = array();
+            $thread["message"] = "Not Found Thread";
         }
 
-        return $board;
+        return $thread;
+    }
+
+    /**
+     * Fetch infomation about the thread
+     * @param string $thread_id
+     * @return array Returns an empty array when thread infomation fetch fails
+     */
+    public function fetchThreadInfo($thread_id) {
+        $query = "SELECT
+                threads.thread_id          AS thread_id,
+                threads.thread_name        AS thread_name,
+                threads.thread_explanation AS thread_explanation,
+                threads.created_at         AS created_at,
+                threads.created_user_id    AS created_user_id,
+                users.user_name            AS created_user_name
+            FROM
+                t_threads threads
+            INNER JOIN
+                t_users users
+            ON
+                threads.created_user_id = users.user_id
+            WHERE
+                threads.thread_id = :thread_id
+        ;";
+
+        $use_query_item = [
+            "thread_id" => $thread_id
+        ];
+
+        $database = new Database();
+        $database->connect();
+        $stmt = $database->executeQuery($query, $use_query_item);
+
+        $row_count = $stmt->rowCount();
+
+        if($row_count > 0) {
+            $thread_info = $stmt->fetch();
+        } else {
+            $thread_info = array();
+        }
+
+        return $thread_info;
     }
 }

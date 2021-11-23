@@ -11,13 +11,8 @@ function CommentList() {
     const { threadId } = useParams();
 
     //
-    const [threadInfo, setThreadInfo] = useState({
-        thread_id: "thread1",
-        thread_name: "ソリクン",
-        thread_explanation: "explanation",
-        created_at: "2021/11/11",
-        created_user_name: "sho"
-    });
+    const [threadInfo, setThreadInfo] = useState([])
+
     // Message when there is no threads
     const [message, setMessage] = useState("");
     // Database thread infomation
@@ -30,9 +25,10 @@ function CommentList() {
                 `http://localhost:3000/GitHub/self/kchannel/backend/Api/commentList.php?thread_id=${threadId}`
             )
             .then((res) => {
-                if(res.data.data.length > 0) {
-                    setComments(res.data.data);
-                    setCommentCount(res.data.data.length);
+                if(res.data.data.item.length > 0) {
+                    setThreadInfo(res.data.data.thread_info);
+                    setComments(res.data.data.item);
+                    setCommentCount(res.data.data.item.length);
                 } else {
                     setMessage(res.data.message);
                 }

@@ -41,11 +41,12 @@ class TCategory
         $row_count = $stmt->rowCount();
         
         $category = array();
+        $category["data"] = array();
 
         if($row_count > 0) {
-            $category["data"] = $stmt->fetchAll();
+            $category["data"]["item"] = $stmt->fetchAll();
         } else {
-            $category["data"] = array();
+            $category["data"]["item"] = array();
             $category["message"] = "Not Found Category";
         }
 
