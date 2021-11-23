@@ -70,9 +70,9 @@ class TThread
                 threads.thread_id          AS thread_id,
                 threads.thread_name        AS thread_name,
                 threads.thread_explanation AS thread_explanation,
-                threads.created_at         AS created_at,
                 threads.created_user_id    AS created_user_id,
-                users.user_name            AS created_user_name
+                users.user_name            AS created_user_name,
+                DATE_FORMAT(threads.created_at, '%Y年%m月%d日 %H時%i分%s秒') AS created_at
             FROM
                 t_threads threads
             INNER JOIN
