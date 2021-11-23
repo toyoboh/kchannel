@@ -4,7 +4,7 @@ namespace Kchannel\Classes\Models;
 
 use Kchannel\Classes\Config\Database;
 
-class MCategory
+class TCategory
 {
     //columns
     public $category_id;
@@ -25,9 +25,9 @@ class MCategory
                 categories.category_name  AS category_name,
                 COUNT(boards.category_id) AS board_count
             FROM
-                m_categories categories
+                t_categories categories
             LEFT JOIN
-                m_boards boards
+                t_boards boards
             ON
                 categories.category_id = boards.category_id
             GROUP BY

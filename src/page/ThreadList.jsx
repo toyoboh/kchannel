@@ -46,6 +46,7 @@ function ThreadList() {
                     count={ thread.comment_count }
                     createdAt={ thread.created_at }
                     createdUserName={ thread.created_user_name }
+                    path={ "/commentList/" + thread.thread_id }
                     />;
         })
     }

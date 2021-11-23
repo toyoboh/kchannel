@@ -37,11 +37,14 @@ function CategoryList() {
         categoryContent = <div>{ message }</div>;
     } else {
         categoryContent = categories.map(function(category) {
-            return <Card
+            return (
+                <Card
                     key={ category.category_id }
                     title={ category.category_name }
                     count={ category.board_count }
-                    />;
+                    path={ "/boardList/" + category.category_id }
+                />
+            )
         })
     }
 

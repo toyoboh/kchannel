@@ -4,7 +4,7 @@ namespace Kchannel\Classes\Models;
 
 use Kchannel\Classes\Config\Database;
 
-class MBoard
+class TBoard
 {
     //columns
     public $category_id;
@@ -28,7 +28,7 @@ class MBoard
                 boards.board_name        AS board_name,
                 COUNT(threads.thread_id) AS thread_count
             FROM
-                m_boards boards
+                t_boards boards
             LEFT JOIN
                 t_threads threads
             ON
