@@ -1,7 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import "../css/Header.css";
-import { useUserContext } from "../context/User";
 import DesktopWindowsIcon from '@material-ui/icons/DesktopWindows';
 import SearchIcon from "@material-ui/icons/Search";
 import PersonOutlineIcon from "@material-ui/icons/PersonOutline";
