@@ -11,8 +11,8 @@ use Kchannel\Classes\Models\TThread;
 if($_SERVER["REQUEST_METHOD"] === "GET" && isset($_GET["board_id"])) {
     $board_id = $_GET["board_id"];
 
-    $m_board = new TThread();
-    $threads  = $m_board->fetchThreadInBoard($board_id);
+    $t_thread = new TThread();
+    $threads  = $t_thread->fetchThreadInBoard($board_id);
 
     echo json_encode($threads);
 }

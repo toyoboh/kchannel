@@ -1,7 +1,7 @@
 import React from "react";
-import "../css/ThreadSpaceTitle.css";
+import "../css/CommentListTitle.css";
 
-function ThreadSpaceTitle({ title }) {
+function CommentListTitle({ title }) {
     return(
         <h2 className="thread-space-title">
             { title }
@@ -9,4 +9,4 @@ function ThreadSpaceTitle({ title }) {
     )
 }
 
-export default ThreadSpaceTitle;
+export default CommentListTitle;
