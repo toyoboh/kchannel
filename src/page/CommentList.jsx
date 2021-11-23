@@ -25,9 +25,14 @@ function CommentList() {
                 `http://localhost:3000/GitHub/self/kchannel/backend/Api/commentList.php?thread_id=${threadId}`
             )
             .then((res) => {
+                // Be sure to set even if the comment is 0
+                setThreadInfo(res.data.data.thread_info);
+
                 if(res.data.data.item.length > 0) {
-                    setThreadInfo(res.data.data.thread_info);
                     setComments(res.data.data.item);
+
+                    // Change only when the number of items is above 0,
+                    // because the initial value of commentCount is 0
                     setCommentCount(res.data.data.item.length);
                 } else {
                     setMessage(res.data.message);
