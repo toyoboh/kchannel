@@ -94,11 +94,51 @@ class TThread
         $row_count = $stmt->rowCount();
 
         if($row_count > 0) {
-            $thread_info = $stmt->fetch();
+            return $stmt->fetch();
         } else {
-            $thread_info = array();
+            return array();
         }
+    }
 
-        return $thread_info;
+    /**
+     * 
+     */
+    public function selectThreadBreadcrumbInfo($thread_id) {
+        $query = "SELECT
+                categories.category_id AS category_id,
+                categories.category_name AS category_name,
+                boards.board_id AS board_id,
+                boards.board_name AS board_name,
+                threads.thread_id AS thread_id,
+                threads.thread_name AS  thread_name
+            FROM
+                t_threads threads
+            INNER JOIN
+                t_boards boards
+            ON
+                threads.board_id = boards.board_id
+            INNER JOIN
+                t_categories categories
+            ON
+                boards.category_id = categories.category_id
+            WHERE
+                threads.thread_id = :thread_id
+        ;";
+
+        $use_query_item = [
+            "thread_id" => $thread_id
+        ];
+
+        $database = new Database();
+        $database->connect();
+        $stmt = $database->executeQuery($query, $use_query_item);
+
+        $row_count = $stmt->rowCount();
+
+        if($row_count > 0) {
+            return $stmt->fetch();
+        } else {
+            return array();
+        }
     }
 }

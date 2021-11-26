@@ -4,6 +4,7 @@ import PageTitle from "../component/PageTitle";
 import CategoryIcon from "@material-ui/icons/Category";
 import Card from "../component/Card";
 import axios from "axios";
+import BreadcrumbNavigation from "../component/BreadcrumbNavigation";
 
 function CategoryList() {
     // Message when there is no category
@@ -32,7 +33,6 @@ function CategoryList() {
 
     // Category content for display
     let categoryContent;
-
     if(message !== "") {
         categoryContent = <div>{ message }</div>;
     } else {
@@ -52,7 +52,7 @@ function CategoryList() {
         <div className="category-list">
             <div className="category-list-title">
                 <PageTitle Icon={ CategoryIcon } title="Category" />
-            </div>
+            </div><BreadcrumbNavigation />
 
             <div className="category-list-body">
                 { categoryContent }

@@ -52,4 +52,34 @@ class TCategory
 
         return $category;
     }
+
+    /**
+     * 
+     */
+    public function selectCategoryBreadcrumbInfo($category_id) {
+        $query = "SELECT
+                categories.category_id AS category_id,
+                categories.category_name AS category_name
+            FROM
+                t_categories categories
+            WHERE
+                categories.category_id = :category_id
+        ;";
+
+        $use_query_item = [
+            "category_id" => $category_id
+        ];
+
+        $database = new Database();
+        $database->connect();
+        $stmt = $database->executeQuery($query, $use_query_item);
+
+        $row_count = $stmt->rowCount();
+
+        if($row_count > 0) {
+            return $stmt->fetch();
+        } else {
+            return array();
+        }
+    }
 }

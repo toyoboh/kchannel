@@ -5,6 +5,7 @@ import "../css/BoardList.css";
 import PageTitle from "../component/PageTitle";
 import ReceiptIcon from "@material-ui/icons/Receipt";
 import Card from "../component/Card";
+import BreadcrumbNavigation from "../component/BreadcrumbNavigation";
 
 function BoardList() {
     // category id received by parameter
@@ -53,7 +54,7 @@ function BoardList() {
         <div className="board-list">
             <div className="board-list-title">
                 <PageTitle Icon={ ReceiptIcon } title="Board" />
-            </div>
+            </div><BreadcrumbNavigation />
 
             <div className="board-list-body">
                 { boardContent }

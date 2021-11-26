@@ -61,4 +61,40 @@ class TBoard
 
         return $board;
     }
+
+    /**
+     * 
+     */
+    public function selectBoardBreadcrumbInfo($board_id) {
+        $query = "SELECT
+                categories.category_id AS category_id,
+                categories.category_name AS category_name,
+                boards.board_id AS board_id,
+                boards.board_name AS board_name
+            FROM
+                t_boards boards
+            INNER JOIN
+                t_categories categories
+            ON
+                boards.category_id = categories.category_id
+            WHERE
+                boards.board_id = :board_id
+        ;";
+
+        $use_query_item = [
+            "board_id" => $board_id
+        ];
+
+        $database = new Database();
+        $database->connect();
+        $stmt = $database->executeQuery($query, $use_query_item);
+
+        $row_count = $stmt->rowCount();
+
+        if($row_count > 0) {
+            return $stmt->fetch();
+        } else {
+            return array();
+        }
+    }
 }

@@ -5,6 +5,7 @@ import "../css/ThreadList.css";
 import PageTitle from "../component/PageTitle";
 import DescriptionIcon from "@material-ui/icons/Description";
 import Card from "../component/Card";
+import BreadcrumbNavigation from "../component/BreadcrumbNavigation";
 
 function ThreadList() {
     // board id received by parameter
@@ -55,7 +56,7 @@ function ThreadList() {
         <div className="thread-list">
             <div className="thread-list-title">
                 <PageTitle Icon={ DescriptionIcon } title="Thread" />
-            </div>
+            </div><BreadcrumbNavigation />
 
             <div className="thread-list-body">
                 { threadContent }
