@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useLocation, Link } from "react-router-dom";
+import "../css/BreadcrumbNavigation.css";
 import axios from "axios";
 import ArrowRightIcon from "@material-ui/icons/ArrowRight";
 
@@ -26,39 +27,51 @@ function BreadcrumbNavigation() {
     useEffect(() => {
         // Split URL
         const urlSplitArr = location.pathname.split("/");
-        // Get the page name from the URL
+        // Get the page name and id of the parameter from the URL
         const urlName     = urlSplitArr[1];
+        const urlId       = urlSplitArr[2];
 
-        // Define URL parameter empty string
-        let urlParameter = "";
-        // if ther is a second property of the array, assign it to the urlParameter
-        if(urlSplitArr[2]) {
-            urlParameter = urlSplitArr[2];
-        }
-
-        // Page array for IF syntax
-        const pageArr = ["boardList", "threadList", "commentList"];
-
-        // Create and set breadcrumb content 
-        if(urlName === "categoryList") {
-            setBreadcrumb([]);
-        } else if(pageArr.indexOf(urlName) !== -1) {
-            createBreadcrumb(urlName, urlParameter);
-        }
+        createBreadcrumb(urlName, urlId);
     }, [location])
 
-    // let breadcrumbContent;
-    // if(!breadcrumb.length) {
-    //     breadcrumbContent = <li key="1">category</li>;
-    // } else {
-    //     breadcrumbContent = breadcrumb.map(function(b) {
-    //         return <li key={b.name}>{b.name}</li>
-    //     })
-    // }
+    const linkList = ["/boardList/", "/threadList/", "/commentList/"];
+    const breadcrumbCount = breadcrumb.length;
+    let breadcrumbContent;
+    if(breadcrumb.length) {
+        breadcrumbContent = breadcrumb.map((value, index) => {
+            return(
+                <React.Fragment key={ index }>
+                    {/* Only when at the first of the loop */}
+                    {!index &&
+                        <li className="list-item list-item-text">
+                            <Link to="/categoryList">category</Link>
+                        </li>
+                    }
+
+                    <li className="list-item list-item-icon">
+                        <ArrowRightIcon />
+                    </li>
+
+                    {/* Use Link tags except at the end of the loop */}
+                    {breadcrumbCount - 1 === index ? (
+                        <li className="list-item list-item-text">
+                            { value.name }
+                        </li>
+                    ) : (
+                        <li className="list-item list-item-text">
+                            <Link to={ linkList[index] + value.id }>
+                                { value.name }
+                            </Link>
+                        </li>
+                    )}
+                </React.Fragment>
+            )
+        })
+    }
 
     return(
         <ul className="breadcrumb-navigation">
-            
+            { breadcrumbContent }
         </ul>
     )
 }

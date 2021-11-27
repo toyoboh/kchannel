@@ -9,11 +9,15 @@
         width: 100%;
     }
 
-    .board-list-title {
+    .board-list > .board-list-title {
         margin-bottom: 16px;
     }
 
-    .board-list-body > .card {
+    .board-list > .breadcrumb-navigation-container {
+        margin-bottom: 16px;
+    }
+
+    .board-list > .board-list-body > .card {
         margin-bottom: 16px;
     }
 }

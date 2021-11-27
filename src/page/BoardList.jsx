@@ -54,7 +54,11 @@ function BoardList() {
         <div className="board-list">
             <div className="board-list-title">
                 <PageTitle Icon={ ReceiptIcon } title="Board" />
-            </div><BreadcrumbNavigation />
+            </div>
+            
+            <div className="breadcrumb-navigation-container">
+                <BreadcrumbNavigation />
+            </div>
 
             <div className="board-list-body">
                 { boardContent }

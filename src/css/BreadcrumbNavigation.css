@@ -1,5 +1,19 @@
 @media(max-width: 480px) {
-    .breadcrumb-navigation{
-        
+    .breadcrumb-navigation {
+        align-items: center;
+        display: flex;
+    }
+
+    .breadcrumb-navigation > .list-item-text {
+        max-width: 80px;
+        font-size: 12px;
+        width: auto;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+    }
+
+    .breadcrumb-navigation > .list-item-icon > .MuiSvgIcon-root {
+        font-size: 18px;
     }
 }

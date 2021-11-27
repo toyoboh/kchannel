@@ -5,17 +5,17 @@ import "../css/CommentList.css";
 import CommentListTitle from "../component/CommentListTitle";
 import Explanation from "../component/Explanation";
 import Comment from "../component/Comment";
+import BreadcrumbNavigation from "../component/BreadcrumbNavigation";
 
 function CommentList() {
     // board id received by parameter
     const { threadId } = useParams();
 
-    //
+    // thread information
     const [threadInfo, setThreadInfo] = useState([])
 
     // Message when there is no threads
     const [message, setMessage] = useState("");
-    // Database thread infomation
     const [comments, setComments] = useState([]);
     const [commentCount, setCommentCount] = useState(0);
 
@@ -25,7 +25,7 @@ function CommentList() {
                 `http://localhost:3000/GitHub/self/kchannel/backend/Api/commentList.php?thread_id=${threadId}`
             )
             .then((res) => {
-                // Be sure to set even if the comment is 0
+                // Be sure to set even if the number of comments is 0
                 setThreadInfo(res.data.data.thread_info);
 
                 if(res.data.data.item.length > 0) {
@@ -61,9 +61,13 @@ function CommentList() {
     }
 
     return(
-        <div className="thread-space">
+        <div className="comment-list">
             <div className="title-container">
                 <CommentListTitle title={ threadInfo.thread_name } />
+            </div>
+
+            <div className="breadcrumb-navigation-container">
+                <BreadcrumbNavigation />
             </div>
 
             <div className="explanation-container">

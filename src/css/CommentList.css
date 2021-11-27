@@ -1,29 +1,33 @@
-.thread-space {
+.comment-list {
     background-color: var(--base-color);
     min-height: 100vh;
 }
 
 @media(max-width: 480px) {
-    .thread-space {
+    .comment-list {
         padding: 20px 16px;
         width: 100%;
     }
 
-    .thread-space > .title-container {
+    .comment-list > .title-container {
         margin-bottom: 16px;
     }
 
-    .thread-space > .explanation-container {
+    .comment-list > .breadcrumb-navigation-container {
         margin-bottom: 16px;
     }
 
-    .thread-space > .total-comment-container {
+    .comment-list > .explanation-container {
+        margin-bottom: 16px;
+    }
+
+    .comment-list > .total-comment-container {
         font-size: 14px;
         margin-bottom: 16px;
         text-align: right;
     }
 
-    .thread-space > .comment-container > .comment {
+    .comment-list > .comment-container > .comment {
         margin-bottom: 16px;
     }
 }

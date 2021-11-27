@@ -43,22 +43,22 @@ if($_SERVER["REQUEST_METHOD"] === "GET") {
     
     if(isset($result_data["category_id"]) && isset($result_data["category_name"])) {
         $category = [
-            "category_id" => $result_data["category_id"],
-            "category_name" => $result_data["category_name"]
+            "id" => $result_data["category_id"],
+            "name" => $result_data["category_name"]
         ];
         array_push($breadcrumbData["data"], $category);
     }
     if(isset($result_data["board_id"]) && isset($result_data["board_name"])) {
         $board = [
-            "board_id" => $result_data["board_id"],
-            "board_name" => $result_data["board_name"]
+            "id" => $result_data["board_id"],
+            "name" => $result_data["board_name"]
         ];
         array_push($breadcrumbData["data"], $board);
     }
     if(isset($result_data["thread_id"]) && isset($result_data["thread_name"])) {
         $thread = [
-            "thread_id" => $result_data["thread_id"],
-            "thread_name" => $result_data["thread_name"]
+            "id" => $result_data["thread_id"],
+            "name" => $result_data["thread_name"]
         ];
         array_push($breadcrumbData["data"], $thread);
     }

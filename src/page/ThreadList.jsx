@@ -56,7 +56,11 @@ function ThreadList() {
         <div className="thread-list">
             <div className="thread-list-title">
                 <PageTitle Icon={ DescriptionIcon } title="Thread" />
-            </div><BreadcrumbNavigation />
+            </div>
+
+            <div className="breadcrumb-navigation-container">
+                <BreadcrumbNavigation />
+            </div>
 
             <div className="thread-list-body">
                 { threadContent }
