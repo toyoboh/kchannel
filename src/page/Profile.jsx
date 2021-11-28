@@ -7,10 +7,11 @@ import { useUserContext } from "../context/User";
 function Profile() {
     const { userId } = useParams();
 
-    const [userDetail, setUserDetail] = useState([]);
-    const [message, setMessage] = useState("");
+    const { user }   = useUserContext();
 
-    const { user } = useUserContext();
+    const [userDetail, setUserDetail] = useState([]);
+    const [message, setMessage]       = useState("");
+
 
     useEffect(() => {
         const url = `http://localhost:3000/GitHub/self/kchannel/backend/Api/userProfile.php?user_id=${userId}`;
@@ -45,7 +46,7 @@ function Profile() {
                     {user.user_id === userDetail.user_id &&
                         <div className="update-button-content">
                             <button className="update-button">
-                                <Link to={ "/profile/update/" + userDetail.user_id }>編集する</Link>
+                                <Link to="/setting/profile">編集する</Link>
                             </button>
                         </div>
                     }
