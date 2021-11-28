@@ -35,16 +35,15 @@
     .profile > .user-main-content > .user-name {
         font-size: 16px;
         font-weight: 600;
-        margin-bottom: 8px;
+        margin-bottom: 12px;
     }
     
     .profile > .user-main-content > .user-id {
         font-size: 12px;
-        margin-bottom: 8px;
+        margin-bottom: 12px;
     }
 
     .profile > .user-main-content > .introduction {
         font-size: 14px;
-        margin-bottom: 8px;
     }
 }

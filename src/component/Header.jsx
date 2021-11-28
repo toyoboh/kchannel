@@ -4,8 +4,11 @@ import "../css/Header.css";
 import DesktopWindowsIcon from '@material-ui/icons/DesktopWindows';
 import SearchIcon from "@material-ui/icons/Search";
 import PersonOutlineIcon from "@material-ui/icons/PersonOutline";
+import { useUserContext } from "../context/User";
 
 const Header = () => {
+    const { user } = useUserContext();
+
     return(
         <div className="header">
             <div className="header-wrapper">
@@ -20,7 +23,7 @@ const Header = () => {
                             <SearchIcon />
                         </li>
                     </Link>
-                    <Link className="header-item" to="/profile/sho">
+                    <Link className="header-item" to={ "/profile/" + user.user_id }>
                         <li>
                             <PersonOutlineIcon />
                         </li>
