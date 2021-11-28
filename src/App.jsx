@@ -7,6 +7,7 @@ import CategoryList from "./page/CategoryList";
 import BoardList from "./page/BoardList";
 import ThreadList from "./page/ThreadList";
 import CommentList from "./page/CommentList";
+import Profile from "./page/Profile";
 
 function App() {
     return (
@@ -14,7 +15,10 @@ function App() {
             <Router>
                 <Header />
                     <Route exact path="/">test</Route>
-                    <Route exact path="/categoryList">
+                    <Route path="/profile/:userId">
+                        <Profile />
+                    </Route>
+                    <Route path="/categoryList">
                         <CategoryList />
                     </Route>
                     <Route path="/boardList/:categoryId">

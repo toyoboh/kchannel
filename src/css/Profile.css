@@ -1,0 +1,51 @@
+.profile {
+    background-color: var(--base-color);
+    min-height: 100vh;
+}
+
+@media(max-width: 480px) {
+    .profile {
+        padding: 20px 16px;
+        width: 100%;
+    }
+
+    .profile > .update-button-content {
+        margin-bottom: 16px;
+        text-align: right;
+    }
+
+    .profile > .update-button-content > .update-button {
+        border: 1px solid black;
+        border-radius: 13px;
+        font-size: 14px;
+        padding: 6px 18px;
+    }
+
+    .profile > .user-icon-content {
+        margin-bottom: 12px;
+    }
+
+    .profile > .user-icon-content > .user-icon {
+        background-color: gray;
+        border-radius: 50%;
+        height: 50px;
+        font-size: 16px;
+        width: 50px;
+    }
+    
+    .profile > .user-main-content > .user-name {
+        font-size: 16px;
+        font-weight: 600;
+        margin-bottom: 8px;
+    }
+    
+    .profile > .user-main-content > .user-id {
+        font-size: 12px;
+        margin-bottom: 8px;
+    }
+
+    .profile > .user-main-content > .introduction {
+        font-size: 14px;
+        margin-bottom: 8px;
+    }
+}

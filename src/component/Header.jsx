@@ -20,7 +20,7 @@ const Header = () => {
                             <SearchIcon />
                         </li>
                     </Link>
-                    <Link className="header-item" to="">
+                    <Link className="header-item" to="/profile/sho">
                         <li>
                             <PersonOutlineIcon />
                         </li>
