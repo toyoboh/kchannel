@@ -1,0 +1,72 @@
+.profile-update {
+    background-color: var(--base-color);
+    min-height: 100vh;
+}
+
+@media(max-width: 480px) {
+    .profile-update {
+        padding: 20px 16px;
+        width: 100%;
+    }
+
+    .profile-update > .save-button-content {
+        margin-bottom: 16px;
+        text-align: right;
+    }
+
+    .profile-update > .save-button-content > .save-button {
+        border: 1px solid black;
+        border-radius: 13px;
+        font-size: 14px;
+        padding: 6px 18px;
+    }
+
+    .profile-update > .user-icon-content {
+        margin-bottom: 12px;
+    }
+
+    .profile-update > .user-icon-content > .user-icon {
+        background-color: gray;
+        border-radius: 50%;
+        height: 50px;
+        width: 50px;
+    }
+
+    .profile-update > .user-main-content .item-title {
+        font-size: 16px;
+        min-width: 80px;
+    }
+
+    .profile-update > .user-main-content .item-content {
+        flex: 1;
+    }
+
+    .profile-update > .user-main-content > .user-name-content {
+        align-items: center;
+        border-bottom: 1px solid white;
+        display: flex;
+        padding-bottom: 8px;
+        padding-top: 8px;
+    }
+
+    .profile-update > .user-main-content > .user-name-content > .item-content > .user-name-input {
+        font-size: 14px;
+        padding: 8px 6px;
+        width: 100%;
+    }
+
+    .profile-update > .user-main-content > .introduction-content {
+        align-items: center;
+        border-bottom: 1px solid white;
+        display: flex;
+        padding-bottom: 8px;
+        padding-top: 8px;
+    }
+
+    .profile-update > .user-main-content > .introduction-content .item-content > .introduction-textarea {
+        font-size: 14px;
+        height: 80px;
+        padding: 8px 6px;
+        width: 100%;
+    }
+}

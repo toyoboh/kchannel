@@ -1,12 +1,19 @@
 import React from "react";
-import { useParams } from "react-router-dom";
+import { useParams, Link } from "react-router-dom";
 import "../css/Profile.css";
 
 function Profile() {
+    const { userId } = useParams();
+    const userUpdateLink = "/profile/update/" + userId;
+
     return(
         <div className="profile">
             <div className="update-button-content">
-                <button className="update-button">編集する</button>
+                <button className="update-button">
+                    <Link to={ userUpdateLink }>
+                        編集する
+                    </Link>
+                </button>
             </div>
 
             <div className="user-icon-content">
