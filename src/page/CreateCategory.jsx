@@ -5,6 +5,7 @@ import BorderColorIcon from "@material-ui/icons/BorderColor";
 import PageTitle from "../component/PageTitle";
 import InputPlusButton from "../component/InputPlusButton";
 import ErrorMessage from "../component/ErrorMessage";
+import CreateRule from "../component/CreateRule";
 
 function CreateCategory() {
     const [message, setMessage] = useState("すでに同一名のcategoryが存在しています。");
@@ -16,11 +17,10 @@ function CreateCategory() {
             </div>
 
             <div className="rule-content">
-                <div className="rule-title">注意</div>
-
-                <div className="rule-body">
-                    登録する際は、一覧画面にて類似したものがないことを確認してください。
-                </div>
+                <CreateRule
+                    title="注意"
+                    body="登録する際は、一覧画面にて類似したものがないことを確認してください。"
+                />
             </div>
 
             <div className="form-content">

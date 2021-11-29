@@ -1,0 +1,17 @@
+@media(max-width: 480px) {
+    .create-rule {
+        width: 100%;
+    }
+
+    .create-rule > .rule-title {
+        font-size: 16px;
+        font-weight: 600;
+        margin-bottom: 8px;
+    }
+
+    .create-rule > .rule-body {
+        font-size: 14px;
+        padding-left: 8px;
+        padding-right: 8px;
+    }
+}

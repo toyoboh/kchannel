@@ -17,18 +17,6 @@
         margin-bottom: 16px;
     }
 
-    .create-category > .rule-content > .rule-title {
-        font-size: 16px;
-        font-weight: 600;
-        margin-bottom: 8px;
-    }
-
-    .create-category > .rule-content > .rule-body {
-        font-size: 14px;
-        padding-left: 8px;
-        padding-right: 8px;
-    }
-
     .create-category > .form-content > .title {
         font-size: 16px;
         margin-bottom: 8px;
