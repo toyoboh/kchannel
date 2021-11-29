@@ -11,6 +11,7 @@ import Profile from "./page/Profile";
 import SettingProfile from "./page/SettingProfile";
 import CreateCategory from "./page/CreateCategory";
 import CreateBoard from "./page/CreateBoard";
+import CreateThread from "./page/CreateThread";
 
 function App() {
     return (
@@ -29,6 +30,9 @@ function App() {
                     </Route>
                     <Route path="/createBoard">
                         <CreateBoard />
+                    </Route>
+                    <Route path="/createThread">
+                        <CreateThread />
                     </Route>
                     <Route path="/categoryList">
                         <CategoryList />

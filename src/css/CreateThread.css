@@ -1,0 +1,28 @@
+.create-thread {
+    background-color: var(--base-color);
+    min-height: 100vh;
+}
+
+@media(max-width: 480px) {
+    .create-thread {
+        padding: 20px 16px;
+        width: 100%;
+    }
+
+    .create-thread > .title-content {
+        margin-bottom: 16px;
+    }
+
+    .create-thread > .rule-content {
+        margin-bottom: 16px;
+    }
+
+    .create-thread > .form-content > .title {
+        font-size: 16px;
+        margin-bottom: 8px;
+    }
+
+    .create-thread > .form-content > .content {
+        margin-bottom: 4px;
+    }
+}

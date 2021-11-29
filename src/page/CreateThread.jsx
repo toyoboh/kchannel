@@ -1,19 +1,19 @@
 import React, { useState } from "react";
-import "../css/CreateBoard.css";
-import ReceiptIcon from "@material-ui/icons/Receipt";
+import "../css/CreateThread.css";
+import DescriptionIcon from "@material-ui/icons/Description";
 import BorderColorIcon from "@material-ui/icons/BorderColor";
 import PageTitle from "../component/PageTitle";
 import InputPlusButton from "../component/InputPlusButton";
 import ErrorMessage from "../component/ErrorMessage";
 import CreateRule from "../component/CreateRule";
 
-function CreateBoard() {
-    const [message, setMessage] = useState("すでに同一名のboardが存在しています。");
+function CreateThread() {
+    const [message, setMessage] = useState("すでに同一名のthreadが存在しています。");
 
     return(
         <div className="create-board">
             <div className="title-content">
-                <PageTitle Icon={ ReceiptIcon } title="Create Board" />
+                <PageTitle Icon={ DescriptionIcon } title="Create Thread" />
             </div>
 
             <div className="rule-content">
@@ -24,7 +24,7 @@ function CreateBoard() {
             </div>
 
             <div className="form-content">
-                <div className="title">Board Name</div>
+                <div className="title">Thread Name</div>
 
                 <div className="content">
                     <InputPlusButton Icon={ BorderColorIcon } />
@@ -42,4 +42,4 @@ function CreateBoard() {
     )
 }
 
-export default CreateBoard;
+export default CreateThread;
