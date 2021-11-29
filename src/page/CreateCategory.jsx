@@ -3,6 +3,7 @@ import "../css/CreateCategory.css";
 import CategoryIcon from "@material-ui/icons/Category";
 import BorderColorIcon from "@material-ui/icons/BorderColor";
 import PageTitle from "../component/PageTitle";
+import InputPlusButton from "../component/InputPlusButton";
 
 function CreateCategory() {
     return(
@@ -22,11 +23,8 @@ function CreateCategory() {
             <div className="form-content">
                 <div className="title">Category Name</div>
 
-                <div className="form-menu">
-                    <input className="create-input" type="text" />
-                    <button className="create-button">
-                        <BorderColorIcon />
-                    </button>
+                <div className="content">
+                    <InputPlusButton Icon={ BorderColorIcon } />
                 </div>
             </div>
         </div>
