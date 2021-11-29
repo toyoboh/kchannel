@@ -10,6 +10,7 @@ import CommentList from "./page/CommentList";
 import Profile from "./page/Profile";
 import SettingProfile from "./page/SettingProfile";
 import CreateCategory from "./page/CreateCategory";
+import CreateBoard from "./page/CreateBoard";
 
 function App() {
     return (
@@ -25,6 +26,9 @@ function App() {
                     </Route>
                     <Route path="/createCategory">
                         <CreateCategory />
+                    </Route>
+                    <Route path="/createBoard">
+                        <CreateBoard />
                     </Route>
                     <Route path="/categoryList">
                         <CategoryList />

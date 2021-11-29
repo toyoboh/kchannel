@@ -1,0 +1,28 @@
+.create-board {
+    background-color: var(--base-color);
+    min-height: 100vh;
+}
+
+@media(max-width: 480px) {
+    .create-board {
+        padding: 20px 16px;
+        width: 100%;
+    }
+
+    .create-board > .title-content {
+        margin-bottom: 16px;
+    }
+
+    .create-board > .rule-content {
+        margin-bottom: 16px;
+    }
+
+    .create-board > .form-content > .title {
+        font-size: 16px;
+        margin-bottom: 8px;
+    }
+
+    .create-board > .form-content > .content {
+        margin-bottom: 4px;
+    }
+}
