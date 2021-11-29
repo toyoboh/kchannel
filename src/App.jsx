@@ -19,33 +19,23 @@ function App() {
             <Router>
                 <Header />
                     <Route exact path="/">test</Route>
-                    <Route path="/setting/profile">
-                        <SettingProfile />
-                    </Route>
-                    <Route exact path="/profile/:userId">
-                        <Profile />
-                    </Route>
-                    <Route path="/createCategory">
-                        <CreateCategory />
-                    </Route>
-                    <Route path="/createBoard">
-                        <CreateBoard />
-                    </Route>
-                    <Route path="/createThread">
-                        <CreateThread />
-                    </Route>
-                    <Route path="/categoryList">
-                        <CategoryList />
-                    </Route>
-                    <Route path="/boardList/:categoryId">
-                        <BoardList />
-                    </Route>
-                    <Route path="/threadList/:boardId">
-                        <ThreadList />
-                    </Route>
-                    <Route path="/CommentList/:threadId">
-                        <CommentList />
-                    </Route>
+                    <Route path="/setting/profile" component={ SettingProfile } />
+
+                    <Route exact path="/profile/:userId" component={ Profile } />
+
+                    <Route path="/createCategory" component={ CreateCategory } />
+
+                    <Route path="/createBoard" component={ CreateBoard } />
+
+                    <Route path="/createThread" component={ CreateThread } />
+
+                    <Route path="/categoryList" component={ CategoryList } />
+
+                    <Route path="/boardList/:categoryId" component={ BoardList } />
+
+                    <Route path="/threadList/:boardId" component={ ThreadList } />
+
+                    <Route path="/CommentList/:threadId" component={ CommentList } />
             </Router>
         </div>
     )
