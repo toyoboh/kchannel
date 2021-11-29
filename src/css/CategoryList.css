@@ -9,11 +9,11 @@
         width: 100%;
     }
 
-    .category-list-title {
+    .category-list > .title-content {
         margin-bottom: 16px;
     }
 
-    .category-list-body > .card {
+    .category-list > .body-content > .card {
         margin-bottom: 16px;
     }
 }

@@ -9,6 +9,7 @@ import ThreadList from "./page/ThreadList";
 import CommentList from "./page/CommentList";
 import Profile from "./page/Profile";
 import SettingProfile from "./page/SettingProfile";
+import CreateCategory from "./page/CreateCategory";
 
 function App() {
     return (
@@ -21,6 +22,9 @@ function App() {
                     </Route>
                     <Route exact path="/profile/:userId">
                         <Profile />
+                    </Route>
+                    <Route path="/createCategory">
+                        <CreateCategory />
                     </Route>
                     <Route path="/categoryList">
                         <CategoryList />

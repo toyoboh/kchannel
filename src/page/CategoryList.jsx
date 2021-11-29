@@ -49,11 +49,11 @@ function CategoryList() {
 
     return(
         <div className="category-list">
-            <div className="category-list-title">
+            <div className="title-content">
                 <PageTitle Icon={ CategoryIcon } title="Category" />
             </div>
 
-            <div className="category-list-body">
+            <div className="body-content">
                 { categoryContent }
             </div>
         </div>

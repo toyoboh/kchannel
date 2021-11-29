@@ -1,0 +1,67 @@
+.create-category {
+    background-color: var(--base-color);
+    min-height: 100vh;
+}
+
+@media(max-width: 480px) {
+    .create-category {
+        padding: 20px 16px;
+        width: 100%;
+    }
+
+    .create-category > .title-content {
+        margin-bottom: 16px;
+    }
+
+    .create-category > .rule-content {
+        margin-bottom: 16px;
+    }
+
+    .create-category > .rule-content > .rule-title {
+        font-size: 16px;
+        font-weight: 600;
+        margin-bottom: 8px;
+    }
+
+    .create-category > .rule-content > .rule-body {
+        font-size: 14px;
+        padding-left: 8px;
+        padding-right: 8px;
+    }
+
+    .create-category > .form-content {
+        
+    }
+
+    .create-category > .form-content > .title {
+        font-size: 16px;
+        margin-bottom: 8px;
+    }
+
+    .create-category > .form-content > .form-menu {
+        border: 1px solid black;
+        display: flex;
+    }
+
+    .create-category > .form-content > .form-menu > .create-input {
+        background-color: white;
+        display: block;
+        flex: 1;
+        font-size: 14px;
+        padding: 6px;
+    }
+
+    .create-category > .form-content > .form-menu > .create-input:focus {
+        outline: none;
+    }
+
+    .create-category > .form-content > .form-menu > .create-button {
+        background-color: var(--main-color);
+        display: block;
+        padding: 6px 8px;
+    }
+
+    .create-category > .form-content > .form-menu > .create-button > .MuiSvgIcon-root {
+        font-size: 16px;
+    }
+}
