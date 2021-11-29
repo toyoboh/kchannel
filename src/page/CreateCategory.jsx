@@ -1,11 +1,14 @@
-import React from "react";
+import React, { useState } from "react";
 import "../css/CreateCategory.css";
 import CategoryIcon from "@material-ui/icons/Category";
 import BorderColorIcon from "@material-ui/icons/BorderColor";
 import PageTitle from "../component/PageTitle";
 import InputPlusButton from "../component/InputPlusButton";
+import ErrorMessage from "../component/ErrorMessage";
 
 function CreateCategory() {
+    const [message, setMessage] = useState("すでに同一名のcategoryが存在しています。");
+
     return(
         <div className="create-category">
             <div className="title-content">
@@ -26,7 +29,15 @@ function CreateCategory() {
                 <div className="content">
                     <InputPlusButton Icon={ BorderColorIcon } />
                 </div>
+
+                {/* Show only if the message is not an empty string. */}
+                {message !== "" &&
+                    <div className="error-content">
+                        <ErrorMessage text={ message } />
+                    </div>
+                }
             </div>
+
         </div>
     )
 }

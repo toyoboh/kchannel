@@ -1,0 +1,6 @@
+@media(max-width: 480px) {
+    .error-message {
+        color: #F06060;
+        font-size: 12px;
+    }
+}
