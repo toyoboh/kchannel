@@ -1,0 +1,16 @@
+@media(max-width: 480px) {
+    .create-link {
+        font-size: 12px;
+        text-align: right;
+    }
+
+    .create-link > .link {
+        align-items: center;
+        display: flex;
+        justify-content: end;
+    }
+
+    .create-link > .link > .MuiSvgIcon-root {
+        font-size: 12px;
+    }
+}

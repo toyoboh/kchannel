@@ -4,6 +4,7 @@ import PageTitle from "../component/PageTitle";
 import CategoryIcon from "@material-ui/icons/Category";
 import Card from "../component/Card";
 import axios from "axios";
+import CreateLink from "../component/CreateLink";
 
 function CategoryList() {
     // Message when there is no category
@@ -51,6 +52,13 @@ function CategoryList() {
         <div className="category-list">
             <div className="title-content">
                 <PageTitle Icon={ CategoryIcon } title="Category" />
+            </div>
+
+            <div className="create-link-content">
+                <CreateLink
+                    path="/createCategory"
+                    title="カテゴリー作成ページに移動する"
+                />
             </div>
 
             <div className="body-content">

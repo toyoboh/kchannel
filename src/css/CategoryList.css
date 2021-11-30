@@ -13,6 +13,10 @@
         margin-bottom: 16px;
     }
 
+    .category-list > .create-link-content {
+        margin-bottom: 16px;
+    }
+
     .category-list > .body-content > .card {
         margin-bottom: 16px;
     }
