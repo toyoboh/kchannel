@@ -8,4 +8,5 @@ body {
     --sub-color: #ccc;
     --main-color: #666;
     --accent-color: #333;
+    --error-color: #F06060;
 }
