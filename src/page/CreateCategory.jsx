@@ -6,6 +6,7 @@ import PageTitle from "../component/PageTitle";
 import InputPlusButton from "../component/InputPlusButton";
 import ErrorMessage from "../component/ErrorMessage";
 import CreateRule from "../component/CreateRule";
+import BackLink from "../component/BackLink";
 
 function CreateCategory() {
     const [message, setMessage] = useState("すでに同一名のcategoryが存在しています。");
@@ -14,6 +15,13 @@ function CreateCategory() {
         <div className="create-category">
             <div className="title-content">
                 <PageTitle Icon={ CategoryIcon } title="Create Category" />
+            </div>
+
+            <div className="back-link-content">
+                <BackLink
+                    path="/categoryList"
+                    title="戻る"
+                />
             </div>
 
             <div className="rule-content">
