@@ -82,4 +82,43 @@ class TCategory
             return array();
         }
     }
+
+    /**
+     * 
+     */
+    public function checkCategoryExists($category_id) {
+        $query = "SELECT
+                category_id,
+                category_name
+            FROM
+                t_categories
+            WHERE
+                category_id = :category_id
+        ;";
+
+        $use_query_item = [
+            "category_id" => $category_id
+        ];
+
+        $database = new Database();
+        $database->connect();
+        $stmt = $database->executeQuery($query, $use_query_item);
+
+        $row_count = $stmt->rowCount();
+
+        $result = array();
+        $result["data"] = array();
+
+        if($row_count > 0) {
+            //true
+            $result["data"]["category_info"] = $stmt->fetch();
+            $result["data"]["category_exists"] = true;
+        } else {
+            //false message
+            $result["data"]["category_exists"] = false;
+            $result["message"] = "存在しないカテゴリーに掲示板を追加することはできません";
+        }
+
+        return $result;
+    }
 }

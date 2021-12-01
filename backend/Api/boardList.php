@@ -16,8 +16,8 @@ use Kchannel\Classes\Models\TBoard;
 if($_SERVER["REQUEST_METHOD"] === "GET" && isset($_GET["category_id"])) {
     $category_id = $_GET["category_id"];
 
-    $m_board = new TBoard();
-    $boards  = $m_board->fetchBoardInCategory($category_id);
+    $t_board = new TBoard();
+    $boards  = $t_board->fetchBoardInCategory($category_id);
 
     echo json_encode($boards);
 }

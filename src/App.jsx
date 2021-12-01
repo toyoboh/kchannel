@@ -25,7 +25,7 @@ function App() {
 
                     <Route path="/createCategory" component={ CreateCategory } />
 
-                    <Route path="/createBoard" component={ CreateBoard } />
+                    <Route path="/createBoard/:categoryId" component={ CreateBoard } />
 
                     <Route path="/createThread" component={ CreateThread } />
 

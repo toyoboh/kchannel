@@ -6,6 +6,7 @@ import PageTitle from "../component/PageTitle";
 import ReceiptIcon from "@material-ui/icons/Receipt";
 import Card from "../component/Card";
 import BreadcrumbNavigation from "../component/BreadcrumbNavigation";
+import CreateLink from "../component/CreateLink";
 
 function BoardList() {
     // category id received by parameter
@@ -22,10 +23,11 @@ function BoardList() {
                 `http://localhost:3000/GitHub/self/kchannel/backend/Api/boardList.php?category_id=${categoryId}`
             )
             .then((res) => {
-                if(res.data.data.item.length > 0) {
-                    setBoards(res.data.data.item);
+                const resData = res.data;
+                if(resData.data.item.length > 0) {
+                    setBoards(resData.data.item);
                 } else {
-                    setMessage(res.data.message);
+                    setMessage(resData.message);
                 }
             })
             .catch((err) => {
@@ -58,6 +60,13 @@ function BoardList() {
             
             <div className="breadcrumb-navigation-container">
                 <BreadcrumbNavigation />
+            </div>
+
+            <div className="create-link-content">
+                <CreateLink
+                    path={ "/createBoard/" + categoryId }
+                    title="掲示板作成ページに移動する"
+                />
             </div>
 
             <div className="board-list-body">
