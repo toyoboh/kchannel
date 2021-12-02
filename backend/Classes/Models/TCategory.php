@@ -84,7 +84,12 @@ class TCategory
     }
 
     /**
-     * 
+     * Check if the category exists
+     * @param string $category_id
+     * @return array     exist: $result["data"] <- category information(array)
+     *                          $result["data"]["category_exists"] <- Does it exist(boolean:true)
+     *               not exist: $result["data"]["category_exists"] <- Does it exist(boolean:false)
+     *                          $result["message"] <- error message(string)
      */
     public function checkCategoryExists($category_id) {
         $query = "SELECT

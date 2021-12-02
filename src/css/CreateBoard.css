@@ -13,12 +13,20 @@
         margin-bottom: 16px;
     }
 
+    .create-board > .back-link-content {
+        margin-bottom: 16px;
+    }
+
     .create-board > .rule-content {
         margin-bottom: 16px;
     }
 
+    .create-board > .parent-name-content {
+        margin-bottom: 16px;
+    }
+
     .create-board > .form-content > .title {
-        font-size: 16px;
+        font-size: 14px;
         margin-bottom: 8px;
     }
 

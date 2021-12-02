@@ -6,6 +6,7 @@ import PageTitle from "../component/PageTitle";
 import DescriptionIcon from "@material-ui/icons/Description";
 import Card from "../component/Card";
 import BreadcrumbNavigation from "../component/BreadcrumbNavigation";
+import CreateLink from "../component/CreateLink";
 
 function ThreadList() {
     // board id received by parameter
@@ -60,6 +61,13 @@ function ThreadList() {
 
             <div className="breadcrumb-navigation-container">
                 <BreadcrumbNavigation />
+            </div>
+
+            <div className="create-link-content">
+                <CreateLink
+                    path={ "/createThread/" + boardId }
+                    title="スレッド作成ページに移動する"
+                />
             </div>
 
             <div className="thread-list-body">

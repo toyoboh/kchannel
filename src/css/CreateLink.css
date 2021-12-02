@@ -4,12 +4,6 @@
         text-align: right;
     }
 
-    .create-link > .link {
-        align-items: center;
-        display: flex;
-        justify-content: end;
-    }
-
     .create-link > .link > .MuiSvgIcon-root {
         font-size: 12px;
     }

@@ -1,0 +1,17 @@
+@media(max-width: 480px) {
+    .create-page-parent-name {
+        
+    }
+
+    .create-page-parent-name > .title {
+        font-size: 12px;
+        margin-bottom: 4px;
+    }
+
+    .create-page-parent-name > .name {
+        font-size: 14px;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+    }
+}

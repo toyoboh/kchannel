@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, Link } from "react-router-dom";
 import "../css/CreateBoard.css";
 import axios from "axios";
 import ReceiptIcon from "@material-ui/icons/Receipt";
@@ -8,12 +8,14 @@ import PageTitle from "../component/PageTitle";
 import InputPlusButton from "../component/InputPlusButton";
 import ErrorMessage from "../component/ErrorMessage";
 import CreateRule from "../component/CreateRule";
+import BackLink from "../component/BackLink";
+import CreatePageParentName from "../component/CreatePageParentName";
 
 function CreateBoard() {
     const { categoryId } = useParams();
 
-    const [categoryInfo, setCategoryInfo] = useState([]);
-    const [message, setMessage] = useState("すでに同一名のboardが存在しています。");
+    const [categoryInfo, setCategoryInfo]   = useState([]);
+    const [message, setMessage]             = useState("すでに同一名のboardが存在しています。");
     const [existsMessage, setExistsMessage] = useState("");
 
     useEffect(() => {
@@ -26,7 +28,6 @@ function CreateBoard() {
             } else {
                 setExistsMessage(resData.message)
             }
-            console.log(existsMessage);
         })
         .catch((err) => {
             console.log(err);
@@ -35,14 +36,26 @@ function CreateBoard() {
 
     return(
         <div className="create-board">
+
+            <div className="title-content">
+                <PageTitle Icon={ ReceiptIcon } title="Create Board" />
+            </div>
+
             {existsMessage !== "" ? (
                 <>
-                    <div>{ existsMessage }</div>
+                    {/* Content on Error */}
+                    <div>
+                        <p>{ existsMessage }</p>
+                        <p><Link to="/categoryList">Category一覧に戻る</Link></p>
+                    </div>
                 </>
             ) : (
                 <>
-                    <div className="title-content">
-                        <PageTitle Icon={ ReceiptIcon } title="Create Board" />
+                    <div className="back-link-content">
+                        <BackLink
+                            path={ `/boardList/${categoryInfo.category_id}` }
+                            title="戻る"
+                        />
                     </div>
 
                     <div className="rule-content">
@@ -52,8 +65,15 @@ function CreateBoard() {
                         />
                     </div>
 
+                    <div className="parent-name-content">
+                        <CreatePageParentName
+                            title="category name"
+                            name={ categoryInfo.category_name }
+                        />
+                    </div>
+
                     <div className="form-content">
-                        <div className="title">Board Name</div>
+                        <div className="title">New Board Name</div>
 
                         <div className="content">
                             <InputPlusButton Icon={ BorderColorIcon } />

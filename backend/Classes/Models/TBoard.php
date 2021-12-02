@@ -97,4 +97,48 @@ class TBoard
             return array();
         }
     }
+
+    /**
+     * Check if the board exists
+     * @param string $board_id
+     * @return array     exist: $result["data"] <- board information(array)
+     *                          $result["data"]["board_exists"] <- Does it exist(boolean:true)
+     *               not exist: $result["data"]["board_exists"] <- Does it exist(boolean:false)
+     *                          $result["message"] <- error message(string)
+     */
+    public function checkBoardExists($board_id) {
+        $query = "SELECT
+                board_id,
+                board_name
+            FROM
+                t_boards
+            WHERE
+                board_id = :board_id
+        ;";
+
+        $use_query_item = [
+            "board_id" => $board_id
+        ];
+
+        $database = new Database();
+        $database->connect();
+        $stmt = $database->executeQuery($query, $use_query_item);
+
+        $row_count = $stmt->rowCount();
+
+        $result = array();
+        $result["data"] = array();
+
+        if($row_count > 0) {
+            //true
+            $result["data"]["board_info"] = $stmt->fetch();
+            $result["data"]["board_exists"] = true;
+        } else {
+            //false message
+            $result["data"]["board_exists"] = false;
+            $result["message"] = "存在しない掲示板にスレッドを追加することはできません";
+        }
+
+        return $result;
+    }
 }
