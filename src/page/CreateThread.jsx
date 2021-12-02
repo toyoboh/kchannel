@@ -36,6 +36,11 @@ function CreateThread() {
 
     return(
         <div className="create-board">
+            
+            <div className="title-content">
+                <PageTitle Icon={ DescriptionIcon } title="Create Thread" />
+            </div>
+
             {existsMessage !== "" ? (
                 <>
                     {/* Content on Error */}
@@ -46,9 +51,6 @@ function CreateThread() {
                 </>
             ) : (
                 <>
-                    <div className="title-content">
-                        <PageTitle Icon={ DescriptionIcon } title="Create Thread" />
-                    </div>
 
                     <div className="back-link-content">
                         <BackLink
