@@ -54,7 +54,10 @@ class TCategory
     }
 
     /**
-     * 
+     * Get Information to create a breadcrumb list
+     * @param string $category_id
+     * @return array     exist: Category Information
+     *               not exist: empty array
      */
     public function selectCategoryBreadcrumbInfo($category_id) {
         $query = "SELECT

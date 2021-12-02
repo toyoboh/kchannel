@@ -63,7 +63,10 @@ class TBoard
     }
 
     /**
-     * 
+     * Get Information to create a breadcrumb list
+     * @param string $board_id
+     * @return array     exist: Category and Board Information
+     *               not exist: empty array
      */
     public function selectBoardBreadcrumbInfo($board_id) {
         $query = "SELECT

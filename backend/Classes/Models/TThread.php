@@ -101,7 +101,10 @@ class TThread
     }
 
     /**
-     * 
+     * Get Information to create a breadcrumb list
+     * @param string $thread_id
+     * @return array     exist: Category and Board and Thread Information
+     *               not exist: empty array
      */
     public function selectThreadBreadcrumbInfo($thread_id) {
         $query = "SELECT
