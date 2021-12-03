@@ -129,4 +129,79 @@ class TCategory
 
         return $result;
     }
+
+    /**
+     * create category
+     * @param string $user_id
+     * @param string $category_name
+     * @return array
+     */
+    public function create($user_id, $category_name) {
+        // result array
+        $result = array();
+
+        $created_user_id = $user_id;
+        $updated_user_id = $user_id;
+
+        // exists check
+        $select_sql = "SELECT
+                        category_id,
+                        category_name
+                    FROM
+                        t_categories
+                    WHERE
+                        category_name = :category_name
+        ;";
+        $select_query_item = [
+            "category_name" => $category_name
+        ];
+
+        $database = new Database();
+        $database->connect();
+        $select_stmt = $database->executeQuery($select_sql, $select_query_item);
+
+        $select_row_count = $select_stmt->rowCount();
+
+        if($select_row_count >= 1) {
+            $result["message"] = "同名のカテゴリが存在しているため、登録できませんでした。";
+            $result["success"] = false;
+            return $result;
+        }
+
+        // create category id
+        $category_id = "ddd";
+
+        $insert_sql = "INSERT INTO
+                        t_categories(
+                            category_id,
+                            category_name,
+                            created_user_id,
+                            updated_user_id
+                        )
+                    VALUES(
+                        :category_id,
+                        :category_name,
+                        :created_user_id,
+                        :updated_user_id
+                    )
+        ;";
+        $insert_query_item = [
+            "category_id" => $category_id,
+            "category_name" => $category_name,
+            "created_user_id" => $created_user_id,
+            "updated_user_id" => $updated_user_id
+        ];
+
+        $insert_stmt = $database->executeQuery($insert_sql, $insert_query_item);
+        $insert_row_count = $insert_stmt->rowCount();
+
+        if($insert_row_count >= 1) {
+            $result["success"] = true;
+        } else {
+            $result["message"] = "システムエラー。正常にカテゴリーを登録することができませんでした。";
+            $result["success"] = false;
+        }
+
+        return $result;
+    }
 }

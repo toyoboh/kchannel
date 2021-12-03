@@ -10,7 +10,7 @@ use Kchannel\Classes\Models\TCategory;
 
 //
 if($_SERVER["REQUEST_METHOD"] === "GET") {
-    $m_category = new TCategory();
-    $categories = $m_category->fetchAllCategory();
+    $t_category = new TCategory();
+    $categories = $t_category->fetchAllCategory();
     echo json_encode($categories);
 }

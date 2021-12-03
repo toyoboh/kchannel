@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import "../css/CreateCategory.css";
+import axios from "axios";
 import CategoryIcon from "@material-ui/icons/Category";
 import BorderColorIcon from "@material-ui/icons/BorderColor";
 import PageTitle from "../component/PageTitle";
@@ -10,6 +11,26 @@ import BackLink from "../component/BackLink";
 
 function CreateCategory() {
     const [message, setMessage] = useState("すでに同一名のcategoryが存在しています。");
+
+    //input item
+    const [inputCategoryName, setInputCategoryName] = useState("");
+
+    const createCategory = () => {
+        const createUrl = "http://localhost:3000/GitHub/self/kchannel/backend/Api/createCategory.php";
+        axios.post(
+            createUrl,
+            {
+                category_name: inputCategoryName,
+                user_id: "test_user_id"
+            }
+        )
+        .then((res) => {
+            console.log(res.data);
+        })
+        .catch((err) => {
+            console.log(err);
+        })
+    }
 
     return(
         <div className="create-category">
@@ -35,7 +56,12 @@ function CreateCategory() {
                 <div className="title">Category Name</div>
 
                 <div className="content">
-                    <InputPlusButton Icon={ BorderColorIcon } />
+                    <InputPlusButton
+                        value={ inputCategoryName }
+                        changeFunction={ setInputCategoryName }
+                        buttonFunction={ createCategory }
+                        Icon={ BorderColorIcon }
+                    />
                 </div>
 
                 {/* Show only if the message is not an empty string. */}
