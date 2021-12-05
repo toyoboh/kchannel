@@ -168,25 +168,19 @@ class TCategory
             return $result;
         }
 
-        // create category id
-        $category_id = "ddd";
-
         $insert_sql = "INSERT INTO
                         t_categories(
-                            category_id,
                             category_name,
                             created_user_id,
                             updated_user_id
                         )
                     VALUES(
-                        :category_id,
                         :category_name,
                         :created_user_id,
                         :updated_user_id
                     )
         ;";
         $insert_query_item = [
-            "category_id" => $category_id,
             "category_name" => $category_name,
             "created_user_id" => $created_user_id,
             "updated_user_id" => $updated_user_id

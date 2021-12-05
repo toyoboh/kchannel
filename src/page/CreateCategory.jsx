@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import "../css/CreateCategory.css";
+import { useHistory } from "react-router-dom";
 import axios from "axios";
 import CategoryIcon from "@material-ui/icons/Category";
 import BorderColorIcon from "@material-ui/icons/BorderColor";
@@ -10,7 +11,9 @@ import CreateRule from "../component/CreateRule";
 import BackLink from "../component/BackLink";
 
 function CreateCategory() {
-    const [message, setMessage] = useState("すでに同一名のcategoryが存在しています。");
+    const history = useHistory();
+
+    const [message, setMessage] = useState("");
 
     //input item
     const [inputCategoryName, setInputCategoryName] = useState("");
@@ -25,7 +28,11 @@ function CreateCategory() {
             }
         )
         .then((res) => {
-            console.log(res.data);
+            if(res.data.success) {
+                history.push("/categoryList");
+            } else {
+                setMessage(res.data.message);
+            }
         })
         .catch((err) => {
             console.log(err);
