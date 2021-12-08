@@ -34,7 +34,7 @@ class TBoard
             ON
                 boards.board_id = threads.board_id
             WHERE
-                boards.category_id = :category_id
+                CAST(boards.category_id AS CHAR) = :category_id
             GROUP BY
                 boards.board_id
             ;";
@@ -81,7 +81,7 @@ class TBoard
             ON
                 boards.category_id = categories.category_id
             WHERE
-                boards.board_id = :board_id
+                CAST(boards.board_id AS CHAR) = :board_id
         ;";
 
         $use_query_item = [
@@ -116,7 +116,7 @@ class TBoard
             FROM
                 t_boards
             WHERE
-                board_id = :board_id
+                CAST(board_id AS CHAR) = :board_id
         ;";
 
         $use_query_item = [

@@ -34,7 +34,7 @@ class TComment
             ON
                 comments.created_user_id = users.user_id
             WHERE
-                comments.thread_id = :thread_id
+                CAST(comments.thread_id AS CHAR) = :thread_id
             ORDER BY
                 comments.created_at ASC
         ;";

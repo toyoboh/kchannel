@@ -29,7 +29,7 @@ class TCategory
             LEFT JOIN
                 t_boards boards
             ON
-                categories.category_id = boards.category_id
+                CAST(categories.category_id AS CHAR) = boards.category_id
             GROUP BY
                 categories.category_id
             ;";
@@ -66,7 +66,7 @@ class TCategory
             FROM
                 t_categories categories
             WHERE
-                categories.category_id = :category_id
+                CAST(categories.category_id AS CHAR) = :category_id
         ;";
 
         $use_query_item = [
@@ -101,7 +101,7 @@ class TCategory
             FROM
                 t_categories
             WHERE
-                category_id = :category_id
+                CAST(category_id AS CHAR) = :category_id
         ;";
 
         $use_query_item = [
@@ -118,11 +118,9 @@ class TCategory
         $result["data"] = array();
 
         if($row_count > 0) {
-            //true
-            $result["data"]["category_info"] = $stmt->fetch();
             $result["data"]["category_exists"] = true;
+            $result["data"]["category_info"] = $stmt->fetch();
         } else {
-            //false message
             $result["data"]["category_exists"] = false;
             $result["message"] = "存在しないカテゴリーに掲示板を追加することはできません";
         }

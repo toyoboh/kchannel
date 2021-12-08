@@ -32,7 +32,7 @@ class TThread
             ON
                 threads.thread_id = comments.thread_id
             WHERE
-                threads.board_id = :board_id
+                CAST(threads.board_id AS CHAR) = :board_id
             GROUP BY
                 threads.thread_id
         ;";
@@ -80,7 +80,7 @@ class TThread
             ON
                 threads.created_user_id = users.user_id
             WHERE
-                threads.thread_id = :thread_id
+                CAST(threads.thread_id AS CHAR) = :thread_id
         ;";
 
         $use_query_item = [
@@ -125,7 +125,7 @@ class TThread
             ON
                 boards.category_id = categories.category_id
             WHERE
-                threads.thread_id = :thread_id
+                CAST(threads.thread_id AS CHAR) = :thread_id
         ;";
 
         $use_query_item = [

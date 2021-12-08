@@ -23,6 +23,7 @@ function CreateBoard() {
         axios.get(url)
         .then((res) => {
             const resData = res.data;
+            console.log(resData);
             if(resData.data.category_exists) {
                 setCategoryInfo(resData.data.category_info);
             } else {
