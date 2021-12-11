@@ -14,22 +14,25 @@ if($_SERVER["REQUEST_METHOD"] === "POST") {
     $json_posts = file_get_contents("php://input");
     $posts      = json_decode($json_posts, true);
 
-    //登録結果格納配列
-    $res_result = array();
-
-    // $csrf_token = $posts["csrf_token"];
-    // csrfトークン確認
-    // OKなら$csrf_token_success = true / NGならfalse
-    // if(!$csrf_token_success) {
-    //     $res_result["create_success"] = false;
-    //     $res_result["message"] = "不正なアクセスのため、正常に処理ができませんでした。";
-    //     echo json_encode($res_result);
-    //     exit;
-    // }
-
-    $user_id = $posts["user_id"];
+    // Set received parameter
+    $csrf_token    = $posts["csrf_token"];
+    $user_id       = $posts["user_id"];
     $category_name = $posts["category_name"];
 
+    session_start();
+
+    // Define the response array
+    $res_result = array();
+
+    // Check csrf token
+    if($csrf_token !== $_SESSION["csrf_token"]) {
+        $res_result["success"] = false;
+        $res_result["message"] = "不正なアクセスのため、正常に処理ができませんでした。";
+        echo json_encode($res_result);
+        exit;
+    }
+
+    // Register the new category
     $t_category = new TCategory();
     $create_result = $t_category->create($user_id, $category_name);
 

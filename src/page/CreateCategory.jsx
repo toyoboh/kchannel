@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "../css/CreateCategory.css";
 import { useHistory } from "react-router-dom";
 import axios from "axios";
@@ -13,18 +13,42 @@ import BackLink from "../component/BackLink";
 function CreateCategory() {
     const history = useHistory();
 
-    const [message, setMessage] = useState("");
+    const [message, setMessage]     = useState("");
+    const [csrfToken, setCsrfToken] = useState("");
 
     //input item
     const [inputCategoryName, setInputCategoryName] = useState("");
 
+    // set csrf token
+    useEffect(() => {
+        const csrfTokenUrl = "http://localhost:3000/GitHub/self/kchannel/backend/Api/csrfToken.php";
+        axios.put(
+            csrfTokenUrl,
+            {
+                withCredentials: true
+            }
+        )
+        .then((res) => {
+            if(res.data.success) {
+                setCsrfToken(res.data.csrf_token);
+            } else {
+                // nothing
+            }
+        })
+        .catch((err) => {
+            console.log(err);
+        })
+    }, [])
+
+    // create category
     const createCategory = () => {
         const createUrl = "http://localhost:3000/GitHub/self/kchannel/backend/Api/createCategory.php";
         axios.post(
             createUrl,
             {
                 category_name: inputCategoryName,
-                user_id: "test_user_id"
+                user_id      : "test_user_id",
+                csrf_token   : csrfToken
             }
         )
         .then((res) => {
