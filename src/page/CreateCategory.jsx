@@ -19,7 +19,7 @@ function CreateCategory() {
     //input item
     const [inputCategoryName, setInputCategoryName] = useState("");
 
-    // set csrf token
+    // Set csrf token
     useEffect(() => {
         const csrfTokenUrl = "http://localhost:3000/GitHub/self/kchannel/backend/Api/csrfToken.php";
         axios.put(
@@ -40,15 +40,16 @@ function CreateCategory() {
         })
     }, [])
 
-    // create category
+    // Create the new category
     const createCategory = () => {
         const createUrl = "http://localhost:3000/GitHub/self/kchannel/backend/Api/createCategory.php";
         axios.post(
             createUrl,
             {
-                category_name: inputCategoryName,
-                user_id      : "test_user_id",
-                csrf_token   : csrfToken
+                category_name  : inputCategoryName,
+                user_id        : "test_user_id",
+                csrf_token     : csrfToken,
+                withCredentials: true
             }
         )
         .then((res) => {
