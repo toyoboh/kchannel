@@ -10,11 +10,18 @@ import ErrorMessage from "../component/ErrorMessage";
 import CreateRule from "../component/CreateRule";
 import BackLink from "../component/BackLink";
 import CreatePageParentName from "../component/CreatePageParentName";
+import { useUserContext } from "../context/User";
 // import { TrendingUpRounded } from "@material-ui/icons";
 
 function CreateBoard() {
-    const { categoryId } = useParams();
+    // History
     const history        = useHistory();
+
+    // Parameter
+    const { categoryId } = useParams();
+
+    // context
+    const { user } = useUserContext();
 
     // Input item
     const [inputBoardName, setInputBoardName] = useState("");
@@ -75,7 +82,7 @@ function CreateBoard() {
             {
                 category_id    : categoryInfo.category_id,
                 board_name     : inputBoardName,
-                user_id        : "test_user_id",
+                user_id        : user.user_id,
                 csrf_token     : csrfToken,
                 withCredentials: true
             }

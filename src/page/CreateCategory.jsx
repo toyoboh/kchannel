@@ -9,14 +9,23 @@ import InputPlusButton from "../component/InputPlusButton";
 import ErrorMessage from "../component/ErrorMessage";
 import CreateRule from "../component/CreateRule";
 import BackLink from "../component/BackLink";
+import { useUserContext } from "../context/User";
 
 function CreateCategory() {
+    // History
     const history = useHistory();
 
+    // context
+    const { user } = useUserContext();
+
+    // Message
+    // Error message when category creation fails
     const [message, setMessage]     = useState("");
+
+    // Csrf token
     const [csrfToken, setCsrfToken] = useState("");
 
-    //input item
+    // Input item
     const [inputCategoryName, setInputCategoryName] = useState("");
 
     // Set csrf token
@@ -47,7 +56,7 @@ function CreateCategory() {
             createUrl,
             {
                 category_name  : inputCategoryName,
-                user_id        : "test_user_id",
+                user_id        : user.user_id,
                 csrf_token     : csrfToken,
                 withCredentials: true
             }
