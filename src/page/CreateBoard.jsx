@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { useParams, Link } from "react-router-dom";
+import { useParams, Link, useHistory } from "react-router-dom";
 import "../css/CreateBoard.css";
 import axios from "axios";
 import ReceiptIcon from "@material-ui/icons/Receipt";
@@ -10,30 +10,87 @@ import ErrorMessage from "../component/ErrorMessage";
 import CreateRule from "../component/CreateRule";
 import BackLink from "../component/BackLink";
 import CreatePageParentName from "../component/CreatePageParentName";
+// import { TrendingUpRounded } from "@material-ui/icons";
 
 function CreateBoard() {
     const { categoryId } = useParams();
+    const history        = useHistory();
 
-    const [categoryInfo, setCategoryInfo]   = useState([]);
-    const [message, setMessage]             = useState("すでに同一名のboardが存在しています。");
-    const [existsMessage, setExistsMessage] = useState("");
+    // Input item
+    const [inputBoardName, setInputBoardName] = useState("");
 
+    const [categoryInfo, setCategoryInfo]    = useState([]);
+
+    // Display message
+    // Error message if the board not exists
+    const [existsMessage, setExistsMessage]  = useState("");
+    // Error message when board creation fails
+    const [message, setMessage]              = useState("");
+
+    //Csrf token
+    const [csrfToken, setCsrfToken]          = useState("");
+
+    // Set csrf token
+    useEffect(() => {
+        const csrfTokenUrl = "http://localhost:3000/GitHub/self/kchannel/backend/Api/csrfToken.php";
+        axios.put(
+            csrfTokenUrl,
+            {
+                withCredentials: true
+            }
+        )
+        .then((res) => {
+            if(res.data.success) {
+                setCsrfToken(res.data.csrf_token);
+            } else {
+                // nothing
+            }
+        })
+        .catch((err) => {
+            console.log(err);
+        })
+    }, [])
+
+    // Set category information
     useEffect(() => {
         const url = `http://localhost:3000/GitHub/self/kchannel/backend/Api//checkCategoryExists.php?category_id=${ categoryId }`;
         axios.get(url)
         .then((res) => {
-            const resData = res.data;
-            console.log(resData);
-            if(resData.data.category_exists) {
-                setCategoryInfo(resData.data.category_info);
+            if(res.data.data.category_exists) {
+                setCategoryInfo(res.data.data.category_info);
             } else {
-                setExistsMessage(resData.message)
+                setExistsMessage(res.data.message)
             }
         })
         .catch((err) => {
             console.log(err);
         })
     }, [categoryId, existsMessage])
+
+    // Create the new Board
+    const createBoard = () => {
+        const createUrl = "http://localhost:3000/GitHub/self/kchannel/backend/Api/createBoard.php";
+        axios.post(
+            createUrl,
+            {
+                category_id    : categoryInfo.category_id,
+                board_name     : inputBoardName,
+                user_id        : "test_user_id",
+                csrf_token     : csrfToken,
+                withCredentials: true
+            }
+        )
+        .then((res) => {
+            if(res.data.success) {
+                history.push(`/boardList/${categoryInfo.category_id}`);
+            } else {
+                setMessage(res.data.message)
+            }
+        })
+        .catch((err) => {
+            console.log(err);
+        })
+    }
 
     return(
         <div className="create-board">
@@ -77,7 +134,12 @@ function CreateBoard() {
                         <div className="title">New Board Name</div>
 
                         <div className="content">
-                            <InputPlusButton Icon={ BorderColorIcon } />
+                            <InputPlusButton
+                                value={ inputBoardName }
+                                changeFunction={ setInputBoardName }
+                                buttonFunction={ createBoard }
+                                Icon={ BorderColorIcon }
+                            />
                         </div>
 
                         {/* Show only if the message is not an empty string. */}

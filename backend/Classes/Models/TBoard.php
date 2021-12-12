@@ -144,4 +144,89 @@ class TBoard
 
         return $result;
     }
+
+    /**
+     * create board
+     * @param string  $user_id
+     * @param integer $category_id
+     * @param string  $baord_name
+     * @return array
+     */
+    public function create($user_id, $category_id, $board_name, $board_explanation) {
+        // Response result array
+        $result = array();
+
+        // Define user id
+        $created_user_id = $user_id;
+        $updated_user_id = $user_id;
+
+        // Exists check
+        $select_sql = "SELECT
+                        categories.category_id,
+                        boards.board_id,
+                        boards.board_name
+                    FROM
+                        t_categories categories
+                    INNER JOIN
+                        t_boards     boards
+                    ON
+                        categories.category_id = boards.category_id
+                    WHERE
+                        categories.category_id = :category_id
+                    AND
+                        board_name             = :board_name
+        ;";
+        $select_query_item = [
+            "category_id" => $category_id,
+            "board_name"  => $board_name
+        ];
+
+        $database = new Database();
+        $database->connect();
+        $select_stmt = $database->executeQuery($select_sql, $select_query_item);
+
+        $select_row_count = $select_stmt->rowCount();
+
+        if($select_row_count >= 1) {
+            $result["message"] = "同名のカテゴリが存在しているため、登録できませんでした。";
+            $result["success"] = false;
+            return $result;
+        }
+
+        $insert_sql = "INSERT INTO
+                        t_boards(
+                            category_id,
+                            board_name,
+                            board_explanation,
+                            created_user_id,
+                            updated_user_id
+                        )
+                    VALUES(
+                        :category_id,
+                        :board_name,
+                        :board_explanation,
+                        :created_user_id,
+                        :updated_user_id
+                    )
+        ;";
+        $insert_query_item = [
+            "category_id"       => $category_id,
+            "board_name"        => $board_name,
+            "board_explanation" => $board_explanation,
+            "created_user_id"   => $created_user_id,
+            "updated_user_id"   => $updated_user_id
+        ];
+
+        $insert_stmt = $database->executeQuery($insert_sql, $insert_query_item);
+        $insert_row_count = $insert_stmt->rowCount();
+
+        if($insert_row_count >= 1) {
+            $result["success"] = true;
+        } else {
+            $result["message"] = "システムエラー。正常にカテゴリーを登録することができませんでした。";
+            $result["success"] = false;
+        }
+
+        return $result;
+    }
 }
