@@ -67,11 +67,11 @@ class TThread
      */
     public function fetchThreadInfo($thread_id) {
         $query = "SELECT
-                threads.thread_id          AS thread_id,
-                threads.thread_name        AS thread_name,
-                threads.thread_thread_explanation AS thread_thread_explanation,
-                threads.created_user_id    AS created_user_id,
-                users.user_name            AS created_user_name,
+                threads.thread_id                                          AS thread_id,
+                threads.thread_name                                        AS thread_name,
+                threads.thread_explanation                                 AS thread_explanation,
+                threads.created_user_id                                    AS created_user_id,
+                users.user_name                                            AS created_user_name,
                 DATE_FORMAT(threads.created_at, '%Y年%m月%d日 %H時%i分%s秒') AS created_at
             FROM
                 t_threads threads
@@ -108,12 +108,12 @@ class TThread
      */
     public function selectThreadBreadcrumbInfo($thread_id) {
         $query = "SELECT
-                categories.category_id AS category_id,
+                categories.category_id   AS category_id,
                 categories.category_name AS category_name,
-                boards.board_id AS board_id,
-                boards.board_name AS board_name,
-                threads.thread_id AS thread_id,
-                threads.thread_name AS  thread_name
+                boards.board_id          AS board_id,
+                boards.board_name        AS board_name,
+                threads.thread_id        AS thread_id,
+                threads.thread_name      AS  thread_name
             FROM
                 t_threads threads
             INNER JOIN
