@@ -10,7 +10,7 @@ class TThread
     public $board_id;
     public $thread_id;
     public $thread_name;
-    public $thread_explanation;
+    public $thread_thread_explanation;
     public $thread_rule;
     public $created_at;
     public $created_user_id;
@@ -69,7 +69,7 @@ class TThread
         $query = "SELECT
                 threads.thread_id          AS thread_id,
                 threads.thread_name        AS thread_name,
-                threads.thread_explanation AS thread_explanation,
+                threads.thread_thread_explanation AS thread_thread_explanation,
                 threads.created_user_id    AS created_user_id,
                 users.user_name            AS created_user_name,
                 DATE_FORMAT(threads.created_at, '%Y年%m月%d日 %H時%i分%s秒') AS created_at
@@ -143,5 +143,91 @@ class TThread
         } else {
             return array();
         }
+    }
+
+    /**
+     * create thread
+     * @param string  $user_id
+     * @param integer $board_id
+     * @param string  $thread_name
+     * @param string  $thread_explanation
+     * @return array
+     */
+    public function create($user_id, $board_id, $thread_name, $thread_explanation) {
+        // Response result array
+        $result = array();
+
+        // Define user id
+        $created_user_id = $user_id;
+        $updated_user_id = $user_id;
+
+        // Exists check
+        $select_sql = "SELECT
+                        boards.board_id,
+                        threads.thread_id,
+                        threads.thread_name
+                    FROM
+                        t_boards  boards
+                    INNER JOIN
+                        t_threads threads
+                    ON
+                        boards.board_id     = threads.board_id
+                    WHERE
+                        boards.board_id     = :board_id
+                    AND
+                        threads.thread_name = :thread_name
+        ;";
+        $select_query_item = [
+            "board_id" => $board_id,
+            "thread_name"  => $thread_name
+        ];
+
+        $database = new Database();
+        $database->connect();
+        $select_stmt = $database->executeQuery($select_sql, $select_query_item);
+
+        $select_row_count = $select_stmt->rowCount();
+
+        if($select_row_count >= 1) {
+            $result["message"] = "同名のカテゴリが存在しているため、登録できませんでした。";
+            $result["success"] = false;
+            return $result;
+        }
+
+        $insert_sql = "INSERT INTO
+                        t_threads(
+                            board_id,
+                            thread_name,
+                            thread_explanation,
+                            created_user_id,
+                            updated_user_id
+                        )
+                    VALUES(
+                        :board_id,
+                        :thread_name,
+                        :thread_explanation,
+                        :created_user_id,
+                        :updated_user_id
+                    )
+        ;";
+        $insert_query_item = [
+            "board_id"       => $board_id,
+            "thread_name"        => $thread_name,
+            "thread_explanation" => $thread_explanation,
+            "created_user_id"   => $created_user_id,
+            "updated_user_id"   => $updated_user_id
+        ];
+
+        $insert_stmt = $database->executeQuery($insert_sql, $insert_query_item);
+        $insert_row_count = $insert_stmt->rowCount();
+
+        if($insert_row_count >= 1) {
+            $result["success"] = true;
+        } else {
+            $result["message"] = "システムエラー。正常にカテゴリーを登録することができませんでした。";
+            $result["success"] = false;
+        }
+
+        return $result;
     }
 }

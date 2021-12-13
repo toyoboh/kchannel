@@ -6,7 +6,7 @@ header("Access-Control-Allow-Methods: POST");
 
 require __DIR__ . "/../../vendor/autoload.php";
 
-use Kchannel\Classes\Models\TBoard;
+use Kchannel\Classes\Models\TThread;
 use Kchannel\Classes\Tool\Session;
 
 if($_SERVER["REQUEST_METHOD"] === "POST") {
@@ -15,11 +15,11 @@ if($_SERVER["REQUEST_METHOD"] === "POST") {
     $posts      = json_decode($json_posts, true);
 
     // Set received parameter
-    $csrf_token        = $posts["csrf_token"];
-    $user_id           = $posts["user_id"];
-    $category_id       = $posts["category_id"];
-    $board_name        = $posts["board_name"];
-    $board_explanation = $posts["board_explanation"];
+    $csrf_token         = $posts["csrf_token"];
+    $user_id            = $posts["user_id"];
+    $board_id           = $posts["board_id"];
+    $thread_name        = $posts["thread_name"];
+    $thread_explanation = $posts["thread_explanation"];
     
     // Define the response array
     $res_result = array();
@@ -36,9 +36,9 @@ if($_SERVER["REQUEST_METHOD"] === "POST") {
         exit;
     }
 
-    // Register the new Board
-    $t_board = new TBoard();
-    $create_result = $t_board->create($user_id, $category_id, $board_name, $board_explanation);
+    // Register the new Thread
+    $t_thread = new TThread();
+    $create_result = $t_thread->create($user_id, $board_id, $thread_name, $thread_explanation);
 
     $res_result["success"] = $create_result["success"];
     if(!$res_result["success"]) {

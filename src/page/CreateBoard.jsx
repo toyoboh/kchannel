@@ -24,7 +24,8 @@ function CreateBoard() {
     const { user } = useUserContext();
 
     // Input item
-    const [inputBoardName, setInputBoardName] = useState("");
+    const [inputBoardName, setInputBoardName]     = useState("");
+    const [inputBoardExplanation, setInputBoardExplanation] = useState("");
 
     const [categoryInfo, setCategoryInfo]    = useState([]);
 
@@ -80,11 +81,12 @@ function CreateBoard() {
         axios.post(
             createUrl,
             {
-                category_id    : categoryInfo.category_id,
-                board_name     : inputBoardName,
-                user_id        : user.user_id,
-                csrf_token     : csrfToken,
-                withCredentials: true
+                category_id      : categoryInfo.category_id,
+                board_name       : inputBoardName,
+                board_explanation: inputBoardExplanation,
+                user_id          : user.user_id,
+                csrf_token       : csrfToken,
+                withCredentials  : true
             }
         )
         .then((res) => {

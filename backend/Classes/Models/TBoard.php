@@ -10,7 +10,7 @@ class TBoard
     public $category_id;
     public $board_id;
     public $board_name;
-    public $board_explanation;
+    public $board_board_explanation;
     public $board_rule;
     public $created_at;
     public $created_user_id;
@@ -150,6 +150,7 @@ class TBoard
      * @param string  $user_id
      * @param integer $category_id
      * @param string  $baord_name
+     * @param string  $board_explanation
      * @return array
      */
     public function create($user_id, $category_id, $board_name, $board_explanation) {
@@ -174,7 +175,7 @@ class TBoard
                     WHERE
                         categories.category_id = :category_id
                     AND
-                        board_name             = :board_name
+                        boards.board_name      = :board_name
         ;";
         $select_query_item = [
             "category_id" => $category_id,
