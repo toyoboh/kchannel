@@ -61,4 +61,50 @@ class TComment
 
         return $comment;
     }
+
+    public function create($user_id, $thread_id, $comment_body) {
+        // Response result array
+        $result = array();
+
+        // Define user id
+        $created_user_id = $user_id;
+        $updated_user_id = $user_id;
+
+        //query
+        $query = "INSERT INTO
+                    t_comments(
+                        thread_id,
+                        comment_body,
+                        created_user_id,
+                        updated_user_id
+                    )
+                VALUES(
+                    :thread_id,
+                    :comment_body,
+                    :created_user_id,
+                    :updated_user_id
+                )
+        ;";
+        $use_query_item = [
+            "thread_id" => $thread_id,
+            "comment_body" => $comment_body,
+            "created_user_id" => $created_user_id,
+            "updated_user_id" => $updated_user_id
+        ];
+
+        $database = new Database();
+        $database->connect();
+        $stmt = $database->executeQuery($query, $use_query_item);
+
+        $count = $stmt->rowCount();
+
+        if($count >= 1) {
+            $result["success"] = true;
+        } else {
+            $result["success"] = false;
+            $result["message"] = "システムエラー。正常にカテゴリーを登録することができませんでした。";
+        }
+        
+        return $result;
+    }
 }

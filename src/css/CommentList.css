@@ -27,7 +27,19 @@
         text-align: right;
     }
 
+    .comment-list > .comment-container {
+        margin-bottom: 16px;
+    }
+
     .comment-list > .comment-container > .comment {
         margin-bottom: 16px;
+    }
+
+    .comment-list > .form-content > {
+        margin-bottom: 16px;
+    }
+
+    .comment-list > .form-content > .error-content {
+        margin-bottom: 4px;
     }
 }

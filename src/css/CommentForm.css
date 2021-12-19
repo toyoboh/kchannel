@@ -1,0 +1,21 @@
+@media(max-width: 480px) {
+    .comment-form {
+        width: 100%;
+    }
+    
+    .comment-form > .comment-textarea {
+        border: solid 1px black;
+        font-size: 14px;
+        height: 150px;
+        padding: 6px;
+        width: 100%;
+    }
+
+    .comment-form > .button {
+        background-color: var(--accent-color);
+        color: #fff;
+        letter-spacing: 10px;
+        text-align: center;
+        width: 100%;
+    }
+}
