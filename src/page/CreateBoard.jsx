@@ -6,11 +6,13 @@ import ReceiptIcon from "@material-ui/icons/Receipt";
 import BorderColorIcon from "@material-ui/icons/BorderColor";
 import PageTitle from "../component/PageTitle";
 import InputPlusButton from "../component/InputPlusButton";
+import ExplanationForm from "../component/ExplanationForm";
 import ErrorMessage from "../component/ErrorMessage";
 import CreateRule from "../component/CreateRule";
 import BackLink from "../component/BackLink";
 import CreatePageParentName from "../component/CreatePageParentName";
 import { useUserContext } from "../context/User";
+import Validation from "../tool/Validation";
 // import { TrendingUpRounded } from "@material-ui/icons";
 
 function CreateBoard() {
@@ -33,7 +35,8 @@ function CreateBoard() {
     // Error message if the board not exists
     const [existsMessage, setExistsMessage]  = useState("");
     // Error message when board creation fails
-    const [message, setMessage]              = useState("");
+    const [boardNameMessage, setBoardNameMessage] = useState("");
+    const [boardExplanationMessage, setBoardExplanationMessage] = useState("");
 
     //Csrf token
     const [csrfToken, setCsrfToken]          = useState("");
@@ -77,6 +80,10 @@ function CreateBoard() {
 
     // Create the new Board
     const createBoard = () => {
+        // validation check
+        if(!validationCheck()) return;
+        console.log("test");
+
         const createUrl = "http://localhost:3000/GitHub/self/kchannel/backend/Api/createBoard.php";
         axios.post(
             createUrl,
@@ -93,12 +100,29 @@ function CreateBoard() {
             if(res.data.success) {
                 history.push(`/boardList/${categoryInfo.category_id}`);
             } else {
-                setMessage(res.data.message)
+                setBoardNameMessage(res.data.message)
             }
         })
         .catch((err) => {
             console.log(err);
         })
+    }
+
+    const validationCheck = () => {
+        const boardNameCheckResult        = boardNameValidationCheck();
+        const boardExplanationCheckResult = boardExplanationValidationCheck();
+
+        return boardNameCheckResult && boardExplanationCheckResult;
+    }
+
+    const boardNameValidationCheck = () => {
+        if(!Validation.checkNotEmpty(inputBoardName, setBoardNameMessage)) return false;
+        return true;
+    }
+
+    const boardExplanationValidationCheck = () => {
+        if(!Validation.checkNotEmpty(inputBoardExplanation, setBoardExplanationMessage)) return false;
+        return true;
     }
 
     return(
@@ -140,9 +164,9 @@ function CreateBoard() {
                     </div>
 
                     <div className="form-content">
-                        <div className="title">New Board Name</div>
 
-                        <div className="content">
+                        <div className="name-content">
+                            <div className="form-item-title">New Board Name</div>
                             <InputPlusButton
                                 value={ inputBoardName }
                                 changeFunction={ setInputBoardName }
@@ -151,10 +175,24 @@ function CreateBoard() {
                             />
                         </div>
 
-                        {/* Show only if the message is not an empty string. */}
-                        {message !== "" &&
+                        {boardNameMessage !== "" &&
                             <div className="error-content">
-                                <ErrorMessage text={ message } />
+                                <ErrorMessage text={ boardNameMessage } />
+                            </div>
+                        }
+
+                        
+                        <div className="explanation-content">
+                            <div className="form-item-title">Board Explanation</div>
+                            <ExplanationForm
+                                value={ inputBoardExplanation }
+                                changeFunction={ setInputBoardExplanation }
+                                />
+                        </div>
+
+                        {boardExplanationMessage !== "" &&
+                            <div className="error-content">
+                                <ErrorMessage text={ boardExplanationMessage } />
                             </div>
                         }
                     </div>
