@@ -167,34 +167,37 @@ function CreateThread() {
                     <div className="form-content">
                         <div className="name-content">
                             <div className="form-item-title">New Thread Name</div>
+
                             <InputPlusButton
                                 value={ inputThreadName }
                                 changeFunction={ setInputThreadName }
                                 buttonFunction={ createThread }
                                 Icon={ BorderColorIcon }
                             />
-                        </div>
 
-                        {/* Show only if the message is not an empty string. */}
-                        {threadNameMessage !== "" &&
-                            <div className="error-content">
-                                <ErrorMessage text={ threadNameMessage } />
-                            </div>
-                        }
+                            {/* Show only if the message is not an empty string. */}
+                            {threadNameMessage !== "" &&
+                                <div className="error-content">
+                                    <ErrorMessage text={ threadNameMessage } />
+                                </div>
+                            }
+                        </div>
 
                         <div className="explanation-content">
                             <div className="form-item-title">Board Explanation</div>
+                            
                             <ExplanationForm
                                 value={ inputThreadExplanation }
                                 changeFunction={ setInputThreadExplanation }
                             />
+
+                            {threadExplanationMessage !== "" &&
+                                <div className="error-content">
+                                    <ErrorMessage text={ threadExplanationMessage } />
+                                </div>
+                            }
                         </div>
 
-                        {threadExplanationMessage !== "" &&
-                            <div className="error-content">
-                                <ErrorMessage text={ threadExplanationMessage } />
-                            </div>
-                        }
                     </div>
                 </>
             )}

@@ -111,23 +111,24 @@ function CreateCategory() {
             </div>
 
             <div className="form-content">
-                <div className="title">Category Name</div>
-
-                <div className="content">
+                <div className="name-content">
+                    <div className="form-item-title">Category Name</div>
+                    
                     <InputPlusButton
                         value={ inputCategoryName }
                         changeFunction={ setInputCategoryName }
                         buttonFunction={ createCategory }
                         Icon={ BorderColorIcon }
                     />
+
+                    {/* Show only if the message is not an empty string. */}
+                    {categoryNameMessage !== "" &&
+                        <div className="error-content">
+                            <ErrorMessage text={ categoryNameMessage } />
+                        </div>
+                    }
                 </div>
 
-                {/* Show only if the message is not an empty string. */}
-                {categoryNameMessage !== "" &&
-                    <div className="error-content">
-                        <ErrorMessage text={ categoryNameMessage } />
-                    </div>
-                }
             </div>
 
         </div>

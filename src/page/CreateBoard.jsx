@@ -171,34 +171,34 @@ function CreateBoard() {
 
                         <div className="name-content">
                             <div className="form-item-title">New Board Name</div>
+
                             <InputPlusButton
                                 value={ inputBoardName }
                                 changeFunction={ setInputBoardName }
                                 buttonFunction={ createBoard }
                                 Icon={ BorderColorIcon }
                             />
+
+                            {boardNameMessage !== "" &&
+                                <div className="error-content">
+                                    <ErrorMessage text={ boardNameMessage } />
+                                </div>
+                            }
                         </div>
 
-                        {boardNameMessage !== "" &&
-                            <div className="error-content">
-                                <ErrorMessage text={ boardNameMessage } />
-                            </div>
-                        }
-
-                        
                         <div className="explanation-content">
                             <div className="form-item-title">Board Explanation</div>
                             <ExplanationForm
                                 value={ inputBoardExplanation }
                                 changeFunction={ setInputBoardExplanation }
-                                />
-                        </div>
+                            />
 
-                        {boardExplanationMessage !== "" &&
-                            <div className="error-content">
-                                <ErrorMessage text={ boardExplanationMessage } />
-                            </div>
-                        }
+                            {boardExplanationMessage !== "" &&
+                                <div className="error-content">
+                                    <ErrorMessage text={ boardExplanationMessage } />
+                                </div>
+                            }
+                        </div>
                     </div>
                 </>
             )}
