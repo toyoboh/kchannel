@@ -10,6 +10,7 @@ import ErrorMessage from "../component/ErrorMessage";
 import CreateRule from "../component/CreateRule";
 import BackLink from "../component/BackLink";
 import { useUserContext } from "../context/User";
+import Validation from "../tool/Validation";
 
 function CreateCategory() {
     // History
@@ -20,7 +21,7 @@ function CreateCategory() {
 
     // Message
     // Error message when category creation fails
-    const [message, setMessage]     = useState("");
+    const [categoryNameMessage, setCategoryNameMessage]     = useState("");
 
     // Csrf token
     const [csrfToken, setCsrfToken] = useState("");
@@ -51,6 +52,9 @@ function CreateCategory() {
 
     // Create the new category
     const createCategory = () => {
+        // validation check
+        if(!validationCheck()) return;
+        
         const createUrl = "http://localhost:3000/GitHub/self/kchannel/backend/Api/createCategory.php";
         axios.post(
             createUrl,
@@ -65,12 +69,25 @@ function CreateCategory() {
             if(res.data.success) {
                 history.push("/categoryList");
             } else {
-                setMessage(res.data.message);
+                setCategoryNameMessage(res.data.message);
             }
         })
         .catch((err) => {
             console.log(err);
         })
+    }
+
+    const validationCheck = () => {
+        const categoryNameCheckResult = categoryNameValidation();
+
+        // Return True if each Input element is True
+        return categoryNameCheckResult;
+    }
+
+    const categoryNameValidation = () => {
+        if(!Validation.checkNotEmpty(inputCategoryName, setCategoryNameMessage)) return false;
+        // Return True if all validation check results are True
+        return true;
     }
 
     return(
@@ -106,9 +123,9 @@ function CreateCategory() {
                 </div>
 
                 {/* Show only if the message is not an empty string. */}
-                {message !== "" &&
+                {categoryNameMessage !== "" &&
                     <div className="error-content">
-                        <ErrorMessage text={ message } />
+                        <ErrorMessage text={ categoryNameMessage } />
                     </div>
                 }
             </div>

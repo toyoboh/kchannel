@@ -80,9 +80,8 @@ function CreateBoard() {
 
     // Create the new Board
     const createBoard = () => {
-        // validation check
+        // Exit if validation check result is False
         if(!validationCheck()) return;
-        console.log("test");
 
         const createUrl = "http://localhost:3000/GitHub/self/kchannel/backend/Api/createBoard.php";
         axios.post(
@@ -109,19 +108,24 @@ function CreateBoard() {
     }
 
     const validationCheck = () => {
-        const boardNameCheckResult        = boardNameValidationCheck();
-        const boardExplanationCheckResult = boardExplanationValidationCheck();
+        const boardNameCheckResult        = boardNameValidation();
+        const boardExplanationCheckResult = boardExplanationValidation();
 
+        // Return True if each Input element is True
         return boardNameCheckResult && boardExplanationCheckResult;
     }
 
-    const boardNameValidationCheck = () => {
+    const boardNameValidation = () => {
         if(!Validation.checkNotEmpty(inputBoardName, setBoardNameMessage)) return false;
+
+        // Return True if all validation check results are True
         return true;
     }
 
-    const boardExplanationValidationCheck = () => {
+    const boardExplanationValidation = () => {
         if(!Validation.checkNotEmpty(inputBoardExplanation, setBoardExplanationMessage)) return false;
+
+        // Return True if all validation check results are True
         return true;
     }
 
