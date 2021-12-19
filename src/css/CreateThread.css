@@ -17,12 +17,20 @@
         margin-bottom: 16px;
     }
 
-    .create-thread > .form-content > .title {
+    .create-thread > .form-content > .form-item-title {
         font-size: 16px;
         margin-bottom: 8px;
     }
 
-    .create-thread > .form-content > .content {
+    .create-thread > .form-content > .name-content {
+        margin-bottom: 4px;
+    }
+
+    .create-thread > .form-content .error-content {
+        margin-bottom: 8px;
+    }
+
+    .create-thread > .form-content > .explanation-content {
         margin-bottom: 4px;
     }
 }

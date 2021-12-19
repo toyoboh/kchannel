@@ -11,6 +11,8 @@ import CreateRule from "../component/CreateRule";
 import BackLink from "../component/BackLink";
 import CreatePageParentName from "../component/CreatePageParentName";
 import { useUserContext } from "../context/User";
+import ExplanationForm from "../component/ExplanationForm";
+import Validation from "../tool/Validation";
 
 function CreateThread() {
     // History
@@ -36,7 +38,8 @@ function CreateThread() {
     // Error message if the board not exists
     const [existsMessage, setExistsMessage]  = useState("");
     // Error message when board creation fails
-    const [message, setMessage]              = useState("");
+    const [threadNameMessage, setThreadNameMessage] = useState("");
+    const [threadExplanationMessage, setThreadExplanationMessage] = useState("");
 
     // Set csrf token
     useEffect(() => {
@@ -78,6 +81,7 @@ function CreateThread() {
 
     // Create the new Thread
     const createThread = () => {
+        if(!validationCheck()) return;
         const createUrl = "http://localhost:3000/GitHub/self/kchannel/backend/Api/createThread.php";
         axios.post(
             createUrl,
@@ -94,12 +98,31 @@ function CreateThread() {
             if(res.data.success) {
                 history.push(`/threadList/${boardInfo.board_id}`);
             } else {
-                setMessage(res.data.message);
+                setThreadNameMessage(res.data.message);
             }
         })
         .catch((err) => {
             console.log(err);
         })
+    }
+
+    const validationCheck = () => {
+        const threadNameCheckResult = threadNameValidation();
+        const threadExplanationCheckResult = threadExplanationValidation();
+
+        return threadNameCheckResult && threadExplanationCheckResult;
+    }
+
+    const threadNameValidation = () => {
+        if(!Validation.checkNotEmpty(inputThreadName, setThreadNameMessage)) return false;
+
+        return true;
+    }
+
+    const threadExplanationValidation = () => {
+        if(!Validation.checkNotEmpty(inputThreadExplanation, setThreadExplanationMessage)) return false;
+
+        return true;
     }
 
     return(
@@ -142,9 +165,8 @@ function CreateThread() {
                     </div>
 
                     <div className="form-content">
-                        <div className="title">New Thread Name</div>
-
-                        <div className="content">
+                        <div className="name-content">
+                            <div className="form-item-title">New Thread Name</div>
                             <InputPlusButton
                                 value={ inputThreadName }
                                 changeFunction={ setInputThreadName }
@@ -154,9 +176,23 @@ function CreateThread() {
                         </div>
 
                         {/* Show only if the message is not an empty string. */}
-                        {message !== "" &&
+                        {threadNameMessage !== "" &&
                             <div className="error-content">
-                                <ErrorMessage text={ message } />
+                                <ErrorMessage text={ threadNameMessage } />
+                            </div>
+                        }
+
+                        <div className="explanation-content">
+                            <div className="form-item-title">Board Explanation</div>
+                            <ExplanationForm
+                                value={ inputThreadExplanation }
+                                changeFunction={ setInputThreadExplanation }
+                            />
+                        </div>
+
+                        {threadExplanationMessage !== "" &&
+                            <div className="error-content">
+                                <ErrorMessage text={ threadExplanationMessage } />
                             </div>
                         }
                     </div>
