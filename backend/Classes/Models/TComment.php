@@ -107,4 +107,48 @@ class TComment
         
         return $result;
     }
+
+    public function selectNewComment($thread_id, $comment_id) {
+        $query ="SELECT
+                    comments.comment_id      AS comment_id,
+                    comments.comment_body    AS comment_body,
+                    comments.created_user_id AS created_user_id,
+                    users.user_name          AS created_user_name,
+                    DATE_FORMAT(comments.created_at, '%Y年%m月%d日 %H時%i分%s秒') AS created_at
+                FROM
+                    t_comments comments
+                INNER JOIN
+                    t_users users
+                ON
+                    comments.created_user_id = users.user_id
+                WHERE
+                    CAST(comments.thread_id AS CHAR) = :thread_id
+                AND
+                    comments.comment_id > :comment_id
+                ORDER BY
+                    comments.created_at ASC
+        ;";
+        
+        $use_query_item = [
+            "thread_id"  => $thread_id,
+            "comment_id" => $comment_id
+        ];
+
+        $database = new Database();
+        $database->connect();
+        $stmt = $database->executeQuery($query, $use_query_item);
+
+        $count  = $stmt->rowCount();
+        $result = array();
+
+        if($count >= 1) {
+            $result["success"] = true;
+            $result["data"]    = $stmt->fetchAll();
+        } else {
+            $result["success"] = false;
+            $result["message"] = "最新のコメントはありません。";
+        }
+        
+        return $result;
+    }
 }

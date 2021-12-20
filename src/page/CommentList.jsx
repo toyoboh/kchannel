@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import { useParams, useHistory } from "react-router-dom";
 import axios from "axios";
 import "../css/CommentList.css";
@@ -12,26 +12,30 @@ import ErrorMessage from "../component/ErrorMessage";
 import { useUserContext } from "../context/User";
 
 function CommentList() {
-    const history = useHistory();
-
+    const history                             = useHistory();
+    
     // board id received by parameter
-    const { threadId } = useParams();
-
+    const { threadId }                        = useParams();
+    
     // context
-    const { user, setUser } = useUserContext();
+    const { user, setUser }                   = useUserContext();
     
     // csrf token
-    const [csrfToken, setCsrfToken] = useState("");
-
+    const [csrfToken, setCsrfToken]           = useState("");
+    
     // thread information
-    const [threadInfo, setThreadInfo] = useState([])
-
+    const [threadInfo, setThreadInfo]         = useState([])
+    
     // Message when there is no threads
-    const [message, setMessage] = useState("");
-    const [comments, setComments] = useState([]);
-    const [commentCount, setCommentCount] = useState(0);
-
-    const [inputComment, setInputComment] = useState("");
+    const [message, setMessage]               = useState("");
+    const [comments, setComments]             = useState([]);
+    const [commentCount, setCommentCount]     = useState(0);
+    
+    // Input Item
+    // refs
+    const inputCommentRef                     = useRef();
+    // state
+    const [inputComment, setInputComment]     = useState("");
     const [commentMessage, setCommentMessage] = useState("");
 
     // Set csrf token
@@ -55,6 +59,7 @@ function CommentList() {
         })
     }, [])
 
+    // Get All Comments using Thread id
     useEffect(() => {
         const fetchComment = async () => {
             axios.get(
@@ -66,9 +71,6 @@ function CommentList() {
 
                 if(res.data.data.item.length > 0) {
                     setComments(res.data.data.item);
-
-                    // Change only when the number of items is above 0,
-                    // because the initial value of commentCount is 0
                     setCommentCount(res.data.data.item.length);
                 } else {
                     setMessage(res.data.message);
@@ -81,6 +83,7 @@ function CommentList() {
         fetchComment();
     }, [threadId]);
 
+    // Register a new comment in the DB
     const createComment = () => {
         // Exit if validation check results is false
         if(!ValidationCheck()) return;
@@ -99,8 +102,12 @@ function CommentList() {
         )
         .then((res) => {
             if(res.data.success) {
-                // Reload this page
-                history.go(0);
+                // Empty the "comment form" and "comment form state"
+                inputCommentRef.current.value = "";
+                setInputComment("");
+
+                // Add the new comments
+                addNewComment();
             } else {
                 console.log(res.data.message);
             }
@@ -122,16 +129,51 @@ function CommentList() {
         return true;
     }
 
+    // Add the new comments to the Array
+    const addNewComment = () => {
+        // HACK: 
+        // Get last comment id
+        let lastCommentId = 0
+        if(commentCount > 0) {
+            const commentNum = comments.length;
+            lastCommentId = comments[commentNum - 1].comment_id;
+        }
+        
+        const selectUrl = `http://localhost:3000/GitHub/self/kchannel/backend/Api/selectNewComment.php?thread_id=${threadInfo.thread_id}&comment_id=${lastCommentId}`;
+        
+        axios.get(selectUrl)
+        .then((res) => {
+            if(res.data.success) {
+                // When the number of comments is 0, the display of "commentContent" is switched
+                if(!commentCount) setMessage("");
+
+                // Update the "comments" and "commentCount"
+                setComments(prev => [...prev, ...res.data.data.item]);
+                setCommentCount(prev => prev + res.data.data.item.length);
+            } else {
+                console.log(res.data.message);
+            }
+        })
+        .catch((err) => {
+            console.log(err);
+        })
+    }
+
     // Comment content for display
     let commentContent;
     if(message !== "") {
         commentContent = <div>{ message }</div>;
     } else {
         commentContent = comments.map(function(comment) {
+            // Replace Line Feed(Newline) with "<br />"
+            const commentBody = comment.comment_body.split(/\n/g).map(function(value, index) {
+                return <React.Fragment key={ index }>{ value }<br /></React.Fragment>
+            })
+
             return <Comment
                     key={ comment.comment_id }
                     createdAt={ comment.created_at }
-                    comment={ comment.comment_body }
+                    comment={ commentBody }
                     createdUserName={ comment.created_user_name }
                     />;
         })
@@ -172,6 +214,7 @@ function CommentList() {
                     </div>
                 }
                 <CommentForm
+                    refItem={ inputCommentRef }
                     value={ inputComment }
                     changeFunction={ setInputComment }
                     clickFunction={ createComment }

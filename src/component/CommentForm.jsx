@@ -1,10 +1,11 @@
 import React from "react";
 import "../css/CommentForm.css";
 
-function CommentForm({ value, changeFunction, clickFunction }) {
+function CommentForm({ refItem, value, changeFunction, clickFunction }) {
     return(
         <div className="comment-form">
             <textarea
+                ref={ refItem }
                 className="comment-textarea"
                 defaultValue={ value }
                 onChange={ (e) => changeFunction(e.target.value) }
