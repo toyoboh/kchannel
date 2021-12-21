@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useRef } from "react";
-import { useParams, useHistory } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import axios from "axios";
 import "../css/CommentList.css";
 import CommentListTitle from "../component/CommentListTitle";
@@ -13,13 +13,11 @@ import { useUserContext } from "../context/User";
 import DisplayProcess from "../tool/DisplayProcess";
 
 function CommentList() {
-    const history                             = useHistory();
-    
     // board id received by parameter
     const { threadId }                        = useParams();
     
     // context
-    const { user, setUser }                   = useUserContext();
+    const { user }                            = useUserContext();
     
     // csrf token
     const [csrfToken, setCsrfToken]           = useState("");
