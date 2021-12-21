@@ -86,6 +86,7 @@ function CreateCategory() {
 
     const categoryNameValidation = () => {
         if(!Validation.checkNotEmpty(inputCategoryName, setCategoryNameMessage)) return false;
+        if(!Validation.checkSpecifiedNumberOfCharacters(inputCategoryName, 1, 50, setCategoryNameMessage)) return false;
         // Return True if all validation check results are True
         return true;
     }

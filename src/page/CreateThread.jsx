@@ -115,6 +115,7 @@ function CreateThread() {
 
     const threadNameValidation = () => {
         if(!Validation.checkNotEmpty(inputThreadName, setThreadNameMessage)) return false;
+        if(!Validation.checkSpecifiedNumberOfCharacters(inputThreadName, 1, 100, setThreadNameMessage)) return false;
 
         return true;
     }

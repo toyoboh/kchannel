@@ -117,6 +117,7 @@ function CreateBoard() {
 
     const boardNameValidation = () => {
         if(!Validation.checkNotEmpty(inputBoardName, setBoardNameMessage)) return false;
+        if(!Validation.checkSpecifiedNumberOfCharacters(inputBoardName, 1, 100, setBoardNameMessage)) return false;
 
         // Return True if all validation check results are True
         return true;
