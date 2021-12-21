@@ -11,10 +11,15 @@
         width: 100%;
     }
 
+    .comment-form > .comment-textarea:focus {
+        outline: none;
+    }
+
     .comment-form > .button {
         background-color: var(--accent-color);
         color: #fff;
         letter-spacing: 10px;
+        padding: 6px 0;
         text-align: center;
         width: 100%;
     }

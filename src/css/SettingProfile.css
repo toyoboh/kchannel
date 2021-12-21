@@ -64,6 +64,10 @@
         width: 100%;
     }
 
+    .setting-profile > .user-main-content > .user-name-content > .item-content > .user-name-input:focus {
+        outline: none;
+    }
+
     .setting-profile > .user-main-content > .introduction-content {
         align-items: center;
         border-bottom: 2px solid white;
@@ -77,5 +81,9 @@
         height: 80px;
         padding: 8px 6px;
         width: 100%;
+    }
+
+    .setting-profile > .user-main-content > .introduction-content .item-content > .introduction-textarea:focus {
+        outline: none;
     }
 }
