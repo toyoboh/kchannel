@@ -10,6 +10,7 @@ import CommentForm from "../component/CommentForm";
 import Validation from "../tool/Validation";
 import ErrorMessage from "../component/ErrorMessage";
 import { useUserContext } from "../context/User";
+import DisplayProcess from "../tool/DisplayProcess";
 
 function CommentList() {
     const history                             = useHistory();
@@ -59,7 +60,7 @@ function CommentList() {
         })
     }, [])
 
-    // Get All Comments using Thread id
+    // Get All Comments and Thread Information using Thread id
     useEffect(() => {
         const fetchComment = async () => {
             axios.get(
@@ -67,7 +68,9 @@ function CommentList() {
             )
             .then((res) => {
                 // Be sure to set even if the number of comments is 0
-                setThreadInfo(res.data.data.thread_info);
+                const resThreadInfo = res.data.data.thread_info;
+                resThreadInfo.thread_explanation = DisplayProcess.replaceLineFeed(resThreadInfo.thread_explanation);
+                setThreadInfo(resThreadInfo);
 
                 if(res.data.data.item.length > 0) {
                     setComments(res.data.data.item);
@@ -166,15 +169,13 @@ function CommentList() {
     } else {
         commentContent = comments.map(function(comment) {
             // Replace Line Feed(Newline) with "<br />"
-            const commentBody = comment.comment_body.split(/\n/g).map(function(value, index) {
-                return <React.Fragment key={ index }>{ value }<br /></React.Fragment>
-            })
+            const commentBody = DisplayProcess.replaceLineFeed(comment.comment_body);
 
             return <Comment
-                    key={ comment.comment_id }
-                    createdAt={ comment.created_at }
-                    comment={ commentBody }
-                    createdUserName={ comment.created_user_name }
+                        key={ comment.comment_id }
+                        createdAt={ comment.created_at }
+                        comment={ commentBody }
+                        createdUserName={ comment.created_user_name }
                     />;
         })
     }
