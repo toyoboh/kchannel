@@ -3,6 +3,8 @@ import { Link, useHistory } from "react-router-dom";
 import axios from "axios";
 import "../css/SettingProfile.css";
 import { useUserContext } from "../context/User";
+import ErrorMessage from "../component/ErrorMessage";
+import Validation from "../tool/Validation";
 
 function SettingProfile() {
     const history  = useHistory();
@@ -10,24 +12,50 @@ function SettingProfile() {
     const { user } = useUserContext();
 
     // useState
-    const [userDetail, setUserDetail]               = useState([]);
-    const [message, setMessage]                     = useState("");
-    const [inputUserName, setInputUserName]         = useState("");
-    const [inputIntroduction, setInputIntroduction] = useState("");
+    // Csrf token
+    const [csrfToken, setCsrfToken]                     = useState("");
+    // User information
+    const [userDetail, setUserDetail]                   = useState([]);
+    // Error message
+    const [existMessage, setExistMessage]               = useState("");
+    const [userNameMessage, setUserNameMessage]         = useState("");
+    const [introductionMessage, setIntroductionMessage] = useState("");
+    // Input item
+    const [inputUserName, setInputUserName]             = useState("");
+    const [inputIntroduction, setInputIntroduction]     = useState("");
+
+    // Set csrf token
+    useEffect(() => {
+        const csrfTokenUrl = "http://localhost:3000/GitHub/self/kchannel/backend/Api/csrfToken.php";
+        axios.put(
+            csrfTokenUrl,
+            {
+                withCredentials: true
+            }
+        )
+        .then((res) => {
+            if(res.data.success) {
+                setCsrfToken(res.data.csrf_token);
+            } else {
+                // nothing
+            }
+        })
+        .catch((err) => {
+            console.log(err);
+        })
+    }, [])
 
     useEffect(() => {
-        const url = `http://localhost:3000/GitHub/self/kchannel/backend/Api/userProfile.php?user_id=${ user.user_id }`;
+        const url = `http://localhost:3000/GitHub/self/kchannel/backend/Api/userProfile.php?user_id=${user.user_id}`;
 
         axios.get(url)
         .then((res) => {
-            const resData = res.data;
-
-            if(!Object.keys(resData.data).length) {
-                setMessage(resData.message);
+            if(!Object.keys(res.data.data).length) {
+                setExistMessage(res.data.message);
             } else {
-                setUserDetail(resData.data);
-                setInputUserName(resData.data.user_name);
-                setInputIntroduction(resData.data.introduction);
+                setUserDetail(res.data.data);
+                setInputUserName(res.data.data.user_name);
+                setInputIntroduction(res.data.data.introduction);
             }
         })
         .catch((err) => {
@@ -39,35 +67,60 @@ function SettingProfile() {
      * update user data
      */
     const updateUserProfile = () => {
+        // Exit if validation check result is False
+        if(!validationCheck()) return;
+
         const url = "http://localhost:3000/GitHub/self/kchannel/backend/Api/updateUserProfile.php";
         
         // Data to send in JSON format
         const postData = {
-            user_id:      userDetail.user_id,
-            user_name:    inputUserName,
-            introduction: inputIntroduction
+            user_id        : userDetail.user_id,
+            user_name      : inputUserName,
+            introduction   : inputIntroduction,
+            csrf_token     : csrfToken,
+            withCredentials: true
         };
 
         axios.post(url, postData)
         .then((res) => {
-            if(res.data.update_result) {
+            if(res.data.success) {
                 history.push("/profile/" + userDetail.user_id);
             } else {
-                console.log(res.data);
+                // TODO: Needs details notification to user
+                alert(res.data.message);
             }
         })
         .catch((err) => {
             console.log(err);
         })
     }
+
+    const validationCheck = () => {
+        const userNameCheckResult = userNameValidation();
+        const introductionCheckResult = introductionValidation();
+
+        return userNameCheckResult && introductionCheckResult;
+    }
+
+    const userNameValidation = () => {
+        if(!Validation.checkNotEmpty(inputUserName, setUserNameMessage)) return false;
+        if(!Validation.checkSpecifiedNumberOfCharacters(inputIntroduction, 1, 50, setIntroductionMessage)) return false;
+
+        return true;
+    }
+
+    const introductionValidation = () => {
+        // TODO: add validation
+        return true;
+    }
     
     return(
         <div className="setting-profile">
 
-            {/* Branch depending on whether the message is an empty string */}
-            {message !== "" ?(
+            {/* Branch depending on whether the existMessage is an empty string */}
+            {existMessage !== "" ?(
                 <>
-                    <div>{ message }</div>
+                    <div>{ existMessage }</div>
                 </>
             ) : (
                 <>
@@ -90,6 +143,11 @@ function SettingProfile() {
                                 名前
                             </div>
                             <div className="item-content">
+                                {userNameMessage !== "" &&
+                                    <div className="error-content">
+                                        <ErrorMessage text={ userNameMessage } />
+                                    </div>
+                                }
                                 <input 
                                     className="user-name-input"
                                     value={ inputUserName }
@@ -105,6 +163,11 @@ function SettingProfile() {
                                 自己紹介
                             </div>
                             <div className="item-content">
+                                {introductionMessage !== "" &&
+                                    <div className="error-content">
+                                        <ErrorMessage text={ introductionMessage } />
+                                    </div>
+                                }
                                 <textarea
                                     className="introduction-textarea"
                                     value={ inputIntroduction }

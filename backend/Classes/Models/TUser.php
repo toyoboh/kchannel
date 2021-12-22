@@ -79,6 +79,16 @@ class TUser
         $database->connect();
         $stmt = $database->executeQuery($query, $use_query_item);
 
-        return true;
+        $row_count = $stmt->rowCount();
+
+        $result = array();
+        if($row_count >= 1) {
+            $result["success"] = true;
+        } else {
+            $result["success"] = false;
+            $result["message"] = "変更箇所がないため更新されませんでした。もしくはシステムエラー。";
+        }
+
+        return $result;
     }
 }

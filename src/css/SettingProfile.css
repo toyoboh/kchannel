@@ -58,6 +58,10 @@
         padding-top: 8px;
     }
 
+    .setting-profile > .user-main-content > .user-name-content > .item-content > .error-content {
+        padding: 0px 6px;
+    }
+
     .setting-profile > .user-main-content > .user-name-content > .item-content > .user-name-input {
         font-size: 14px;
         padding: 8px 6px;
@@ -74,6 +78,10 @@
         display: flex;
         padding-bottom: 8px;
         padding-top: 8px;
+    }
+
+    .setting-profile > .user-main-content > .introduction-content .item-content > .error-content {
+        padding: 0px 6px;
     }
 
     .setting-profile > .user-main-content > .introduction-content .item-content > .introduction-textarea {
