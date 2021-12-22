@@ -17,25 +17,57 @@ function App() {
     return (
         <div className="app">
             <Router>
-                <Header />
-                    <Route exact path="/">test</Route>
-                    <Route path="/setting/profile" component={ SettingProfile } />
 
-                    <Route exact path="/profile/:userId" component={ Profile } />
+                {/* HACK: It's not cool to put Header in each Route */}
+                <Route exact path="/">
+                    <Header />
+                    test
+                </Route>
 
-                    <Route path="/createCategory" component={ CreateCategory } />
+                <Route path="/setting/profile">
+                    <Header />
+                    <SettingProfile />
+                </Route>
 
-                    <Route path="/createBoard/:categoryId" component={ CreateBoard } />
+                <Route exact path="/profile/:userId">
+                    <Header />
+                    <Profile />
+                </Route>
 
-                    <Route path="/createThread/:boardId" component={ CreateThread } />
+                <Route path="/createCategory">
+                    <Header />
+                    <CreateCategory />
+                </Route>
 
-                    <Route path="/categoryList" component={ CategoryList } />
+                <Route path="/createBoard/:categoryId">
+                    <Header />
+                    <CreateBoard />
+                </Route>
 
-                    <Route path="/boardList/:categoryId" component={ BoardList } />
+                <Route path="/createThread/:boardId">
+                    <Header />
+                    <CreateThread />
+                </Route>
 
-                    <Route path="/threadList/:boardId" component={ ThreadList } />
+                <Route path="/categoryList">
+                    <Header />
+                    <CategoryList />
+                </Route>
 
-                    <Route path="/CommentList/:threadId" component={ CommentList } />
+                <Route path="/boardList/:categoryId">
+                    <Header />
+                    <BoardList />
+                </Route>
+
+                <Route path="/threadList/:boardId">
+                    <Header />
+                    <ThreadList />
+                </Route>
+
+                <Route path="/CommentList/:threadId">
+                    <Header />
+                    <CommentList />
+                </Route>
             </Router>
         </div>
     )
