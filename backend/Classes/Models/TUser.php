@@ -91,4 +91,66 @@ class TUser
 
         return $result;
     }
+
+    public function selectUserInformation($user_id, $mail_address) {
+        $query = "SELECT
+                    user_id,
+                    user_name,
+                    password
+                FROM
+                    t_users
+                WHERE
+                    user_id      = :user_id
+                OR
+                    mail_address = :mail_address
+        ;";
+
+        $use_query_item = [
+            "user_id" => $user_id,
+            "mail_address" => $mail_address
+        ];
+
+        $database = new Database();
+        $database->connect();
+        $stmt = $database->executeQuery($query, $use_query_item);
+
+        $row_count = $stmt->rowCount();
+
+        $result = array();
+
+        if($row_count > 0) {
+            $result["success"] = true;
+            $result["data"]    = $stmt->fetch();
+        } else {
+            $result["success"] = false;
+        }
+
+        return $result;
+    }
+
+    public function updateAtLogin($user_id) {
+        $query = "UPDATE
+                    t_users
+                SET
+                    last_login_at = CURRENT_TIMESTAMP()
+                WHERE
+                    user_id = :user_id
+        ;";
+
+        $use_query_item = [
+            "user_id" => $user_id
+        ];
+
+        $database = new Database();
+        $database->connect();
+        $stmt = $database->executeQuery($query, $use_query_item);
+
+        $row_count = $stmt->rowCount();
+
+        if($row_count >= 1) {
+            return true;
+        } else {
+            return false;
+        }
+    }
 }

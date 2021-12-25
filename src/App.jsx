@@ -12,11 +12,13 @@ import SettingProfile from "./page/SettingProfile";
 import CreateCategory from "./page/CreateCategory";
 import CreateBoard from "./page/CreateBoard";
 import CreateThread from "./page/CreateThread";
+import Login from "./page/Login";
 
 function App() {
     return (
         <div className="app">
             <Router>
+                <Route path="/login" component={ Login } />
 
                 {/* HACK: It's not cool to put Header in each Route */}
                 <Route exact path="/">

@@ -16,6 +16,15 @@ class Session {
     }
 
     /**
+     * @param void
+     * @return void
+     * Change current session id
+     */
+    public function regenerate() {
+        session_regenerate_id();
+    }
+
+    /**
      * Get the session value
      * @param string $key: The key of the session variable
      * @return mixed
