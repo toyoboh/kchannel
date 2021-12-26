@@ -9,12 +9,21 @@
         width: 100%;
     }
 
-    .profile > .update-button-content {
+    .profile > .button-content {
+        display: flex;
+        justify-content: space-between;
         margin-bottom: 20px;
-        text-align: right;
     }
 
-    .profile > .update-button-content > .update-button {
+    .profile > .button-content > .logout-button {
+        background-color: var(--accent-color);
+        border-radius: 13px;
+        color: white;
+        font-size: 14px;
+        padding: 6px 18px;
+    }
+
+    .profile > .button-content > .update-button {
         border: 1px solid black;
         border-radius: 13px;
         font-size: 14px;
