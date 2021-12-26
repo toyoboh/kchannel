@@ -8,10 +8,9 @@ export const useUserContext = () => {
 
 export const UserProvider = ({ children }) => {
     const initialUserData = {
-        user_id: "test_user_id",
-        user_name: "test_user_name",
-        is_auth: false,
-        current_header_item: 0
+        user_id  : "",
+        user_name: "",
+        is_auth  : false
     }
 
     const [user, setUser] = useState(initialUserData);

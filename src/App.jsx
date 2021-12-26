@@ -13,6 +13,7 @@ import CreateCategory from "./page/CreateCategory";
 import CreateBoard from "./page/CreateBoard";
 import CreateThread from "./page/CreateThread";
 import Login from "./page/Login";
+import PrivateRoute from "./component/route/PrivateRoute";
 
 function App() {
     return (
@@ -21,55 +22,55 @@ function App() {
                 <Route path="/login" component={ Login } />
 
                 {/* HACK: It's not cool to put Header in each Route */}
-                <Route exact path="/">
+                <PrivateRoute exact path="/">
                     <Header />
                     test
-                </Route>
+                </PrivateRoute>
 
-                <Route path="/setting/profile">
+                <PrivateRoute path="/setting/profile">
                     <Header />
                     <SettingProfile />
-                </Route>
+                </PrivateRoute>
 
-                <Route exact path="/profile/:userId">
+                <PrivateRoute exact path="/profile/:userId">
                     <Header />
                     <Profile />
-                </Route>
+                </PrivateRoute>
 
-                <Route path="/createCategory">
+                <PrivateRoute path="/createCategory">
                     <Header />
                     <CreateCategory />
-                </Route>
+                </PrivateRoute>
 
-                <Route path="/createBoard/:categoryId">
+                <PrivateRoute path="/createBoard/:categoryId">
                     <Header />
                     <CreateBoard />
-                </Route>
+                </PrivateRoute>
 
-                <Route path="/createThread/:boardId">
+                <PrivateRoute path="/createThread/:boardId">
                     <Header />
                     <CreateThread />
-                </Route>
+                </PrivateRoute>
 
-                <Route path="/categoryList">
+                <PrivateRoute path="/categoryList">
                     <Header />
                     <CategoryList />
-                </Route>
+                </PrivateRoute>
 
-                <Route path="/boardList/:categoryId">
+                <PrivateRoute path="/boardList/:categoryId">
                     <Header />
                     <BoardList />
-                </Route>
+                </PrivateRoute>
 
-                <Route path="/threadList/:boardId">
+                <PrivateRoute path="/threadList/:boardId">
                     <Header />
                     <ThreadList />
-                </Route>
+                </PrivateRoute>
 
-                <Route path="/CommentList/:threadId">
+                <PrivateRoute path="/CommentList/:threadId">
                     <Header />
                     <CommentList />
-                </Route>
+                </PrivateRoute>
             </Router>
         </div>
     )

@@ -1,10 +1,14 @@
 import React, { useState, useEffect } from "react";
+import { useHistory } from "react-router-dom";
 import "../css/Login.css";
 import axios from "axios";
 import { useUserContext } from "../context/User";
 import ErrorMessage from "../component/ErrorMessage";
 
 function Login() {
+    // history
+    const history                                   = useHistory();
+
     // context
     const { setUser }                               = useUserContext();
 
@@ -69,6 +73,7 @@ function Login() {
                     user_name: res.data.data.user_name,
                     is_auth  : true
                 });
+                history.push("/categoryList");
             } else {
                 setLoginErrorMessage(res.data.message);
             }
