@@ -56,9 +56,12 @@ if($_SERVER["REQUEST_METHOD"] === "POST") {
         // TODO: Needs processing in case of failure.
         $t_user->updateAtLogin($select_result["data"]["user_id"]);
 
-        // change current session id
+        // Set session information
         $session->regenerate();
+        $session->set("user_id", $select_result["data"]["user_id"]);
+        $session->set("user_name", $select_result["data"]["user_name"]);
 
+        // Set response data
         $res_result["success"]           = true;
         $res_result["data"]              = array();
         $res_result["data"]["user_id"]   = $select_result["data"]["user_id"];

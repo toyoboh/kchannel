@@ -63,6 +63,19 @@ class Session {
     }
 
     /**
+     * Check if it exists
+     * @param mixed $key
+     * @return boolean
+     */
+    public function checkExists($key) {
+        if(isset($_SESSION[$key])) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    /**
      * Check if they match
      * @param mixed  $item: Value to be compared
      * @param string $key : Session key
