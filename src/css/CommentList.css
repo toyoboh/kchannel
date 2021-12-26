@@ -1,10 +1,10 @@
 .comment-list {
     background-color: var(--base-color);
-    min-height: 100vh;
 }
 
 @media(max-width: 480px) {
     .comment-list {
+        min-height: var(--page-min-height);
         padding: 20px 16px;
         width: 100%;
     }

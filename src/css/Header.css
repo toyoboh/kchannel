@@ -7,24 +7,24 @@
 
 @media(max-width: 480px) {
     .header {
-        border-bottom: 4px double var(--accent-color);
+        background-color: #333;
     }
-
+    
     .header-item-wrapper {
         display: flex;
         justify-content: space-between;
         width: 100%;
     }
-
+    
     .header-item-wrapper > .header-item {
         align-items: center;
-        color: var(--accent-color);
+        /* color: var(--accent-color); */
+        color: white;
         display: flex;
         font-size: 18px;
         font-weight: 900;
+        height: 50px;
         justify-content: center;
-        padding-bottom: 8px;
-        padding-top: 8px;
         width: 100%;
     }
 

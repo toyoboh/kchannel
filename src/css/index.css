@@ -10,3 +10,9 @@ body {
     --accent-color: #333;
     --error-color: #F06060;
 }
+
+@media(max-width: 480px) {
+    body {
+        --page-min-height: calc(100vh - 50px);
+    }
+}
