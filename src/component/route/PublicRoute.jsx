@@ -1,19 +1,20 @@
 import React from "react";
-import { Redirect, Route } from "react-router-dom";
+import { Route, Redirect } from "react-router-dom";
 import { useUserContext } from "../../context/User";
 
-function PrivateRoute({ ...props }) {
+function PublicRoute({ ...props }) {
+    // context
     const { user } = useUserContext();
 
     return(
         <>
             {user.is_auth ? (
-                <Route { ...props } />
+                <Redirect to="/" />
             ) : (
-                <Redirect to="/login" />
+                <Route { ...props } />
             )}
         </>
     )
 }
 
-export default PrivateRoute;
+export default PublicRoute;

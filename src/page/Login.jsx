@@ -88,7 +88,7 @@ function Login() {
             
             <div className="form">
                 <p className="app-name">
-                    テスト
+                    Kちゃんねる
                 </p>
 
                 <div className="user-content">

@@ -14,12 +14,13 @@ import CreateBoard from "./page/CreateBoard";
 import CreateThread from "./page/CreateThread";
 import Login from "./page/Login";
 import PrivateRoute from "./component/route/PrivateRoute";
+import PublicRoute from "./component/route/PublicRoute";
 
 function App() {
     return (
         <div className="app">
             <Router>
-                <Route path="/login" component={ Login } />
+                <PublicRoute path="/login" component={ Login } />
 
                 {/* HACK: It's not cool to put Header in each Route */}
                 <PrivateRoute exact path="/">
