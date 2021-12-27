@@ -1,5 +1,5 @@
 import React from "react";
-import { BrowserRouter as Router, Route } from "react-router-dom";
+import { BrowserRouter as Router } from "react-router-dom";
 import "./css/App.css";
 // import { useUserContext } from "./context/User";
 import Header from "./component/Header";
