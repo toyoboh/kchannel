@@ -2,19 +2,14 @@ import React from "react";
 import { Route, Redirect } from "react-router-dom";
 import { useUserContext } from "../../context/User";
 
-function PublicRoute({ ...props }) {
-    // context
+function PublicRoute(props) {
     const { user } = useUserContext();
 
-    return(
-        <>
-            {user.is_auth ? (
-                <Redirect to="/" />
-            ) : (
-                <Route { ...props } />
-            )}
-        </>
-    )
+    if(user.is_auth) {
+        return <Redirect to="/" />
+    } else {
+        return <Route { ...props } />
+    }
 }
 
 export default PublicRoute;
