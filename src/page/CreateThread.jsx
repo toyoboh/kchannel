@@ -130,7 +130,7 @@ function CreateThread() {
         <div className="create-board">
             
             <div className="title-content">
-                <PageTitle Icon={ DescriptionIcon } title="Create Thread" />
+                <PageTitle Icon={ DescriptionIcon } title="スレッド作成" />
             </div>
 
             {existsMessage !== "" ? (
@@ -138,7 +138,7 @@ function CreateThread() {
                     {/* Content on Error */}
                     <div>
                         <p>{ existsMessage }</p>
-                        <p><Link to="/categoryList">Category一覧に戻る</Link></p>
+                        <p><Link to="/categoryList">カテゴリー一覧に戻る</Link></p>
                     </div>
                 </>
             ) : (
@@ -160,14 +160,14 @@ function CreateThread() {
 
                     <div className="parent-name-content">
                         <CreatePageParentName
-                            title="category name"
+                            title="掲示板名"
                             name={ boardInfo.board_name }
                         />
                     </div>
 
                     <div className="form-content">
                         <div className="name-content">
-                            <div className="form-item-title">New Thread Name</div>
+                            <div className="form-item-title">スレッド名</div>
 
                             <InputPlusButton
                                 value={ inputThreadName }
@@ -185,7 +185,7 @@ function CreateThread() {
                         </div>
 
                         <div className="explanation-content">
-                            <div className="form-item-title">Board Explanation</div>
+                            <div className="form-item-title">説明</div>
                             
                             <ExplanationForm
                                 value={ inputThreadExplanation }

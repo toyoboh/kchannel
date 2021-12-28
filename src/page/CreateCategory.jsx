@@ -94,7 +94,7 @@ function CreateCategory() {
     return(
         <div className="create-category">
             <div className="title-content">
-                <PageTitle Icon={ CategoryIcon } title="Create Category" />
+                <PageTitle Icon={ CategoryIcon } title="カテゴリー作成" />
             </div>
 
             <div className="back-link-content">
@@ -113,7 +113,7 @@ function CreateCategory() {
 
             <div className="form-content">
                 <div className="name-content">
-                    <div className="form-item-title">Category Name</div>
+                    <div className="form-item-title">カテゴリー名</div>
                     
                     <InputPlusButton
                         value={ inputCategoryName }

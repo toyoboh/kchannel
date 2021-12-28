@@ -13,7 +13,7 @@ function Comment({ createdAt, comment, createdUserName }) {
             </div>
 
             <div className="comment-footer">
-                { createdUserName }
+                投稿者：{ createdUserName }
             </div>
         </div>
     )

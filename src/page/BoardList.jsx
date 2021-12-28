@@ -55,7 +55,7 @@ function BoardList() {
     return(
         <div className="board-list">
             <div className="board-list-title">
-                <PageTitle Icon={ ReceiptIcon } title="Board" />
+                <PageTitle Icon={ ReceiptIcon } title="掲示板" />
             </div>
             
             <div className="breadcrumb-navigation-container">

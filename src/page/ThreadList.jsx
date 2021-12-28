@@ -56,7 +56,7 @@ function ThreadList() {
     return(
         <div className="thread-list">
             <div className="thread-list-title">
-                <PageTitle Icon={ DescriptionIcon } title="Thread" />
+                <PageTitle Icon={ DescriptionIcon } title="スレッド" />
             </div>
 
             <div className="breadcrumb-navigation-container">

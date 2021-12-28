@@ -51,7 +51,7 @@ function CategoryList() {
     return(
         <div className="category-list">
             <div className="title-content">
-                <PageTitle Icon={ CategoryIcon } title="Category" />
+                <PageTitle Icon={ CategoryIcon } title="カテゴリー" />
             </div>
 
             <div className="create-link-content">

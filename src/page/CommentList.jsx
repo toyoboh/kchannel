@@ -133,7 +133,7 @@ function CommentList() {
     // Add the new comments to the Array
     const addNewComment = () => {
         // HACK: 
-        // Get last comment id
+        // Get the "comment id" of the last comment currently displayed
         let lastCommentId = 0
         if(commentCount > 0) {
             const commentNum = comments.length;
