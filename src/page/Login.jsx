@@ -16,8 +16,8 @@ function Login() {
     // csrf token
     const [csrfToken, setCsrfToken]                 = useState("");
     // Input item
-    const [userInfo, setUserInfo]                   = useState("test_user_id");
-    const [password, setPassword]                   = useState("password");
+    const [inputUserInfo, setInputUserInfo]                   = useState("test_user_id");
+    const [inputPassword, setInputPassword]                   = useState("password");
     const [switchInputType, setSwitchInputType]     = useState("password");
     const [passwordCheckbox, setPasswordCheckbox]   = useState(false);
     // Error message
@@ -60,8 +60,8 @@ function Login() {
             url,
             {
                 csrf_token: csrfToken,
-                user_info: userInfo,
-                password: password,
+                user_info: inputUserInfo,
+                password: inputPassword,
                 withCredentials: true
             }
         )
@@ -96,8 +96,8 @@ function Login() {
                     <input
                         type="text"
                         className="input-user-info"
-                        defaultValue={ userInfo }
-                        onChange={ (e) => setUserInfo(e.target.value) }
+                        defaultValue={ inputUserInfo }
+                        onChange={ (e) => setInputUserInfo(e.target.value) }
                     />
                 </div>
 
@@ -106,8 +106,8 @@ function Login() {
                     <input
                         type={ switchInputType }
                         className="input-password"
-                        defaultValue={ password }
-                        onChange={ (e) => setPassword(e.target.value) }
+                        defaultValue={ inputPassword }
+                        onChange={ (e) => setInputPassword(e.target.value) }
                     />
                 </div>
 
@@ -128,10 +128,11 @@ function Login() {
                 </div>
 
                 <div className="login-button-content">
-                    <button
-                        className="button"
-                        onClick={ login }
-                    >ログイン</button>
+                    {inputUserInfo !== "" && inputPassword ?
+                    <button className="button enable" onClick={ login }>ログイン</button>
+                    :
+                    <button className="button disable">ログイン</button>
+                    }
                 </div>
 
                 {loginErrorMessage !== "" &&

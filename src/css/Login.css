@@ -76,7 +76,6 @@
     }
 
     .login > .form > .login-button-content > .button {
-        background-color: var(--main-color);
         border-radius: 4px;
         font-size: 14px;
         letter-spacing: 0.5px;
@@ -84,6 +83,14 @@
         padding-top: 8px;
         text-align: center;
         width: 100%;
+    }
+
+    .login > .form > .login-button-content > .enable {
+        background-color: var(--main-color);
+    }
+
+    .login > .form > .login-button-content > .disable {
+        background-color: var(--base-color);
     }
 
     .login > .form > .error-content {
