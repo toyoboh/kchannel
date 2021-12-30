@@ -153,4 +153,54 @@ class TUser
             return false;
         }
     }
+
+    /**
+     * Check if the user_id is used.
+     * @param string $user_id
+     * @return boolean
+     */
+    public function checkUserIdExists($user_id) {
+        $query = "SELECT
+                    user_id
+                FROM
+                    t_users
+                WHERE
+                    user_id = :user_id
+        ;";
+
+        $use_query_item = [
+            "user_id" => $user_id
+        ];
+
+        $database = new Database();
+        $database->connect();
+        $stmt = $database->executeQuery($query, $use_query_item);
+
+        return $stmt->rowCount() > 0;
+    }
+
+    /**
+     * Check if the mail_address is used.
+     * @param string $mail_address
+     * @return boolean
+     */
+    public function checkMailAddressExists($mail_address) {
+        $query = "SELECT
+                    mail_address
+                FROM
+                    t_users
+                WHERE
+                    mail_address = :mail_address
+        ;";
+
+        $use_query_item = [
+            "mail_address" => $mail_address
+        ];
+
+        $database = new Database();
+        $database->connect();
+        $stmt = $database->executeQuery($query, $use_query_item);
+
+        return $stmt->rowCount() > 0;
+    }
 }

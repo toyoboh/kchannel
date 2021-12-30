@@ -1,71 +1,71 @@
 @media(max-width: 480px) {
-    .login {
+    .register-account {
         height: 100vh;
         display: flex;
         align-items: center;
         justify-content: center;
     }
 
-    .login > .form {
+    .register-account > .form {
         border: 1px solid black;
         min-width: 300px;
         padding: 32px 16px;
         width: 80%;
     }
 
-    .login > .form > .app-name {
+    .register-account > .form > .app-name {
         font-size: 16px;
         margin-bottom: 32px;
         text-align: center;
     }
 
-    .login > .form > .input-item-content {
+    .register-account > .form > .input-item-content {
         border: 1px solid black;
         border-radius: 4px;
         padding: 4px 8px;
     }
 
-    .login > .form > .input-item-content:first-of-type {
+    .register-account > .form > .input-item-content:not(:last-of-type) {
         margin-bottom: 16px;
     }
 
-    .login > .form > .input-item-content:last-of-type {
+    .register-account > .form > .input-item-content:last-of-type {
         margin-bottom: 8px;
     }
 
-    .login > .form > .input-item-content > .title {
+    .register-account > .form > .input-item-content > .title {
         font-size: 10px;
     }
 
-    .login > .form > .input-item-content > .input {
+    .register-account > .form > .input-item-content > .input {
         background-color: var(--base-color);
         font-size: 14px;
         width: 100%;
     }
-    
-    .login > .form > .input-item-content > .input:focus {
+
+    .register-account > .form > .input-item-content > .input:focus {
         outline: none;
     }
 
-    .login > .form > .password-display-content {
+    .register-account > .form > .password-display-content {
         margin-bottom: 12px;
         padding: 0px 4px;
         text-align: right;
     }
 
-    .login > .form > .password-display-content > .label {
+    .register-account > .form > .password-display-content > .label {
         font-size: 12px;
     }
 
-    .login > .form > .password-display-content > .password-checkbox {
+    .register-account > .form > .password-display-content > .password-checkbox {
         margin-left: 4px;
     }
 
-    .login > .form > .login-button-content {
+    .register-account > .form > .register-button-content {
         margin-bottom: 16px;
     }
 
-    .login > .form > .login-button-content > .button {
+    .register-account > .form > .register-button-content > .button {
         border-radius: 4px;
         font-size: 14px;
         letter-spacing: 0.5px;
@@ -75,42 +75,38 @@
         width: 100%;
     }
 
-    .login > .form > .login-button-content > .enable {
+    .register-account > .form > .register-button-content > .enable {
         background-color: var(--main-color);
     }
 
-    .login > .form > .login-button-content > .disable {
+    .register-account > .form > .register-button-content > .disable {
         background-color: var(--base-color);
     }
 
-    .login > .form > .error-content {
-        margin-bottom: 16px;
-    }
-
-    .login > .form > .or-content {
+    .register-account > .form > .or-content {
         align-items: center;
         display: flex;
         font-size: 14px;
         margin-bottom: 16px;
     }
 
-    .login > .form > .or-content:before,
-    .login > .form > .or-content:after {
+    .register-account > .form > .or-content:before,
+    .register-account > .form > .or-content:after {
         background-color: black;
         content: "";
         flex-grow: 1;
         height: 1px;
     }
 
-    .login > .form > .or-content:before {
+    .register-account > .form > .or-content:before {
         margin-right: 14px;
     }
 
-    .login > .form > .or-content:after {
+    .register-account > .form > .or-content:after {
         margin-left: 14px;
     }
 
-    .login > .form > .create-link-content {
+    .register-account > .form > .login-link-content {
         font-size: 12px;
         text-align: center;
     }

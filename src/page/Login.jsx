@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { useHistory } from "react-router-dom";
+import { useHistory, Link } from "react-router-dom";
 import "../css/Login.css";
 import axios from "axios";
 import { useUserContext } from "../context/User";
@@ -91,21 +91,21 @@ function Login() {
                     Kちゃんねる
                 </p>
 
-                <div className="user-content">
+                <div className="input-item-content user-content">
                     <p className="title">メールアドレス、ユーザID</p>
                     <input
                         type="text"
-                        className="input-user-info"
+                        className="input input-user-info"
                         defaultValue={ inputUserInfo }
                         onChange={ (e) => setInputUserInfo(e.target.value) }
                     />
                 </div>
 
-                <div className="password-content">
+                <div className="input-item-content password-content">
                     <p className="title">パスワード</p>
                     <input
                         type={ switchInputType }
-                        className="input-password"
+                        className="input input-password"
                         defaultValue={ inputPassword }
                         onChange={ (e) => setInputPassword(e.target.value) }
                     />
@@ -146,7 +146,7 @@ function Login() {
                 </p>
 
                 <p className="create-link-content">
-                    アカウントを作成する
+                    <Link to="/registerAccount">アカウントを作成する</Link>
                 </p>
             </div>
         </div>
