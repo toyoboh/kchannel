@@ -7,56 +7,28 @@ class Validation
      * @returns {boolean} : If there is a setFunction
      * @returns {array}   : If there is no setFunction
      */
-    checkNotEmpty(value, setFunction = null) {
-        if(setFunction === null) {
-            if(value === "") {
-                return {
-                    success: false,
-                    message: "入力してください"
-                }
-            } else {
-                return {
-                    success: true,
-                    message: ""
-                }
-            }
+    checkNotEmpty(value, setFunction) {
+        if(value === "") {
+            setFunction("入力してください");
+            return false;
         } else {
-            if(value === "") {
-                setFunction("入力してください");
-                return false;
-            } else {
-                setFunction("");
-                return true;
-            }
+            setFunction("");
+            return true;
         }
     }
 
     /**
      * 
      */
-    checkSpecifiedNumberOfCharacters(chara, min, max, setFunction = null) {
+    checkSpecifiedNumberOfCharacters(chara, min, max, setFunction) {
         const charaCount = chara.length;
-        
-        if(setFunction === null) {
-            if(min <= charaCount && charaCount <= max) {
-                return {
-                    success: true,
-                    message: ""
-                }
-            } else {
-                return {
-                    success: false,
-                    message: `${min}文字以上、${max}文字以下で入力してください`
-                }
-            }
+
+        if(min <= charaCount && charaCount <= max) {
+            setFunction("");
+            return true;
         } else {
-            if(min <= charaCount && charaCount <= max) {
-                setFunction("");
-                return true;
-            } else {
-                setFunction(`${min}文字以上、${max}文字以下で入力してください`);
-                return false;
-            }
+            setFunction(`${min}文字以上、${max}文字以下で入力してください`);
+            return false;
         }
     }
 }

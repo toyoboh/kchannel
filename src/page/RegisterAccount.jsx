@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import axios from "axios";
 import "../css/RegisterAccount.css";
 import ErrorMessage from "../component/ErrorMessage";
+import Validation from "../tool/Validation";
 
 function RegisterAccount() {
     // state
@@ -53,6 +54,7 @@ console.log("0bb8dd944d3a8e9042fae56f0109dd8dfa1dcd1bb0bfd077dee2d17e9415f2f00d8
 
     const register = () => {
         // validation check
+        if(validationCheck()) return;
 
         const url = "http://localhost:3000/GitHub/self/kchannel/backend/Api/temporaryRegistration.php";
         axios.post(
@@ -78,6 +80,39 @@ console.log("0bb8dd944d3a8e9042fae56f0109dd8dfa1dcd1bb0bfd077dee2d17e9415f2f00d8
         .catch((err) => {
             console.log(err);
         })
+    }
+
+    const validationCheck = () => {
+        const mailAddressCheckResult = mailAddressValidation();
+        const userIdCheckResult      = userIdValidation();
+        const userNameCheckResult    = userNameValidation();
+        const passwordCheckResult    = passwordValidation();
+
+        return mailAddressCheckResult && userIdCheckResult && userNameCheckResult && passwordCheckResult;
+    }
+
+    const mailAddressValidation = () => {
+        if(!Validation.checkSpecifiedNumberOfCharacters(inputMailAddress, 1, 50, setMailAddressMessage)) return false;
+        
+        return true;
+    }
+    
+    const userIdValidation = () => {
+        if(!Validation.checkSpecifiedNumberOfCharacters(inputUserId, 1, 20, setUserIdMessage)) return false;
+        
+        return true;
+    }
+    
+    const userNameValidation = () => {
+        if(!Validation.checkSpecifiedNumberOfCharacters(inputUserName, 1, 50, setUserNameMessage)) return false;
+        
+        return true;
+    }
+    
+    const passwordValidation = () => {
+        if(!Validation.checkSpecifiedNumberOfCharacters(inputPassword, 8, 50, setPasswordMessage)) return false;
+
+        return true;
     }
 
     return(
