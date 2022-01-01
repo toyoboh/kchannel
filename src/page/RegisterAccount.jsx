@@ -1,27 +1,29 @@
 import React, { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import axios from "axios";
 import "../css/RegisterAccount.css";
 import ErrorMessage from "../component/ErrorMessage";
 import Validation from "../tool/Validation";
 
 function RegisterAccount() {
+    // history
+    const history                                     = useHistory();
     // state
     // CSRF token
-    const [csrfToken, setCsrfToken] = useState("");
+    const [csrfToken, setCsrfToken]                   = useState("");
     // InputItem
-    const [inputMailAddress, setInputMailAddress] = useState("");
-    const [inputUserId, setInputUserId] = useState("");
-    const [inputUserName, setInputUserName] = useState("");
-    const [inputPassword, setInputPassword] = useState("");
-    const [switchInputType, setSwitchInputType]    = useState("password");
-    const [passwordCheckbox, setPasswordCheckbox]  = useState(false);
+    const [inputMailAddress, setInputMailAddress]     = useState("");
+    const [inputUserId, setInputUserId]               = useState("");
+    const [inputUserName, setInputUserName]           = useState("");
+    const [inputPassword, setInputPassword]           = useState("");
+    const [switchInputType, setSwitchInputType]       = useState("password");
+    const [passwordCheckbox, setPasswordCheckbox]     = useState(false);
     // Error message
     const [mailAddressMessage, setMailAddressMessage] = useState("");
-    const [userIdMessage, setUserIdMessage] = useState("");
-    const [userNameMessage, setUserNameMessage] = useState("");
-    const [passwordMessage, setPasswordMessage] = useState("");
-console.log("0bb8dd944d3a8e9042fae56f0109dd8dfa1dcd1bb0bfd077dee2d17e9415f2f00d8ab8091b2727295a5b0d000bde8323591b743f4c20521792505f102d836d0a".length)
+    const [userIdMessage, setUserIdMessage]           = useState("");
+    const [userNameMessage, setUserNameMessage]       = useState("");
+    const [passwordMessage, setPasswordMessage]       = useState("");
+
     // Set csrf token
     useEffect(() => {
         const csrfTokenUrl = "http://localhost:3000/GitHub/self/kchannel/backend/Api/csrfToken.php";
@@ -54,7 +56,7 @@ console.log("0bb8dd944d3a8e9042fae56f0109dd8dfa1dcd1bb0bfd077dee2d17e9415f2f00d8
 
     const register = () => {
         // validation check
-        if(validationCheck()) return;
+        if(!validationCheck()) return;
 
         const url = "http://localhost:3000/GitHub/self/kchannel/backend/Api/temporaryRegistration.php";
         axios.post(
@@ -71,7 +73,7 @@ console.log("0bb8dd944d3a8e9042fae56f0109dd8dfa1dcd1bb0bfd077dee2d17e9415f2f00d8
         .then((res) => {
             console.log(res.data);
             if(res.data.success) {
-                // screen move
+                history.push("/temporaryRegisterDone");
             } else {
                 setUserIdMessage(res.data.message.user_id);
                 setMailAddressMessage(res.data.message.mail_address);
@@ -111,7 +113,6 @@ console.log("0bb8dd944d3a8e9042fae56f0109dd8dfa1dcd1bb0bfd077dee2d17e9415f2f00d8
     
     const passwordValidation = () => {
         if(!Validation.checkSpecifiedNumberOfCharacters(inputPassword, 8, 50, setPasswordMessage)) return false;
-
         return true;
     }
 
@@ -131,9 +132,9 @@ console.log("0bb8dd944d3a8e9042fae56f0109dd8dfa1dcd1bb0bfd077dee2d17e9415f2f00d8
                         onChange={ (e) => setInputMailAddress(e.target.value) }
                     />
                     {mailAddressMessage !== "" &&
-                    <p className="error">
+                    <div className="error">
                         <ErrorMessage text={ mailAddressMessage } />
-                    </p>
+                    </div>
                     }
                 </div>
 
@@ -146,9 +147,9 @@ console.log("0bb8dd944d3a8e9042fae56f0109dd8dfa1dcd1bb0bfd077dee2d17e9415f2f00d8
                         onChange={ (e) => setInputUserId(e.target.value) }
                     />
                     {userIdMessage !== "" &&
-                    <p className="error">
+                    <div className="error">
                         <ErrorMessage text={ userIdMessage } />
-                    </p>
+                    </div>
                     }
                 </div>
 
@@ -161,9 +162,9 @@ console.log("0bb8dd944d3a8e9042fae56f0109dd8dfa1dcd1bb0bfd077dee2d17e9415f2f00d8
                         onChange={ (e) => setInputUserName(e.target.value) }
                     />
                     {userNameMessage !== "" &&
-                    <p className="error">
+                    <div className="error">
                         <ErrorMessage text={ userNameMessage } />
-                    </p>
+                    </div>
                     }
                 </div>
 
@@ -176,9 +177,9 @@ console.log("0bb8dd944d3a8e9042fae56f0109dd8dfa1dcd1bb0bfd077dee2d17e9415f2f00d8
                         onChange={ (e) => setInputPassword(e.target.value) }
                     />
                     {passwordMessage !== "" &&
-                    <p className="error">
+                    <div className="error">
                         <ErrorMessage text={ passwordMessage } />
-                    </p>
+                    </div>
                     }
                 </div>
 

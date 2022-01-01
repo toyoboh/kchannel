@@ -15,6 +15,7 @@ import Login from "./page/Login";
 import RegisterAccount from "./page/RegisterAccount";
 import PrivateRoute from "./component/route/PrivateRoute";
 import PublicRoute from "./component/route/PublicRoute";
+import TemporaryRegisterDone from "./page/TemporaryRegisterDone";
 
 function App() {
     return (
@@ -24,6 +25,8 @@ function App() {
                     <PublicRoute path="/login" component={ Login } />
 
                     <PublicRoute path="/registerAccount" component={ RegisterAccount } />
+
+                    <PublicRoute path="/temporaryRegisterDone" component={ TemporaryRegisterDone } />
 
                     {/* HACK: It's not cool to put Header in each Route */}
                     <PrivateRoute exact path="/">
