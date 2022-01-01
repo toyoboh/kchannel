@@ -1,9 +1,9 @@
 import React from "react";
-import "../css/TemporaryRegisterDone.css";
+import "../css/TemporaryRegistrationCompleted.css";
 
-function TemporaryRegisterDone() {
+function TemporaryRegistrationCompleted() {
     return(
-        <div className="temporary-register-done">
+        <div className="temporary-registration-completed">
             <div className="main">
                 <p className="app-name">Kちゃんねる</p>
 
@@ -20,4 +20,4 @@ function TemporaryRegisterDone() {
     )
 }
 
-export default TemporaryRegisterDone;
+export default TemporaryRegistrationCompleted;

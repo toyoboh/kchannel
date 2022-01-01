@@ -73,7 +73,7 @@ function RegisterAccount() {
         .then((res) => {
             console.log(res.data);
             if(res.data.success) {
-                history.push("/temporaryRegisterDone");
+                history.push("/temporaryRegistrationCompleted");
             } else {
                 setUserIdMessage(res.data.message.user_id);
                 setMailAddressMessage(res.data.message.mail_address);
