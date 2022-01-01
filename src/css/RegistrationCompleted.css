@@ -1,0 +1,41 @@
+@media(max-width: 480px) {
+    .registration-completed {
+        height: 100vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .registration-completed > .main {
+        border: 1px solid #333;
+        width: 90%;
+    }
+
+    .registration-completed > .main > .app-name-content {
+        background-color: var(--base-color);
+        border-bottom: 1px solid #333;
+        padding-bottom: 8px;
+        padding-top: 8px;
+    }
+
+    .registration-completed > .main > .app-name-content > .app-name {
+        font-size: 16px;
+        text-align: center;
+    }
+
+    .registration-completed > .main > .message-content {
+        padding: 16px 8px;
+    }
+
+    .registration-completed > .main > .message-content > .item {
+        font-size: 14px;
+    }
+
+    .registration-completed > .main > .message-content > .item:not(:last-of-type) {
+        margin-bottom: 12px;
+    }
+
+    .registration-completed > .main > .message-content > .login-link-content {
+        text-align: center;
+    }
+}

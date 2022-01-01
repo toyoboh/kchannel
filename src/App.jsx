@@ -15,6 +15,7 @@ import Login from "./page/Login";
 import RegisterAccount from "./page/RegisterAccount";
 import PrivateRoute from "./component/route/PrivateRoute";
 import PublicRoute from "./component/route/PublicRoute";
+import RegistrationCompleted from "./page/RegistrationCompleted";
 import TemporaryRegistrationCompleted from "./page/TemporaryRegistrationCompleted";
 
 function App() {
@@ -25,6 +26,8 @@ function App() {
                     <PublicRoute path="/login" component={ Login } />
 
                     <PublicRoute path="/registerAccount" component={ RegisterAccount } />
+
+                    <PublicRoute path="/RegistrationCompleted" component={ RegistrationCompleted } />
 
                     <PublicRoute path="/temporaryRegistrationCompleted" component={ TemporaryRegistrationCompleted } />
 

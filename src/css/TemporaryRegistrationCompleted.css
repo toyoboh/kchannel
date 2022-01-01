@@ -7,22 +7,35 @@
     }
 
     .temporary-registration-completed > .main {
+        border: 1px solid #333;
         width: 90%;
     }
 
-    .temporary-registration-completed > .main > .app-name {
+    .temporary-registration-completed > .main > .app-name-content {
+        background-color: var(--base-color);
+        border-bottom: 1px solid #333;
+        padding-bottom: 8px;
+        padding-top: 8px;
+    }
+
+    .temporary-registration-completed > .main > .app-name-content > .app-name {
         font-size: 16px;
-        margin-bottom: 32px;
         text-align: center;
     }
 
-    .temporary-registration-completed > .main > .done-message-content > .item {
+    .temporary-registration-completed > .main > .message-content {
+        padding: 16px 8px;
+    }
+
+    .temporary-registration-completed > .main > .message-content > .item {
         font-size: 14px;
+    }
+
+    .temporary-registration-completed > .main > .message-content > .item:not(:last-of-type) {
         margin-bottom: 12px;
     }
 
-    .temporary-registration-completed > .main > .done-message-content > .not-done {
-        border: 1px solid black;
-        padding: 12px 8px;
+    .temporary-registration-completed > .main > .message-content > .login-link-content {
+        text-align: center;
     }
 }
