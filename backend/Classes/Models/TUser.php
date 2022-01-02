@@ -203,4 +203,44 @@ class TUser
 
         return $stmt->rowCount() > 0;
     }
+
+    /**
+     * Register new Account
+     * @param string $user_id
+     * @param string $user_name
+     * @param string $mail_address
+     * @param string $hash_password
+     * @return boolean
+     */
+    public function register($user_id, $user_name, $mail_address, $hash_password, $auth) {
+        $query = "INSERT INTO
+                    t_users(
+                        user_id,
+                        user_name,
+                        mail_address,
+                        password,
+                        auth
+                    ) VALUES(
+                        :user_id,
+                        :user_name,
+                        :mail_address,
+                        :password,
+                        :auth
+                    )
+        ;";
+
+        $use_query_item = [
+            "user_id"      => $user_id,
+            "user_name"    => $user_name,
+            "mail_address" => $mail_address,
+            "password"     => $hash_password,
+            "auth"         => $auth
+        ];
+
+        $database = new Database();
+        $database->connect();
+        $stmt = $database->executeQuery($query, $use_query_item);
+
+        return $stmt->rowCount() > 0;
+    }
 }
