@@ -6,7 +6,8 @@
 }
 
 .registration-completed > .main {
-    border: 1px solid #333;
+    border: 1px solid black;
+    max-width: 800px;
     width: 90%;
 }
 
