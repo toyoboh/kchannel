@@ -56,7 +56,7 @@ class TComment
             $comment["data"]["item"] = $stmt->fetchAll();
         } else {
             $comment["data"]["item"] = array();
-            $comment["message"] = "Not Found Comment. Let's write a good comment!";
+            $comment["message"] = "現在コメントはありません。投稿しましょう！";
         }
 
         return $comment;

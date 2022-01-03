@@ -3,6 +3,7 @@ import { useLocation, Link } from "react-router-dom";
 import "../css/BreadcrumbNavigation.css";
 import axios from "axios";
 import ArrowRightIcon from "@material-ui/icons/ArrowRight";
+import URL from "../info/Url";
 
 function BreadcrumbNavigation() {
     const location = useLocation();
@@ -10,14 +11,23 @@ function BreadcrumbNavigation() {
     const [breadcrumb, setBreadcrumb] = useState([]);
 
     const createBreadcrumb = async (pagename, id = false) => {
-        let url = `http://localhost:3000/GitHub/self/kchannel/backend/Api/breadcrumbInformation.php?pagename=${pagename}`;
-        // Add parameter only when there is an id of the argument
-        if(id) url += `&id=${id}`;
+        let paramData;
+        if(id) {
+            paramData = {
+                pagename: pagename,
+                id      : id
+            }
+        } else {
+            paramData = {
+                pagename: pagename
+            }
+        }
 
-        axios.get(url)
+        axios[URL.breadcrumbInformation.method](URL.breadcrumbInformation.url, {
+            params: paramData
+        })
         .then((res) => {
-            const data = res.data.data;
-            setBreadcrumb(data);
+            setBreadcrumb(res.data.data);
         })
         .catch((err) => {
             console.log(err);
@@ -43,9 +53,9 @@ function BreadcrumbNavigation() {
                 <React.Fragment key={ index }>
                     {/* Only when at the first of the loop */}
                     {!index &&
-                        <li className="list-item list-item-text">
-                            <Link to="/categoryList">category</Link>
-                        </li>
+                    <li className="list-item list-item-text">
+                        <Link to="/categoryList">category</Link>
+                    </li>
                     }
 
                     <li className="list-item list-item-icon">
@@ -54,15 +64,15 @@ function BreadcrumbNavigation() {
 
                     {/* Use Link tags except at the end of the loop */}
                     {breadcrumbCount - 1 === index ? (
-                        <li className="list-item list-item-text">
-                            { value.name }
-                        </li>
+                    <li className="list-item list-item-text">
+                        { value.name }
+                    </li>
                     ) : (
-                        <li className="list-item list-item-text">
-                            <Link to={ linkList[index] + value.id }>
-                                { value.name }
-                            </Link>
-                        </li>
+                    <li className="list-item list-item-text">
+                        <Link to={ linkList[index] + value.id }>
+                            { value.name }
+                        </Link>
+                    </li>
                     )}
                 </React.Fragment>
             )

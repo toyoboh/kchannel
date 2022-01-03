@@ -3,6 +3,10 @@ const URL = {
         method: "put",
         url   : "http://localhost:3000/GitHub/self/kchannel/backend/Api/csrfToken.php"
     },
+    breadcrumbInformation: { // param: pagename, id = default:false
+        method: "get",
+        url   : "http://localhost:3000/GitHub/self/kchannel/backend/Api/breadcrumbInformation.php"
+    },
     categoryList: { // param: none
         method: "get",
         url   : "http://localhost:3000/GitHub/self/kchannel/backend/Api/categoryList.php"
@@ -58,6 +62,10 @@ const URL = {
     login: {
         method: "post",
         url   : "http://localhost:3000/GitHub/self/kchannel/backend/Api/login.php"
+    },
+    loggedInCheck: {
+        method: "post",
+        url   : "http://localhost:3000/GitHub/self/kchannel/backend/Api/loggedInCheck.php"
     },
     logout: { // param: none
         method: "get",

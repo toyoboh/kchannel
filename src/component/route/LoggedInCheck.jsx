@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { useUserContext } from "../../context/User";
 import App from "../../App";
+import URL from "../../info/Url";
 
 function LoggedInCheck() {
     // context
@@ -12,13 +13,9 @@ function LoggedInCheck() {
 
     // check if you are logged in
     useEffect(() => {
-        const url = "http://localhost:3000/GitHub/self/kchannel/backend/Api/loggedInCheck.php";
-        axios.post(
-            url,
-            {
-                withCredentials: true
-            }
-        )
+        axios[URL.loggedInCheck.method](URL.loggedInCheck.url, {
+            withCredentials: true
+        })
         .then((res) => {
             if(res.data.success) {
                 setUser({

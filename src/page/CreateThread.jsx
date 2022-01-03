@@ -61,7 +61,11 @@ function CreateThread() {
 
     // Set Board information
     useEffect(() => {
-        axios[URL.checkBoardExists.method](URL.checkBoardExists.url)
+        axios[URL.checkBoardExists.method](URL.checkBoardExists.url, {
+            params: {
+                board_id: boardId
+            }
+        })
         .then((res) => {
             if(res.data.data.board_exists) {
                 setBoardInfo(res.data.data.board_info);
