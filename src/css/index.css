@@ -26,3 +26,24 @@ body {
         --page-min-height: calc(100vh - 50px);
     }
 }
+
+@media(min-width: 481px) and (max-width: 1000px) {
+    body {
+        --page-min-height: calc(100vh - 60px);
+    }
+}
+
+@media(min-width: 1001px) {
+    body {
+        --page-min-height: calc(100vh - 60px);
+    }
+}
+
+
+@media(min-width: 481px) and (max-width: 1000px) {
+    
+}
+
+@media(min-width: 1001px) {
+    
+}

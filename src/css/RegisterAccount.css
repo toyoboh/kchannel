@@ -1,113 +1,168 @@
+.register-account {
+    display: flex;
+    height: 100vh;
+    align-items: center;
+    justify-content: center;
+}
+
+.register-account > .form {
+    border: 1px solid black;
+    max-width: 800px;
+    padding: 32px 16px;
+    width: 90%;
+}
+
+.register-account > .form > .app-name {
+    margin-bottom: 32px;
+    text-align: center;
+}
+
+.register-account > .form > .input-item-content {
+    border: 1px solid black;
+    border-radius: 4px;
+    padding: 4px 8px;
+}
+
+.register-account > .form > .input-item-content {
+    margin-bottom: 16px;
+}
+
+.register-account > .form > .password-content {
+    margin-bottom: 8px; /* last-of-typeがきかないため */
+}
+
+.register-account > .form > .input-item-content > .input {
+    background-color: var(--base-color);
+    width: 100%;
+}
+
+.register-account > .form > .input-item-content > .input:focus {
+    outline: none;
+}
+
+.register-account > .form > .password-display-content {
+    margin-bottom: 12px;
+    padding: 0px 4px;
+    text-align: right;
+}
+
+.register-account > .form > .password-display-content > .password-checkbox {
+    margin-left: 4px;
+}
+
+.register-account > .form > .register-button-content {
+    margin-bottom: 16px;
+}
+
+.register-account > .form > .register-button-content > .button {
+    border-radius: 4px;
+    font-size: 14px;
+    letter-spacing: 0.5px;
+    padding-bottom: 8px;
+    padding-top: 8px;
+    text-align: center;
+    width: 100%;
+}
+
+.register-account > .form > .register-button-content > .enable {
+    background-color: var(--main-color);
+}
+
+.register-account > .form > .register-button-content > .disable {
+    background-color: var(--base-color);
+}
+
+.register-account > .form > .or-content {
+    align-items: center;
+    display: flex;
+    font-size: 14px;
+    margin-bottom: 16px;
+}
+
+.register-account > .form > .or-content:before,
+.register-account > .form > .or-content:after {
+    background-color: black;
+    content: "";
+    flex-grow: 1;
+    height: 1px;
+}
+
+.register-account > .form > .or-content:before {
+    margin-right: 14px;
+}
+
+.register-account > .form > .or-content:after {
+    margin-left: 14px;
+}
+
+.register-account > .form > .login-link-content {
+    text-align: center;
+}
+
 @media(max-width: 480px) {
-    .register-account {
-        height: 100vh;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-    }
-
-    .register-account > .form {
-        border: 1px solid black;
-        min-width: 300px;
-        padding: 32px 16px;
-        width: 80%;
-    }
-
     .register-account > .form > .app-name {
         font-size: 16px;
-        margin-bottom: 32px;
-        text-align: center;
-    }
-
-    .register-account > .form > .input-item-content {
-        border: 1px solid black;
-        border-radius: 4px;
-        padding: 4px 8px;
-    }
-
-    .register-account > .form > .input-item-content:not(:last-of-type) {
-        margin-bottom: 16px;
-    }
-
-    .register-account > .form > .input-item-content:last-of-type {
-        margin-bottom: 8px;
     }
 
     .register-account > .form > .input-item-content > .title {
         font-size: 10px;
     }
-
+    
     .register-account > .form > .input-item-content > .input {
         background-color: var(--base-color);
         font-size: 14px;
         width: 100%;
     }
 
-    .register-account > .form > .input-item-content > .input:focus {
-        outline: none;
-    }
-
-    .register-account > .form > .password-display-content {
-        margin-bottom: 12px;
-        padding: 0px 4px;
-        text-align: right;
-    }
-
     .register-account > .form > .password-display-content > .label {
         font-size: 12px;
     }
 
-    .register-account > .form > .password-display-content > .password-checkbox {
-        margin-left: 4px;
+    .register-account > .form > .login-link-content {
+        font-size: 12px;
+    }
+}
+
+@media(min-width: 481px) and (max-width: 1000px) {
+    .register-account > .form > .app-name {
+        font-size: 18px;
     }
 
-    .register-account > .form > .register-button-content {
-        margin-bottom: 16px;
+    .register-account > .form > .input-item-content > .title {
+        font-size: 12px;
+    }
+    
+    .register-account > .form > .input-item-content > .input {
+        font-size: 16px;
     }
 
-    .register-account > .form > .register-button-content > .button {
-        border-radius: 4px;
+    .register-account > .form > .password-display-content > .label {
         font-size: 14px;
-        letter-spacing: 0.5px;
-        padding-bottom: 8px;
-        padding-top: 8px;
-        text-align: center;
-        width: 100%;
-    }
-
-    .register-account > .form > .register-button-content > .enable {
-        background-color: var(--main-color);
-    }
-
-    .register-account > .form > .register-button-content > .disable {
-        background-color: var(--base-color);
-    }
-
-    .register-account > .form > .or-content {
-        align-items: center;
-        display: flex;
-        font-size: 14px;
-        margin-bottom: 16px;
-    }
-
-    .register-account > .form > .or-content:before,
-    .register-account > .form > .or-content:after {
-        background-color: black;
-        content: "";
-        flex-grow: 1;
-        height: 1px;
-    }
-
-    .register-account > .form > .or-content:before {
-        margin-right: 14px;
-    }
-
-    .register-account > .form > .or-content:after {
-        margin-left: 14px;
     }
 
     .register-account > .form > .login-link-content {
+        font-size: 14px;
+    }
+}
+
+@media(min-width: 1001px) {
+    .register-account > .form > .app-name {
+        font-size: 20px;
+    }
+
+    .register-account > .form > .input-item-content > .title {
         font-size: 12px;
-        text-align: center;
+    }
+    
+    .register-account > .form > .input-item-content > .input {
+        font-size: 16px;
+    }
+
+    .register-account > .form > .password-display-content > .label {
+        font-size: 14px;
+    }
+
+    .register-account > .form > .login-link-content {
+        font-size: 14px;
     }
 }
