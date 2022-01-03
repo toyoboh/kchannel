@@ -7,6 +7,7 @@ import DescriptionIcon from "@material-ui/icons/Description";
 import Card from "../component/Card";
 import BreadcrumbNavigation from "../component/BreadcrumbNavigation";
 import CreateLink from "../component/CreateLink";
+import URL from "../info/Url";
 
 function ThreadList() {
     // board id received by parameter
@@ -18,22 +19,21 @@ function ThreadList() {
     const [threads, setThreads] = useState([]);
 
     useEffect(() => {
-        const fetchThread = async () => {
-            axios.get(
-                `http://localhost:3000/GitHub/self/kchannel/backend/Api/threadList.php?board_id=${boardId}`
-            )
-            .then((res) => {
-                if(res.data.data.item.length > 0) {
-                    setThreads(res.data.data.item);
-                } else {
-                    setMessage(res.data.message);
-                }
-            })
-            .catch((err) => {
-                console.log(err);
-            })
-        }
-        fetchThread();
+        axios[URL.threadList.method](URL.threadList.url, {
+            params: {
+                board_id: boardId
+            }
+        })
+        .then((res) => {
+            if(res.data.data.item.length > 0) {
+                setThreads(res.data.data.item);
+            } else {
+                setMessage(res.data.message);
+            }
+        })
+        .catch((err) => {
+            console.log(err);
+        })
     }, [boardId]);
 
     // Thread content for display

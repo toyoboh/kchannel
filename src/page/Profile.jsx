@@ -3,20 +3,23 @@ import { useParams, Link } from "react-router-dom";
 import axios from "axios";
 import "../css/Profile.css";
 import { useUserContext } from "../context/User";
+import URL from "../info/Url";
 
 function Profile() {
-    const { userId } = useParams();
+    const { userId }                  = useParams();
 
-    const { user, setUser }   = useUserContext();
+    const { user, setUser }           = useUserContext();
 
     const [userDetail, setUserDetail] = useState([]);
     const [message, setMessage]       = useState("");
 
 
     useEffect(() => {
-        const url = `http://localhost:3000/GitHub/self/kchannel/backend/Api/userProfile.php?user_id=${userId}`;
-
-        axios.get(url)
+        axios[URL.userProfile.method](URL.userProfile.url, {
+            params: {
+                user_id: userId
+            }
+        })
         .then((res) => {
             // Branch depending on whether the number of data in response data is 0
             if(!Object.keys(res.data.data).length) {
@@ -32,8 +35,7 @@ function Profile() {
 
     // Logout Process
     const logout = () => {
-        const url = `http://localhost:3000/GitHub/self/kchannel/backend/Api/logout.php`;
-        axios.get(url)
+        axios[URL.logout.method](URL.logout.url)
         .then((res) => {
             if(res.data.success) {
                 setUser({
@@ -58,6 +60,8 @@ function Profile() {
                 </>
             ) : (
                 <>
+                    {/* Display only when user id of the logged-in user and the user id on the profile page match */}
+                    {user.user_id === userDetail.user_id &&
                     <div className="button-content">
                         <button
                             className="logout-button"
@@ -66,13 +70,11 @@ function Profile() {
                             ログアウト
                         </button>
 
-                        {/* Display only when user id of the logged-in user and the user id on the profile page match */}
-                        {user.user_id === userDetail.user_id &&
                         <button className="update-button">
                             <Link to="/setting/profile">編集する</Link>
                         </button>
-                        }
                     </div>
+                    }
 
                     <div className="user-icon-content">
                         <div className="user-icon"></div>

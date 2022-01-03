@@ -13,6 +13,7 @@ import CreatePageParentName from "../component/CreatePageParentName";
 import { useUserContext } from "../context/User";
 import ExplanationForm from "../component/ExplanationForm";
 import Validation from "../tool/Validation";
+import URL from "../info/Url";
 
 function CreateThread() {
     // History
@@ -43,13 +44,9 @@ function CreateThread() {
 
     // Set csrf token
     useEffect(() => {
-        const csrfTokenUrl = "http://localhost:3000/GitHub/self/kchannel/backend/Api/csrfToken.php";
-        axios.put(
-            csrfTokenUrl,
-            {
-                withCredentials: true
-            }
-        )
+        axios[URL.csrfToken.method](URL.csrfToken.url, {
+            withCredentials: true
+        })
         .then((res) => {
             if(res.data.success) {
                 setCsrfToken(res.data.csrf_token);
@@ -64,14 +61,12 @@ function CreateThread() {
 
     // Set Board information
     useEffect(() => {
-        const url = `http://localhost:3000/GitHub/self/kchannel/backend/Api//checkBoardExists.php?board_id=${ boardId }`;
-        axios.get(url)
+        axios[URL.checkBoardExists.method](URL.checkBoardExists.url)
         .then((res) => {
-            const resData = res.data;
-            if(resData.data.board_exists) {
-                setBoardInfo(resData.data.board_info);
+            if(res.data.data.board_exists) {
+                setBoardInfo(res.data.data.board_info);
             } else {
-                setExistsMessage(resData.message)
+                setExistsMessage(res.data.message)
             }
         })
         .catch((err) => {
@@ -82,18 +77,15 @@ function CreateThread() {
     // Create the new Thread
     const createThread = () => {
         if(!validationCheck()) return;
-        const createUrl = "http://localhost:3000/GitHub/self/kchannel/backend/Api/createThread.php";
-        axios.post(
-            createUrl,
-            {
-                board_id          : boardInfo.board_id,
-                thread_name       : inputThreadName,
-                thread_explanation: inputThreadExplanation,
-                user_id           : user.user_id,
-                csrf_token        : csrfToken,
-                withCredentials   : true
-            }
-        )
+
+        axios[URL.createThread.method](URL.createThread.url, {
+            board_id          : boardInfo.board_id,
+            thread_name       : inputThreadName,
+            thread_explanation: inputThreadExplanation,
+            user_id           : user.user_id,
+            csrf_token        : csrfToken,
+            withCredentials   : true
+        })
         .then((res) => {
             if(res.data.success) {
                 history.push(`/threadList/${boardInfo.board_id}`);

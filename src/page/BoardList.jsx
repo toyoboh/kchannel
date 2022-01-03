@@ -7,6 +7,7 @@ import ReceiptIcon from "@material-ui/icons/Receipt";
 import Card from "../component/Card";
 import BreadcrumbNavigation from "../component/BreadcrumbNavigation";
 import CreateLink from "../component/CreateLink";
+import URL from "../info/Url";
 
 function BoardList() {
     // category id received by parameter
@@ -18,23 +19,22 @@ function BoardList() {
     const [boards, setBoards] = useState([]);
 
     useEffect(() => {
-        const fetchBoard = async () => {
-            axios.get(
-                `http://localhost:3000/GitHub/self/kchannel/backend/Api/boardList.php?category_id=${categoryId}`
-            )
-            .then((res) => {
-                const resData = res.data;
-                if(resData.data.item.length > 0) {
-                    setBoards(resData.data.item);
-                } else {
-                    setMessage(resData.message);
-                }
-            })
-            .catch((err) => {
-                console.log(err);
-            })
-        }
-        fetchBoard();
+        axios[URL.boardList.method](URL.boardList.url, {
+            params: {
+                category_id: categoryId
+            }
+        })
+        .then((res) => {
+            const resData = res.data;
+            if(resData.data.item.length > 0) {
+                setBoards(resData.data.item);
+            } else {
+                setMessage(resData.message);
+            }
+        })
+        .catch((err) => {
+            console.log(err);
+        })
     }, [categoryId]);
 
     // Board content for display

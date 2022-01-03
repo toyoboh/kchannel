@@ -5,11 +5,12 @@ import "../css/SettingProfile.css";
 import { useUserContext } from "../context/User";
 import ErrorMessage from "../component/ErrorMessage";
 import Validation from "../tool/Validation";
+import URL from "../info/Url";
 
 function SettingProfile() {
-    const history  = useHistory();
+    const history                                       = useHistory();
 
-    const { user } = useUserContext();
+    const { user }                                      = useUserContext();
 
     // useState
     // Csrf token
@@ -26,13 +27,9 @@ function SettingProfile() {
 
     // Set csrf token
     useEffect(() => {
-        const csrfTokenUrl = "http://localhost:3000/GitHub/self/kchannel/backend/Api/csrfToken.php";
-        axios.put(
-            csrfTokenUrl,
-            {
-                withCredentials: true
-            }
-        )
+        axios[URL.csrfToken.method](URL.csrfToken.url, {
+            withCredentials: true
+        })
         .then((res) => {
             if(res.data.success) {
                 setCsrfToken(res.data.csrf_token);
@@ -46,9 +43,11 @@ function SettingProfile() {
     }, [])
 
     useEffect(() => {
-        const url = `http://localhost:3000/GitHub/self/kchannel/backend/Api/userProfile.php?user_id=${user.user_id}`;
-
-        axios.get(url)
+        axios[URL.userProfile.method](URL.userProfile.url, {
+            params: {
+                user_id: user.user_id
+            }
+        })
         .then((res) => {
             if(!Object.keys(res.data.data).length) {
                 setExistMessage(res.data.message);
@@ -70,18 +69,13 @@ function SettingProfile() {
         // Exit if validation check result is False
         if(!validationCheck()) return;
 
-        const url = "http://localhost:3000/GitHub/self/kchannel/backend/Api/updateUserProfile.php";
-        
-        // Data to send in JSON format
-        const postData = {
+        axios[URL.updateUserProfile.method](URL.updateUserProfile.url, {
             user_id        : userDetail.user_id,
             user_name      : inputUserName,
             introduction   : inputIntroduction,
             csrf_token     : csrfToken,
             withCredentials: true
-        };
-
-        axios.post(url, postData)
+        })
         .then((res) => {
             if(res.data.success) {
                 history.push("/profile/" + userDetail.user_id);

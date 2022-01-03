@@ -2,25 +2,22 @@ import React, { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import axios from "axios";
 import "../css/RegistrationCompleted.css";
+import URL from "../info/Url";
 
 function RegistrationCompleted() {
     // Parameter
-    const { token } = useParams();
+    const { token }                 = useParams();
 
     // State
     const [csrfToken, setCsrfToken] = useState("");
-    const [isExpire, setIsExpire] = useState(true);
+    const [isExpire, setIsExpire]   = useState(true);
     const [message, setMessage]     = useState("");
 
     // Set csrf token
     useEffect(() => {
-        const csrfTokenUrl = "http://localhost:3000/GitHub/self/kchannel/backend/Api/csrfToken.php";
-        axios.put(
-            csrfTokenUrl,
-            {
-                withCredentials: true
-            }
-        )
+        axios[URL.csrfToken.method](URL.csrfToken.url, {
+            withCredentials: true
+        })
         .then((res) => {
             if(res.data.success) {
                 setCsrfToken(res.data.csrf_token);
@@ -34,16 +31,11 @@ function RegistrationCompleted() {
     }, [])
 
     useEffect(() => {
-        const url = "http://localhost:3000/GitHub/self/kchannel/backend/Api/accountRegistration.php";
-
-        axios.post(
-            url,
-            {
-                token: token,
-                csrf_token: csrfToken,
-                withCredentials: true
-            }
-        )
+        axios[URL.accountRegistration.method](URL.accountRegistration.url, {
+            token          : token,
+            csrf_token     : csrfToken,
+            withCredentials: true
+        })
         .then((res) => {
             if(res.data.success) {
                 setIsExpire(false);

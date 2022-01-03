@@ -11,6 +11,7 @@ import Validation from "../tool/Validation";
 import ErrorMessage from "../component/ErrorMessage";
 import { useUserContext } from "../context/User";
 import DisplayProcess from "../tool/DisplayProcess";
+import URL from "../info/Url";
 
 function CommentList() {
     // board id received by parameter
@@ -39,13 +40,9 @@ function CommentList() {
 
     // Set csrf token
     useEffect(() => {
-        const csrfTokenUrl = "http://localhost:3000/GitHub/self/kchannel/backend/Api/csrfToken.php";
-        axios.put(
-            csrfTokenUrl,
-            {
-                withCredentials: true
-            }
-        )
+        axios[URL.csrfToken.method](URL.csrfToken.url, {
+            withCredentials: true
+        })
         .then((res) => {
             if(res.data.success) {
                 setCsrfToken(res.data.csrf_token);
@@ -60,28 +57,27 @@ function CommentList() {
 
     // Get All Comments and Thread Information using Thread id
     useEffect(() => {
-        const fetchComment = async () => {
-            axios.get(
-                `http://localhost:3000/GitHub/self/kchannel/backend/Api/commentList.php?thread_id=${threadId}`
-            )
-            .then((res) => {
-                // Be sure to set even if the number of comments is 0
-                const resThreadInfo = res.data.data.thread_info;
-                resThreadInfo.thread_explanation = DisplayProcess.replaceLineFeed(resThreadInfo.thread_explanation);
-                setThreadInfo(resThreadInfo);
+        axios[URL.commentList.method](URL.commentList.url, {
+            params: {
+                thread_id: threadId
+            }
+        })
+        .then((res) => {
+            // Be sure to set even if the number of comments is 0
+            const resThreadInfo = res.data.data.thread_info;
+            resThreadInfo.thread_explanation = DisplayProcess.replaceLineFeed(resThreadInfo.thread_explanation);
+            setThreadInfo(resThreadInfo);
 
-                if(res.data.data.item.length > 0) {
-                    setComments(res.data.data.item);
-                    setCommentCount(res.data.data.item.length);
-                } else {
-                    setMessage(res.data.message);
-                }
-            })
-            .catch((err) => {
-                console.log(err);
-            })
-        }
-        fetchComment();
+            if(res.data.data.item.length > 0) {
+                setComments(res.data.data.item);
+                setCommentCount(res.data.data.item.length);
+            } else {
+                setMessage(res.data.message);
+            }
+        })
+        .catch((err) => {
+            console.log(err);
+        })
     }, [threadId]);
 
     // Register a new comment in the DB
@@ -89,18 +85,13 @@ function CommentList() {
         // Exit if validation check results is false
         if(!ValidationCheck()) return;
 
-        const createUrl = "http://localhost:3000/GitHub/self/kchannel/backend/Api/createComment.php";
-
-        axios.post(
-            createUrl,
-            {
-                thread_id      : threadInfo.thread_id,
-                comment_body   : inputComment,
-                user_id        : user.user_id,
-                csrf_token     : csrfToken,
-                withCredentials: true
-            }
-        )
+        axios[URL.createComment.method](URL.createComment.url, {
+            thread_id      : threadInfo.thread_id,
+            comment_body   : inputComment,
+            user_id        : user.user_id,
+            csrf_token     : csrfToken,
+            withCredentials: true
+        })
         .then((res) => {
             if(res.data.success) {
                 // Empty the "comment form" and "comment form state"
@@ -140,9 +131,12 @@ function CommentList() {
             lastCommentId = comments[commentNum - 1].comment_id;
         }
         
-        const selectUrl = `http://localhost:3000/GitHub/self/kchannel/backend/Api/selectNewComment.php?thread_id=${threadInfo.thread_id}&comment_id=${lastCommentId}`;
-        
-        axios.get(selectUrl)
+        axios[URL.selectNewComment.method](URL.selectNewComment.url, {
+            params: {
+                thread_id: threadInfo.thread_id,
+                comment_id: lastCommentId
+            }
+        })
         .then((res) => {
             if(res.data.success) {
                 // When the number of comments is 0, the display of "commentContent" is switched

@@ -11,6 +11,7 @@ import CreateRule from "../component/CreateRule";
 import BackLink from "../component/BackLink";
 import { useUserContext } from "../context/User";
 import Validation from "../tool/Validation";
+import URL from "../info/Url";
 
 function CreateCategory() {
     // History
@@ -31,13 +32,9 @@ function CreateCategory() {
 
     // Set csrf token
     useEffect(() => {
-        const csrfTokenUrl = "http://localhost:3000/GitHub/self/kchannel/backend/Api/csrfToken.php";
-        axios.put(
-            csrfTokenUrl,
-            {
-                withCredentials: true
-            }
-        )
+        axios[URL.csrfToken.method](URL.csrfToken.url, {
+            withCredentials: true
+        })
         .then((res) => {
             if(res.data.success) {
                 setCsrfToken(res.data.csrf_token);
@@ -55,16 +52,12 @@ function CreateCategory() {
         // validation check
         if(!validationCheck()) return;
         
-        const createUrl = "http://localhost:3000/GitHub/self/kchannel/backend/Api/createCategory.php";
-        axios.post(
-            createUrl,
-            {
-                category_name  : inputCategoryName,
-                user_id        : user.user_id,
-                csrf_token     : csrfToken,
-                withCredentials: true
-            }
-        )
+        axios[URL.createCategory.method](URL.createCategory.url, {
+            category_name  : inputCategoryName,
+            user_id        : user.user_id,
+            csrf_token     : csrfToken,
+            withCredentials: true
+        })
         .then((res) => {
             if(res.data.success) {
                 history.push("/categoryList");

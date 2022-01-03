@@ -4,6 +4,7 @@ import axios from "axios";
 import "../css/RegisterAccount.css";
 import ErrorMessage from "../component/ErrorMessage";
 import Validation from "../tool/Validation";
+import URL from "../info/Url";
 
 function RegisterAccount() {
     // history
@@ -26,13 +27,9 @@ function RegisterAccount() {
 
     // Set csrf token
     useEffect(() => {
-        const csrfTokenUrl = "http://localhost:3000/GitHub/self/kchannel/backend/Api/csrfToken.php";
-        axios.put(
-            csrfTokenUrl,
-            {
-                withCredentials: true
-            }
-        )
+        axios[URL.csrfToken.method](URL.csrfToken.url, {
+            withCredentials: true
+        })
         .then((res) => {
             if(res.data.success) {
                 setCsrfToken(res.data.csrf_token);
@@ -58,18 +55,14 @@ function RegisterAccount() {
         // validation check
         if(!validationCheck()) return;
 
-        const url = "http://localhost:3000/GitHub/self/kchannel/backend/Api/temporaryRegistration.php";
-        axios.post(
-            url,
-            {
-                csrf_token: csrfToken,
-                mail_address: inputMailAddress,
-                user_id: inputUserId,
-                user_name: inputUserName,
-                password: inputPassword,
-                withCredentails: true
-            }
-        )
+        axios[URL.temporaryRegistration.method](URL.temporaryRegistration.url, {
+            csrf_token: csrfToken,
+            mail_address: inputMailAddress,
+            user_id: inputUserId,
+            user_name: inputUserName,
+            password: inputPassword,
+            withCredentails: true
+        })
         .then((res) => {
             console.log(res.data);
             if(res.data.success) {

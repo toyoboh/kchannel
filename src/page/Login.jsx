@@ -4,6 +4,7 @@ import "../css/Login.css";
 import axios from "axios";
 import { useUserContext } from "../context/User";
 import ErrorMessage from "../component/ErrorMessage";
+import URL from "../info/Url";
 
 function Login() {
     // history
@@ -16,8 +17,8 @@ function Login() {
     // csrf token
     const [csrfToken, setCsrfToken]                 = useState("");
     // Input item
-    const [inputUserInfo, setInputUserInfo]                   = useState("test_user_id");
-    const [inputPassword, setInputPassword]                   = useState("password");
+    const [inputUserInfo, setInputUserInfo]         = useState("test_user_id");
+    const [inputPassword, setInputPassword]         = useState("password");
     const [switchInputType, setSwitchInputType]     = useState("password");
     const [passwordCheckbox, setPasswordCheckbox]   = useState(false);
     // Error message
@@ -25,13 +26,9 @@ function Login() {
 
     // Set csrf token
     useEffect(() => {
-        const csrfTokenUrl = "http://localhost:3000/GitHub/self/kchannel/backend/Api/csrfToken.php";
-        axios.put(
-            csrfTokenUrl,
-            {
-                withCredentials: true
-            }
-        )
+        axios[URL.csrfToken.method](URL.csrfToken.url, {
+            withCredentials: true
+        })
         .then((res) => {
             if(res.data.success) {
                 setCsrfToken(res.data.csrf_token);
@@ -55,19 +52,14 @@ function Login() {
 
     // Login proccessing 
     const login = () => {
-        const url = "http://localhost:3000/GitHub/self/kchannel/backend/Api/login.php";
-        axios.post(
-            url,
-            {
-                csrf_token: csrfToken,
-                user_info: inputUserInfo,
-                password: inputPassword,
-                withCredentials: true
-            }
-        )
+        axios[URL.login.method](URL.login.url, {
+            csrf_token: csrfToken,
+            user_info: inputUserInfo,
+            password: inputPassword,
+            withCredentials: true
+        })
         .then((res) => {
             if(res.data.success) {
-                console.log(res.data);
                 setUser({
                     user_id  : res.data.data.user_id,
                     user_name: res.data.data.user_name,
