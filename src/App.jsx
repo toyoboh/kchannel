@@ -2,6 +2,7 @@ import React from "react";
 import { BrowserRouter as Router, Switch } from "react-router-dom";
 import "./css/App.css";
 import Header from "./component/Header";
+import Home from "./page/Home";
 import CategoryList from "./page/CategoryList";
 import BoardList from "./page/BoardList";
 import ThreadList from "./page/ThreadList";
@@ -32,9 +33,9 @@ function App() {
                     <PublicRoute path="/temporaryRegistrationCompleted" component={ TemporaryRegistrationCompleted } />
 
                     {/* HACK: It's not cool to put Header in each Route */}
-                    <PrivateRoute exact path="/">
+                    <PrivateRoute exact path="/home">
                         <Header />
-                        test
+                        <Home />
                     </PrivateRoute>
 
                     <PrivateRoute path="/setting/profile">

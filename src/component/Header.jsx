@@ -1,7 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import "../css/Header.css";
-import SearchIcon from "@material-ui/icons/Search";
+import DvrIcon from "@material-ui/icons/Dvr";
 import PersonOutlineIcon from "@material-ui/icons/PersonOutline";
 import { useUserContext } from "../context/User";
 
@@ -14,10 +14,10 @@ const Header = () => {
                 <ul className="header-item-wrapper">
                     <Link className="header-item" to="/categoryList">
                         <li>
-                            <SearchIcon />
+                            <DvrIcon />
                         </li>
                     </Link>
-                    <Link className="header-item" to="">
+                    <Link className="header-item" to="/home">
                         <li>
                             Kちゃんねる
                         </li>
