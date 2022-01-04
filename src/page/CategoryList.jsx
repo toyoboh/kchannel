@@ -108,7 +108,7 @@ function CategoryList() {
                         changeFunction={ setSearchWord }
                         buttonFunction={ searchCategoryList }
                         Icon={ SearchIcon }
-                        placeholderText="カテゴリー検索"
+                        placeholderText="カテゴリーを検索する..."
                     />
                 </div>
 
