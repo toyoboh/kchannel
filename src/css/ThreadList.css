@@ -23,6 +23,10 @@
     margin-bottom: 16px;
 }
 
+.thread-list > .wrapper > .search-content {
+    margin-bottom: 24px;
+}
+
 .thread-list > .wrapper > .thread-list-body > .card {
     margin-bottom: 16px;
 }

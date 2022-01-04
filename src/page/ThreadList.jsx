@@ -8,15 +8,38 @@ import Card from "../component/Card";
 import BreadcrumbNavigation from "../component/BreadcrumbNavigation";
 import CreateLink from "../component/CreateLink";
 import URL from "../info/Url";
+import SearchIcon from "@material-ui/icons/Search";
+import InputPlusButton from "../component/InputPlusButton";
 
 function ThreadList() {
     // board id received by parameter
     const { boardId } = useParams();
 
+    // state
+    const [csrfToken, setCsrfToken] = useState("");
+    // word
+    const [searchWord, setSearchWord] = useState("");
     // Message when there is no threads
     const [message, setMessage] = useState("");
     // Database thread infomation
     const [threads, setThreads] = useState([]);
+
+    // Set csrf token
+    useEffect(() => {
+        axios[URL.csrfToken.method](URL.csrfToken.url, {
+            withCredentials: true
+        })
+        .then((res) => {
+            if(res.data.success) {
+                setCsrfToken(res.data.csrf_token);
+            } else {
+                // nothing
+            }
+        })
+        .catch((err) => {
+            console.log(err);
+        })
+    }, [])
 
     useEffect(() => {
         axios[URL.threadList.method](URL.threadList.url, {
@@ -35,6 +58,25 @@ function ThreadList() {
             console.log(err);
         })
     }, [boardId]);
+
+    const searchThreadList = () => {
+        axios[URL.searchThreadList.method](URL.searchThreadList.url, {
+            params: {
+                search_word: searchWord,
+                board_id   : boardId,
+                csrf_token : csrfToken
+            },
+            withCredentials: true
+        })
+        .then((res) => {
+            if(res.data.data.item.length > 0) {
+                setThreads(res.data.data.item);
+                setMessage("");
+            } else {
+                setMessage(res.data.message);
+            }
+        })
+    }
 
     // Thread content for display
     let threadContent;
@@ -69,6 +111,16 @@ function ThreadList() {
                         path={ "/createThread/" + boardId }
                         title="スレッド作成ページに移動する"
                         />
+                </div>
+
+                <div className="search-content">
+                    <InputPlusButton
+                        value={ searchWord }
+                        changeFunction={ setSearchWord }
+                        buttonFunction={ searchThreadList }
+                        Icon={ SearchIcon }
+                        placeholderText="スレッドを検索する..."
+                    />
                 </div>
 
                 <div className="thread-list-body">

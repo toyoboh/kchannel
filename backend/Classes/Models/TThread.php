@@ -230,4 +230,38 @@ class TThread
 
         return $result;
     }
+
+    public function search($word, $id) {
+        $query = "SELECT
+                threads.thread_id          AS thread_id,
+                threads.thread_name        AS thread_name,
+                COUNT(comments.comment_id) AS comment_count
+            FROM
+                t_threads  threads
+            LEFT JOIN
+                t_comments comments
+            ON
+                threads.thread_id = comments.thread_id
+            WHERE
+                CAST(threads.board_id AS CHAR) = :board_id
+            AND
+                threads.thread_name LIKE :word
+            GROUP BY
+                threads.thread_id
+        ;";
+
+        $use_query_item = [
+            "board_id" => $id,
+            "word"     => sprintf("%%%s%%", addcslashes($word, "\%_"))
+        ];
+        
+        $database = new Database();
+        $database->connect();
+        $stmt = $database->executeQuery($query, $use_query_item);
+
+        $row_count = $stmt->rowCount();
+        $threads   = $stmt->fetchAll();
+
+        return array($row_count, $threads);
+    }
 }
