@@ -32,7 +32,7 @@ class TCategory
                 CAST(categories.category_id AS CHAR) = boards.category_id
             GROUP BY
                 categories.category_id
-            ;";
+        ;";
         
         $database = new Database();
         $database->connect();
@@ -47,7 +47,7 @@ class TCategory
             $category["data"]["item"] = $stmt->fetchAll();
         } else {
             $category["data"]["item"] = array();
-            $category["message"] = "Not Found Category";
+            $category["message"] = "カテゴリーは現在未登録です。";
         }
 
         return $category;
@@ -119,10 +119,10 @@ class TCategory
 
         if($row_count > 0) {
             $result["data"]["category_exists"] = true;
-            $result["data"]["category_info"] = $stmt->fetch();
+            $result["data"]["category_info"]   = $stmt->fetch();
         } else {
             $result["data"]["category_exists"] = false;
-            $result["message"] = "存在しないカテゴリーに掲示板を追加することはできません";
+            $result["message"]                 = "存在しないカテゴリーに掲示板を追加することはできません";
         }
 
         return $result;
@@ -195,5 +195,36 @@ class TCategory
         }
 
         return $result;
+    }
+
+    public function search($word) {
+        $query = "SELECT
+                    categories.category_id    AS category_id,
+                    categories.category_name  AS category_name,
+                    COUNT(boards.category_id) AS board_count
+                FROM
+                    t_categories categories
+                LEFT JOIN
+                    t_boards boards
+                ON
+                    CAST(categories.category_id AS CHAR) = boards.category_id
+                WHERE
+                    categories.category_name LIKE :word
+                GROUP BY
+                    categories.category_id
+        ;";
+
+        $use_query_item = [
+            "word" => sprintf("%%%s%%", addcslashes($word, "\_%"))
+        ];
+
+        $database = new Database();
+        $database->connect();
+        $stmt = $database->executeQuery($query, $use_query_item);
+
+        $row_count  = $stmt->rowCount();
+        $categories = $stmt->fetchAll();
+
+        return array($row_count, $categories);
     }
 }

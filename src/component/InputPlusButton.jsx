@@ -1,7 +1,7 @@
 import React from "react";
 import "../css/InputPlusButton.css";
 
-function InputPlusButton({ value, changeFunction, buttonFunction, Icon }) {
+function InputPlusButton({ value, changeFunction, buttonFunction, Icon, placeholderText = "" }) {
     return(
         <div className="input-plus-button">
             <input
@@ -9,6 +9,7 @@ function InputPlusButton({ value, changeFunction, buttonFunction, Icon }) {
                 type="text"
                 defaultValue={ value }
                 onChange={ (e) => changeFunction(e.target.value) }
+                placeholder={ placeholderText }
             />
 
             <button

@@ -19,6 +19,10 @@
     margin-bottom: 16px;
 }
 
+.category-list > .wrapper > .search-content {
+    margin-bottom: 24px;
+}
+
 .category-list > .wrapper > .body-content > .card {
     margin-bottom: 16px;
 }
