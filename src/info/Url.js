@@ -19,6 +19,10 @@ const URL = {
         method: "get",
         url   : "http://localhost:3000/GitHub/self/kchannel/backend/Api/boardList.php"
     },
+    searchBoardList: { // param: search_word, category_id, csrf_token
+        method: "get",
+        url   : "http://localhost:3000/GitHub/self/kchannel/backend/Api/searchBoardList.php"
+    },
     threadList: { // param: board_id
         method: "get",
         url   : "http://localhost:3000/GitHub/self/kchannel/backend/Api/threadList.php"

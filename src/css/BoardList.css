@@ -23,6 +23,10 @@
     margin-bottom: 16px;
 }
 
+.board-list > .wrapper > .search-content {
+    margin-bottom: 24px;
+}
+
 .board-list > .wrapper > .board-list-body > .card {
     margin-bottom: 16px;
 }

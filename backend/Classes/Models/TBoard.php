@@ -230,4 +230,39 @@ class TBoard
 
         return $result;
     }
+
+    // search
+    public function search($word, $id) {
+        $query = "SELECT
+                boards.board_id          AS board_id,
+                boards.board_name        AS board_name,
+                COUNT(threads.thread_id) AS thread_count
+            FROM
+                t_boards boards
+            LEFT JOIN
+                t_threads threads
+            ON
+                boards.board_id = threads.board_id
+            WHERE
+                CAST(boards.category_id AS CHAR) = :category_id
+            AND
+                boards.board_name LIKE :word
+            GROUP BY
+                boards.board_id
+            ;";
+
+        $use_query_item = [
+            "category_id" => $id,
+            "word"        => sprintf("%%%s%%", addcslashes($word, "\_%"))
+        ];
+        
+        $database = new Database();
+        $database->connect();
+        $stmt = $database->executeQuery($query, $use_query_item);
+
+        $row_count = $stmt->rowCount();
+        $boards    = $stmt->fetchAll();
+
+        return array($row_count, $boards);
+    }
 }
