@@ -1,19 +1,36 @@
+.breadcrumb-navigation {
+    align-items: center;
+    display: flex;
+}
+
+.breadcrumb-navigation > .list-item-text {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    width: auto;
+}
+
+.breadcrumb-navigation > .list-item-icon > .MuiSvgIcon-root {
+    font-size: 18px;
+}
+
 @media(max-width: 480px) {
-    .breadcrumb-navigation {
-        align-items: center;
-        display: flex;
-    }
-
     .breadcrumb-navigation > .list-item-text {
-        max-width: 80px;
         font-size: 12px;
-        width: auto;
-        overflow: hidden;
-        text-overflow: ellipsis;
-        white-space: nowrap;
+        max-width: 80px;
     }
+}
 
-    .breadcrumb-navigation > .list-item-icon > .MuiSvgIcon-root {
-        font-size: 18px;
+@media(min-width: 481px) and (max-width: 1000px) {
+    .breadcrumb-navigation > .list-item-text {
+        font-size: 14px;
+        max-width: 100px;
+    }
+}
+
+@media(min-width: 1001px) {
+    .breadcrumb-navigation > .list-item-text {
+        font-size: 14px;
+        max-width: 200px;
     }
 }

@@ -52,48 +52,48 @@ function Profile() {
 
     return(
         <div className="profile">
+            <div className="wrapper">
+                {/* Branch depending on whether the message is an empty string */}
+                {message !== "" ?(
+                    <>
+                        <div className="message">{ message }</div>
+                    </>
+                ) : (
+                    <>
+                        {/* Display only when user id of the logged-in user and the user id on the profile page match */}
+                        {user.user_id === userDetail.user_id &&
+                        <div className="button-content">
+                            <button
+                                className="logout-button"
+                                onClick={ logout }
+                            >
+                                ログアウト
+                            </button>
 
-            {/* Branch depending on whether the message is an empty string */}
-            {message !== "" ?(
-                <>
-                    <div className="message">{ message }</div>
-                </>
-            ) : (
-                <>
-                    {/* Display only when user id of the logged-in user and the user id on the profile page match */}
-                    {user.user_id === userDetail.user_id &&
-                    <div className="button-content">
-                        <button
-                            className="logout-button"
-                            onClick={ logout }
-                        >
-                            ログアウト
-                        </button>
-
-                        <button className="update-button">
-                            <Link to="/setting/profile">編集する</Link>
-                        </button>
-                    </div>
-                    }
-
-                    <div className="user-icon-content">
-                        <div className="user-icon"></div>
-                    </div>
-
-                    <div className="user-main-content">
-                        <div className="user-name">
-                            { userDetail.user_name }
+                            <button className="update-button">
+                                <Link to="/setting/profile">編集する</Link>
+                            </button>
                         </div>
-                        <div className="user-id">
-                            @{ userDetail.user_id }
-                        </div>
-                        <div className="introduction">
-                            { userDetail.introduction }
-                        </div>
-                    </div>
-                </>
-            )}
+                        }
 
+                        <div className="user-icon-content">
+                            <div className="user-icon"></div>
+                        </div>
+
+                        <div className="user-main-content">
+                            <div className="user-name">
+                                { userDetail.user_name }
+                            </div>
+                            <div className="user-id">
+                                @{ userDetail.user_id }
+                            </div>
+                            <div className="introduction">
+                                { userDetail.introduction }
+                            </div>
+                        </div>
+                    </>
+                )}
+            </div>
         </div>
     )
 }

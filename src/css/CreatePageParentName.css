@@ -1,17 +1,25 @@
+.create-page-parent-name > .title {
+    font-size: 16px;
+    font-weight: 600;
+    margin-bottom: 8px;
+}
+
+.create-page-parent-name > .name {
+    font-size: 14px;
+    overflow: hidden;
+    padding: 0 8px;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
 @media(max-width: 480px) {
-    .create-page-parent-name {
-        
-    }
 
-    .create-page-parent-name > .title {
-        font-size: 12px;
-        margin-bottom: 4px;
-    }
+}
 
-    .create-page-parent-name > .name {
-        font-size: 14px;
-        overflow: hidden;
-        text-overflow: ellipsis;
-        white-space: nowrap;
-    }
+@media(min-width: 481px) and (max-width: 1000px) {
+
+}
+
+@media(min-width: 1001px) {
+
 }

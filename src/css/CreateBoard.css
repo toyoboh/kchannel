@@ -1,54 +1,66 @@
 .create-board {
     background-color: var(--base-color);
+    min-height: var(--page-min-height);
+    padding: 20px 16px;
+    width: 100%;
+}
+
+.create-board > .wrapper {
+    margin: 0 auto;
+    max-width: 1000px;
+    width: 100%;
+}
+
+.create-board > .wrapper > .title-content {
+    margin-bottom: 16px;
+}
+
+.create-board > .wrapper > .back-link-content {
+    margin-bottom: 16px;
+}
+
+.create-board > .wrapper > .rule-content {
+    margin-bottom: 16px;
+}
+
+.create-board > .wrapper > .parent-name-content {
+    margin-bottom: 16px;
+}
+
+/* form */
+.create-board > .wrapper > .form-content {
+
+}
+
+.create-board > .wrapper > .form-content .form-item-title {
+    font-size: 14px;
+    margin-bottom: 4px;
+}
+
+/* name-content */
+.create-board > .wrapper > .form-content > .name-content {
+    margin-bottom: 8px
+}
+.create-board > .wrapper > .form-content > .name-content > .input-plus-button {
+    margin-bottom: 4px;
+}
+
+/* explanation-content */
+.create-board > .wrapper > .form-content > .explanation-content {
+    margin-bottom: 8px;
+}
+
+.create-board > .wrapper > .form-content > .explanation-content > .explanation-form {
+    margin-bottom: 4px;
 }
 
 @media(max-width: 480px) {
-    .create-board {
-        min-height: var(--page-min-height);
-        padding: 20px 16px;
-        width: 100%;
-    }
+}
 
-    .create-board > .title-content {
-        margin-bottom: 16px;
-    }
+@media(min-width: 481px) and (max-width: 1000px) {
+    
+}
 
-    .create-board > .back-link-content {
-        margin-bottom: 16px;
-    }
-
-    .create-board > .rule-content {
-        margin-bottom: 16px;
-    }
-
-    .create-board > .parent-name-content {
-        margin-bottom: 16px;
-    }
-
-    /* form */
-    .create-board > .form-content {
-
-    }
-
-    .create-board > .form-content .form-item-title {
-        font-size: 14px;
-        margin-bottom: 4px;
-    }
-
-    /* name-content */
-    .create-board > .form-content > .name-content {
-        margin-bottom: 8px
-    }
-    .create-board > .form-content > .name-content > .input-plus-button {
-        margin-bottom: 4px;
-    }
-
-    /* explanation-content */
-    .create-board > .form-content > .explanation-content {
-        margin-bottom: 8px;
-    }
-
-    .create-board > .form-content > .explanation-content > .explanation-form {
-        margin-bottom: 4px;
-    }
+@media(min-width: 1001px) {
+    
 }

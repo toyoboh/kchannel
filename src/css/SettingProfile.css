@@ -1,97 +1,110 @@
 .setting-profile {
     background-color: var(--base-color);
+    min-height: var(--page-min-height);
+    padding: 20px 16px;
+    width: 100%;
+}
+
+.setting-profile > .wrapper {
+    margin: 0 auto;
+    max-width: 1000px;
+    width: 100%;
+}
+
+.setting-profile > .wrapper > .button-content {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
+}
+
+.setting-profile > .wrapper > .button-content > .cancel-button {
+    background-color: var(--accent-color);
+    border-radius: 13px;
+    color: white;
+    font-size: 14px;
+    padding: 6px 18px;
+}
+
+.setting-profile > .wrapper > .button-content > .save-button {
+    border: 1px solid black;
+    border-radius: 13px;
+    font-size: 14px;
+    padding: 6px 18px;
+}
+
+.setting-profile > .wrapper > .user-icon-content {
+    margin-bottom: 12px;
+}
+
+.setting-profile > .wrapper > .user-icon-content > .user-icon {
+    background-color: gray;
+    border-radius: 50%;
+    height: 50px;
+    width: 50px;
+}
+
+.setting-profile > .wrapper > .user-main-content .item-title {
+    font-size: 16px;
+    min-width: 80px;
+}
+
+.setting-profile > .wrapper > .user-main-content .item-content {
+    flex: 1;
+}
+
+.setting-profile > .wrapper > .user-main-content > .user-name-content {
+    align-items: center;
+    border-bottom: 2px solid white;
+    display: flex;
+    padding-bottom: 8px;
+    padding-top: 8px;
+}
+
+.setting-profile > .wrapper > .user-main-content > .user-name-content > .item-content > .error-content {
+    padding: 0px 6px;
+}
+
+.setting-profile > .wrapper > .user-main-content > .user-name-content > .item-content > .user-name-input {
+    font-size: 14px;
+    padding: 8px 6px;
+    width: 100%;
+}
+
+.setting-profile > .wrapper > .user-main-content > .user-name-content > .item-content > .user-name-input:focus {
+    outline: none;
+}
+
+.setting-profile > .wrapper > .user-main-content > .introduction-content {
+    align-items: center;
+    border-bottom: 2px solid white;
+    display: flex;
+    padding-bottom: 8px;
+    padding-top: 8px;
+}
+
+.setting-profile > .wrapper > .user-main-content > .introduction-content .item-content > .error-content {
+    padding: 0px 6px;
+}
+
+.setting-profile > .wrapper > .user-main-content > .introduction-content .item-content > .introduction-textarea {
+    font-size: 14px;
+    height: 80px;
+    padding: 8px 6px;
+    width: 100%;
+}
+
+.setting-profile > .wrapper > .user-main-content > .introduction-content .item-content > .introduction-textarea:focus {
+    outline: none;
 }
 
 @media(max-width: 480px) {
-    .setting-profile {
-        min-height: var(--page-min-height);
-        padding: 20px 16px;
-        width: 100%;
-    }
 
-    .setting-profile > .button-content {
-        display: flex;
-        justify-content: space-between;
-        margin-bottom: 20px;
-    }
+}
 
-    .setting-profile > .button-content > .cancel-button {
-        background-color: var(--accent-color);
-        border-radius: 13px;
-        color: white;
-        font-size: 14px;
-        padding: 6px 18px;
-    }
+@media(min-width: 481px) and (max-width: 1000px) {
+    
+}
 
-    .setting-profile > .button-content > .save-button {
-        border: 1px solid black;
-        border-radius: 13px;
-        font-size: 14px;
-        padding: 6px 18px;
-    }
-
-    .setting-profile > .user-icon-content {
-        margin-bottom: 12px;
-    }
-
-    .setting-profile > .user-icon-content > .user-icon {
-        background-color: gray;
-        border-radius: 50%;
-        height: 50px;
-        width: 50px;
-    }
-
-    .setting-profile > .user-main-content .item-title {
-        font-size: 16px;
-        min-width: 80px;
-    }
-
-    .setting-profile > .user-main-content .item-content {
-        flex: 1;
-    }
-
-    .setting-profile > .user-main-content > .user-name-content {
-        align-items: center;
-        border-bottom: 2px solid white;
-        display: flex;
-        padding-bottom: 8px;
-        padding-top: 8px;
-    }
-
-    .setting-profile > .user-main-content > .user-name-content > .item-content > .error-content {
-        padding: 0px 6px;
-    }
-
-    .setting-profile > .user-main-content > .user-name-content > .item-content > .user-name-input {
-        font-size: 14px;
-        padding: 8px 6px;
-        width: 100%;
-    }
-
-    .setting-profile > .user-main-content > .user-name-content > .item-content > .user-name-input:focus {
-        outline: none;
-    }
-
-    .setting-profile > .user-main-content > .introduction-content {
-        align-items: center;
-        border-bottom: 2px solid white;
-        display: flex;
-        padding-bottom: 8px;
-        padding-top: 8px;
-    }
-
-    .setting-profile > .user-main-content > .introduction-content .item-content > .error-content {
-        padding: 0px 6px;
-    }
-
-    .setting-profile > .user-main-content > .introduction-content .item-content > .introduction-textarea {
-        font-size: 14px;
-        height: 80px;
-        padding: 8px 6px;
-        width: 100%;
-    }
-
-    .setting-profile > .user-main-content > .introduction-content .item-content > .introduction-textarea:focus {
-        outline: none;
-    }
+@media(min-width: 1001px) {
+    
 }

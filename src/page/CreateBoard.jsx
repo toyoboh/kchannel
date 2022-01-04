@@ -128,78 +128,78 @@ function CreateBoard() {
 
     return(
         <div className="create-board">
+            <div className="wrapper">
+                <div className="title-content">
+                    <PageTitle Icon={ ReceiptIcon } title="掲示板作成" />
+                </div>
 
-            <div className="title-content">
-                <PageTitle Icon={ ReceiptIcon } title="掲示板作成" />
+                {existsMessage !== "" ? (
+                    <>
+                        {/* Content on Error */}
+                        <div>
+                            <p>{ existsMessage }</p>
+                            <p><Link to="/categoryList">カテゴリー一覧に戻る</Link></p>
+                        </div>
+                    </>
+                ) : (
+                    <>
+                        <div className="back-link-content">
+                            <BackLink
+                                path={ `/boardList/${categoryInfo.category_id}` }
+                                title="戻る"
+                            />
+                        </div>
+
+                        <div className="rule-content">
+                            <CreateRule
+                                title="注意"
+                                body="登録する際は、一覧画面にて類似したものがないことを確認してください。"
+                            />
+                        </div>
+
+                        <div className="parent-name-content">
+                            <CreatePageParentName
+                                title="カテゴリー名"
+                                name={ categoryInfo.category_name }
+                            />
+                        </div>
+
+                        <div className="form-content">
+
+                            <div className="name-content">
+                                <div className="form-item-title">掲示板名</div>
+
+                                <InputPlusButton
+                                    value={ inputBoardName }
+                                    changeFunction={ setInputBoardName }
+                                    buttonFunction={ createBoard }
+                                    Icon={ BorderColorIcon }
+                                />
+
+                                {boardNameMessage !== "" &&
+                                    <div className="error-content">
+                                        <ErrorMessage text={ boardNameMessage } />
+                                    </div>
+                                }
+                            </div>
+
+                            <div className="explanation-content">
+                                <div className="form-item-title">説明</div>
+                                <ExplanationForm
+                                    value={ inputBoardExplanation }
+                                    changeFunction={ setInputBoardExplanation }
+                                />
+
+                                {boardExplanationMessage !== "" &&
+                                    <div className="error-content">
+                                        <ErrorMessage text={ boardExplanationMessage } />
+                                    </div>
+                                }
+                            </div>
+                        </div>
+                    </>
+                )}
             </div>
-
-            {existsMessage !== "" ? (
-                <>
-                    {/* Content on Error */}
-                    <div>
-                        <p>{ existsMessage }</p>
-                        <p><Link to="/categoryList">カテゴリー一覧に戻る</Link></p>
-                    </div>
-                </>
-            ) : (
-                <>
-                    <div className="back-link-content">
-                        <BackLink
-                            path={ `/boardList/${categoryInfo.category_id}` }
-                            title="戻る"
-                        />
-                    </div>
-
-                    <div className="rule-content">
-                        <CreateRule
-                            title="注意"
-                            body="登録する際は、一覧画面にて類似したものがないことを確認してください。"
-                        />
-                    </div>
-
-                    <div className="parent-name-content">
-                        <CreatePageParentName
-                            title="カテゴリー名"
-                            name={ categoryInfo.category_name }
-                        />
-                    </div>
-
-                    <div className="form-content">
-
-                        <div className="name-content">
-                            <div className="form-item-title">掲示板名</div>
-
-                            <InputPlusButton
-                                value={ inputBoardName }
-                                changeFunction={ setInputBoardName }
-                                buttonFunction={ createBoard }
-                                Icon={ BorderColorIcon }
-                            />
-
-                            {boardNameMessage !== "" &&
-                                <div className="error-content">
-                                    <ErrorMessage text={ boardNameMessage } />
-                                </div>
-                            }
-                        </div>
-
-                        <div className="explanation-content">
-                            <div className="form-item-title">説明</div>
-                            <ExplanationForm
-                                value={ inputBoardExplanation }
-                                changeFunction={ setInputBoardExplanation }
-                            />
-
-                            {boardExplanationMessage !== "" &&
-                                <div className="error-content">
-                                    <ErrorMessage text={ boardExplanationMessage } />
-                                </div>
-                            }
-                        </div>
-                    </div>
-                </>
-            )}
-
         </div>
     )
 }

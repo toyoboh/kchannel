@@ -55,23 +55,25 @@ function ThreadList() {
 
     return(
         <div className="thread-list">
-            <div className="thread-list-title">
-                <PageTitle Icon={ DescriptionIcon } title="スレッド" />
-            </div>
+            <div className="wrapper">
+                <div className="thread-list-title">
+                    <PageTitle Icon={ DescriptionIcon } title="スレッド" />
+                </div>
 
-            <div className="breadcrumb-navigation-container">
-                <BreadcrumbNavigation />
-            </div>
+                <div className="breadcrumb-navigation-container">
+                    <BreadcrumbNavigation />
+                </div>
 
-            <div className="create-link-content">
-                <CreateLink
-                    path={ "/createThread/" + boardId }
-                    title="スレッド作成ページに移動する"
-                />
-            </div>
+                <div className="create-link-content">
+                    <CreateLink
+                        path={ "/createThread/" + boardId }
+                        title="スレッド作成ページに移動する"
+                        />
+                </div>
 
-            <div className="thread-list-body">
-                { threadContent }
+                <div className="thread-list-body">
+                    { threadContent }
+                </div>
             </div>
         </div>
     )

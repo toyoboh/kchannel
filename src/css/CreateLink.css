@@ -1,10 +1,33 @@
+.create-link {
+    text-align: right;
+}
+
 @media(max-width: 480px) {
     .create-link {
         font-size: 12px;
-        text-align: right;
     }
-
+    
     .create-link > .link > .MuiSvgIcon-root {
         font-size: 12px;
+    }
+}
+
+@media(min-width: 481px) and (max-width: 1000px) {
+    .create-link {
+        font-size: 14px;
+    }
+    
+    .create-link > .link > .MuiSvgIcon-root {
+        font-size: 14px;
+    }
+}
+
+@media(min-width: 1001px) {
+    .create-link {
+        font-size: 14px;
+    }
+    
+    .create-link > .link > .MuiSvgIcon-root {
+        font-size: 14px;
     }
 }

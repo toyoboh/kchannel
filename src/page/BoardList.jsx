@@ -54,23 +54,25 @@ function BoardList() {
 
     return(
         <div className="board-list">
-            <div className="board-list-title">
-                <PageTitle Icon={ ReceiptIcon } title="掲示板" />
-            </div>
-            
-            <div className="breadcrumb-navigation-container">
-                <BreadcrumbNavigation />
-            </div>
+            <div className="wrapper">
+                <div className="board-list-title">
+                    <PageTitle Icon={ ReceiptIcon } title="掲示板" />
+                </div>
+                
+                <div className="breadcrumb-navigation-container">
+                    <BreadcrumbNavigation />
+                </div>
 
-            <div className="create-link-content">
-                <CreateLink
-                    path={ "/createBoard/" + categoryId }
-                    title="掲示板作成ページに移動する"
-                />
-            </div>
+                <div className="create-link-content">
+                    <CreateLink
+                        path={ "/createBoard/" + categoryId }
+                        title="掲示板作成ページに移動する"
+                    />
+                </div>
 
-            <div className="board-list-body">
-                { boardContent }
+                <div className="board-list-body">
+                    { boardContent }
+                </div>
             </div>
         </div>
     )

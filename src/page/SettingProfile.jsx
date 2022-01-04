@@ -110,69 +110,70 @@ function SettingProfile() {
     
     return(
         <div className="setting-profile">
-
-            {/* Branch depending on whether the existMessage is an empty string */}
-            {existMessage !== "" ?(
-                <>
-                    <div>{ existMessage }</div>
-                </>
-            ) : (
-                <>
-                    <div className="button-content">
-                        <button className="cancel-button">
-                            <Link to={ "/profile/" + userDetail.user_id }>
-                                キャンセル
-                            </Link>
-                        </button>
-                        <button className="save-button" onClick={ updateUserProfile }>保存する</button>
-                    </div>
-
-                    <div className="user-icon-content">
-                        <div className="user-icon"></div>
-                    </div>
-
-                    <div className="user-main-content">
-                        <div className="user-name-content">
-                            <div className="item-title">
-                                名前
-                            </div>
-                            <div className="item-content">
-                                {userNameMessage !== "" &&
-                                    <div className="error-content">
-                                        <ErrorMessage text={ userNameMessage } />
-                                    </div>
-                                }
-                                <input 
-                                    className="user-name-input"
-                                    value={ inputUserName }
-                                    onChange={ (e) => setInputUserName(e.target.value) }
-                                    type="text"
-                                    placeholder="名前を追加する"
-                                />
-                            </div>
+            <div className="wrapper">
+                {/* Branch depending on whether the existMessage is an empty string */}
+                {existMessage !== "" ?(
+                    <>
+                        <div>{ existMessage }</div>
+                    </>
+                ) : (
+                    <>
+                        <div className="button-content">
+                            <button className="cancel-button">
+                                <Link to={ "/profile/" + userDetail.user_id }>
+                                    キャンセル
+                                </Link>
+                            </button>
+                            <button className="save-button" onClick={ updateUserProfile }>保存する</button>
                         </div>
 
-                        <div className="introduction-content">
-                            <div className="item-title">
-                                自己紹介
+                        <div className="user-icon-content">
+                            <div className="user-icon"></div>
+                        </div>
+
+                        <div className="user-main-content">
+                            <div className="user-name-content">
+                                <div className="item-title">
+                                    名前
+                                </div>
+                                <div className="item-content">
+                                    {userNameMessage !== "" &&
+                                        <div className="error-content">
+                                            <ErrorMessage text={ userNameMessage } />
+                                        </div>
+                                    }
+                                    <input 
+                                        className="user-name-input"
+                                        value={ inputUserName }
+                                        onChange={ (e) => setInputUserName(e.target.value) }
+                                        type="text"
+                                        placeholder="名前を追加する"
+                                    />
+                                </div>
                             </div>
-                            <div className="item-content">
-                                {introductionMessage !== "" &&
-                                    <div className="error-content">
-                                        <ErrorMessage text={ introductionMessage } />
-                                    </div>
-                                }
-                                <textarea
-                                    className="introduction-textarea"
-                                    value={ inputIntroduction }
-                                    onChange={ (e) => setInputIntroduction(e.target.value) }
-                                    placeholder="自己紹介を追加する"
-                                ></textarea>
+
+                            <div className="introduction-content">
+                                <div className="item-title">
+                                    自己紹介
+                                </div>
+                                <div className="item-content">
+                                    {introductionMessage !== "" &&
+                                        <div className="error-content">
+                                            <ErrorMessage text={ introductionMessage } />
+                                        </div>
+                                    }
+                                    <textarea
+                                        className="introduction-textarea"
+                                        value={ inputIntroduction }
+                                        onChange={ (e) => setInputIntroduction(e.target.value) }
+                                        placeholder="自己紹介を追加する"
+                                    ></textarea>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                </>
-            )}
+                    </>
+                )}
+            </div>
         </div>
     )
 }

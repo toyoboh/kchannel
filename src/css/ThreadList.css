@@ -1,27 +1,40 @@
 .thread-list {
     background-color: var(--base-color);
+    min-height: var(--page-min-height);
+    padding: 20px 16px;
+    width: 100%;
+}
+
+.thread-list > .wrapper {
+    margin: 0 auto;
+    max-width: 1000px;
+    width: 100%;
+}
+
+.thread-list > .wrapper > .thread-list-title {
+    margin-bottom: 16px;
+}
+
+.thread-list > .wrapper > .breadcrumb-navigation-container {
+    margin-bottom: 4px;
+}
+
+.thread-list > .wrapper > .create-link-content {
+    margin-bottom: 16px;
+}
+
+.thread-list > .wrapper > .thread-list-body > .card {
+    margin-bottom: 16px;
 }
 
 @media(max-width: 480px) {
-    .thread-list {
-        min-height: var(--page-min-height);
-        padding: 20px 16px;
-        width: 100%;
-    }
 
-    .thread-list > .thread-list-title {
-        margin-bottom: 16px;
-    }
+}
 
-    .thread-list > .breadcrumb-navigation-container {
-        margin-bottom: 4px;
-    }
+@media(min-width: 481px) and (max-width: 1000px) {
+    
+}
 
-    .thread-list > .create-link-content {
-        margin-bottom: 16px;
-    }
-
-    .thread-list > .thread-list-body > .card {
-        margin-bottom: 16px;
-    }
+@media(min-width: 1001px) {
+    
 }

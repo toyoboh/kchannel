@@ -1,45 +1,58 @@
 .comment-list {
     background-color: var(--base-color);
+    min-height: var(--page-min-height);
+    padding: 20px 16px;
+    width: 100%;
+}
+
+.comment-list > .wrapper {
+    margin: 0 auto;
+    max-width: 1000px;
+    width: 100%;
+}
+
+.comment-list > .wrapper > .title-container {
+    margin-bottom: 16px;
+}
+
+.comment-list > .wrapper > .breadcrumb-navigation-container {
+    margin-bottom: 16px;
+}
+
+.comment-list > .wrapper > .explanation-container {
+    margin-bottom: 16px;
+}
+
+.comment-list > .wrapper > .total-comment-container {
+    font-size: 14px;
+    margin-bottom: 16px;
+    text-align: right;
+}
+
+.comment-list > .wrapper > .comment-container {
+    margin-bottom: 16px;
+}
+
+.comment-list > .wrapper > .comment-container > .comment {
+    margin-bottom: 16px;
+}
+
+.comment-list > .wrapper > .form-content > {
+    margin-bottom: 16px;
+}
+
+.comment-list > .wrapper > .form-content > .error-content {
+    margin-bottom: 4px;
 }
 
 @media(max-width: 480px) {
-    .comment-list {
-        min-height: var(--page-min-height);
-        padding: 20px 16px;
-        width: 100%;
-    }
 
-    .comment-list > .title-container {
-        margin-bottom: 16px;
-    }
+}
 
-    .comment-list > .breadcrumb-navigation-container {
-        margin-bottom: 16px;
-    }
+@media(min-width: 481px) and (max-width: 1000px) {
+    
+}
 
-    .comment-list > .explanation-container {
-        margin-bottom: 16px;
-    }
-
-    .comment-list > .total-comment-container {
-        font-size: 14px;
-        margin-bottom: 16px;
-        text-align: right;
-    }
-
-    .comment-list > .comment-container {
-        margin-bottom: 16px;
-    }
-
-    .comment-list > .comment-container > .comment {
-        margin-bottom: 16px;
-    }
-
-    .comment-list > .form-content > {
-        margin-bottom: 16px;
-    }
-
-    .comment-list > .form-content > .error-content {
-        margin-bottom: 4px;
-    }
+@media(min-width: 1001px) {
+    
 }

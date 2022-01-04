@@ -174,44 +174,46 @@ function CommentList() {
 
     return(
         <div className="comment-list">
-            <div className="title-container">
-                <CommentListTitle title={ threadInfo.thread_name } />
-            </div>
+            <div className="wrapper">
+                <div className="title-container">
+                    <CommentListTitle title={ threadInfo.thread_name } />
+                </div>
 
-            <div className="breadcrumb-navigation-container">
-                <BreadcrumbNavigation />
-            </div>
+                <div className="breadcrumb-navigation-container">
+                    <BreadcrumbNavigation />
+                </div>
 
-            <div className="explanation-container">
-                <Explanation 
-                    content={ threadInfo.thread_explanation }
-                    createdAt={ threadInfo.created_at }
-                    createdUserName={ threadInfo.created_user_name }
-                />
-            </div>
+                <div className="explanation-container">
+                    <Explanation 
+                        content={ threadInfo.thread_explanation }
+                        createdAt={ threadInfo.created_at }
+                        createdUserName={ threadInfo.created_user_name }
+                    />
+                </div>
 
-            <div className="total-comment-container">
-                コメント：全{ commentCount }件
-            </div>
+                <div className="total-comment-container">
+                    コメント：全{ commentCount }件
+                </div>
 
-            <div className="comment-container">
-                { commentContent }
-            </div>
+                <div className="comment-container">
+                    { commentContent }
+                </div>
 
-            <div className="form-content">
-                {commentMessage !== "" &&
-                    <div className="error-content">
-                        <ErrorMessage
-                            text={ commentMessage }
-                        />
-                    </div>
-                }
-                <CommentForm
-                    refItem={ inputCommentRef }
-                    value={ inputComment }
-                    changeFunction={ setInputComment }
-                    clickFunction={ createComment }
-                />
+                <div className="form-content">
+                    {commentMessage !== "" &&
+                        <div className="error-content">
+                            <ErrorMessage
+                                text={ commentMessage }
+                            />
+                        </div>
+                    }
+                    <CommentForm
+                        refItem={ inputCommentRef }
+                        value={ inputComment }
+                        changeFunction={ setInputComment }
+                        clickFunction={ createComment }
+                    />
+                </div>
             </div>
         </div>
     )

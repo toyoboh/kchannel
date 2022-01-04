@@ -1,10 +1,33 @@
+.back-link {
+    text-align: left;
+}
+
 @media(max-width: 480px) {
     .back-link {
         font-size: 12px;
-        text-align: left;
     }
-
+    
     .back-link > .link > .MuiSvgIcon-root {
         font-size: 12px;
+    }
+}
+
+@media(min-width: 481px) and (max-width: 1000px) {
+    .back-link {
+        font-size: 14px;
+    }
+    
+    .back-link > .link > .MuiSvgIcon-root {
+        font-size: 14px;
+    }
+}
+
+@media(min-width: 1001px) {
+    .back-link {
+        font-size: 14px;
+    }
+    
+    .back-link > .link > .MuiSvgIcon-root {
+        font-size: 14px;
     }
 }

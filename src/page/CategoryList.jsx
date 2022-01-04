@@ -46,19 +46,21 @@ function CategoryList() {
 
     return(
         <div className="category-list">
-            <div className="title-content">
-                <PageTitle Icon={ CategoryIcon } title="カテゴリー" />
-            </div>
+            <div className="wrapper">
+                <div className="title-content">
+                    <PageTitle Icon={ CategoryIcon } title="カテゴリー" />
+                </div>
 
-            <div className="create-link-content">
-                <CreateLink
-                    path="/createCategory"
-                    title="カテゴリー作成ページに移動する"
-                />
-            </div>
+                <div className="create-link-content">
+                    <CreateLink
+                        path="/createCategory"
+                        title="カテゴリー作成ページに移動する"
+                    />
+                </div>
 
-            <div className="body-content">
-                { categoryContent }
+                <div className="body-content">
+                    { categoryContent }
+                </div>
             </div>
         </div>
     )

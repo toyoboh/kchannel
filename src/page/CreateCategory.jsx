@@ -86,45 +86,46 @@ function CreateCategory() {
 
     return(
         <div className="create-category">
-            <div className="title-content">
-                <PageTitle Icon={ CategoryIcon } title="カテゴリー作成" />
-            </div>
-
-            <div className="back-link-content">
-                <BackLink
-                    path="/categoryList"
-                    title="戻る"
-                />
-            </div>
-
-            <div className="rule-content">
-                <CreateRule
-                    title="注意"
-                    body="登録する際は、一覧画面にて類似したものがないことを確認してください。"
-                />
-            </div>
-
-            <div className="form-content">
-                <div className="name-content">
-                    <div className="form-item-title">カテゴリー名</div>
-                    
-                    <InputPlusButton
-                        value={ inputCategoryName }
-                        changeFunction={ setInputCategoryName }
-                        buttonFunction={ createCategory }
-                        Icon={ BorderColorIcon }
-                    />
-
-                    {/* Show only if the message is not an empty string. */}
-                    {categoryNameMessage !== "" &&
-                        <div className="error-content">
-                            <ErrorMessage text={ categoryNameMessage } />
-                        </div>
-                    }
+            <div className="wrapper">
+                <div className="title-content">
+                    <PageTitle Icon={ CategoryIcon } title="カテゴリー作成" />
                 </div>
 
-            </div>
+                <div className="back-link-content">
+                    <BackLink
+                        path="/categoryList"
+                        title="戻る"
+                    />
+                </div>
 
+                <div className="rule-content">
+                    <CreateRule
+                        title="注意"
+                        body="登録する際は、一覧画面にて類似したものがないことを確認してください。"
+                    />
+                </div>
+
+                <div className="form-content">
+                    <div className="name-content">
+                        <div className="form-item-title">カテゴリー名</div>
+                        
+                        <InputPlusButton
+                            value={ inputCategoryName }
+                            changeFunction={ setInputCategoryName }
+                            buttonFunction={ createCategory }
+                            Icon={ BorderColorIcon }
+                        />
+
+                        {/* Show only if the message is not an empty string. */}
+                        {categoryNameMessage !== "" &&
+                            <div className="error-content">
+                                <ErrorMessage text={ categoryNameMessage } />
+                            </div>
+                        }
+                    </div>
+
+                </div>
+            </div>
         </div>
     )
 }

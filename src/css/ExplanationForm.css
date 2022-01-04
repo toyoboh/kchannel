@@ -1,14 +1,24 @@
-@media(max-width: 480px) {
-    .explanation-form {
-        background-color: white;
-        border: 1px solid black;
-        font-size: 14px;
-        height: 200px;
-        padding: 6px;
-        width: 100%;
-    }
+.explanation-form {
+    background-color: white;
+    border: 1px solid black;
+    font-size: 14px;
+    height: 200px;
+    padding: 6px;
+    width: 100%;
+}
 
-    .explanation-form:focus {
-        outline: none;
-    }
+.explanation-form:focus {
+    outline: none;
+}
+
+@media(max-width: 480px) {
+
+}
+
+@media(min-width: 481px) and (max-width: 1000px) {
+    
+}
+
+@media(min-width: 1001px) {
+    
 }
