@@ -10,6 +10,7 @@ use Kchannel\Classes\Models\TUser;
 use Kchannel\Classes\Models\TTemporaryUser;
 use Kchannel\Classes\Tool\Session;
 use Kchannel\Classes\Tool\Token;
+use Kchannel\Classes\Tool\Mail;
 
 // Exit if not POST METHOD
 if($_SERVER["REQUEST_METHOD"] !== "POST") {
@@ -79,7 +80,17 @@ $token = $tool_token->getEmailAuthToken();
 
 // Register new Account
 $register_success = $t_temporary_user->register($user_id, $user_name, $mail_address, $hash_password, $token);
-
 $res_result["success"] = $register_success;
+
+// Send E-mail
+// ローカル環境では送信できていない
+if($res_result["success"]) {
+    $to      = $mail_address;
+    $subject = "テスト送信";
+    $message = "http://localhost:3000/RegistrationCompleted/{$token}";
+    
+    $mail                    = new Mail();
+    $res_result["mail_info"] = $mail->send($to, $subject, $message);
+}
 
 echo json_encode($res_result);
