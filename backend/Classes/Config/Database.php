@@ -35,7 +35,7 @@ class Database
      * @return array DSN info, DB username, DB user password
      */
     public function getDatabaseInfo() {
-        $ini_array = parse_ini_file(__DIR__ . "/../../../info.ini", true);
+        $ini_array = parse_ini_file(__DIR__ . "/../../Info/info.ini", true);
         $dbname    = $ini_array["kchannel_db_test"]["db_name"];
         $host      = $ini_array["kchannel_db_test"]["host"];
         $charset   = $ini_array["kchannel_db_test"]["charset"];

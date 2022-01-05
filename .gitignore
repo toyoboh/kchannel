@@ -24,4 +24,5 @@ yarn-error.log*
 
 # service
 info.ini
+/backend/Info/info.ini
 /vendor
