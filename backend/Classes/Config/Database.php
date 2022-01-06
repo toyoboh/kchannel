@@ -35,14 +35,22 @@ class Database
      * @return array DSN info, DB username, DB user password
      */
     public function getDatabaseInfo() {
+        $key;
+
+        if($_SERVER["HTTP_HOST"] === "www.kchannel.jp") {
+            $key = "kchannel_db_main";
+        } else {
+            $key = "kchannel_db_test";
+        }
+
         $ini_array = parse_ini_file(__DIR__ . "/../../Info/info.ini", true);
-        $dbname    = $ini_array["kchannel_db_test"]["db_name"];
-        $host      = $ini_array["kchannel_db_test"]["host"];
-        $charset   = $ini_array["kchannel_db_test"]["charset"];
+        $dbname    = $ini_array[$key]["db_name"];
+        $host      = $ini_array[$key]["host"];
+        $charset   = $ini_array[$key]["charset"];
 
         $dsn      = "mysql:dbname={$dbname};host={$host};charset={$charset}";
-        $username  = $ini_array["kchannel_db_test"]["username"];
-        $password  = $ini_array["kchannel_db_test"]["password"];
+        $username  = $ini_array[$key]["username"];
+        $password  = $ini_array[$key]["password"];
 
         return array($dsn, $username, $password);
     }

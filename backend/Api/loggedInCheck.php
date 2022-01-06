@@ -6,9 +6,10 @@ require __DIR__ . "/../../vendor/autoload.php";
 use Kchannel\Classes\Tool\Session;
 
 if($_SERVER["REQUEST_METHOD"] !== "POST") {
-    return [
+    echo json_encode([
         "success" => false
-    ];
+    ]);
+    exit;
 }
 
 $result         = array();
