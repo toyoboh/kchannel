@@ -37,7 +37,7 @@ class Database
     public function getDatabaseInfo() {
         $key;
 
-        if($_SERVER["HTTP_HOST"] === "www.kchannel.jp") {
+        if($_SERVER["HTTP_HOST"] === "api.kchannel.jp") {
             $key = "kchannel_db_main";
         } else {
             $key = "kchannel_db_test";
