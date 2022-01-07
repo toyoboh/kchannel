@@ -46,9 +46,10 @@ class Database
         $ini_array = parse_ini_file(__DIR__ . "/../../Info/info.ini", true);
         $dbname    = $ini_array[$key]["db_name"];
         $host      = $ini_array[$key]["host"];
+        $port      = $ini_array[$key]["port"];
         $charset   = $ini_array[$key]["charset"];
 
-        $dsn      = "mysql:dbname={$dbname};host={$host};charset={$charset}";
+        $dsn      = "mysql:dbname={$dbname};host={$host};port={$port};charset={$charset}";
         $username  = $ini_array[$key]["username"];
         $password  = $ini_array[$key]["password"];
 
