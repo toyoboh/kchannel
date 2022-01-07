@@ -2,6 +2,7 @@
     $reqHeaders = apache_request_headers();
     $allowedOrigin = array(
     "http://localhost:3000",
+    "http://localhost:49001",
     "http://www.kchannel.jp"
     );
     
