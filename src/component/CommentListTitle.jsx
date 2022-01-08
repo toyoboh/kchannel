@@ -3,7 +3,7 @@ import "../css/CommentListTitle.css";
 
 function CommentListTitle({ title }) {
     return(
-        <h2 className="thread-space-title">
+        <h2 className="comment-list-title">
             { title }
         </h2>
     )

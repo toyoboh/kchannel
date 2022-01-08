@@ -33,6 +33,7 @@
 
 .login > .form > .input-item-content > .input {
     background-color: var(--base-color);
+    font-size: 16px;
     width: 100%;
 }
 
@@ -111,10 +112,6 @@
     .login > .form > .input-item-content > .title {
         font-size: 10px;
     }
-    
-    .login > .form > .input-item-content > .input {
-        font-size: 14px;
-    }
 
     .login > .form > .password-display-content > .label {
         font-size: 12px;
@@ -134,10 +131,6 @@
         font-size: 12px;
     }
 
-    .login > .form > .input-item-content > .input {
-        font-size: 16px;
-    }
-
     .login > .form > .password-display-content > .label {
         font-size: 14px;
     }
@@ -154,10 +147,6 @@
 
     .login > .form > .input-item-content > .title {
         font-size: 12px;
-    }
-
-    .login > .form > .input-item-content > .input {
-        font-size: 16px;
     }
 
     .login > .form > .password-display-content > .label {
