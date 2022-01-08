@@ -28,7 +28,7 @@ function App() {
 
                     <PublicRoute path="/registerAccount" component={ RegisterAccount } />
 
-                    <PublicRoute path="/RegistrationCompleted/:token" component={ RegistrationCompleted } />
+                    <PublicRoute path="/registrationCompleted/:token" component={ RegistrationCompleted } />
 
                     <PublicRoute path="/temporaryRegistrationCompleted" component={ TemporaryRegistrationCompleted } />
 

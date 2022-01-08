@@ -10,7 +10,7 @@ class Token {
     }
 
     public function getEmailAuthToken() {
-        $token_length = 64;
+        $token_length = 16;
         $bytes        = random_bytes($token_length);
         return bin2hex($bytes);
     }

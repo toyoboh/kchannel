@@ -82,12 +82,8 @@ $res_result["success"] = $register_success;
 // Send E-mail
 // ローカル環境では送信できていない
 if($res_result["success"]) {
-    $to      = $mail_address;
-    $subject = "テスト送信";
-    $message = "http://localhost:3000/RegistrationCompleted/{$token}";
-    
     $mail                    = new Mail();
-    $res_result["mail_info"] = $mail->send($to, $subject, $message);
+    $res_result["mail_info"] = $mail->mainRegistrationGuidance($mail_address, $user_name, $token);
 }
 
 echo json_encode($res_result);

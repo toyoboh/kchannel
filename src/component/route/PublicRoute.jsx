@@ -6,7 +6,7 @@ function PublicRoute(props) {
     const { user } = useUserContext();
 
     if(user.is_auth) {
-        return <Redirect to="/" />
+        return <Redirect to="/home" />
     } else {
         return <Route { ...props } />
     }
