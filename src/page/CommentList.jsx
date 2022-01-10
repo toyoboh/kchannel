@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useRef } from "react";
-import { useParams, Link } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import axios from "axios";
 import "../css/CommentList.css";
 import CommentListTitle from "../component/CommentListTitle";
@@ -12,6 +12,7 @@ import ErrorMessage from "../component/ErrorMessage";
 import { useUserContext } from "../context/User";
 import DisplayProcess from "../tool/DisplayProcess";
 import URL from "../info/Url";
+import NoContent from "../component/NoContent";
 
 function CommentList() {
     // thread id received by parameter
@@ -71,7 +72,7 @@ function CommentList() {
                 // Perform line break processing in thread explanation.
                 const tempThreadInformation = res.data.data.thread_information;
                 tempThreadInformation.thread_explanation = DisplayProcess.replaceLineFeed(tempThreadInformation.thread_explanation);
-                
+
                 setThreadInformation(tempThreadInformation);
             } else {
                 setThreadExists(false);
@@ -237,10 +238,9 @@ function CommentList() {
 
                     {!threadExists ? (
 
-                        <div>
-                            <p>存在しないスレッドIDです</p>
-                            <p><Link to="categoryList">カテゴリ一覧ページ</Link>へ戻る</p>
-                        </div>
+                        <NoContent
+                            text="存在しないスレッドです。"
+                        />
 
                     ) : (<>
 

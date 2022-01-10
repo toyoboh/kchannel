@@ -19,6 +19,8 @@ body {
 
     
     --error-color: #F06060;
+
+    --blue: #007FFF;
 }
 
 @media(max-width: 480px) {
