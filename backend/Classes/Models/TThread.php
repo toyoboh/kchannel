@@ -20,17 +20,17 @@ class TThread
      * @param string $board_id 
      * @return array Only when there is no thread: add message
      */
-    public function fetchThreadInBoard($board_id) {
+    public function initialSelect($board_id) {
         $query = "SELECT
-                threads.thread_id AS thread_id,
-                threads.thread_name AS thread_name,
+                threads.thread_id          AS thread_id,
+                threads.thread_name        AS thread_name,
                 COUNT(comments.comment_id) AS comment_count
             FROM
                 t_threads threads
             LEFT JOIN
                 t_comments comments
             ON
-                threads.thread_id = comments.thread_id
+                threads.thread_id              = comments.thread_id
             WHERE
                 CAST(threads.board_id AS CHAR) = :board_id
             GROUP BY
@@ -45,19 +45,10 @@ class TThread
         $database->connect();
         $stmt = $database->executeQuery($query, $use_query_item);
 
-        $row_count = $stmt->rowCount();
-        
-        $thread = array();
-        $thread["data"] = array();
-
-        if($row_count > 0) {
-            $thread["data"]["item"] = $stmt->fetchAll();
-        } else {
-            $thread["data"]["item"] = array();
-            $thread["message"] = "Not Found Thread";
-        }
-
-        return $thread;
+        return array(
+            $stmt->rowCount(),
+            $stmt->fetchAll()
+        );
     }
 
     /**
@@ -256,9 +247,9 @@ class TThread
         $database->connect();
         $stmt = $database->executeQuery($query, $use_query_item);
 
-        $row_count = $stmt->rowCount();
-        $threads   = $stmt->fetchAll();
-
-        return array($row_count, $threads);
+        return array(
+            $stmt->rowCount(),
+            $stmt->fetchAll()
+        );
     }
 }

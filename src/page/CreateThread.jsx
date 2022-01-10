@@ -29,7 +29,7 @@ function CreateThread() {
     const { user }                  = useUserContext();
 
     // Board Information
-    const [boardInfo, setBoardInfo] = useState([]);
+    const [boardInformation, setBoardInformation] = useState([]);
 
     // Input item
     const [inputThreadName, setInputThreadName]   = useState("");
@@ -59,31 +59,34 @@ function CreateThread() {
         })
     }, [])
 
-    // Set Board information
+    /**
+     * check if the board exists
+     */
     useEffect(() => {
-        axios[URL.checkBoardExists.method](URL.checkBoardExists.url, {
+        axios[URL.fetchBoardInformation.method](URL.fetchBoardInformation.url, {
             params: {
                 board_id: boardId
             }
         })
         .then((res) => {
-            if(res.data.data.board_exists) {
-                setBoardInfo(res.data.data.board_info);
+            if(res.data.success) {
+                // setBoardExists(true);
+                setBoardInformation(res.data.data.board_information);
             } else {
-                setExistsMessage(res.data.message)
+                setExistsMessage("存在しない掲示板です。");
             }
         })
         .catch((err) => {
             console.log(err);
         })
-    }, [boardId])
+    }, [boardId]);
 
     // Create the new Thread
     const createThread = () => {
         if(!validationCheck()) return;
 
         axios[URL.createThread.method](URL.createThread.url, {
-            board_id          : boardInfo.board_id,
+            board_id          : boardId,
             thread_name       : inputThreadName,
             thread_explanation: inputThreadExplanation,
             user_id           : user.user_id,
@@ -92,7 +95,7 @@ function CreateThread() {
         })
         .then((res) => {
             if(res.data.success) {
-                history.push(`/threadList/${boardInfo.board_id}`);
+                history.push(`/threadList/${boardInformation.board_id}`);
             } else {
                 setThreadNameMessage(res.data.message);
             }
@@ -142,7 +145,7 @@ function CreateThread() {
 
                         <div className="back-link-content">
                             <BackLink
-                                path={ `/threadList/${boardInfo.board_id}` }
+                                path={ `/threadList/${boardInformation.board_id}` }
                                 title="戻る"
                             />
                         </div>
@@ -157,7 +160,7 @@ function CreateThread() {
                         <div className="parent-name-content">
                             <CreatePageParentName
                                 title="掲示板名"
-                                name={ boardInfo.board_name }
+                                name={ boardInformation.board_name }
                             />
                         </div>
 

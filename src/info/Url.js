@@ -34,6 +34,10 @@ const URL = hostName === "www.kchannel.jp" ?
         method: "get",
         url   : "http://api.kchannel.jp/backend/Api/fetchThreadInformation.php"
     },
+    fetchBoardInformation: { // param: board_id
+        method: "get",
+        url   : "http://api.kchannel.jp/backend/Api/fetchBoardInformation.php"
+    },
     searchThreadList: { // param: search_word, board_id, csrf_token
         method: "get",
         url   : "http://api.kchannel.jp/backend/Api/searchThreadList.php"
@@ -65,10 +69,6 @@ const URL = hostName === "www.kchannel.jp" ?
     checkCategoryExists: { // param: category_id
         method: "get",
         url   : "http://api.kchannel.jp/backend/Api/checkCategoryExists.php"
-    },
-    checkBoardExists: { // param: board_id
-        method: "get",
-        url   : "http://api.kchannel.jp/backend/Api/checkBoardExists.php"
     },
     userProfile: { // param: user_id
         method: "get",
@@ -131,6 +131,10 @@ const URL = hostName === "www.kchannel.jp" ?
         method: "get",
         url   : "http://localhost:49002/backend/Api/fetchThreadInformation.php"
     },
+    fetchBoardInformation: { // param: board_id
+        method: "get",
+        url   : "http://localhost:49002/backend/Api/fetchBoardInformation.php"
+    },
     searchThreadList: { // param: search_word, board_id, csrf_token
         method: "get",
         url   : "http://localhost:49002/backend/Api/searchThreadList.php"
@@ -162,10 +166,6 @@ const URL = hostName === "www.kchannel.jp" ?
     checkCategoryExists: { // param: category_id
         method: "get",
         url   : "http://localhost:49002/backend/Api/checkCategoryExists.php"
-    },
-    checkBoardExists: { // param: board_id
-        method: "get",
-        url   : "http://localhost:49002/backend/Api/checkBoardExists.php"
     },
     userProfile: { // param: user_id
         method: "get",

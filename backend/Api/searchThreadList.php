@@ -18,14 +18,12 @@ $board_id    = $_GET["board_id"];
 $csrf_token  = $_GET["csrf_token"];
 
 // set result data
-$res_result         = array();
-$res_result["data"] = array();
-
+$res_result;
 // check csrf token
 $session = new Session();
 if(!$session->checkMatch($csrf_token, "csrf_token")) {
-    $res_result["data"]["item"] = array();
-    $res_result["message"]      = "不正なアクセスのため、正常に処理ができませんでした。";
+    $res_result["success"] = false;
+    $res_result["message"] = "不正なアクセスのため、正常に処理ができませんでした。";
     echo json_encode($res_result);
     exit;
 }
@@ -35,10 +33,12 @@ $t_thread = new TThread();
 list($row_count, $threads) = $t_thread->search($search_word, $board_id);
 
 if($row_count > 0) {
-    $res_result["data"]["item"] = $threads;
+    $res_result["success"]         = true;
+    $res_result["data"]["threads"] = $threads;
 } else {
-    $res_result["data"]["item"] = array();
-    $res_result["message"]      = "「{$search_word}」の検索結果はありません。";
+    $res_result["success"]         = false;
+    $res_result["message"]         = "「{$search_word}」の検索結果はありません。";
+    $res_result["data"]["threads"] = array();
 }
 
 echo json_encode($res_result);
