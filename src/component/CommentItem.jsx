@@ -1,9 +1,9 @@
 import React from "react";
-import "../css/Comment.css";
+import "../css/CommentItem.css";
 
-function Comment({ createdAt, comment, createdUserName }) {
+function CommentItem({ createdAt, comment, createdUserName }) {
     return(
-        <div className="comment">
+        <div className="comment-item">
             <div className="comment-header">
                 { createdAt }
             </div>
@@ -19,4 +19,4 @@ function Comment({ createdAt, comment, createdUserName }) {
     )
 }
 
-export default Comment;
+export default CommentItem;

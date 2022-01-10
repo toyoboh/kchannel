@@ -61,24 +61,24 @@ class TThread
     }
 
     /**
-     * Fetch infomation about the thread
+     * Select information about the thread
      * @param string $thread_id
      * @return array Returns an empty array when thread infomation fetch fails
      */
-    public function fetchThreadInfo($thread_id) {
+    public function selectThreadInformation($thread_id) {
         $query = "SELECT
-                threads.thread_id                                          AS thread_id,
-                threads.thread_name                                        AS thread_name,
-                threads.thread_explanation                                 AS thread_explanation,
-                threads.created_user_id                                    AS created_user_id,
-                users.user_name                                            AS created_user_name,
-                DATE_FORMAT(threads.created_at, '%Y年%m月%d日 %H時%i分%s秒') AS created_at
+                threads.thread_id                                     AS thread_id,
+                threads.thread_name                                   AS thread_name,
+                threads.thread_explanation                            AS thread_explanation,
+                threads.created_user_id                               AS created_user_id,
+                users.user_name                                       AS created_user_name,
+                DATE_FORMAT(threads.created_at, '%Y/%m/%d %H:%i:%s') AS created_at
             FROM
                 t_threads threads
             INNER JOIN
-                t_users users
+                t_users   users
             ON
-                threads.created_user_id = users.user_id
+                threads.created_user_id         = users.user_id
             WHERE
                 CAST(threads.thread_id AS CHAR) = :thread_id
         ;";
@@ -91,13 +91,10 @@ class TThread
         $database->connect();
         $stmt = $database->executeQuery($query, $use_query_item);
 
-        $row_count = $stmt->rowCount();
-
-        if($row_count > 0) {
-            return $stmt->fetch();
-        } else {
-            return array();
-        }
+        return array(
+            $stmt->rowCount(),
+            $stmt->fetch()
+        );
     }
 
     /**

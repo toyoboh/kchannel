@@ -18,15 +18,15 @@ class TComment
     /**
      * Fetch comments included in the thread
      * @param string $thread_id
-     * @return array Only when there is no comments: add message
+     * @return array 
      */
-    public function fetchThreadInBoard($thread_id) {
+    public function selectInitialComments($thread_id) {
         $query ="SELECT
-                comments.comment_id      AS comment_id,
-                comments.comment_body    AS comment_body,
-                comments.created_user_id AS created_user_id,
-                users.user_name          AS created_user_name,
-                DATE_FORMAT(comments.created_at, '%Y年%m月%d日 %H時%i分%s秒') AS created_at
+                comments.comment_id                                   AS comment_id,
+                comments.comment_body                                 AS comment_body,
+                comments.created_user_id                              AS created_user_id,
+                users.user_name                                       AS created_user_name,
+                DATE_FORMAT(comments.created_at, '%Y/%m/%d %H:%i:%s') AS created_at
             FROM
                 t_comments comments
             INNER JOIN
@@ -47,19 +47,10 @@ class TComment
         $database->connect();
         $stmt = $database->executeQuery($query, $use_query_item);
 
-        $row_count = $stmt->rowCount();
-        
-        $comment = array();
-        $comment["data"] = array();
-
-        if($row_count > 0) {
-            $comment["data"]["item"] = $stmt->fetchAll();
-        } else {
-            $comment["data"]["item"] = array();
-            $comment["message"] = "現在コメントはありません。投稿しましょう！";
-        }
-
-        return $comment;
+        return array(
+            $stmt->rowCount(),
+            $stmt->fetchAll()
+        );
     }
 
     public function create($user_id, $thread_id, $comment_body) {
@@ -96,16 +87,7 @@ class TComment
         $database->connect();
         $stmt = $database->executeQuery($query, $use_query_item);
 
-        $count = $stmt->rowCount();
-
-        if($count >= 1) {
-            $result["success"] = true;
-        } else {
-            $result["success"] = false;
-            $result["message"] = "システムエラー。正常にカテゴリーを登録することができませんでした。";
-        }
-        
-        return $result;
+        return $stmt->rowCount();
     }
 
     public function selectNewComment($thread_id, $comment_id) {
@@ -138,17 +120,9 @@ class TComment
         $database->connect();
         $stmt = $database->executeQuery($query, $use_query_item);
 
-        $count  = $stmt->rowCount();
-        $result = array();
-
-        if($count >= 1) {
-            $result["success"] = true;
-            $result["data"]    = $stmt->fetchAll();
-        } else {
-            $result["success"] = false;
-            $result["message"] = "最新のコメントはありません。";
-        }
-        
-        return $result;
+        return array(
+            $stmt->rowCount(),
+            $stmt->fetchAll()
+        );
     }
 }

@@ -1,22 +1,22 @@
-.comment {
+.comment-item {
     background-color: var(--sub-color);
     box-shadow: 0px 0px 4px var(--main-color);
     margin-bottom: 16px; /* 本当はコメントリストページで指定したい */
     padding: 6px;
 }
 
-.comment > .comment-header {
+.comment-item > .comment-header {
     font-size: 12px;
     margin-bottom: 4px;
     text-align: right;
 }
 
-.comment > .comment-body {
+.comment-item > .comment-body {
     font-size: 14px;
     margin-bottom: 4px;
 }
 
-.comment > .comment-footer {
+.comment-item > .comment-footer {
     font-size: 12px;
     text-align: right;
 }

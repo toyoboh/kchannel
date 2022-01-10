@@ -34,7 +34,7 @@
 }
 
 /* 本当はここでコメントのmarginを指定したいが、本番環境で正常に設定されないのでコメント自体で対応する（expressでは正常に読み込まれている） */
-/* .comment-list > .wrapper > .comment-container .comment {
+/* .comment-list > .wrapper > .comment-container .comment-item {
     margin-bottom: 16px;
 } */
 
