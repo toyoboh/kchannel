@@ -30,7 +30,7 @@ function CreateBoard() {
     const [inputBoardName, setInputBoardName]     = useState("");
     const [inputBoardExplanation, setInputBoardExplanation] = useState("");
 
-    const [categoryInfo, setCategoryInfo]    = useState([]);
+    const [categoryInformation, setCategoryInformation]    = useState([]);
 
     // Display message
     // Error message if the board not exists
@@ -61,16 +61,16 @@ function CreateBoard() {
 
     // Set category information
     useEffect(() => {
-        axios[URL.checkCategoryExists.method](URL.checkCategoryExists.url, {
+        axios[URL.fetchCategoryInformation.method](URL.fetchCategoryInformation.url, {
             params: {
                 category_id: categoryId
             }
         })
         .then((res) => {
-            if(res.data.data.category_exists) {
-                setCategoryInfo(res.data.data.category_info);
+            if(res.data.success) {
+                setCategoryInformation(res.data.data.category_information);
             } else {
-                setExistsMessage(res.data.message)
+                setExistsMessage("存在しないカテゴリーです。")
             }
         })
         .catch((err) => {
@@ -84,7 +84,7 @@ function CreateBoard() {
         if(!validationCheck()) return;
 
         axios[URL.createBoard.method](URL.createBoard.url, {
-            category_id      : categoryInfo.category_id,
+            category_id      : categoryInformation.category_id,
             board_name       : inputBoardName,
             board_explanation: inputBoardExplanation,
             user_id          : user.user_id,
@@ -93,7 +93,7 @@ function CreateBoard() {
         })
         .then((res) => {
             if(res.data.success) {
-                history.push(`/boardList/${categoryInfo.category_id}`);
+                history.push(`/boardList/${categoryInformation.category_id}`);
             } else {
                 setBoardNameMessage(res.data.message)
             }
@@ -145,7 +145,7 @@ function CreateBoard() {
                     <>
                         <div className="back-link-content">
                             <BackLink
-                                path={ `/boardList/${categoryInfo.category_id}` }
+                                path={ `/boardList/${categoryInformation.category_id}` }
                                 title="戻る"
                             />
                         </div>
@@ -160,7 +160,7 @@ function CreateBoard() {
                         <div className="parent-name-content">
                             <CreatePageParentName
                                 title="カテゴリー名"
-                                name={ categoryInfo.category_name }
+                                name={ categoryInformation.category_name }
                             />
                         </div>
 

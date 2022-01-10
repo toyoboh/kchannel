@@ -18,27 +18,29 @@ $category_id = $_GET["category_id"];
 $csrf_token  = $_GET["csrf_token"];
 
 // set result data
-$res_result         = array();
-$res_result["data"] = array();
-
+$res_result;
 // check csrf token
 $session = new Session();
 if(!$session->checkMatch($csrf_token, "csrf_token")) {
-    $res_result["data"]["item"] = array();
+    $res_result["success"]      = false;
     $res_result["message"]      = "不正なアクセスのため、正常に処理ができませんでした。";
+    $res_result["data"]["boards"] = array();
     echo json_encode($res_result);
     exit;
 }
 
 // search board
 $t_board = new TBoard();
-list($row_count, $boards) = $t_board->search($search_word, $category_id);
+list($select_count, $boards) = $t_board->search($search_word, $category_id);
 
-if($row_count > 0) {
-    $res_result["data"]["item"] = $boards;
+// Formatting response data
+if($select_count > 0) {
+    $res_result["success"]        = true;
+    $res_result["data"]["boards"] = $boards;
 } else {
-    $res_result["data"]["item"] = array();
-    $res_result["message"]      = "「{$search_word}」の検索結果はありません。";
+    $res_result["success"]        = false;
+    $res_result["message"]        = "「{$search_word}」の検索結果はありません。";
+    $res_result["data"]["boards"] = array();
 }
 
 echo json_encode($res_result);

@@ -22,7 +22,7 @@ class TBoard
      * @param string $category_id 
      * @return array Only when there is no board: add message
      */
-    public function fetchBoardInCategory($category_id) {
+    public function initialSelect($category_id) {
         $query = "SELECT
                 boards.board_id          AS board_id,
                 boards.board_name        AS board_name,
@@ -47,19 +47,10 @@ class TBoard
         $database->connect();
         $stmt = $database->executeQuery($query, $use_query_item);
 
-        $row_count = $stmt->rowCount();
-        
-        $board = array();
-        $board["data"] = array();
-
-        if($row_count > 0) {
-            $board["data"]["item"] = $stmt->fetchAll();
-        } else {
-            $board["data"]["item"] = array();
-            $board["message"] = "Not Found Board";
-        }
-
-        return $board;
+        return array(
+            $stmt->rowCount(),
+            $stmt->fetchAll()
+        );
     }
 
     /**
@@ -241,9 +232,9 @@ class TBoard
         $database->connect();
         $stmt = $database->executeQuery($query, $use_query_item);
 
-        $row_count = $stmt->rowCount();
-        $boards    = $stmt->fetchAll();
-
-        return array($row_count, $boards);
+        return array(
+            $stmt->rowCount(),
+            $stmt->fetchAll()
+        );
     }
 }

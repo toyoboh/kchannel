@@ -87,14 +87,9 @@ class TCategory
     }
 
     /**
-     * Check if the category exists
-     * @param string $category_id
-     * @return array     exist: $result["data"] <- category information(array)
-     *                          $result["data"]["category_exists"] <- Does it exist(boolean:true)
-     *               not exist: $result["data"]["category_exists"] <- Does it exist(boolean:false)
-     *                          $result["message"] <- error message(string)
+     * 
      */
-    public function checkCategoryExists($category_id) {
+    public function selectCategoryInformation($category_id) {
         $query = "SELECT
                 category_id,
                 category_name
@@ -112,20 +107,10 @@ class TCategory
         $database->connect();
         $stmt = $database->executeQuery($query, $use_query_item);
 
-        $row_count = $stmt->rowCount();
-
-        $result = array();
-        $result["data"] = array();
-
-        if($row_count > 0) {
-            $result["data"]["category_exists"] = true;
-            $result["data"]["category_info"]   = $stmt->fetch();
-        } else {
-            $result["data"]["category_exists"] = false;
-            $result["message"]                 = "存在しないカテゴリーに掲示板を追加することはできません";
-        }
-
-        return $result;
+        return array(
+            $stmt->rowCount(),
+            $stmt->fetch()
+        );
     }
 
     /**

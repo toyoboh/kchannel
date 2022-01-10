@@ -38,6 +38,10 @@ const URL = hostName === "www.kchannel.jp" ?
         method: "get",
         url   : "http://api.kchannel.jp/backend/Api/fetchBoardInformation.php"
     },
+    fetchCategoryInformation: { // param: category_id
+        method: "get",
+        url   : "http://api.kchannel.jp/backend/Api/fetchCategoryInformation.php"
+    },
     searchThreadList: { // param: search_word, board_id, csrf_token
         method: "get",
         url   : "http://api.kchannel.jp/backend/Api/searchThreadList.php"
@@ -134,6 +138,10 @@ const URL = hostName === "www.kchannel.jp" ?
     fetchBoardInformation: { // param: board_id
         method: "get",
         url   : "http://localhost:49002/backend/Api/fetchBoardInformation.php"
+    },
+    fetchCategoryInformation: { // param: category_id
+        method: "get",
+        url   : "http://localhost:49002/backend/Api/fetchCategoryInformation.php"
     },
     searchThreadList: { // param: search_word, board_id, csrf_token
         method: "get",
