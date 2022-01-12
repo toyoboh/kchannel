@@ -5,6 +5,8 @@ import "../css/RegisterAccount.css";
 import ErrorMessage from "../component/ErrorMessage";
 import Validation from "../tool/Validation";
 import URL from "../info/Url";
+import VisibilityIcon from "@material-ui/icons/Visibility";
+import VisibilityOffIcon from "@material-ui/icons/VisibilityOff";
 
 function RegisterAccount() {
     // history
@@ -163,33 +165,23 @@ function RegisterAccount() {
 
                 <div className="input-item-content password-content">
                     <p className="title">パスワード</p>
-                    <input
-                        type={ switchInputType }
-                        className="input input-password"
-                        defaultValue={ inputPassword }
-                        onChange={ (e) => setInputPassword(e.target.value) }
-                    />
+                    <div className="input-password-content">
+                        <input
+                            type={ switchInputType }
+                            className="input input-password"
+                            defaultValue={ inputPassword }
+                            onChange={ (e) => setInputPassword(e.target.value) }
+                        />
+                        {passwordCheckbox
+                        ?<VisibilityIcon    onClick={ () => setPasswordCheckbox(prev => !prev)} />
+                        :<VisibilityOffIcon onClick={ () => setPasswordCheckbox(prev => !prev)} />
+                        }
+                    </div>
                     {passwordMessage !== "" &&
                     <div className="error">
                         <ErrorMessage text={ passwordMessage } />
                     </div>
                     }
-                </div>
-
-                <div className="password-display-content">
-                    <label
-                        className="label"
-                        htmlFor="passCheckbox"
-                    >パスワードを表示する
-                    </label>
-
-                    <input
-                        type="checkbox"
-                        id="passCheckbox"
-                        className="password-checkbox"
-                        defaultChecked={ passwordCheckbox }
-                        onChange={ () => { setPasswordCheckbox(!passwordCheckbox) } }
-                    />
                 </div>
 
                 <div className="register-button-content">

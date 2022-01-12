@@ -5,6 +5,8 @@ import axios from "axios";
 import { useUserContext } from "../context/User";
 import ErrorMessage from "../component/ErrorMessage";
 import URL from "../info/Url";
+import VisibilityIcon from "@material-ui/icons/Visibility";
+import VisibilityOffIcon from "@material-ui/icons/VisibilityOff";
 
 function Login() {
     // history
@@ -21,6 +23,7 @@ function Login() {
     const [inputPassword, setInputPassword]         = useState("password");
     const [switchInputType, setSwitchInputType]     = useState("password");
     const [passwordCheckbox, setPasswordCheckbox]   = useState(false);
+    const [isAutoLogin, setIsAutoLogin]             = useState(false);
     // Error message
     const [loginErrorMessage, setLoginErrorMessage] = useState("");
 
@@ -52,13 +55,16 @@ function Login() {
 
     // Login proccessing 
     const login = () => {
+        console.log("isAutoLogin");
+        console.log(isAutoLogin)
         axios[URL.login.method](URL.login.url, {
-            csrf_token: csrfToken,
-            user_info: inputUserInfo,
-            password: inputPassword,
-            withCredentials: true
+            csrf_token:    csrfToken,
+            user_info:     inputUserInfo,
+            password:      inputPassword,
+            is_auto_login: isAutoLogin
         })
         .then((res) => {
+            console.log(res)
             if(res.data.success) {
                 setUser({
                     user_id  : res.data.data.user_id,
@@ -91,32 +97,38 @@ function Login() {
                         defaultValue={ inputUserInfo }
                         onChange={ (e) => setInputUserInfo(e.target.value) }
                     />
+                    
                 </div>
 
                 <div className="input-item-content password-content">
                     <p className="title">パスワード</p>
-                    <input
-                        type={ switchInputType }
-                        className="input input-password"
-                        defaultValue={ inputPassword }
-                        onChange={ (e) => setInputPassword(e.target.value) }
-                    />
+                    <div className="input-password-content">
+                        <input
+                            type={ switchInputType }
+                            className="input input-password"
+                            defaultValue={ inputPassword }
+                            onChange={ (e) => setInputPassword(e.target.value) }
+                        />
+                        {passwordCheckbox
+                        ?<VisibilityIcon    onClick={ () => setPasswordCheckbox(prev => !prev)} />
+                        :<VisibilityOffIcon onClick={ () => setPasswordCheckbox(prev => !prev)} />
+                        }
+                    </div>
                 </div>
 
-                <div className="password-display-content">
-                    <label
-                        className="label"
-                        htmlFor="passCheckbox"
-                    >パスワードを表示する
-                    </label>
-
+                <div className="auto-login-content">
                     <input
                         type="checkbox"
-                        id="passCheckbox"
-                        className="password-checkbox"
-                        defaultChecked={ passwordCheckbox }
-                        onChange={ () => { setPasswordCheckbox(!passwordCheckbox) } }
+                        id="autoLoginCheckbox"
+                        className="checkbox"
+                        defaultValue={ isAutoLogin }
+                        onChange={ () => setIsAutoLogin(prev => !prev) }
                     />
+
+                    <label
+                        className="label"
+                        htmlFor="autoLoginCheckbox"
+                    >次回から自動ログイン</label>
                 </div>
 
                 <div className="login-button-content">

@@ -5,65 +5,97 @@ require __DIR__ . "/../../vendor/autoload.php";
 
 use Kchannel\Classes\Models\TUser;
 use Kchannel\Classes\Tool\Session;
+use Kchannel\Classes\Tool\Token;
+use Kchannel\Classes\Tool\Cookie;
 
-if($_SERVER["REQUEST_METHOD"] === "POST") {
-    // Receive data in JSON format
-    $json_posts = file_get_contents("php://input");
-    $posts      = json_decode($json_posts, true);
+if($_SERVER["REQUEST_METHOD"] !== "POST") {
+    exit;
+}
 
-    // Set received parameter
-    $csrf_token         = $posts["csrf_token"];
-    $user_id            = $posts["user_info"];
-    $mail_address       = $posts["user_info"];
-    $plaintext_password = $posts["password"];
-    
-    // Define the response array
-    $res_result = array();
-    
-    // session start
-    $session = new Session();
+// Receive data in JSON format
+$json_posts = file_get_contents("php://input");
+$posts      = json_decode($json_posts, true);
 
-    // Check csrf token
-    if(!$session->checkMatch($csrf_token, "csrf_token")) {
-        $res_result["success"]    = false;
-        $res_result["message"]    = "不正なアクセスのため、正常に処理ができませんでした。";
-        $res_result["csrf_token"] = $session->get("csrf_token");
-        echo json_encode($res_result);
-        exit;
-    }
+// check parameter
+if(!isset($posts["csrf_token"]))      exit;
+if(!isset($posts["user_info"]))       exit;
+if(!isset($posts["password"]))        exit;
+if(!isset($posts["is_auto_login"]))   exit;
 
-    // 
-    $t_user = new TUser();
-    $select_result = $t_user->selectUserInformation($user_id, $mail_address);
+// Set received parameter
+$csrf_token         = $posts["csrf_token"];
+$user_id            = $posts["user_info"];
+$mail_address       = $posts["user_info"];
+$plaintext_password = $posts["password"];
+$is_auto_login      = $posts["is_auto_login"];
 
-    // Exit if there is no user information
-    if(!$select_result["success"]) {
-        $res_result["success"] = false;
-        $res_result["message"] = "メールアドレス・ユーザIDまたはパスワードが間違っています。";
-        echo json_encode($res_result);
-        exit;
-    }
-    
-    // password check
-    if(!password_verify($plaintext_password, $select_result["data"]["password"])) {
-        $res_result["success"] = false;
-        $res_result["message"] = "メールアドレス・ユーザIDまたはパスワードが間違っています。";
-    } else {
-        // update last login date at time.
-        // TODO: Needs processing in case of failure.
-        $t_user->updateAtLogin($select_result["data"]["user_id"]);
+// Define the response array
+$res_result;
 
-        // Set session information
-        $session->regenerate();
-        $session->set("user_id", $select_result["data"]["user_id"]);
-        $session->set("user_name", $select_result["data"]["user_name"]);
+// Check csrf token
+$session = new Session();
+if(!$session->checkMatch($csrf_token, "csrf_token")) {
+    $res_result["success"]    = false;
+    $res_result["message"]    = "不正なアクセスのため、正常に処理ができませんでした。";
+    echo json_encode($res_result);
+    exit;
+}
 
-        // Set response data
-        $res_result["success"]           = true;
-        $res_result["data"]              = array();
-        $res_result["data"]["user_id"]   = $select_result["data"]["user_id"];
-        $res_result["data"]["user_name"] = $select_result["data"]["user_name"];
-    }
+// Get user user information
+$t_user = new TUser();
+list($select_count, $user_information) = $t_user->selectUserInformation($user_id, $mail_address);
+
+// Exit if there is no user information
+if($select_count <= 0) {
+    $res_result["success"] = false;
+    $res_result["message"] = "メールアドレス・ユーザIDまたはパスワードが間違っています。";
+    echo json_encode($res_result);
+    exit;
+}
+
+// password check
+$hash_password = $user_information["password"];
+if(!password_verify($plaintext_password, $hash_password)) {
+    $res_result["success"] = false;
+    $res_result["message"] = "メールアドレス・ユーザIDまたはパスワードが間違っています。";
 
     echo json_encode($res_result);
+    exit;
 }
+
+// When login is successful
+// TODO: Needs processing in case of failure.
+
+// update last login date at time.
+$t_user->updateAtLogin($user_information["user_id"]);
+
+// Set session information
+$session->regenerate();
+$session->set("user_id", $user_information["user_id"]);
+$session->set("user_name", $user_information["user_name"]);
+
+if($is_auto_login) {
+    // create auto login token
+    $t_token = new Token();
+    $auto_login_token = $t_token->autoLoginToken();
+
+    // register in DB
+    $t_user->removeAllAutoLoginToken($user_information["user_id"]);
+    $insert_count = $t_user->registrationAutoLoginToken($user_information["user_id"], $auto_login_token);
+
+    // register in cookie
+    if($insert_count > 0) {
+        $t_cookie = new Cookie();
+        $t_cookie->registrationAutoLoginToken($auto_login_token);
+    } else {
+        // HACK: add error proccess
+    }
+}
+
+// Formatting response data
+$res_result["success"]           = true;
+$res_result["data"]["user_id"]   = $user_information["user_id"];
+$res_result["data"]["user_name"] = $user_information["user_name"];
+
+
+echo json_encode($res_result);

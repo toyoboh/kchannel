@@ -6,12 +6,12 @@ import { useUserContext } from "../context/User";
 import URL from "../info/Url";
 
 function Profile() {
-    const { userId }                  = useParams();
+    const { userId }                            = useParams();
 
-    const { user, setUser }           = useUserContext();
+    const { user, setUser }                     = useUserContext();
 
-    const [userDetail, setUserDetail] = useState([]);
-    const [message, setMessage]       = useState("");
+    const [userInformation, setUserInformation] = useState([]);
+    const [message, setMessage]                 = useState("");
 
 
     useEffect(() => {
@@ -21,11 +21,12 @@ function Profile() {
             }
         })
         .then((res) => {
-            // Branch depending on whether the number of data in response data is 0
-            if(!Object.keys(res.data.data).length) {
-                setMessage(res.data.message);
+            if(res.data.success) {
+                setUserInformation(res.data.data.user_information);
+                setMessage("");
             } else {
-                setUserDetail(res.data.data);
+                setUserInformation([]);
+                setMessage(res.data.message);
             }
         })
         .catch((err) => {
@@ -61,7 +62,7 @@ function Profile() {
                 ) : (
                     <>
                         {/* Display only when user id of the logged-in user and the user id on the profile page match */}
-                        {user.user_id === userDetail.user_id &&
+                        {user.user_id === userInformation.user_id &&
                         <div className="button-content">
                             <button
                                 className="logout-button"
@@ -82,13 +83,13 @@ function Profile() {
 
                         <div className="user-main-content">
                             <div className="user-name">
-                                { userDetail.user_name }
+                                { userInformation.user_name }
                             </div>
                             <div className="user-id">
-                                @{ userDetail.user_id }
+                                @{ userInformation.user_id }
                             </div>
                             <div className="introduction">
-                                { userDetail.introduction }
+                                { userInformation.introduction }
                             </div>
                         </div>
                     </>

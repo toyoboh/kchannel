@@ -16,7 +16,7 @@ function SettingProfile() {
     // Csrf token
     const [csrfToken, setCsrfToken]                     = useState("");
     // User information
-    const [userDetail, setUserDetail]                   = useState([]);
+    const [userInformation, setUserInformation]                   = useState([]);
     // Error message
     const [existMessage, setExistMessage]               = useState("");
     const [userNameMessage, setUserNameMessage]         = useState("");
@@ -49,12 +49,13 @@ function SettingProfile() {
             }
         })
         .then((res) => {
-            if(!Object.keys(res.data.data).length) {
-                setExistMessage(res.data.message);
+            if(res.data.success) {
+                setUserInformation(  res.data.data.user_information);
+                setInputUserName(    res.data.data.user_information.user_name);
+                setInputIntroduction(res.data.data.user_information.introduction);
             } else {
-                setUserDetail(res.data.data);
-                setInputUserName(res.data.data.user_name);
-                setInputIntroduction(res.data.data.introduction);
+                setUserInformation([]);
+                setExistMessage(res.data.message);
             }
         })
         .catch((err) => {
@@ -70,7 +71,7 @@ function SettingProfile() {
         if(!validationCheck()) return;
 
         axios[URL.updateUserProfile.method](URL.updateUserProfile.url, {
-            user_id        : userDetail.user_id,
+            user_id        : userInformation.user_id,
             user_name      : inputUserName,
             introduction   : inputIntroduction,
             csrf_token     : csrfToken,
@@ -78,7 +79,7 @@ function SettingProfile() {
         })
         .then((res) => {
             if(res.data.success) {
-                history.push("/profile/" + userDetail.user_id);
+                history.push("/profile/" + userInformation.user_id);
             } else {
                 // TODO: Needs details notification to user
                 alert(res.data.message);
@@ -120,7 +121,7 @@ function SettingProfile() {
                     <>
                         <div className="button-content">
                             <button className="cancel-button">
-                                <Link to={ "/profile/" + userDetail.user_id }>
+                                <Link to={ "/profile/" + userInformation.user_id }>
                                     キャンセル
                                 </Link>
                             </button>

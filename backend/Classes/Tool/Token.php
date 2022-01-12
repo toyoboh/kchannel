@@ -14,4 +14,10 @@ class Token {
         $bytes        = random_bytes($token_length);
         return bin2hex($bytes);
     }
+
+    public function autoLoginToken() {
+        $token_length = 16;
+        $bytes        = random_bytes($token_length);
+        return bin2hex($bytes);
+    }
 }

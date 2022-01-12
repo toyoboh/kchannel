@@ -41,18 +41,10 @@ class TUser
         $database->connect();
         $stmt = $database->executeQuery($query, $use_query_item);
 
-        $row_count = $stmt->rowCount();
-
-        $user_profile         = array();
-        $user_profile["data"] = array();
-
-        if($row_count > 0) {
-            $user_profile["data"]    = $stmt->fetch();
-        } else {
-            $user_profile["message"] = "ユーザ情報が存在しません";
-        }
-
-        return $user_profile;
+        return array(
+            $stmt->rowCount(),
+            $stmt->fetch()
+        );
     }
 
     public function updateUserProfile($user_id, $user_name, $introduction) {
@@ -114,18 +106,10 @@ class TUser
         $database->connect();
         $stmt = $database->executeQuery($query, $use_query_item);
 
-        $row_count = $stmt->rowCount();
-
-        $result = array();
-
-        if($row_count > 0) {
-            $result["success"] = true;
-            $result["data"]    = $stmt->fetch();
-        } else {
-            $result["success"] = false;
-        }
-
-        return $result;
+        return array(
+            $stmt->rowCount(),
+            $stmt->fetch()
+        );
     }
 
     public function updateAtLogin($user_id) {
@@ -242,5 +226,88 @@ class TUser
         $stmt = $database->executeQuery($query, $use_query_item);
 
         return $stmt->rowCount() > 0;
+    }
+
+    /**
+     * 
+     */
+    public function removeAllAutoLoginToken($user_id) {
+        $query = "DELETE FROM
+                    t_auto_login
+                WHERE
+                    user_id = :user_id
+        ;";
+
+        $use_query_item = [
+            "user_id" => $user_id
+        ];
+
+        $database = new Database();
+        $database->connect();
+        $stmt = $database->executeQuery($query, $use_query_item);
+
+        return $stmt->rowCount();
+    }
+
+    /**
+     * 
+     */
+    public function registrationAutoLoginToken($user_id, $auto_login_token) {
+        $query = "INSERT INTO
+                    t_auto_login(
+                        user_id,
+                        auto_login_token
+                    ) VALUES (
+                        :user_id,
+                        :auto_login_token
+                    )
+        ;";
+
+        $use_query_item = [
+            "user_id" => $user_id,
+            "auto_login_token" => $auto_login_token
+        ];
+
+        $database = new Database();
+        $database->connect();
+        $stmt = $database->executeQuery($query, $use_query_item);
+
+        return $stmt->rowCount();
+    }
+
+    /**
+     * 
+     */
+    public function selectAutoLoginUserInformation($auto_login_token) {
+        $query = "SELECT
+                    TU.user_id     AS user_id,
+                    TU.user_name   AS user_name,
+                    TAL.created_at AS token_created_at
+                FROM
+                    t_auto_login TAL
+                INNER JOIN
+                    t_users      TU
+                ON
+                    TAL.user_id = TU.user_id
+                WHERE
+                    TAL.auto_login_token = :auto_login_token
+                ORDER BY
+                    TAL.created_at DESC
+                LIMIT
+                    1
+        ;";
+
+        $use_query_item = [
+            "auto_login_token" => $auto_login_token
+        ];
+
+        $database = new Database();
+        $database->connect();
+        $stmt = $database->executeQuery($query, $use_query_item);
+
+        return array(
+            $stmt->rowCount(),
+            $stmt->fetch()
+        );
     }
 }
