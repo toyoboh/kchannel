@@ -6,7 +6,7 @@
 }
 
 .login > .form {
-    border: 1px solid black;
+    box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.1);
     max-width: 800px;
     padding: 32px 16px;
     width: 90%;
@@ -18,7 +18,7 @@
 }
 
 .login > .form > .input-item-content {
-    border: 1px solid black;
+    border: 1px solid #aaa;
     border-radius: 4px;
     padding: 4px 8px;
 }
@@ -78,6 +78,7 @@
 
 .login > .form > .login-button-content > .button {
     border-radius: 4px;
+    color: #FFFFFF;
     font-size: 14px;
     letter-spacing: 0.5px;
     padding-bottom: 8px;
@@ -87,11 +88,11 @@
 }
 
 .login > .form > .login-button-content > .enable {
-    background-color: var(--main-color);
+    background-color: var(--green-a);
 }
 
 .login > .form > .login-button-content > .disable {
-    background-color: var(--base-color);
+    background-color: var(--green-b);
 }
 
 .login > .form > .error-content {

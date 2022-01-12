@@ -7,6 +7,7 @@ import ErrorMessage from "../component/ErrorMessage";
 import URL from "../info/Url";
 import VisibilityIcon from "@material-ui/icons/Visibility";
 import VisibilityOffIcon from "@material-ui/icons/VisibilityOff";
+import UILink from "../component/ui/UILink";
 
 function Login() {
     // history
@@ -132,10 +133,10 @@ function Login() {
                 </div>
 
                 <div className="login-button-content">
-                    {inputUserInfo !== "" && inputPassword ?
-                    <button className="button enable" onClick={ login }>ログイン</button>
-                    :
+                    {inputUserInfo === "" || inputPassword === "" ?
                     <button className="button disable">ログイン</button>
+                    :
+                    <button className="button enable" onClick={ login }>ログイン</button>
                     }
                 </div>
 
@@ -150,7 +151,11 @@ function Login() {
                 </p>
 
                 <p className="create-link-content">
-                    <Link to="/registerAccount">アカウントを作成する</Link>
+                    <UILink
+                        to="/registerAccount"
+                        underline="true"
+                        sizekind="small"
+                    >アカウントを作成する</UILink>
                 </p>
             </div>
         </div>

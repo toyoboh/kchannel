@@ -21,6 +21,28 @@ body {
     --error-color: #F06060;
 
     --blue: #007FFF;
+
+    --green-a: #67C23A;
+    --green-b: #d6f5c6;
+    --green-c: #F0F9EB;
+
+    --blue-a: #409EFF;
+    --blue-b: #53A8FF;
+    --blue-c: #66B1FF;
+    --blue-d: #79BBFF;
+    --blue-e: #8CC5FF;
+    --blue-f: #A0CFFF;
+    --blue-g: #B3D8FF;
+    --blue-h: #C6E2FF;
+    --blue-i: #ECF5FF;
+
+    --orange-a: #E6A23C;
+    --orange-b: #FAECD8;
+    --orange-c: #FDF6EC;
+
+    --red-a: #F56C6C;
+    --red-b: #FDE2E2;
+    --red-c: #FEF0F0;
 }
 
 @media(max-width: 480px) {

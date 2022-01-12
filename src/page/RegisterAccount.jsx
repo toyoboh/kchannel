@@ -7,6 +7,7 @@ import Validation from "../tool/Validation";
 import URL from "../info/Url";
 import VisibilityIcon from "@material-ui/icons/Visibility";
 import VisibilityOffIcon from "@material-ui/icons/VisibilityOff";
+import UILink from "../component/ui/UILink";
 
 function RegisterAccount() {
     // history
@@ -197,7 +198,11 @@ function RegisterAccount() {
                 </p>
 
                 <p className="login-link-content">
-                    <Link to="/login">アカウントをお持ちの方はこちらへ</Link>
+                    <UILink
+                        to="/login"
+                        underline="true"
+                        sizekind="small"
+                    >アカウントをお持ちの方はこちらへ</UILink>
                 </p>
             </div>
         </div>
