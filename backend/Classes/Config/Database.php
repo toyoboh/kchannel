@@ -36,14 +36,16 @@ class Database
      */
     public function getDatabaseInfo() {
         $key;
-
+        $info_file_path;
         if($_SERVER["HTTP_HOST"] === "api.kchannel.jp") {
             $key = "kchannel_db_main";
+            $info_file_path = __DIR__ . "/../../../../../kchannel/Info/info.ini";
         } else {
             $key = "kchannel_db_test";
+            $info_file_path = __DIR__ . "/../../Info/info.ini";
         }
 
-        $ini_array = parse_ini_file(__DIR__ . "/../../Info/info.ini", true);
+        $ini_array = parse_ini_file($info_file_path, true);
         $dbname    = $ini_array[$key]["db_name"];
         $host      = $ini_array[$key]["host"];
         $port      = $ini_array[$key]["port"];
