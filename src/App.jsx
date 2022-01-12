@@ -19,12 +19,15 @@ import PublicRoute from "./component/route/PublicRoute";
 import RegistrationCompleted from "./page/RegistrationCompleted";
 import TemporaryRegistrationCompleted from "./page/TemporaryRegistrationCompleted";
 import ERROR404 from "./page/ERROR404";
+import Welcome from "./page/Welcome";
 
 function App() {
     return (
         <div className="app">
             <Router>
                 <Switch>
+                    <Route exact path="/" component={ Welcome } />
+
                     <PublicRoute path="/login" component={ Login } />
 
                     <PublicRoute path="/registerAccount" component={ RegisterAccount } />
