@@ -1,5 +1,5 @@
 import React from "react";
-import { BrowserRouter as Router, Switch } from "react-router-dom";
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import "./css/App.css";
 import Header from "./component/Header";
 import Home from "./page/Home";
@@ -18,6 +18,7 @@ import PrivateRoute from "./component/route/PrivateRoute";
 import PublicRoute from "./component/route/PublicRoute";
 import RegistrationCompleted from "./page/RegistrationCompleted";
 import TemporaryRegistrationCompleted from "./page/TemporaryRegistrationCompleted";
+import ERROR404 from "./page/ERROR404";
 
 function App() {
     return (
@@ -82,6 +83,8 @@ function App() {
                         <Header />
                         <CommentList />
                     </PrivateRoute>
+
+                    <Route component={ ERROR404 } />
                 </Switch>
             </Router>
         </div>

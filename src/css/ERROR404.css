@@ -1,0 +1,36 @@
+.error404 {
+    align-items: center;
+    background-color: var(--base-color);
+    display: flex;
+    justify-content: center;
+    min-height: 100vh;
+}
+
+.error404 > .error-content {
+    margin: 0 auto;
+    max-width: 1000px;
+}
+
+.error404 > .error-content > .error-number {
+    font-size: 36px;
+    font-weight: bold;
+    margin-bottom: 36px;
+    text-align: center;
+}
+
+.error404 > .error-content > .error-title {
+    font-size: 18px;
+    text-align: center;
+}
+
+@media(max-width: 480px) {
+
+}
+
+@media(min-width: 481px) and (max-width: 1000px) {
+
+}
+
+@media(min-width: 1001px) {
+
+}
