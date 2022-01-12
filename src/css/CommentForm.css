@@ -3,6 +3,7 @@
 }
 
 .comment-form > .comment-textarea {
+    background-color: #FFF;
     border: solid 1px black;
     font-size: 16px;
     height: 150px;
