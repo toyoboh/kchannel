@@ -13,9 +13,7 @@ function LoggedInCheck() {
 
     // check if you are logged in
     useEffect(() => {
-        axios[URL.loggedInCheck.method](URL.loggedInCheck.url, {
-            withCredentials: true
-        })
+        axios[URL.loggedInCheck.method](URL.loggedInCheck.url)
         .then((res) => {
             if(res.data.success) {
                 setUser({
