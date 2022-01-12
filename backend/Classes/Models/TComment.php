@@ -96,7 +96,7 @@ class TComment
                     comments.comment_body    AS comment_body,
                     comments.created_user_id AS created_user_id,
                     users.user_name          AS created_user_name,
-                    DATE_FORMAT(comments.created_at, '%Y年%m月%d日 %H時%i分%s秒') AS created_at
+                    DATE_FORMAT(comments.created_at, '%Y/%m/%d %H:%i:%s') AS created_at
                 FROM
                     t_comments comments
                 INNER JOIN
