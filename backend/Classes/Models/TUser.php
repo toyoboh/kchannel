@@ -20,8 +20,9 @@ class TUser
 
     public function getUserProfile($user_id) {
         $query = "SELECT
-                    users.user_id AS user_id,
-                    users.user_name AS user_name,
+                    users.id             AS id,
+                    users.user_id        AS user_id,
+                    users.user_name      AS user_name,
                     details.introduction AS introduction
                 FROM
                     t_users users
@@ -47,22 +48,22 @@ class TUser
         );
     }
 
-    public function updateUserProfile($user_id, $user_name, $introduction) {
+    public function updateUserProfile($id, $user_name, $introduction) {
         $query = "UPDATE
-                    t_users users
+                    t_users        users
                 INNER JOIN
                     t_user_details details
                 ON
-                    users.user_id = details.user_id
+                    users.id = details.id
                 SET
-                    users.user_name = :user_name,
+                    users.user_name      = :user_name,
                     details.introduction = :introduction
                 WHERE
-                    users.user_id = :user_id
+                    users.id = :id
         ;";
 
         $use_query_item = [
-            "user_id"      => $user_id,
+            "id"           => $id,
             "user_name"    => $user_name,
             "introduction" => $introduction
         ];
@@ -71,21 +72,12 @@ class TUser
         $database->connect();
         $stmt = $database->executeQuery($query, $use_query_item);
 
-        $row_count = $stmt->rowCount();
-
-        $result = array();
-        if($row_count >= 1) {
-            $result["success"] = true;
-        } else {
-            $result["success"] = false;
-            $result["message"] = "変更箇所がないため更新されませんでした。もしくはシステムエラー。";
-        }
-
-        return $result;
+        return $stmt->rowCount();
     }
 
     public function selectUserInformation($user_id, $mail_address) {
         $query = "SELECT
+                    id,
                     user_id,
                     user_name,
                     password
@@ -112,30 +104,24 @@ class TUser
         );
     }
 
-    public function updateAtLogin($user_id) {
+    public function updateAtLogin($id) {
         $query = "UPDATE
                     t_users
                 SET
                     last_login_at = CURRENT_TIMESTAMP()
                 WHERE
-                    user_id = :user_id
+                    id = :id
         ;";
 
         $use_query_item = [
-            "user_id" => $user_id
+            "id" => $id
         ];
 
         $database = new Database();
         $database->connect();
         $stmt = $database->executeQuery($query, $use_query_item);
 
-        $row_count = $stmt->rowCount();
-
-        if($row_count >= 1) {
-            return true;
-        } else {
-            return false;
-        }
+        return $stmt->rowCount();
     }
 
     /**
@@ -231,15 +217,15 @@ class TUser
     /**
      * 
      */
-    public function removeAllAutoLoginToken($user_id) {
+    public function removeAllAutoLoginToken($id) {
         $query = "DELETE FROM
                     t_auto_login
                 WHERE
-                    user_id = :user_id
+                    created_user_id = :id
         ;";
 
         $use_query_item = [
-            "user_id" => $user_id
+            "created_user_id" => $id
         ];
 
         $database = new Database();
@@ -252,19 +238,19 @@ class TUser
     /**
      * 
      */
-    public function registrationAutoLoginToken($user_id, $auto_login_token) {
+    public function registrationAutoLoginToken($id, $auto_login_token) {
         $query = "INSERT INTO
                     t_auto_login(
-                        user_id,
+                        created_user_id,
                         auto_login_token
                     ) VALUES (
-                        :user_id,
+                        :created_user_id,
                         :auto_login_token
                     )
         ;";
 
         $use_query_item = [
-            "user_id" => $user_id,
+            "created_user_id"  => $id,
             "auto_login_token" => $auto_login_token
         ];
 

@@ -56,8 +56,6 @@ function Login() {
 
     // Login proccessing 
     const login = () => {
-        console.log("isAutoLogin");
-        console.log(isAutoLogin)
         axios[URL.login.method](URL.login.url, {
             csrf_token:    csrfToken,
             user_info:     inputUserInfo,
@@ -65,9 +63,9 @@ function Login() {
             is_auto_login: isAutoLogin
         })
         .then((res) => {
-            console.log(res)
             if(res.data.success) {
                 setUser({
+                    id       : res.data.data.id,
                     user_id  : res.data.data.user_id,
                     user_name: res.data.data.user_name,
                     is_auth  : true

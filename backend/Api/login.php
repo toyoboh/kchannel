@@ -45,7 +45,7 @@ if(!$session->checkMatch($csrf_token, "csrf_token")) {
 $t_user = new TUser();
 list($select_count, $user_information) = $t_user->selectUserInformation($user_id, $mail_address);
 
-// Exit if there is no user information
+// If there is no user information
 if($select_count <= 0) {
     $res_result["success"] = false;
     $res_result["message"] = "メールアドレス・ユーザIDまたはパスワードが間違っています。";
@@ -67,12 +67,17 @@ if(!password_verify($plaintext_password, $hash_password)) {
 // TODO: Needs processing in case of failure.
 
 // update last login date at time.
-$t_user->updateAtLogin($user_information["user_id"]);
+$id        = $user_information["id"];
+$user_id   = $user_information["user_id"];
+$user_name = $user_information["user_name"];
+
+$t_user->updateAtLogin($id);
 
 // Set session information
 $session->regenerate();
-$session->set("user_id", $user_information["user_id"]);
-$session->set("user_name", $user_information["user_name"]);
+$session->set("id"       , $id);
+$session->set("user_id"  , $user_id);
+$session->set("user_name", $user_name);
 
 if($is_auto_login) {
     // create auto login token
@@ -80,8 +85,8 @@ if($is_auto_login) {
     $auto_login_token = $t_token->autoLoginToken();
 
     // register in DB
-    $t_user->removeAllAutoLoginToken($user_information["user_id"]);
-    $insert_count = $t_user->registrationAutoLoginToken($user_information["user_id"], $auto_login_token);
+    $t_user->removeAllAutoLoginToken($id);
+    $insert_count = $t_user->registrationAutoLoginToken($id, $auto_login_token);
 
     // register in cookie
     if($insert_count > 0) {
@@ -94,8 +99,9 @@ if($is_auto_login) {
 
 // Formatting response data
 $res_result["success"]           = true;
-$res_result["data"]["user_id"]   = $user_information["user_id"];
-$res_result["data"]["user_name"] = $user_information["user_name"];
+$res_result["data"]["id"]        = $id;
+$res_result["data"]["user_id"]   = $user_id;
+$res_result["data"]["user_name"] = $user_name;
 
 
 echo json_encode($res_result);

@@ -50,8 +50,10 @@ function SettingProfile() {
         })
         .then((res) => {
             if(res.data.success) {
-                setUserInformation(  res.data.data.user_information);
-                setInputUserName(    res.data.data.user_information.user_name);
+                setUserInformation(res.data.data.user_information);
+
+                // input items default value
+                setInputUserName(res.data.data.user_information.user_name);
                 setInputIntroduction(res.data.data.user_information.introduction);
             } else {
                 setUserInformation([]);
@@ -71,11 +73,10 @@ function SettingProfile() {
         if(!validationCheck()) return;
 
         axios[URL.updateUserProfile.method](URL.updateUserProfile.url, {
-            user_id        : userInformation.user_id,
+            id             : userInformation.id,
             user_name      : inputUserName,
             introduction   : inputIntroduction,
-            csrf_token     : csrfToken,
-            withCredentials: true
+            csrf_token     : csrfToken
         })
         .then((res) => {
             if(res.data.success) {

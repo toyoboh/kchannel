@@ -22,21 +22,24 @@ $res_result["data"] = array();
 // check csrf token
 $session = new Session();
 if(!$session->checkMatch($csrf_token, "csrf_token")) {
-    $res_result["data"]["item"] = array();
-    $res_result["message"]      = "不正なアクセスのため、正常に処理ができませんでした。";
+    $res_result["message"]            = "不正なアクセスのため、正常に処理ができませんでした。";
+    $res_result["data"]["categories"] = array();
     echo json_encode($res_result);
     exit;
 }
 
 // search category
 $t_category = new TCategory();
-list($row_count, $categories) = $t_category->search($search_word);
+list($select_count, $categories) = $t_category->search($search_word);
 
-if($row_count > 0) {
-    $res_result["data"]["item"] = $categories;
+if($select_count > 0) {
+    $res_result["success"]            = true;
+    $res_result["message"]            = "";
+    $res_result["data"]["categories"] = $categories;
 } else {
-    $res_result["data"]["item"] = array();
-    $res_result["message"]      = "「{$search_word}」の検索結果はありません。";
+    $res_result["success"]            = false;
+    $res_result["message"]            = "「{$search_word}」の検索結果はありません。";
+    $res_result["data"]["categories"] = array();
 }
 
 echo json_encode($res_result);

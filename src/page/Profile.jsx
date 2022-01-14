@@ -40,6 +40,7 @@ function Profile() {
         .then((res) => {
             if(res.data.success) {
                 setUser({
+                    id       : 0,
                     user_id  : "",
                     user_name: "",
                     is_auth  : false
@@ -86,7 +87,7 @@ function Profile() {
                                 { userInformation.user_name }
                             </div>
                             <div className="user-id">
-                                @{ userInformation.user_id }
+                                { userInformation.user_id }
                             </div>
                             <div className="introduction">
                                 { userInformation.introduction }

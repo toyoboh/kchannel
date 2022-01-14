@@ -15,29 +15,31 @@ if($_SERVER["REQUEST_METHOD"] !== "POST") {
 $session = new Session();
 
 // セッション情報もクッキー情報もない人、何もせずに終了（オートログイン機能をしようしない人）
-if(!$session->checkExists("user_id") && !isset($_COOKIE["auto_login_token"])) {
+if(!$session->checkExists("id") && !isset($_COOKIE["auto_login_token"])) {
     $res_result["success"] = false;
     echo json_encode($res_result);
     exit;
 }
 
 // セッション情報はあるがクッキー情報がない人、セッションIDを再発行して、ユーザ情報を返して終了（オートログイン機能を使用しない人）
-if($session->checkExists("user_id") && !isset($_COOKIE["auto_login_token"])) {
+if($session->checkExists("id") && !isset($_COOKIE["auto_login_token"])) {
     //session id再発行
     $session->regenerate();
 
     // get session data
-    $user_id = $session->get("user_id");
+    $id        = $session->get("id");
+    $user_id   = $session->get("user_id");
     $user_name = $session->get("user_name");
 
     // response data
     $res_result["success"]           = true;
+    $res_result["data"]["id"]        = $id;
     $res_result["data"]["user_id"]   = $user_id;
     $res_result["data"]["user_name"] = $user_name;
     
     // update last login date at time.
     $t_user = new TUser();
-    $t_user->updateAtLogin($user_id);
+    $t_user->updateAtLogin($id);
 
     // returns
     echo json_encode($res_result);
@@ -45,27 +47,28 @@ if($session->checkExists("user_id") && !isset($_COOKIE["auto_login_token"])) {
 }
 
 // セッション情報もクッキー情報もある人、セッションIDを再発行、DBのトークン削除、新規トークンを登録（DBとcookie）、ユーザ情報を返して終了（オートログイン使用する人）
-if($session->checkExists("user_id") && isset($_COOKIE["auto_login_token"])) {
+if($session->checkExists("id") && isset($_COOKIE["auto_login_token"])) {
     // session id再発行
     $session->regenerate();
 
     // get user information
+    $id        = $session->get("id");
     $user_id   = $session->get("user_id");
     $user_name = $session->get("user_name");
 
     // update last login date at time.
     $t_user = new TUser();
-    $t_user->updateAtLogin($user_id);
+    $t_user->updateAtLogin($id);
 
     // DBのトークン削除
-    $t_user->removeAllAutoLoginToken($user_id);
+    $t_user->removeAllAutoLoginToken($id);
 
     // 新しいトークンの作成
     $t_token          = new Token();
     $auto_login_token = $t_token->autoLoginToken();
 
     // DBへの新規トークン登録
-    $insert_count = $t_user->registrationAutoLoginToken($user_id, $auto_login_token);
+    $insert_count = $t_user->registrationAutoLoginToken($id, $auto_login_token);
 
     // Cookieへの新規トークン登録
     if($insert_count > 0) {
@@ -75,6 +78,7 @@ if($session->checkExists("user_id") && isset($_COOKIE["auto_login_token"])) {
     
     // response data
     $res_result["success"] = true;
+    $res_result["data"]["id"]        = $id;
     $res_result["data"]["user_id"]   = $user_id;
     $res_result["data"]["user_name"] = $user_name;
 
@@ -86,7 +90,7 @@ if($session->checkExists("user_id") && isset($_COOKIE["auto_login_token"])) {
 // セッション情報はないがクッキー情報はある人、
 // セッション情報がある時点で直近でログインしたと思われるので、クッキーの期限確認は不要
 // 上記はまちがい！！！端末の時間設定がおかしい可能性もあるので、DBのcreate_atを見る必要がある
-if(!$session->checkExists("user_id") && isset($_COOKIE["auto_login_token"])) {
+if(!$session->checkExists("id") && isset($_COOKIE["auto_login_token"])) {
     // get auto_login_token of the cookie
     $browser_auto_login_token = $_COOKIE["auto_login_token"];
 
@@ -102,6 +106,7 @@ if(!$session->checkExists("user_id") && isset($_COOKIE["auto_login_token"])) {
     }
 
     // set user information
+    $id               = $user_information["id"];
     $user_id          = $user_information["user_id"];
     $user_name        = $user_information["user_name"];
     $token_created_at = $user_information["token_created_at"];
@@ -120,17 +125,17 @@ if(!$session->checkExists("user_id") && isset($_COOKIE["auto_login_token"])) {
     }
 
     // update last login date at time.
-    $t_user->updateAtLogin($user_id);
+    $t_user->updateAtLogin($id);
 
-    // Remove all tokens held by the user ID
-    $t_user->removeAllAutoLoginToken($user_id);
+    // Remove all tokens held by the ID
+    $t_user->removeAllAutoLoginToken($id);
     
     // 新しいトークンの作成
     $t_token          = new Token();
     $auto_login_token = $t_token->autoLoginToken();
     
     // DBへの新規トークン登録
-    $insert_count = $t_user->registrationAutoLoginToken($user_id, $auto_login_token);
+    $insert_count = $t_user->registrationAutoLoginToken($id, $auto_login_token);
     
     // Cookieへの新規トークン登録
     if($insert_count > 0) {
@@ -140,11 +145,13 @@ if(!$session->checkExists("user_id") && isset($_COOKIE["auto_login_token"])) {
     
     // set session
     $session->regenerate();
+    $session->set("id", $user_id);
     $session->set("user_id", $user_id);
     $session->set("user_name", $user_name);
     
     // formatting response data
     $res_result["success"]           = true;
+    $res_result["data"]["id"]        = $id;
     $res_result["data"]["user_id"]   = $user_id;
     $res_result["data"]["user_name"] = $user_name;
 

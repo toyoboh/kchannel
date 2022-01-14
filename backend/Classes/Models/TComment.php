@@ -32,7 +32,7 @@ class TComment
             INNER JOIN
                 t_users users
             ON
-                comments.created_user_id = users.user_id
+                comments.created_user_id = users.id
             WHERE
                 CAST(comments.thread_id AS CHAR) = :thread_id
             ORDER BY
@@ -53,15 +53,7 @@ class TComment
         );
     }
 
-    public function create($user_id, $thread_id, $comment_body) {
-        // Response result array
-        $result = array();
-
-        // Define user id
-        $created_user_id = $user_id;
-        $updated_user_id = $user_id;
-
-        //query
+    public function create($id, $thread_id, $comment_body) {
         $query = "INSERT INTO
                     t_comments(
                         thread_id,
@@ -79,8 +71,8 @@ class TComment
         $use_query_item = [
             "thread_id" => $thread_id,
             "comment_body" => $comment_body,
-            "created_user_id" => $created_user_id,
-            "updated_user_id" => $updated_user_id
+            "created_user_id" => $id,
+            "updated_user_id" => $id
         ];
 
         $database = new Database();
@@ -102,7 +94,7 @@ class TComment
                 INNER JOIN
                     t_users users
                 ON
-                    comments.created_user_id = users.user_id
+                    comments.created_user_id = users.id
                 WHERE
                     CAST(comments.thread_id AS CHAR) = :thread_id
                 AND

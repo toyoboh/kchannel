@@ -87,9 +87,8 @@ function CreateBoard() {
             category_id      : categoryInformation.category_id,
             board_name       : inputBoardName,
             board_explanation: inputBoardExplanation,
-            user_id          : user.user_id,
-            csrf_token       : csrfToken,
-            withCredentials  : true
+            id               : user.id,
+            csrf_token       : csrfToken
         })
         .then((res) => {
             if(res.data.success) {

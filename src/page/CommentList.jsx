@@ -65,7 +65,6 @@ function CommentList() {
             }
         })
         .then((res) => {
-            // It's true if thread information exist.
             if(res.data.success) {
                 setThreadExists(true);
 
@@ -127,7 +126,7 @@ function CommentList() {
             csrf_token  : csrfToken,
             thread_id   : threadId,
             comment_body: inputComment,
-            user_id     : user.user_id
+            id          : user.id
         })
         .then((res) => {
             if(res.data.success) {
@@ -178,14 +177,14 @@ function CommentList() {
      * HACK: 
      * Get the "comment id" of the last comment currently displayed
      */
-         const searchLastCommentId = () => {
-            let lastCommentId = 0
-            if(commentCount > 0) {
-                const commentNum = comments.length;
-                lastCommentId = comments[commentNum - 1].comment_id;
-            }
-            return lastCommentId;
+    const searchLastCommentId = () => {
+        let lastCommentId = 0
+        if(commentCount > 0) {
+            const commentNum = comments.length;
+            lastCommentId    = comments[commentNum - 1].comment_id;
         }
+        return lastCommentId;
+    }
 
     /**
      * @returns {boolean}

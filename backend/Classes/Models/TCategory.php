@@ -38,19 +38,10 @@ class TCategory
         $database->connect();
         $stmt = $database->executeQuery($query);
 
-        $row_count = $stmt->rowCount();
-        
-        $category = array();
-        $category["data"] = array();
-
-        if($row_count > 0) {
-            $category["data"]["item"] = $stmt->fetchAll();
-        } else {
-            $category["data"]["item"] = array();
-            $category["message"] = "カテゴリーは現在未登録です。";
-        }
-
-        return $category;
+        return array(
+            $stmt->rowCount(),
+            $stmt->fetchAll()
+        );
     }
 
     /**
@@ -114,19 +105,11 @@ class TCategory
     }
 
     /**
-     * create category
-     * @param string $user_id
-     * @param string $category_name
-     * @return array
+     * Check if the same name already exists.
+     * @param  string $category_name
+     * @return integer
      */
-    public function create($user_id, $category_name) {
-        // result array
-        $result = array();
-
-        $created_user_id = $user_id;
-        $updated_user_id = $user_id;
-
-        // exists check
+    public function checkSameNameExists($category_name) {
         $select_sql = "SELECT
                         category_id,
                         category_name
@@ -141,17 +124,19 @@ class TCategory
 
         $database = new Database();
         $database->connect();
-        $select_stmt = $database->executeQuery($select_sql, $select_query_item);
+        $stmt = $database->executeQuery($select_sql, $select_query_item);
 
-        $select_row_count = $select_stmt->rowCount();
+        return $stmt->rowCount();
+    }
 
-        if($select_row_count >= 1) {
-            $result["message"] = "同名のカテゴリが存在しているため、登録できませんでした。";
-            $result["success"] = false;
-            return $result;
-        }
-
-        $insert_sql = "INSERT INTO
+    /**
+     * create category
+     * @param  integer $id
+     * @param  string  $category_name
+     * @return integer
+     */
+    public function create($id, $category_name) {
+        $query = "INSERT INTO
                         t_categories(
                             category_name,
                             created_user_id,
@@ -163,25 +148,23 @@ class TCategory
                         :updated_user_id
                     )
         ;";
-        $insert_query_item = [
+        $use_query_item = [
             "category_name" => $category_name,
-            "created_user_id" => $created_user_id,
-            "updated_user_id" => $updated_user_id
+            "created_user_id" => $id,
+            "updated_user_id" => $id
         ];
 
-        $insert_stmt = $database->executeQuery($insert_sql, $insert_query_item);
-        $insert_row_count = $insert_stmt->rowCount();
-
-        if($insert_row_count >= 1) {
-            $result["success"] = true;
-        } else {
-            $result["message"] = "システムエラー。正常にカテゴリーを登録することができませんでした。";
-            $result["success"] = false;
-        }
-
-        return $result;
+        $database = new Database();
+        $database->connect();
+        $stmt = $database->executeQuery($query, $use_query_item);
+        
+        return $stmt->rowCount();
     }
 
+    /**
+     * @param  mixed $word search word
+     * @return array
+     */
     public function search($word) {
         $query = "SELECT
                     categories.category_id    AS category_id,
@@ -207,9 +190,9 @@ class TCategory
         $database->connect();
         $stmt = $database->executeQuery($query, $use_query_item);
 
-        $row_count  = $stmt->rowCount();
-        $categories = $stmt->fetchAll();
-
-        return array($row_count, $categories);
+        return array(
+            $stmt->rowCount(),
+            $stmt->fetchAll()
+        );
     }
 }

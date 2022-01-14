@@ -11,14 +11,16 @@ import SearchIcon from "@material-ui/icons/Search";
 
 function CategoryList() {
     // state
+    // initail loaging
+    const [initialLoading, setInitialLoading] = useState(true);
     // csrf token
-    const [csrfToken, setCsrfToken] = useState("");
+    const [csrfToken, setCsrfToken]           = useState("");
     // search word
-    const [searchWord, setSearchWord] = useState("");
+    const [searchWord, setSearchWord]         = useState("");
     // Message when there is no category
-    const [message, setMessage] = useState("");
+    const [message, setMessage]               = useState("");
     // Database category infomation
-    const [categories, setCategories] = useState([]);
+    const [categories, setCategories]         = useState([]);
 
     // Set csrf token
     useEffect(() => {
@@ -40,11 +42,13 @@ function CategoryList() {
     useEffect(() => {
         axios[URL.categoryList.method](URL.categoryList.url)
         .then((res) => {
-            if(res.data.data.item.length > 0) {
-                setCategories(res.data.data.item);
+            if(res.data.success) {
+                setCategories(res.data.data.categories);
+                setMessage("");
             } else {
                 setMessage(res.data.message);
             }
+            setInitialLoading(false);
         })
         .catch((err) => {
             console.log(err);
@@ -59,8 +63,8 @@ function CategoryList() {
             }
         })
         .then((res) => {
-            if(res.data.data.item.length > 0) {
-                setCategories(res.data.data.item);
+            if(res.data.success) {
+                setCategories(res.data.data.categories);
                 setMessage("");
             } else {
                 setMessage(res.data.message);
@@ -91,6 +95,11 @@ function CategoryList() {
     return(
         <div className="category-list">
             <div className="wrapper">
+                
+                {initialLoading ? (
+                <div>Now initial loading</div>
+                ) : (<>
+
                 <div className="title-content">
                     <PageTitle Icon={ CategoryIcon } title="カテゴリー" />
                 </div>
@@ -115,6 +124,8 @@ function CategoryList() {
                 <div className="body-content">
                     { categoryContent }
                 </div>
+                
+                </>)}
             </div>
         </div>
     )

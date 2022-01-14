@@ -14,7 +14,7 @@ if($_SERVER["REQUEST_METHOD"] !== "GET" || !isset($_GET["user_id"])) {
 $user_id = $_GET["user_id"];
 
 // get user information
-$t_user       = new TUser();
+$t_user = new TUser();
 list($select_count, $user_information) = $t_user->getUserProfile($user_id);
 
 // Formatting response data

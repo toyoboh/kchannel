@@ -15,10 +15,12 @@ function LoggedInCheck() {
     useEffect(() => {
         axios[URL.loggedInCheck.method](URL.loggedInCheck.url)
         .then((res) => {
+            console.log(res)
             if(res.data.success) {
                 setUser({
+                    id       : res.data.data.id,
                     user_id  : res.data.data.user_id,
-                    user_name: res.data.data.user_name,
+                    user_name: res.data.data.user_name, 
                     is_auth  : true
                 });
             }

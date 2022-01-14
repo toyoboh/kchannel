@@ -89,11 +89,11 @@ function CreateThread() {
             board_id          : boardId,
             thread_name       : inputThreadName,
             thread_explanation: inputThreadExplanation,
-            user_id           : user.user_id,
-            csrf_token        : csrfToken,
-            withCredentials   : true
+            id                : user.id,
+            csrf_token        : csrfToken
         })
         .then((res) => {
+            console.log(res)
             if(res.data.success) {
                 history.push(`/threadList/${boardInformation.board_id}`);
             } else {
@@ -132,75 +132,73 @@ function CreateThread() {
                     <PageTitle Icon={ DescriptionIcon } title="スレッド作成" />
                 </div>
 
-                {existsMessage !== "" ? (
-                    <>
-                        {/* Content on Error */}
-                        <div>
-                            <p>{ existsMessage }</p>
-                            <p><Link to="/categoryList">カテゴリー一覧に戻る</Link></p>
-                        </div>
-                    </>
-                ) : (
-                    <>
+                {existsMessage !== "" ? (<>
+                {/* Content on Error */}
+                <div>
+                    <p>{ existsMessage }</p>
+                    <p><Link to="/categoryList">カテゴリー一覧に戻る</Link></p>
+                </div>
 
-                        <div className="back-link-content">
-                            <BackLink
-                                path={ `/threadList/${boardInformation.board_id}` }
-                                title="戻る"
-                            />
-                        </div>
+                </>) : (<>
 
-                        <div className="rule-content">
-                            <CreateRule
-                                title="注意"
-                                body="登録する際は、一覧画面にて類似したものがないことを確認してください。"
-                            />
-                        </div>
+                <div className="back-link-content">
+                    <BackLink
+                        path={ `/threadList/${boardInformation.board_id}` }
+                        title="戻る"
+                    />
+                </div>
 
-                        <div className="parent-name-content">
-                            <CreatePageParentName
-                                title="掲示板名"
-                                name={ boardInformation.board_name }
-                            />
-                        </div>
+                <div className="rule-content">
+                    <CreateRule
+                        title="注意"
+                        body="登録する際は、一覧画面にて類似したものがないことを確認してください。"
+                    />
+                </div>
 
-                        <div className="form-content">
-                            <div className="name-content">
-                                <div className="form-item-title">スレッド名</div>
+                <div className="parent-name-content">
+                    <CreatePageParentName
+                        title="掲示板名"
+                        name={ boardInformation.board_name }
+                    />
+                </div>
 
-                                <InputPlusButton
-                                    value={ inputThreadName }
-                                    changeFunction={ setInputThreadName }
-                                    buttonFunction={ createThread }
-                                    Icon={ BorderColorIcon }
-                                />
+                <div className="form-content">
+                    <div className="name-content">
+                        <div className="form-item-title">スレッド名</div>
 
-                                {/* Show only if the message is not an empty string. */}
-                                {threadNameMessage !== "" &&
-                                    <div className="error-content">
-                                        <ErrorMessage text={ threadNameMessage } />
-                                    </div>
-                                }
+                        <InputPlusButton
+                            value={ inputThreadName }
+                            changeFunction={ setInputThreadName }
+                            buttonFunction={ createThread }
+                            Icon={ BorderColorIcon }
+                        />
+
+                        {/* Show only if the message is not an empty string. */}
+                        {threadNameMessage !== "" &&
+                            <div className="error-content">
+                                <ErrorMessage text={ threadNameMessage } />
                             </div>
+                        }
+                    </div>
 
-                            <div className="explanation-content">
-                                <div className="form-item-title">説明</div>
-                                
-                                <ExplanationForm
-                                    value={ inputThreadExplanation }
-                                    changeFunction={ setInputThreadExplanation }
-                                />
+                    <div className="explanation-content">
+                        <div className="form-item-title">説明</div>
+                        
+                        <ExplanationForm
+                            value={ inputThreadExplanation }
+                            changeFunction={ setInputThreadExplanation }
+                        />
 
-                                {threadExplanationMessage !== "" &&
-                                    <div className="error-content">
-                                        <ErrorMessage text={ threadExplanationMessage } />
-                                    </div>
-                                }
+                        {threadExplanationMessage !== "" &&
+                            <div className="error-content">
+                                <ErrorMessage text={ threadExplanationMessage } />
                             </div>
+                        }
+                    </div>
 
-                        </div>
-                    </>
-                )}
+                </div>
+                </>)}
+                
             </div>
         </div>
     )

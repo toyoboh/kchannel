@@ -14,15 +14,15 @@ $posts      = json_decode($json_posts, true);
 
 // Check for the existence of parameters
 if(!isset($posts["csrf_token"]))   exit;
-if(!isset($posts["user_id"]))      exit;
+if(!isset($posts["id"]))           exit;
 if(!isset($posts["thread_id"]))    exit;
 if(!isset($posts["comment_body"])) exit;
 
 // Set received parameter
-$csrf_token         = $posts["csrf_token"];
-$user_id            = $posts["user_id"];
-$thread_id          = $posts["thread_id"];
-$comment_body       = $posts["comment_body"];
+$csrf_token   = $posts["csrf_token"];
+$id           = $posts["id"];
+$thread_id    = $posts["thread_id"];
+$comment_body = $posts["comment_body"];
 
 // Define the response array
 $res_result = array();
@@ -40,7 +40,7 @@ if(!$session->checkMatch($csrf_token, "csrf_token")) {
 
 // Register the new Comment
 $t_comment = new TComment();
-$create_count = $t_comment->create($user_id, $thread_id, $comment_body);
+$create_count = $t_comment->create($id, $thread_id, $comment_body);
 
 if($create_count > 0) {
     $res_result["success"] = true;

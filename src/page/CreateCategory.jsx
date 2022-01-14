@@ -54,9 +54,8 @@ function CreateCategory() {
         
         axios[URL.createCategory.method](URL.createCategory.url, {
             category_name  : inputCategoryName,
-            user_id        : user.user_id,
-            csrf_token     : csrfToken,
-            withCredentials: true
+            id             : user.id,
+            csrf_token     : csrfToken
         })
         .then((res) => {
             if(res.data.success) {

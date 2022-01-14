@@ -55,11 +55,11 @@ const URL = hostName.indexOf(domain) > -1 ?
         method: "get",
         url   : "https://api.kchannel.jp/backend/Api/selectNewComment.php"
     },
-    createCategory: {
+    createCategory: { // param: category_name, id(t_users), csrf_token
         method: "post",
         url   : "https://api.kchannel.jp/backend/Api/createCategory.php"
     },
-    createBoard: { // param: category_id, board_name, board_explanation, user_id, csrf_token
+    createBoard: { // param: category_id, board_name, board_explanation, id, csrf_token
         method: "post",
         url: "https://api.kchannel.jp/backend/Api/createBoard.php"
     },
@@ -79,7 +79,7 @@ const URL = hostName.indexOf(domain) > -1 ?
         method: "get",
         url   : "https://api.kchannel.jp/backend/Api/userProfile.php"
     },
-    updateUserProfile: { // param: user_id, user_name, introduction, csrf_token
+    updateUserProfile: { // param: id, user_name, introduction, csrf_token
         method: "post",
         url   : "https://api.kchannel.jp/backend/Api/updateUserProfile.php"
     },
@@ -156,11 +156,11 @@ const URL = hostName.indexOf(domain) > -1 ?
         method: "get",
         url   : "http://localhost:49002/backend/Api/selectNewComment.php"
     },
-    createCategory: {
+    createCategory: { // param: category_name, id(t_users), csrf_token
         method: "post",
         url   : "http://localhost:49002/backend/Api/createCategory.php"
     },
-    createBoard: { // param: category_id, board_name, board_explanation, user_id, csrf_token
+    createBoard: { // param: category_id, board_name, board_explanation, id, csrf_token
         method: "post",
         url: "http://localhost:49002/backend/Api/createBoard.php"
     },
@@ -180,7 +180,7 @@ const URL = hostName.indexOf(domain) > -1 ?
         method: "get",
         url   : "http://localhost:49002/backend/Api/userProfile.php"
     },
-    updateUserProfile: { // param: user_id, user_name, introduction, csrf_token
+    updateUserProfile: { // param: id, user_name, introduction, csrf_token
         method: "post",
         url   : "http://localhost:49002/backend/Api/updateUserProfile.php"
     },

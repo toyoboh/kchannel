@@ -63,13 +63,13 @@ class TThread
                 threads.thread_explanation                            AS thread_explanation,
                 threads.created_user_id                               AS created_user_id,
                 users.user_name                                       AS created_user_name,
-                DATE_FORMAT(threads.created_at, '%Y/%m/%d %H:%i:%s') AS created_at
+                DATE_FORMAT(threads.created_at, '%Y/%m/%d %H:%i:%s')  AS created_at
             FROM
                 t_threads threads
             INNER JOIN
                 t_users   users
             ON
-                threads.created_user_id         = users.user_id
+                threads.created_user_id         = users.id
             WHERE
                 CAST(threads.thread_id AS CHAR) = :thread_id
         ;";
@@ -134,55 +134,48 @@ class TThread
     }
 
     /**
-     * create thread
-     * @param string  $user_id
-     * @param integer $board_id
-     * @param string  $thread_name
-     * @param string  $thread_explanation
-     * @return array
+     * Check if the same name already exists.
+     * @param 
      */
-    public function create($user_id, $board_id, $thread_name, $thread_explanation) {
-        // Response result array
-        $result = array();
-
-        // Define user id
-        $created_user_id = $user_id;
-        $updated_user_id = $user_id;
-
-        // Exists check
-        $select_sql = "SELECT
-                        boards.board_id,
-                        threads.thread_id,
-                        threads.thread_name
-                    FROM
-                        t_boards  boards
-                    INNER JOIN
-                        t_threads threads
-                    ON
-                        boards.board_id     = threads.board_id
-                    WHERE
-                        boards.board_id     = :board_id
-                    AND
-                        threads.thread_name = :thread_name
+    public function checkSameNameExists($board_id, $thread_name) {
+        $query = "SELECT
+                boards.board_id,
+                threads.thread_id,
+                threads.thread_name
+            FROM
+                t_boards  boards
+            INNER JOIN
+                t_threads threads
+            ON
+                boards.board_id     = threads.board_id
+            WHERE
+                boards.board_id     = :board_id
+            AND
+                threads.thread_name = :thread_name
         ;";
-        $select_query_item = [
-            "board_id" => $board_id,
+
+        $use_query_item = [
+            "board_id"     => $board_id,
             "thread_name"  => $thread_name
         ];
 
         $database = new Database();
         $database->connect();
-        $select_stmt = $database->executeQuery($select_sql, $select_query_item);
+        $stmt = $database->executeQuery($query, $use_query_item);
 
-        $select_row_count = $select_stmt->rowCount();
+        return $stmt->rowCount();
+    }
 
-        if($select_row_count >= 1) {
-            $result["message"] = "同名のカテゴリが存在しているため、登録できませんでした。";
-            $result["success"] = false;
-            return $result;
-        }
-
-        $insert_sql = "INSERT INTO
+    /**
+     * create thread
+     * @param  integer $id
+     * @param  integer $board_id
+     * @param  string  $thread_name
+     * @param  string  $thread_explanation
+     * @return integer
+     */
+    public function create($id, $board_id, $thread_name, $thread_explanation) {
+        $query = "INSERT INTO
                         t_threads(
                             board_id,
                             thread_name,
@@ -198,25 +191,19 @@ class TThread
                         :updated_user_id
                     )
         ;";
-        $insert_query_item = [
-            "board_id"       => $board_id,
+        $use_query_item = [
+            "board_id"           => $board_id,
             "thread_name"        => $thread_name,
             "thread_explanation" => $thread_explanation,
-            "created_user_id"   => $created_user_id,
-            "updated_user_id"   => $updated_user_id
+            "created_user_id"    => $id,
+            "updated_user_id"    => $id
         ];
 
-        $insert_stmt = $database->executeQuery($insert_sql, $insert_query_item);
-        $insert_row_count = $insert_stmt->rowCount();
+        $database = new Database();
+        $database->connect();
+        $stmt = $database->executeQuery($query, $use_query_item);
 
-        if($insert_row_count >= 1) {
-            $result["success"] = true;
-        } else {
-            $result["message"] = "システムエラー。正常にカテゴリーを登録することができませんでした。";
-            $result["success"] = false;
-        }
-
-        return $result;
+        return $stmt->rowCount();
     }
 
     public function search($word, $id) {
