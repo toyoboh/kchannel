@@ -7,58 +7,65 @@ use Kchannel\Classes\Models\TCategory;
 use Kchannel\Classes\Models\TBoard;
 use Kchannel\Classes\Models\TThread;
 
-// Executed only when the category_id is received by GET METHOD
-// When there is the board:    return
-//                             $board["data"]["item"]
-// When there is no the board: return
-//                             $board["data"]["item"] <- empty array, $board["message"]
-if($_SERVER["REQUEST_METHOD"] === "GET") {
-    $pagename = $_GET["pagename"];
-    
-    $result_data = null;
-
-    $breadcrumbData         = array();
-    $breadcrumbData["data"] = array();
-
-    switch($pagename) {
-        case "boardList":
-            $category_id = $_GET["id"];
-            $t_category = new TCategory();
-            $result_data = $t_category->selectCategoryBreadcrumbInfo($category_id);
-            break;
-        case "threadList":
-            $board_id = $_GET["id"];
-            $t_board = new TBoard();
-            $result_data = $t_board->selectBoardBreadcrumbInfo($board_id);
-            break;
-        case "commentList":
-            $thread_id = $_GET["id"];
-            $t_thread = new TThread();
-            $result_data = $t_thread->selectThreadBreadcrumbInfo($thread_id);
-            break;
-    }
-    
-    if(isset($result_data["category_id"]) && isset($result_data["category_name"])) {
-        $category = [
-            "id" => $result_data["category_id"],
-            "name" => $result_data["category_name"]
-        ];
-        array_push($breadcrumbData["data"], $category);
-    }
-    if(isset($result_data["board_id"]) && isset($result_data["board_name"])) {
-        $board = [
-            "id" => $result_data["board_id"],
-            "name" => $result_data["board_name"]
-        ];
-        array_push($breadcrumbData["data"], $board);
-    }
-    if(isset($result_data["thread_id"]) && isset($result_data["thread_name"])) {
-        $thread = [
-            "id" => $result_data["thread_id"],
-            "name" => $result_data["thread_name"]
-        ];
-        array_push($breadcrumbData["data"], $thread);
-    }
-
-    echo json_encode($breadcrumbData);
+if($_SERVER["REQUEST_METHOD"] !== "GET") {
+    exit;
 }
+
+// check received parameter
+if(!isset($_GET["pagename"])) exit;
+if(!isset($_GET["id"]))       exit;
+
+// define
+$pagename = $_GET["pagename"];
+
+// get breadcrumb information
+$select_data;
+switch($pagename) {
+    case "boardList":
+        $category_id = $_GET["id"];
+        $t_category = new TCategory();
+        $select_data = $t_category->selectCategoryBreadcrumbInfo($category_id);
+        break;
+    case "threadList":
+        $board_id = $_GET["id"];
+        $t_board = new TBoard();
+        $select_data = $t_board->selectBoardBreadcrumbInfo($board_id);
+        break;
+    case "commentList":
+        $thread_id = $_GET["id"];
+        $t_thread = new TThread();
+        $select_data = $t_thread->selectThreadBreadcrumbInfo($thread_id);
+        break;
+}
+
+// formatting response data
+$resBreadcrumbData["data"] = array();
+if(isset($select_data["category_id"]) && isset($select_data["category_name"])) {
+    $category = [
+        "id" => $select_data["category_id"],
+        "name" => $select_data["category_name"],
+        "title" => "カテゴリー",
+        "link" => "/boardList"
+    ];
+    array_push($resBreadcrumbData["data"], $category);
+}
+if(isset($select_data["board_id"]) && isset($select_data["board_name"])) {
+    $board = [
+        "id" => $select_data["board_id"],
+        "name" => $select_data["board_name"],
+        "title" => "掲示板",
+        "link" => "/threadList"
+    ];
+    array_push($resBreadcrumbData["data"], $board);
+}
+if(isset($select_data["thread_id"]) && isset($select_data["thread_name"])) {
+    $thread = [
+        "id" => $select_data["thread_id"],
+        "name" => $select_data["thread_name"],
+        "title" => "スレッド",
+        "link" => "/commentList"
+    ];
+    array_push($resBreadcrumbData["data"], $thread);
+}
+
+echo json_encode($resBreadcrumbData);
