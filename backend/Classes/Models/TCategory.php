@@ -21,9 +21,10 @@ class TCategory
      */
     public function fetchAllCategory() {
         $query = "SELECT
-                categories.category_id    AS category_id,
-                categories.category_name  AS category_name,
-                COUNT(boards.category_id) AS board_count
+                categories.category_id                                  AS category_id,
+                categories.category_name                                AS category_name,
+                DATE_FORMAT(categories.created_at, '%Y/%m/%d %H:%i:%s') AS created_at,
+                COUNT(boards.category_id)                               AS board_count
             FROM
                 t_categories categories
             LEFT JOIN
@@ -167,9 +168,10 @@ class TCategory
      */
     public function search($word) {
         $query = "SELECT
-                    categories.category_id    AS category_id,
-                    categories.category_name  AS category_name,
-                    COUNT(boards.category_id) AS board_count
+                    categories.category_id                                  AS category_id,
+                    categories.category_name                                AS category_name,
+                    DATE_FORMAT(categories.created_at, '%Y/%m/%d %H:%i:%s') AS created_at,
+                    COUNT(boards.category_id)                               AS board_count
                 FROM
                     t_categories categories
                 LEFT JOIN

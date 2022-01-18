@@ -23,10 +23,6 @@
     margin-bottom: 24px;
 }
 
-.category-list > .wrapper > .body-content > .card {
-    margin-bottom: 16px;
-}
-
 @media(max-width: 480px) {
 
 }

@@ -27,10 +27,6 @@
     margin-bottom: 24px;
 }
 
-.board-list > .wrapper > .board-list-body > .card {
-    margin-bottom: 16px;
-}
-
 @media(max-width: 480px) {
 
 }

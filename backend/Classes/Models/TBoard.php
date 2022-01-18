@@ -24,9 +24,10 @@ class TBoard
      */
     public function initialSelect($category_id) {
         $query = "SELECT
-                boards.board_id          AS board_id,
-                boards.board_name        AS board_name,
-                COUNT(threads.thread_id) AS thread_count
+                boards.board_id                                      AS board_id,
+                boards.board_name                                    AS board_name,
+                DATE_FORMAT(boards.created_at, '%Y/%m/%d %H:%i:%s')  AS created_at,
+                COUNT(threads.thread_id)                             AS thread_count
             FROM
                 t_boards boards
             LEFT JOIN
@@ -193,9 +194,10 @@ class TBoard
     // search
     public function search($word, $id) {
         $query = "SELECT
-                boards.board_id          AS board_id,
-                boards.board_name        AS board_name,
-                COUNT(threads.thread_id) AS thread_count
+                boards.board_id                                      AS board_id,
+                boards.board_name                                    AS board_name,
+                DATE_FORMAT(boards.created_at, '%Y/%m/%d %H:%i:%s')  AS created_at,
+                COUNT(threads.thread_id)                             AS thread_count
             FROM
                 t_boards boards
             LEFT JOIN

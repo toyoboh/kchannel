@@ -86,6 +86,7 @@ function CategoryList() {
                     key={ category.category_id }
                     title={ category.category_name }
                     count={ category.board_count }
+                    createdAt={ category.created_at }
                     path={ "/boardList/" + category.category_id }
                 />
             )

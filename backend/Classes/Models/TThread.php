@@ -22,9 +22,10 @@ class TThread
      */
     public function initialSelect($board_id) {
         $query = "SELECT
-                threads.thread_id          AS thread_id,
-                threads.thread_name        AS thread_name,
-                COUNT(comments.comment_id) AS comment_count
+                threads.thread_id                                    AS thread_id,
+                threads.thread_name                                  AS thread_name,
+                DATE_FORMAT(threads.created_at, '%Y/%m/%d %H:%i:%s') AS created_at,
+                COUNT(comments.comment_id)                           AS comment_count
             FROM
                 t_threads threads
             LEFT JOIN
@@ -208,9 +209,10 @@ class TThread
 
     public function search($word, $id) {
         $query = "SELECT
-                threads.thread_id          AS thread_id,
-                threads.thread_name        AS thread_name,
-                COUNT(comments.comment_id) AS comment_count
+                threads.thread_id                                    AS thread_id,
+                threads.thread_name                                  AS thread_name,
+                DATE_FORMAT(threads.created_at, '%Y/%m/%d %H:%i:%s') AS created_at,
+                COUNT(comments.comment_id)                           AS comment_count
             FROM
                 t_threads  threads
             LEFT JOIN

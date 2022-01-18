@@ -135,6 +135,7 @@ function BoardList() {
                     key={ board.board_id }
                     title={ board.board_name }
                     count={ board.thread_count }
+                    createdAt={ board.created_at }
                     path={ "/threadList/" + board.board_id }
                     />;
         })

@@ -1,18 +1,18 @@
 .card {
-    background-color: var(--sub-color);
-    border-radius: 8px 0 0 8px;
-    padding: 10px 8px;
+    padding: 14px 8px;
     width: 100%;
 }
 
+.card:hover {
+    background-color: #eee;
+}
+
 .card-header {
-    align-items: center;
-    display: flex;
-    justify-content: space-between;
     margin-bottom: 8px;
 }
 
 .card-header > .header-created-at {
+    color: var(--green-a);
     font-size: 12px;
     font-weight: 200;
 }
@@ -28,18 +28,23 @@
 }
 
 .card-body > .body-title {
-    flex: 3;
+    flex: 1;
     font-size: 14px;
-    font-weight: 600;
-    overflow: hidden;
+    font-weight: bold;
+    /* overflow: hidden;
     text-overflow: ellipsis;
-    white-space: nowrap;
+    white-space: nowrap; */
 }
 
 .card-body > .body-count {
-    flex:1;
-    font-size: 12px;
+    font-size: 14px;
     text-align: right;
+    width: 50px;
+}
+
+.card-body > .body-count > .MuiSvgIcon-root {
+    font-size: 18px;
+    margin-right: 2px;
 }
 
 @media(max-width: 480px) {

@@ -1,6 +1,7 @@
 import React from "react";
 import "../css/Card.css";
 import { Link } from "react-router-dom";
+import DescriptionIcon from "@material-ui/icons/Description";
 
 /**
  * @param {string} title           カードのタイトル
@@ -12,23 +13,19 @@ function Card({ title, count, createdAt, createdUserName, path }) {
     return(
         <div className="card">
             <Link to={ path }>
-                {createdAt && createdUserName &&
-                    <div className="card-header">
-                        <div className="header-created-at">
-                            登録日：{ createdAt }
-                        </div>
-                        <div className="header-created-user-name">
-                            登録者：{ createdUserName }
-                        </div>
+                <div className="card-header">
+                    <div className="header-created-at">
+                        { createdAt }
                     </div>
-                }
+                </div>
 
                 <div className="card-body">
                     <div className="body-title">
                         { title }
                     </div>
                     <div className="body-count">
-                        { String(count) }件
+                        <DescriptionIcon />
+                        { String(count) }
                     </div>
                 </div>
             </Link>
