@@ -3,7 +3,6 @@ import styled from "styled-components";
 import SearchIcon from "@material-ui/icons/Search";
 
 function UISearchInput({ value, placeholder, clickFunction, changeFunction }) {
-    console.log(value)
     return(
         <Container>
             <Input
@@ -30,6 +29,7 @@ const Container = styled.div`
 `;
 
 const Input = styled.input`
+    caret-color: var(--black-2);
     color: var(--black-2);
     flex: 1;
     font-size: 16px;

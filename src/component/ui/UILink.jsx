@@ -28,7 +28,7 @@ const UILink = styled(Link)`
         if(props.colorkind) {
             return `var(--${props.colorkind})`;
         } else {
-            return "var(--blue)";
+            return "var(--blue-2)";
         }
     }};
     font-size: ${(props) => {
@@ -47,12 +47,12 @@ const UILink = styled(Link)`
     }};
 
     &:hover {
-        border-bottom: ${props => {
+        border-bottom: ${(props) => {
             if(props.underline) {
                 if(props.colorkind) {
                     return `1px solid var(--${props.colorkind})`;
                 } else {
-                    return "1px solid var(--blue)";
+                    return "1px solid var(--blue-2)";
                 }
             } else {
                 return "none";

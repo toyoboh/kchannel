@@ -104,7 +104,7 @@ function BoardList() {
         .then((res) => {
             if(res.data.success) {
                 setBoards(res.data.data.boards);
-                setBoards(res.data.data.boards.length);
+                setBoardCount(res.data.data.boards.length);
                 setContentMessage("");
             } else {
                 setBoards([]);

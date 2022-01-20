@@ -1,6 +1,7 @@
 .breadcrumb-navigation {
     align-items: center;
     display: flex;
+    overflow: hidden;
 }
 
 .breadcrumb-navigation > .list-item-text {
@@ -16,21 +17,18 @@
 
 @media(max-width: 480px) {
     .breadcrumb-navigation > .list-item-text {
-        font-size: 12px;
         max-width: 80px;
     }
 }
 
 @media(min-width: 481px) and (max-width: 1000px) {
     .breadcrumb-navigation > .list-item-text {
-        font-size: 14px;
         max-width: 100px;
     }
 }
 
 @media(min-width: 1001px) {
     .breadcrumb-navigation > .list-item-text {
-        font-size: 14px;
         max-width: 200px;
     }
 }

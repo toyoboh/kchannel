@@ -1,9 +1,10 @@
-import React, { useEffect, useState } from "react";
-import { useLocation, Link } from "react-router-dom";
 import "../css/BreadcrumbNavigation.css";
-import axios from "axios";
-import ArrowRightIcon from "@material-ui/icons/ArrowRight";
-import URL from "../info/Url";
+import ArrowRightIcon                 from "@material-ui/icons/ArrowRight";
+import axios                          from "axios";
+import React, { useEffect, useState } from "react";
+import UILink                         from "./ui/UILink";
+import URL                            from "../info/Url";
+import { useLocation }                from "react-router-dom";
 
 function BreadcrumbNavigation() {
     const location = useLocation();
@@ -11,20 +12,11 @@ function BreadcrumbNavigation() {
     const [breadcrumb, setBreadcrumb] = useState([]);
 
     const createBreadcrumb = async (pagename, id = false) => {
-        let paramData;
-        if(id) {
-            paramData = {
+        axios[URL.breadcrumbInformation.method](URL.breadcrumbInformation.url, {
+            params: {
                 pagename: pagename,
                 id      : id
             }
-        } else {
-            paramData = {
-                pagename: pagename
-            }
-        }
-
-        axios[URL.breadcrumbInformation.method](URL.breadcrumbInformation.url, {
-            params: paramData
         })
         .then((res) => {
             setBreadcrumb(res.data.data);
@@ -54,7 +46,11 @@ function BreadcrumbNavigation() {
                     {/* Only when at the first of the loop */}
                     {!index &&
                     <li className="list-item list-item-text">
-                        <Link to="/categoryList">category</Link>
+                        <UILink
+                            underline="true"
+                            to="/categoryList"
+                            sizekind="small"
+                        >category</UILink>
                     </li>
                     }
 
@@ -69,9 +65,12 @@ function BreadcrumbNavigation() {
                     </li>
                     ) : (
                     <li className="list-item list-item-text">
-                        <Link to={ linkList[index] + value.id }>
-                            { value.name }
-                        </Link>
+                        <UILink
+                            underline="true"
+                            sizekind="small"
+                            to={ linkList[index] + value.id }
+                        >{ value.name }
+                        </UILink>
                     </li>
                     )}
                 </React.Fragment>
