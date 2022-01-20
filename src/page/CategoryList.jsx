@@ -1,13 +1,12 @@
-import React, { useState, useEffect } from "react";
 import "../css/CategoryList.css";
-import PageTitle from "../component/PageTitle";
-import CategoryIcon from "@material-ui/icons/Category";
-import Card from "../component/Card";
-import axios from "axios";
-import CreateLink from "../component/CreateLink";
-import URL from "../info/Url";
-import InputPlusButton from "../component/InputPlusButton";
-import SearchIcon from "@material-ui/icons/Search";
+import axios                          from "axios";
+import Card                           from "../component/Card";
+import CategoryIcon                   from "@material-ui/icons/Category";
+import CreateLink                     from "../component/CreateLink";
+import PageTitle                      from "../component/PageTitle";
+import React, { useState, useEffect } from "react";
+import UISearchInput                  from "../component/ui/UISearchInput";
+import URL                            from "../info/Url";
 
 function CategoryList() {
     // state
@@ -64,6 +63,8 @@ function CategoryList() {
         })
         .then((res) => {
             if(res.data.success) {
+                console.log(searchWord)
+                console.log(res.data.data.categories)
                 setCategories(res.data.data.categories);
                 setMessage("");
             } else {
@@ -113,12 +114,11 @@ function CategoryList() {
                 </div>
 
                 <div className="search-content">
-                    <InputPlusButton
+                    <UISearchInput
                         value={ searchWord }
+                        placeholder={ "カテゴリー検索" }
+                        clickFunction={ searchCategoryList }
                         changeFunction={ setSearchWord }
-                        buttonFunction={ searchCategoryList }
-                        Icon={ SearchIcon }
-                        placeholderText="カテゴリーを検索する..."
                     />
                 </div>
 

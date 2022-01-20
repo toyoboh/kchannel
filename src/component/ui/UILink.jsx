@@ -3,15 +3,15 @@ import styled from "styled-components";
 
 const size = {
     small: {
-        padding: "0px 4px",
+        padding: "0px 2px",
         fontSize: "14px"
     },
     normal: {
-        padding: "0px 4px",
+        padding: "0px 2px",
         fontSize: "16px"
     },
     big: {
-        padding: "0px 4px",
+        padding: "0px 2px",
         fontSize: "18px"
     }
 }

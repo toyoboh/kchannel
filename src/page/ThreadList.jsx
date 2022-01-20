@@ -1,16 +1,15 @@
-import React, { useState, useEffect } from "react";
-import { useParams } from "react-router-dom";
-import axios from "axios";
 import "../css/ThreadList.css";
-import PageTitle from "../component/PageTitle";
-import DescriptionIcon from "@material-ui/icons/Description";
-import Card from "../component/Card";
-import BreadcrumbNavigation from "../component/BreadcrumbNavigation";
-import CreateLink from "../component/CreateLink";
-import URL from "../info/Url";
-import SearchIcon from "@material-ui/icons/Search";
-import InputPlusButton from "../component/InputPlusButton";
-import NoContent from "../component/NoContent";
+import axios                          from "axios";
+import BreadcrumbNavigation           from "../component/BreadcrumbNavigation";
+import Card                           from "../component/Card";
+import CreateLink                     from "../component/CreateLink";
+import DescriptionIcon                from "@material-ui/icons/Description";
+import NoContent                      from "../component/NoContent";
+import PageTitle                      from "../component/PageTitle";
+import React, { useState, useEffect } from "react";
+import UISearchInput                  from "../component/ui/UISearchInput";
+import URL                            from "../info/Url";
+import { useParams }                  from "react-router-dom";
 
 function ThreadList() {
     // board id received by parameter
@@ -172,12 +171,11 @@ function ThreadList() {
                         </div>
 
                         <div className="search-content">
-                            <InputPlusButton
+                            <UISearchInput
                                 value={ inputSearchWord }
+                                placeholder={ "スレッド検索" }
+                                clickFunction={ searchThreadList }
                                 changeFunction={ setInputSearchWord }
-                                buttonFunction={ searchThreadList }
-                                Icon={ SearchIcon }
-                                placeholderText="スレッドを検索する..."
                             />
                         </div>
 

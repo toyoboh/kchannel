@@ -1,16 +1,15 @@
-import React, { useState, useEffect } from "react";
-import { useParams } from "react-router-dom";
-import axios from "axios";
 import "../css/BoardList.css";
-import PageTitle from "../component/PageTitle";
-import ReceiptIcon from "@material-ui/icons/Receipt";
-import SearchIcon from "@material-ui/icons/Search";
-import Card from "../component/Card";
-import BreadcrumbNavigation from "../component/BreadcrumbNavigation";
-import CreateLink from "../component/CreateLink";
-import URL from "../info/Url";
-import InputPlusButton from "../component/InputPlusButton";
-import NoContent from "../component/NoContent";
+import axios                          from "axios";
+import BreadcrumbNavigation           from "../component/BreadcrumbNavigation";
+import Card                           from "../component/Card";
+import CreateLink                     from "../component/CreateLink";
+import NoContent                      from "../component/NoContent";
+import PageTitle                      from "../component/PageTitle";
+import React, { useState, useEffect } from "react";
+import ReceiptIcon                    from "@material-ui/icons/Receipt";
+import UISearchInput                  from "../component/ui/UISearchInput";
+import URL                            from "../info/Url";
+import { useParams }                  from "react-router-dom";
 
 function BoardList() {
     // category id received by parameter
@@ -18,14 +17,7 @@ function BoardList() {
 
     // state
     const [csrfToken, setCsrfToken] = useState("");
-    // // word
-    // const [searchWord, setSearchWord] = useState("");
-    // // Message when there is no board
-    // const [message, setMessage] = useState("");
-    // // Database board infomation
-    // const [boards, setBoards] = useState([]);
-    // state
-    // initail process
+    // initial
     const [initialLoading, setInitialLoading] = useState(true);
     const [categoryExists, setCategoryExists] = useState(false);
     // board
@@ -169,12 +161,11 @@ function BoardList() {
                     </div>
 
                     <div className="search-content">
-                        <InputPlusButton
+                        <UISearchInput
                             value={ inputSearchWord }
+                            placeholder={ "掲示板検索" }
+                            clickFunction={ searchBoardList }
                             changeFunction={ setInputSearchWord }
-                            buttonFunction={ searchBoardList }
-                            Icon={ SearchIcon }
-                            placeholderText="掲示板を検索する..."
                         />
                     </div>
 
