@@ -1,11 +1,11 @@
 .page-title {
     align-items: center;
-    border-left: 4px solid var(--main-color);
-    border-bottom: 2px dotted var(--main-color);
+    background-color: var(--black-7);
+    border-left: 8px solid var(--black-2);
     display: flex;
-    font-size: 16px;
+    font-size: 18px;
     font-weight: 600;
-    padding: 6px;
+    padding: 8px;
 }
 
 .page-title > .MuiSvgIcon-root {
