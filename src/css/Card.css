@@ -1,10 +1,10 @@
 .card {
-    padding: 14px 8px;
+    padding: 16px 8px;
     width: 100%;
 }
 
 .card:hover {
-    background-color: #eee;
+    background-color: var(--black-9);
 }
 
 .card-header {
@@ -12,7 +12,7 @@
 }
 
 .card-header > .header-created-at {
-    color: var(--green-a);
+    color: var(--green-1);
     font-size: 12px;
     font-weight: 200;
 }
@@ -28,21 +28,21 @@
 }
 
 .card-body > .body-title {
+    color: var(--black-2);
     flex: 1;
-    font-size: 14px;
+    font-size: 16px;
     font-weight: bold;
-    /* overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap; */
 }
 
 .card-body > .body-count {
+    color: var(--black-2);
     font-size: 14px;
     text-align: right;
     width: 50px;
 }
 
 .card-body > .body-count > .MuiSvgIcon-root {
+    color: var(--black-2);
     font-size: 18px;
     margin-right: 2px;
 }
