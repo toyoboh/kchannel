@@ -1,5 +1,4 @@
 .comment-list {
-    background-color: var(--base-color);
     min-height: var(--page-min-height);
     padding: 20px 16px;
     width: 100%;
@@ -24,6 +23,7 @@
 }
 
 .comment-list > .wrapper > .total-comment-container {
+    color: var(--black-2);
     font-size: 14px;
     margin-bottom: 16px;
     text-align: right;

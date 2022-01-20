@@ -60,7 +60,7 @@ function BreadcrumbNavigation() {
 
                     {/* Use Link tags except at the end of the loop */}
                     {breadcrumbCount - 1 === index ? (
-                    <li className="list-item list-item-text">
+                    <li className="list-item list-item-text last-text">
                         { value.name }
                     </li>
                     ) : (

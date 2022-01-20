@@ -11,6 +11,10 @@
     width: auto;
 }
 
+.breadcrumb-navigation > .last-text {
+    color: var(--black-2);
+}
+
 .breadcrumb-navigation > .list-item-icon > .MuiSvgIcon-root {
     font-size: 18px;
 }
