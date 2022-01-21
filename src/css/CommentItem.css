@@ -1,24 +1,34 @@
 .comment-item {
-    background-color: var(--sub-color);
-    box-shadow: 0px 0px 4px var(--main-color);
+    background-color: var(--black-9);
+    box-shadow: 0px 0px 4px var(--black-5);
     margin-bottom: 16px; /* 本当はコメントリストページで指定したい */
     padding: 6px;
 }
 
 .comment-item > .comment-header {
+    color: var(--green-1);
     font-size: 12px;
     margin-bottom: 4px;
-    text-align: right;
 }
 
 .comment-item > .comment-body {
-    font-size: 14px;
+    color: var(--black-2);
+    font-size: 16px;
     margin-bottom: 4px;
 }
 
 .comment-item > .comment-footer {
-    font-size: 12px;
     text-align: right;
+}
+
+.comment-item > .comment-footer > .link {
+    color: var(--black-2);
+    font-size: 12px;
+    padding-bottom: 1px;
+}
+
+.comment-item > .comment-footer > .link:hover {
+    border-bottom: 1px solid var(--black-2);
 }
 
 @media(max-width: 480px) {

@@ -1,7 +1,8 @@
-import React from "react";
 import "../css/CommentItem.css";
+import { Link } from "react-router-dom";
+import React from "react";
 
-function CommentItem({ createdAt, comment, createdUserName }) {
+function CommentItem({ createdAt, comment, createdUserName, createdUserId }) {
     return(
         <div className="comment-item">
             <div className="comment-header">
@@ -13,7 +14,10 @@ function CommentItem({ createdAt, comment, createdUserName }) {
             </div>
 
             <div className="comment-footer">
-                投稿者：{ createdUserName }
+                <Link
+                    to={ `/profile/${createdUserId}` }
+                    className="link"
+                >投稿者：{ createdUserName }</Link>
             </div>
         </div>
     )
