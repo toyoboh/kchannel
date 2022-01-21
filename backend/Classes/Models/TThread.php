@@ -62,7 +62,7 @@ class TThread
                 threads.thread_id                                     AS thread_id,
                 threads.thread_name                                   AS thread_name,
                 threads.thread_explanation                            AS thread_explanation,
-                threads.created_user_id                               AS created_user_id,
+                threads.created_account_id                            AS created_account_id,
                 users.user_name                                       AS created_user_name,
                 DATE_FORMAT(threads.created_at, '%Y/%m/%d %H:%i:%s')  AS created_at
             FROM
@@ -70,7 +70,7 @@ class TThread
             INNER JOIN
                 t_users   users
             ON
-                threads.created_user_id         = users.id
+                threads.created_account_id      = users.account_id
             WHERE
                 CAST(threads.thread_id AS CHAR) = :thread_id
         ;";
@@ -169,35 +169,35 @@ class TThread
 
     /**
      * create thread
-     * @param  integer $id
+     * @param  integer $account_id
      * @param  integer $board_id
      * @param  string  $thread_name
      * @param  string  $thread_explanation
      * @return integer
      */
-    public function create($id, $board_id, $thread_name, $thread_explanation) {
+    public function create($account_id, $board_id, $thread_name, $thread_explanation) {
         $query = "INSERT INTO
                         t_threads(
                             board_id,
                             thread_name,
                             thread_explanation,
-                            created_user_id,
-                            updated_user_id
+                            created_account_id,
+                            updated_account_id
                         )
                     VALUES(
                         :board_id,
                         :thread_name,
                         :thread_explanation,
-                        :created_user_id,
-                        :updated_user_id
+                        :created_account_id,
+                        :updated_account_id
                     )
         ;";
         $use_query_item = [
             "board_id"           => $board_id,
             "thread_name"        => $thread_name,
             "thread_explanation" => $thread_explanation,
-            "created_user_id"    => $id,
-            "updated_user_id"    => $id
+            "created_account_id"    => $account_id,
+            "updated_account_id"    => $account_id
         ];
 
         $database = new Database();

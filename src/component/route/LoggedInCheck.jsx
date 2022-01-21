@@ -1,8 +1,8 @@
+import App                            from "../../App";
+import axios                          from "axios";
 import React, { useEffect, useState } from "react";
-import axios from "axios";
-import { useUserContext } from "../../context/User";
-import App from "../../App";
-import URL from "../../info/Url";
+import URL                            from "../../info/Url";
+import { useUserContext }             from "../../context/User";
 
 function LoggedInCheck() {
     // context
@@ -18,12 +18,13 @@ function LoggedInCheck() {
             console.log(res)
             if(res.data.success) {
                 setUser({
-                    id       : res.data.data.id,
-                    user_id  : res.data.data.user_id,
-                    user_name: res.data.data.user_name, 
-                    is_auth  : true
+                    account_id: res.data.data.account_id,
+                    user_id   : res.data.data.user_id,
+                    user_name : res.data.data.user_name, 
+                    is_auth   : true
                 });
             }
+            
             setIsLoading(false);
         })
         .catch((err) => {

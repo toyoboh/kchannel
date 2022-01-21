@@ -1,19 +1,19 @@
-import React, { useEffect, useState } from "react";
-import { useParams, Link, useHistory } from "react-router-dom";
 import "../css/CreateBoard.css";
-import axios from "axios";
-import DescriptionIcon from "@material-ui/icons/Description";
-import BorderColorIcon from "@material-ui/icons/BorderColor";
-import PageTitle from "../component/PageTitle";
-import InputPlusButton from "../component/InputPlusButton";
-import ErrorMessage from "../component/ErrorMessage";
-import CreateRule from "../component/CreateRule";
-import BackLink from "../component/BackLink";
-import CreatePageParentName from "../component/CreatePageParentName";
-import { useUserContext } from "../context/User";
-import ExplanationForm from "../component/ExplanationForm";
-import Validation from "../tool/Validation";
-import URL from "../info/Url";
+import axios                           from "axios";
+import BackLink                        from "../component/BackLink";
+import BorderColorIcon                 from "@material-ui/icons/BorderColor";
+import CreatePageParentName            from "../component/CreatePageParentName";
+import CreateRule                      from "../component/CreateRule";
+import DescriptionIcon                 from "@material-ui/icons/Description";
+import ErrorMessage                    from "../component/ErrorMessage";
+import ExplanationForm                 from "../component/ExplanationForm";
+import InputPlusButton                 from "../component/InputPlusButton";
+import PageTitle                       from "../component/PageTitle";
+import React, { useEffect, useState }  from "react";
+import URL                             from "../info/Url";
+import { useParams, Link, useHistory } from "react-router-dom";
+import { useUserContext }              from "../context/User";
+import Validation                      from "../tool/Validation";
 
 function CreateThread() {
     // History
@@ -22,24 +22,20 @@ function CreateThread() {
     // Parameter
     const { boardId } = useParams();
 
-    // csrf token
-    const [csrfToken, setCsrfToken] = useState("");
-
     // context
-    const { user }                  = useUserContext();
-
+    const { user }    = useUserContext();
+    
+    // State
+    // csrf token
+    const [csrfToken, setCsrfToken]                               = useState("");
     // Board Information
-    const [boardInformation, setBoardInformation] = useState([]);
-
+    const [boardInformation, setBoardInformation]                 = useState([]);
     // Input item
-    const [inputThreadName, setInputThreadName]   = useState("");
-    const [inputThreadExplanation, setInputThreadExplanation] = useState("");
-
-    // Display message
-    // Error message if the board not exists
-    const [existsMessage, setExistsMessage]  = useState("");
-    // Error message when board creation fails
-    const [threadNameMessage, setThreadNameMessage] = useState("");
+    const [inputThreadName, setInputThreadName]                   = useState("");
+    const [inputThreadExplanation, setInputThreadExplanation]     = useState("");
+    // Error Message
+    const [existsMessage, setExistsMessage]                       = useState("");
+    const [threadNameMessage, setThreadNameMessage]               = useState("");
     const [threadExplanationMessage, setThreadExplanationMessage] = useState("");
 
     // Set csrf token
@@ -89,11 +85,10 @@ function CreateThread() {
             board_id          : boardId,
             thread_name       : inputThreadName,
             thread_explanation: inputThreadExplanation,
-            id                : user.id,
+            account_id        : user.account_id,
             csrf_token        : csrfToken
         })
         .then((res) => {
-            console.log(res)
             if(res.data.success) {
                 history.push(`/threadList/${boardInformation.board_id}`);
             } else {

@@ -67,17 +67,17 @@ if(!password_verify($plaintext_password, $hash_password)) {
 // TODO: Needs processing in case of failure.
 
 // update last login date at time.
-$id        = $user_information["id"];
-$user_id   = $user_information["user_id"];
-$user_name = $user_information["user_name"];
+$account_id = $user_information["account_id"];
+$user_id    = $user_information["user_id"];
+$user_name  = $user_information["user_name"];
 
-$t_user->updateAtLogin($id);
+$t_user->updateAtLogin($account_id);
 
 // Set session information
 $session->regenerate();
-$session->set("id"       , $id);
-$session->set("user_id"  , $user_id);
-$session->set("user_name", $user_name);
+$session->set("account_id", $account_id);
+$session->set("user_id"   , $user_id);
+$session->set("user_name" , $user_name);
 
 if($is_auto_login) {
     // create auto login token
@@ -85,8 +85,8 @@ if($is_auto_login) {
     $auto_login_token = $t_token->autoLoginToken();
 
     // register in DB
-    $t_user->removeAllAutoLoginToken($id);
-    $insert_count = $t_user->registrationAutoLoginToken($id, $auto_login_token);
+    $t_user->removeAllAutoLoginToken($account_id);
+    $insert_count = $t_user->registrationAutoLoginToken($account_id, $auto_login_token);
 
     // register in cookie
     if($insert_count > 0) {
@@ -98,10 +98,10 @@ if($is_auto_login) {
 }
 
 // Formatting response data
-$res_result["success"]           = true;
-$res_result["data"]["id"]        = $id;
-$res_result["data"]["user_id"]   = $user_id;
-$res_result["data"]["user_name"] = $user_name;
+$res_result["success"]            = true;
+$res_result["data"]["account_id"] = $account_id;
+$res_result["data"]["user_id"]    = $user_id;
+$res_result["data"]["user_name"]  = $user_name;
 
 
 echo json_encode($res_result);

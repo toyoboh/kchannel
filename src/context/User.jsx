@@ -8,10 +8,10 @@ export const useUserContext = () => {
 
 export const UserProvider = ({ children }) => {
     const initialUserData = {
-        id: 0,           // Because we don't use 0 in the id
-        user_id  : "",
-        user_name: "",
-        is_auth  : false
+        account_id: 0,           // Because we don't use 0 in the id
+        user_id   : "",
+        user_name : "",
+        is_auth   : false
     }
 
     const [user, setUser] = useState(initialUserData);

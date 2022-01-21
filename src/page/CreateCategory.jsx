@@ -1,17 +1,17 @@
-import React, { useEffect, useState } from "react";
 import "../css/CreateCategory.css";
-import { useHistory } from "react-router-dom";
-import axios from "axios";
-import CategoryIcon from "@material-ui/icons/Category";
-import BorderColorIcon from "@material-ui/icons/BorderColor";
-import PageTitle from "../component/PageTitle";
-import InputPlusButton from "../component/InputPlusButton";
-import ErrorMessage from "../component/ErrorMessage";
-import CreateRule from "../component/CreateRule";
-import BackLink from "../component/BackLink";
-import { useUserContext } from "../context/User";
-import Validation from "../tool/Validation";
-import URL from "../info/Url";
+import axios                          from "axios";
+import BackLink                       from "../component/BackLink";
+import BorderColorIcon                from "@material-ui/icons/BorderColor";
+import CategoryIcon                   from "@material-ui/icons/Category";
+import CreateRule                     from "../component/CreateRule";
+import ErrorMessage                   from "../component/ErrorMessage";
+import InputPlusButton                from "../component/InputPlusButton";
+import PageTitle                      from "../component/PageTitle";
+import React, { useEffect, useState } from "react";
+import URL                            from "../info/Url";
+import { useHistory }                 from "react-router-dom";
+import { useUserContext }             from "../context/User";
+import Validation                     from "../tool/Validation";
 
 function CreateCategory() {
     // History
@@ -54,7 +54,7 @@ function CreateCategory() {
         
         axios[URL.createCategory.method](URL.createCategory.url, {
             category_name  : inputCategoryName,
-            id             : user.id,
+            account_id     : user.account_id,
             csrf_token     : csrfToken
         })
         .then((res) => {

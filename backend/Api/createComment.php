@@ -14,13 +14,13 @@ $posts      = json_decode($json_posts, true);
 
 // Check for the existence of parameters
 if(!isset($posts["csrf_token"]))   exit;
-if(!isset($posts["id"]))           exit;
+if(!isset($posts["account_id"]))   exit;
 if(!isset($posts["thread_id"]))    exit;
 if(!isset($posts["comment_body"])) exit;
 
 // Set received parameter
 $csrf_token   = $posts["csrf_token"];
-$id           = $posts["id"];
+$account_id   = $posts["account_id"];
 $thread_id    = $posts["thread_id"];
 $comment_body = $posts["comment_body"];
 
@@ -32,15 +32,15 @@ $session = new Session();
 
 // Check csrf token
 if(!$session->checkMatch($csrf_token, "csrf_token")) {
-    $res_result["success"]    = false;
-    $res_result["message"]    = "不正なアクセスのため、正常に処理ができませんでした。";
+    $res_result["success"] = false;
+    $res_result["message"] = "不正なアクセスのため、正常に処理ができませんでした。";
     echo json_encode($res_result);
     exit;
 }
 
 // Register the new Comment
 $t_comment = new TComment();
-$create_count = $t_comment->create($id, $thread_id, $comment_body);
+$create_count = $t_comment->create($account_id, $thread_id, $comment_body);
 
 if($create_count > 0) {
     $res_result["success"] = true;

@@ -20,7 +20,7 @@ class TUser
 
     public function getUserProfile($user_id) {
         $query = "SELECT
-                    users.id             AS id,
+                    users.account_id     AS account_id,
                     users.user_id        AS user_id,
                     users.user_name      AS user_name,
                     details.introduction AS introduction
@@ -29,7 +29,7 @@ class TUser
                 INNER JOIN
                     t_user_details details
                 ON
-                    users.id = details.id
+                    users.account_id = details.account_id
                 WHERE
                     users.user_id = :user_id
         ;";
@@ -48,22 +48,22 @@ class TUser
         );
     }
 
-    public function updateUserProfile($id, $user_name, $introduction) {
+    public function updateUserProfile($account_id, $user_name, $introduction) {
         $query = "UPDATE
                     t_users        users
                 INNER JOIN
                     t_user_details details
                 ON
-                    users.id = details.id
+                    users.account_id     = details.account_id
                 SET
                     users.user_name      = :user_name,
                     details.introduction = :introduction
                 WHERE
-                    users.id = :id
+                    users.account_id     = :account_id
         ;";
 
         $use_query_item = [
-            "id"           => $id,
+            "account_id"   => $account_id,
             "user_name"    => $user_name,
             "introduction" => $introduction
         ];
@@ -77,7 +77,7 @@ class TUser
 
     public function selectUserInformation($user_id, $mail_address) {
         $query = "SELECT
-                    id,
+                    account_id,
                     user_id,
                     user_name,
                     password
@@ -104,17 +104,17 @@ class TUser
         );
     }
 
-    public function updateAtLogin($id) {
+    public function updateAtLogin($account_id) {
         $query = "UPDATE
                     t_users
                 SET
                     last_login_at = CURRENT_TIMESTAMP()
                 WHERE
-                    id = :id
+                    account_id = :account_id
         ;";
 
         $use_query_item = [
-            "id" => $id
+            "account_id" => $account_id
         ];
 
         $database = new Database();
@@ -217,15 +217,15 @@ class TUser
     /**
      * 
      */
-    public function removeAllAutoLoginToken($id) {
+    public function removeAllAutoLoginToken($account_id) {
         $query = "DELETE FROM
                     t_auto_login
                 WHERE
-                    created_user_id = :id
+                    created_account_id = :account_id
         ;";
 
         $use_query_item = [
-            "created_user_id" => $id
+            "created_account_id" => $account_id
         ];
 
         $database = new Database();
@@ -238,20 +238,20 @@ class TUser
     /**
      * 
      */
-    public function registrationAutoLoginToken($id, $auto_login_token) {
+    public function registrationAutoLoginToken($account_id, $auto_login_token) {
         $query = "INSERT INTO
                     t_auto_login(
-                        created_user_id,
+                        created_account_id,
                         auto_login_token
                     ) VALUES (
-                        :created_user_id,
+                        :created_account_id,
                         :auto_login_token
                     )
         ;";
 
         $use_query_item = [
-            "created_user_id"  => $id,
-            "auto_login_token" => $auto_login_token
+            "created_account_id" => $account_id,
+            "auto_login_token"   => $auto_login_token
         ];
 
         $database = new Database();
@@ -266,6 +266,7 @@ class TUser
      */
     public function selectAutoLoginUserInformation($auto_login_token) {
         $query = "SELECT
+                    TU.daccount_id AS account_id,
                     TU.user_id     AS user_id,
                     TU.user_name   AS user_name,
                     TAL.created_at AS token_created_at
@@ -274,9 +275,9 @@ class TUser
                 INNER JOIN
                     t_users      TU
                 ON
-                    TAL.user_id = TU.user_id
+                    TAL.created_account_id = TU.account_id
                 WHERE
-                    TAL.auto_login_token = :auto_login_token
+                    TAL.auto_login_token   = :auto_login_token
                 ORDER BY
                     TAL.created_at DESC
                 LIMIT

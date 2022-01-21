@@ -17,12 +17,12 @@ $posts      = json_decode($json_posts, true);
 
 // Check receive data
 if(!isset($posts["csrf_token"]))    exit;
-if(!isset($posts["id"]))            exit;
+if(!isset($posts["account_id"]))    exit;
 if(!isset($posts["category_name"])) exit;
 
 // Set received parameter
 $csrf_token    = $posts["csrf_token"];
-$id            = $posts["id"];
+$account_id    = $posts["account_id"];
 $category_name = $posts["category_name"];
 
 // Define the response array
@@ -44,7 +44,7 @@ $select_count = $t_category->checkSameNameExists($category_name);
 // insert process
 $insert_success = false;
 if($select_count <= 0) {
-    $insert_count = $t_category->create($id, $category_name);
+    $insert_count = $t_category->create($account_id, $category_name);
 
     $insert_success = $insert_count > 0 ? true : false;
 }

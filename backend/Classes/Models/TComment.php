@@ -24,7 +24,8 @@ class TComment
         $query ="SELECT
                 comments.comment_id                                   AS comment_id,
                 comments.comment_body                                 AS comment_body,
-                comments.created_user_id                              AS created_user_id,
+                comments.created_account_id                           AS created_account_id,
+                users.user_id                                         AS created_user_id,
                 users.user_name                                       AS created_user_name,
                 DATE_FORMAT(comments.created_at, '%Y/%m/%d %H:%i:%s') AS created_at
             FROM
@@ -32,7 +33,7 @@ class TComment
             INNER JOIN
                 t_users users
             ON
-                comments.created_user_id = users.id
+                comments.created_account_id      = users.account_id
             WHERE
                 CAST(comments.thread_id AS CHAR) = :thread_id
             ORDER BY
@@ -53,26 +54,26 @@ class TComment
         );
     }
 
-    public function create($id, $thread_id, $comment_body) {
+    public function create($account_id, $thread_id, $comment_body) {
         $query = "INSERT INTO
                     t_comments(
                         thread_id,
                         comment_body,
-                        created_user_id,
-                        updated_user_id
+                        created_account_id,
+                        updated_account_id
                     )
                 VALUES(
                     :thread_id,
                     :comment_body,
-                    :created_user_id,
-                    :updated_user_id
+                    :created_account_id,
+                    :updated_account_id
                 )
         ;";
         $use_query_item = [
-            "thread_id" => $thread_id,
-            "comment_body" => $comment_body,
-            "created_user_id" => $id,
-            "updated_user_id" => $id
+            "thread_id"          => $thread_id,
+            "comment_body"       => $comment_body,
+            "created_account_id" => $account_id,
+            "updated_account_id" => $account_id
         ];
 
         $database = new Database();
@@ -84,17 +85,18 @@ class TComment
 
     public function selectNewComment($thread_id, $comment_id) {
         $query ="SELECT
-                    comments.comment_id      AS comment_id,
-                    comments.comment_body    AS comment_body,
-                    comments.created_user_id AS created_user_id,
-                    users.user_name          AS created_user_name,
+                    comments.comment_id                                   AS comment_id,
+                    comments.comment_body                                 AS comment_body,
+                    comments.created_account_id                           AS created_account_id,
+                    users.user_id                                         AS created_user_id,
+                    users.user_name                                       AS created_user_name,
                     DATE_FORMAT(comments.created_at, '%Y/%m/%d %H:%i:%s') AS created_at
                 FROM
                     t_comments comments
                 INNER JOIN
                     t_users users
                 ON
-                    comments.created_user_id = users.id
+                    comments.created_account_id      = users.account_id
                 WHERE
                     CAST(comments.thread_id AS CHAR) = :thread_id
                 AND

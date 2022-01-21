@@ -1,13 +1,13 @@
-import React, { useState, useEffect } from "react";
-import { useHistory } from "react-router-dom";
 import "../css/Login.css";
-import axios from "axios";
-import { useUserContext } from "../context/User";
-import ErrorMessage from "../component/ErrorMessage";
-import URL from "../info/Url";
-import VisibilityIcon from "@material-ui/icons/Visibility";
-import VisibilityOffIcon from "@material-ui/icons/VisibilityOff";
-import UILink from "../component/ui/UILink";
+import axios                          from "axios";
+import ErrorMessage                   from "../component/ErrorMessage";
+import React, { useState, useEffect } from "react";
+import UILink                         from "../component/ui/UILink";
+import URL                            from "../info/Url";
+import { useHistory }                 from "react-router-dom";
+import { useUserContext }             from "../context/User";
+import VisibilityIcon                 from "@material-ui/icons/Visibility";
+import VisibilityOffIcon              from "@material-ui/icons/VisibilityOff";
 
 function Login() {
     // history
@@ -65,10 +65,10 @@ function Login() {
         .then((res) => {
             if(res.data.success) {
                 setUser({
-                    id       : res.data.data.id,
-                    user_id  : res.data.data.user_id,
-                    user_name: res.data.data.user_name,
-                    is_auth  : true
+                    account_id: res.data.data.account_id,
+                    user_id   : res.data.data.user_id,
+                    user_name : res.data.data.user_name,
+                    is_auth   : true
                 });
                 history.push("/categoryList");
             } else {

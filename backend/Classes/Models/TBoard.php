@@ -153,35 +153,35 @@ class TBoard
 
     /**
      * create board
-     * @param integer $id
+     * @param integer $account_id
      * @param integer $category_id
      * @param string  $baord_name
      * @param string  $board_explanation
      * @return array
      */
-    public function create($id, $category_id, $board_name, $board_explanation) {
+    public function create($account_id, $category_id, $board_name, $board_explanation) {
         $query = "INSERT INTO
                         t_boards(
                             category_id,
                             board_name,
                             board_explanation,
-                            created_user_id,
-                            updated_user_id
+                            created_account_id,
+                            updated_account_id
                         )
                     VALUES(
                         :category_id,
                         :board_name,
                         :board_explanation,
-                        :created_user_id,
-                        :updated_user_id
+                        :created_account_id,
+                        :updated_account_id
                     )
         ;";
         $use_query_item = [
-            "category_id"       => $category_id,
-            "board_name"        => $board_name,
-            "board_explanation" => $board_explanation,
-            "created_user_id"   => $id,
-            "updated_user_id"   => $id
+            "category_id"        => $category_id,
+            "board_name"         => $board_name,
+            "board_explanation"  => $board_explanation,
+            "created_account_id" => $account_id,
+            "updated_account_id" => $account_id
         ];
 
         $database = new Database();

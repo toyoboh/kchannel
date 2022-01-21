@@ -15,9 +15,9 @@ $_session = new Session();
 
 // remove all auto_login_token in DB and Cookie if auto_login_token exists in cookie.
 if(isset($_COOKIE["auto_login_token"])) {
-    $id      = $_session->get("id");
-    $t_user  = new TUser();
-    $t_user->removeAllAutoLoginToken($id);
+    $account_id = $_session->get("account_id");
+    $t_user     = new TUser();
+    $t_user->removeAllAutoLoginToken($account_id);
 
     // remove auto login token in cookie
     $_cookie = new Cookie();

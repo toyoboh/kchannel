@@ -73,10 +73,10 @@ function SettingProfile() {
         if(!validationCheck()) return;
 
         axios[URL.updateUserProfile.method](URL.updateUserProfile.url, {
-            id             : userInformation.id,
-            user_name      : inputUserName,
-            introduction   : inputIntroduction,
-            csrf_token     : csrfToken
+            account_id  : userInformation.account_id,
+            user_name   : inputUserName,
+            introduction: inputIntroduction,
+            csrf_token  : csrfToken
         })
         .then((res) => {
             if(res.data.success) {

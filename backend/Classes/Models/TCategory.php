@@ -10,9 +10,9 @@ class TCategory
     public $category_id;
     public $category_name;
     public $created_at;
-    public $created_user_id;
+    public $created_account_id;
     public $updated_at;
-    public $updated_user_id;
+    public $updated_account_id;
 
     /**
      * Fetch all category of database and 
@@ -53,7 +53,7 @@ class TCategory
      */
     public function selectCategoryBreadcrumbInfo($category_id) {
         $query = "SELECT
-                categories.category_id AS category_id,
+                categories.category_id   AS category_id,
                 categories.category_name AS category_name
             FROM
                 t_categories categories
@@ -132,27 +132,27 @@ class TCategory
 
     /**
      * create category
-     * @param  integer $id
+     * @param  integer $account_id
      * @param  string  $category_name
      * @return integer
      */
-    public function create($id, $category_name) {
+    public function create($account_id, $category_name) {
         $query = "INSERT INTO
                         t_categories(
                             category_name,
-                            created_user_id,
-                            updated_user_id
+                            created_account_id,
+                            updated_account_id
                         )
                     VALUES(
                         :category_name,
-                        :created_user_id,
-                        :updated_user_id
+                        :created_account_id,
+                        :updated_account_id
                     )
         ;";
         $use_query_item = [
-            "category_name" => $category_name,
-            "created_user_id" => $id,
-            "updated_user_id" => $id
+            "category_name"      => $category_name,
+            "created_account_id" => $account_id,
+            "updated_account_id" => $account_id
         ];
 
         $database = new Database();

@@ -18,10 +18,10 @@ list($select_count, $category_information)  = $t_category->selectCategoryInforma
 
 $res_result;
 if($select_count > 0) {
-    $res_result["success"] = true;
+    $res_result["success"]                      = true;
     $res_result["data"]["category_information"] = $category_information;
 } else {
-    $res_result["success"] = false;
+    $res_result["success"]                      = false;
     $res_result["data"]["category_information"] = array();
 }
 echo json_encode($res_result);

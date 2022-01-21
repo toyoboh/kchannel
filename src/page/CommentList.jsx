@@ -1,18 +1,18 @@
-import React, { useEffect, useState, useRef } from "react";
-import { useParams } from "react-router-dom";
-import axios from "axios";
 import "../css/CommentList.css";
-import CommentListTitle from "../component/CommentListTitle";
-import Explanation from "../component/Explanation";
-import CommentItem from "../component/CommentItem";
-import BreadcrumbNavigation from "../component/BreadcrumbNavigation";
-import CommentForm from "../component/CommentForm";
-import Validation from "../tool/Validation";
-import ErrorMessage from "../component/ErrorMessage";
-import { useUserContext } from "../context/User";
-import DisplayProcess from "../tool/DisplayProcess";
-import URL from "../info/Url";
-import NoContent from "../component/NoContent";
+import axios                                  from "axios";
+import BreadcrumbNavigation                   from "../component/BreadcrumbNavigation";
+import CommentForm                            from "../component/CommentForm";
+import CommentItem                            from "../component/CommentItem";
+import CommentListTitle                       from "../component/CommentListTitle";
+import DisplayProcess                         from "../tool/DisplayProcess";
+import ErrorMessage                           from "../component/ErrorMessage";
+import Explanation                            from "../component/Explanation";
+import NoContent                              from "../component/NoContent";
+import React, { useEffect, useState, useRef } from "react";
+import URL                                    from "../info/Url";
+import { useParams }                          from "react-router-dom";
+import { useUserContext }                     from "../context/User";
+import Validation                             from "../tool/Validation";
 
 function CommentList() {
     // thread id received by parameter
@@ -126,7 +126,7 @@ function CommentList() {
             csrf_token  : csrfToken,
             thread_id   : threadId,
             comment_body: inputComment,
-            id          : user.id
+            account_id  : user.account_id
         })
         .then((res) => {
             if(res.data.success) {
@@ -221,6 +221,7 @@ function CommentList() {
                         createdAt={ comment.created_at }
                         comment={ commentBody }
                         createdUserName={ comment.created_user_name }
+                        createdUserId={ comment.created_user_id }
                     />;
         })
     }

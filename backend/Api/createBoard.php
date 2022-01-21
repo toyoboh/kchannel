@@ -15,14 +15,14 @@ $json_posts = file_get_contents("php://input");
 $posts      = json_decode($json_posts, true);
 
 if(!isset($posts["csrf_token"]))        exit;
-if(!isset($posts["id"]))                exit;
+if(!isset($posts["account_id"]))        exit;
 if(!isset($posts["category_id"]))       exit;
 if(!isset($posts["board_name"]))        exit;
 if(!isset($posts["board_explanation"])) exit;
 
 // Set received parameter
 $csrf_token        = $posts["csrf_token"];
-$id                = $posts["id"];
+$account_id        = $posts["account_id"];
 $category_id       = $posts["category_id"];
 $board_name        = $posts["board_name"];
 $board_explanation = $posts["board_explanation"];
@@ -33,8 +33,8 @@ $res_result;
 // Check csrf token
 $session = new Session();
 if(!$session->checkMatch($csrf_token, "csrf_token")) {
-    $res_result["success"]    = false;
-    $res_result["message"]    = "不正なアクセスのため、正常に処理ができませんでした。";
+    $res_result["success"] = false;
+    $res_result["message"] = "不正なアクセスのため、正常に処理ができませんでした。";
     echo json_encode($res_result);
     exit;
 }
@@ -45,9 +45,9 @@ $select_count = $t_board->checkSameNameExists($category_id, $board_name);
 
 $insert_success = false;
 if($select_count <= 0) {
-    $insert_count = $t_board->create($id, $category_id, $board_name, $board_explanation);
+    $insert_count = $t_board->create($account_id, $category_id, $board_name, $board_explanation);
 
-    $insert_success = $insert_count > 0 ? true : false;
+    $insert_success = $insert_count > 0;
 }
 
 if($insert_success) {

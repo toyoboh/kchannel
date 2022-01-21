@@ -16,13 +16,13 @@ $posts      = json_decode($json_posts, true);
 
 // check receive data
 if(!isset($posts["csrf_token"]))   exit;
-if(!isset($posts["id"]))           exit;
+if(!isset($posts["account_id"]))   exit;
 if(!isset($posts["user_name"]))    exit;
 if(!isset($posts["introduction"])) exit;
 
 // Set received parameter
 $csrf_token   = $posts["csrf_token"];
-$id           = $posts["id"];
+$account_id   = $posts["account_id"];
 $user_name    = $posts["user_name"];
 $introduction = $posts["introduction"];
 
@@ -39,7 +39,7 @@ if(!$session->checkMatch($csrf_token, "csrf_token")) {
 }
 
 $t_user = new TUser();
-$update_count = $t_user->updateUserProfile($id, $user_name, $introduction);
+$update_count = $t_user->updateUserProfile($account_id, $user_name, $introduction);
 
 if($update_count > 0) {
     $res_result["success"] = true;

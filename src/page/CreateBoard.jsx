@@ -1,20 +1,19 @@
-import React, { useEffect, useState } from "react";
-import { useParams, Link, useHistory } from "react-router-dom";
 import "../css/CreateBoard.css";
-import axios from "axios";
-import ReceiptIcon from "@material-ui/icons/Receipt";
-import BorderColorIcon from "@material-ui/icons/BorderColor";
-import PageTitle from "../component/PageTitle";
-import InputPlusButton from "../component/InputPlusButton";
-import ExplanationForm from "../component/ExplanationForm";
-import ErrorMessage from "../component/ErrorMessage";
-import CreateRule from "../component/CreateRule";
-import BackLink from "../component/BackLink";
-import CreatePageParentName from "../component/CreatePageParentName";
-import { useUserContext } from "../context/User";
-import Validation from "../tool/Validation";
-// import { TrendingUpRounded } from "@material-ui/icons";
-import URL from "../info/Url";
+import axios                           from "axios";
+import BackLink                        from "../component/BackLink";
+import BorderColorIcon                 from "@material-ui/icons/BorderColor";
+import CreatePageParentName            from "../component/CreatePageParentName";
+import CreateRule                      from "../component/CreateRule";
+import ErrorMessage                    from "../component/ErrorMessage";
+import ExplanationForm                 from "../component/ExplanationForm";
+import InputPlusButton                 from "../component/InputPlusButton";
+import PageTitle                       from "../component/PageTitle";
+import React, { useEffect, useState }  from "react";
+import ReceiptIcon                     from "@material-ui/icons/Receipt";
+import URL                             from "../info/Url";
+import { useParams, Link, useHistory } from "react-router-dom";
+import { useUserContext }              from "../context/User";
+import Validation                      from "../tool/Validation";
 
 function CreateBoard() {
     // History
@@ -24,23 +23,20 @@ function CreateBoard() {
     const { categoryId } = useParams();
 
     // context
-    const { user } = useUserContext();
+    const { user }       = useUserContext();
 
+    // state
+    // Csrf token
+    const [csrfToken, setCsrfToken]                             = useState("");
     // Input item
-    const [inputBoardName, setInputBoardName]     = useState("");
-    const [inputBoardExplanation, setInputBoardExplanation] = useState("");
-
-    const [categoryInformation, setCategoryInformation]    = useState([]);
-
-    // Display message
-    // Error message if the board not exists
-    const [existsMessage, setExistsMessage]  = useState("");
-    // Error message when board creation fails
-    const [boardNameMessage, setBoardNameMessage] = useState("");
+    const [inputBoardName, setInputBoardName]                   = useState("");
+    const [inputBoardExplanation, setInputBoardExplanation]     = useState("");
+    // information
+    const [categoryInformation, setCategoryInformation]         = useState([]);
+    // error message
+    const [existsMessage, setExistsMessage]                     = useState("");
+    const [boardNameMessage, setBoardNameMessage]               = useState("");
     const [boardExplanationMessage, setBoardExplanationMessage] = useState("");
-
-    //Csrf token
-    const [csrfToken, setCsrfToken]          = useState("");
 
     // Set csrf token
     useEffect(() => {
@@ -87,7 +83,7 @@ function CreateBoard() {
             category_id      : categoryInformation.category_id,
             board_name       : inputBoardName,
             board_explanation: inputBoardExplanation,
-            id               : user.id,
+            account_id       : user.account_id,
             csrf_token       : csrfToken
         })
         .then((res) => {
