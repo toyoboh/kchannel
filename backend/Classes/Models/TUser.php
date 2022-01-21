@@ -29,7 +29,7 @@ class TUser
                 INNER JOIN
                     t_user_details details
                 ON
-                    users.user_id = details.user_id
+                    users.id = details.id
                 WHERE
                     users.user_id = :user_id
         ;";
