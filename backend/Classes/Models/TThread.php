@@ -6,15 +6,6 @@ use Kchannel\Classes\Config\Database;
 
 class TThread
 {
-    //columns
-    public $board_id;
-    public $thread_id;
-    public $thread_name;
-    public $thread_thread_explanation;
-    public $thread_rule;
-    public $created_at;
-    public $created_user_id;
-
     /**
      * Fetch threads included in the board
      * @param string $board_id 
@@ -61,7 +52,6 @@ class TThread
         $query = "SELECT
                 threads.thread_id                                     AS thread_id,
                 threads.thread_name                                   AS thread_name,
-                threads.thread_explanation                            AS thread_explanation,
                 threads.created_account_id                            AS created_account_id,
                 users.user_name                                       AS created_user_name,
                 DATE_FORMAT(threads.created_at, '%Y/%m/%d %H:%i:%s')  AS created_at
@@ -172,22 +162,19 @@ class TThread
      * @param  integer $account_id
      * @param  integer $board_id
      * @param  string  $thread_name
-     * @param  string  $thread_explanation
      * @return integer
      */
-    public function create($account_id, $board_id, $thread_name, $thread_explanation) {
+    public function create($account_id, $board_id, $thread_name) {
         $query = "INSERT INTO
                         t_threads(
                             board_id,
                             thread_name,
-                            thread_explanation,
                             created_account_id,
                             updated_account_id
                         )
                     VALUES(
                         :board_id,
                         :thread_name,
-                        :thread_explanation,
                         :created_account_id,
                         :updated_account_id
                     )
@@ -195,7 +182,6 @@ class TThread
         $use_query_item = [
             "board_id"           => $board_id,
             "thread_name"        => $thread_name,
-            "thread_explanation" => $thread_explanation,
             "created_account_id"    => $account_id,
             "updated_account_id"    => $account_id
         ];

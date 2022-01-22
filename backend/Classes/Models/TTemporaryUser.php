@@ -6,15 +6,6 @@ use Kchannel\Classes\Config\Database;
 
 class TTemporaryUser
 {
-    // columns
-    public $user_id;
-    public $user_name;
-    public $main_address;
-    public $password;
-    public $token;
-    public $created_at;
-    public $updated_at;
-
     /**
      * Check if the user_id is used.
      * @param string $user_id

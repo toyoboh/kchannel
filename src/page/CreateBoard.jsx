@@ -5,7 +5,6 @@ import BorderColorIcon                 from "@material-ui/icons/BorderColor";
 import CreatePageParentName            from "../component/CreatePageParentName";
 import CreateRule                      from "../component/CreateRule";
 import ErrorMessage                    from "../component/ErrorMessage";
-import ExplanationForm                 from "../component/ExplanationForm";
 import InputPlusButton                 from "../component/InputPlusButton";
 import PageTitle                       from "../component/PageTitle";
 import React, { useEffect, useState }  from "react";
@@ -27,16 +26,14 @@ function CreateBoard() {
 
     // state
     // Csrf token
-    const [csrfToken, setCsrfToken]                             = useState("");
+    const [csrfToken, setCsrfToken]                     = useState("");
     // Input item
-    const [inputBoardName, setInputBoardName]                   = useState("");
-    const [inputBoardExplanation, setInputBoardExplanation]     = useState("");
+    const [inputBoardName, setInputBoardName]           = useState("");
     // information
-    const [categoryInformation, setCategoryInformation]         = useState([]);
+    const [categoryInformation, setCategoryInformation] = useState([]);
     // error message
-    const [existsMessage, setExistsMessage]                     = useState("");
-    const [boardNameMessage, setBoardNameMessage]               = useState("");
-    const [boardExplanationMessage, setBoardExplanationMessage] = useState("");
+    const [existsMessage, setExistsMessage]             = useState("");
+    const [boardNameMessage, setBoardNameMessage]       = useState("");
 
     // Set csrf token
     useEffect(() => {
@@ -80,11 +77,10 @@ function CreateBoard() {
         if(!validationCheck()) return;
 
         axios[URL.createBoard.method](URL.createBoard.url, {
-            category_id      : categoryInformation.category_id,
-            board_name       : inputBoardName,
-            board_explanation: inputBoardExplanation,
-            account_id       : user.account_id,
-            csrf_token       : csrfToken
+            category_id : categoryInformation.category_id,
+            board_name  : inputBoardName,
+            account_id  : user.account_id,
+            csrf_token  : csrfToken
         })
         .then((res) => {
             if(res.data.success) {
@@ -100,22 +96,14 @@ function CreateBoard() {
 
     const validationCheck = () => {
         const boardNameCheckResult        = boardNameValidation();
-        const boardExplanationCheckResult = boardExplanationValidation();
 
         // Return True if each Input element is True
-        return boardNameCheckResult && boardExplanationCheckResult;
+        return boardNameCheckResult;
     }
 
     const boardNameValidation = () => {
         if(!Validation.checkNotEmpty(inputBoardName, setBoardNameMessage)) return false;
         if(!Validation.checkSpecifiedNumberOfCharacters(inputBoardName, 1, 100, setBoardNameMessage)) return false;
-
-        // Return True if all validation check results are True
-        return true;
-    }
-
-    const boardExplanationValidation = () => {
-        if(!Validation.checkNotEmpty(inputBoardExplanation, setBoardExplanationMessage)) return false;
 
         // Return True if all validation check results are True
         return true;
@@ -178,19 +166,6 @@ function CreateBoard() {
                                 }
                             </div>
 
-                            <div className="explanation-content">
-                                <div className="form-item-title">説明</div>
-                                <ExplanationForm
-                                    value={ inputBoardExplanation }
-                                    changeFunction={ setInputBoardExplanation }
-                                />
-
-                                {boardExplanationMessage !== "" &&
-                                    <div className="error-content">
-                                        <ErrorMessage text={ boardExplanationMessage } />
-                                    </div>
-                                }
-                            </div>
                         </div>
                     </>
                 )}

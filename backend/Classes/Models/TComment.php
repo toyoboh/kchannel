@@ -6,15 +6,6 @@ use Kchannel\Classes\Config\Database;
 
 class TComment
 {
-    //columns
-    public $thread_id;
-    public $comment_id;
-    public $comment_body;
-    public $created_at;
-    public $created_user_id;
-    public $updated_at;
-    public $updated_user_id;
-
     /**
      * Fetch comments included in the thread
      * @param string $thread_id

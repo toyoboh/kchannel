@@ -1,9 +1,9 @@
 .comment-list-title {
-    border-left: 4px solid var(--main-color);
-    border-bottom: 2px dotted var(--main-color);
-    font-size: 14px;
-    font-weight: 600;
-    padding: 6px;
+    background-color: var(--black-7);
+    border-left: 8px solid var(--black-2);
+    font-size: 16px;
+    font-weight: bold;
+    padding: 8px;
 }
 
 @media(max-width: 480px) {

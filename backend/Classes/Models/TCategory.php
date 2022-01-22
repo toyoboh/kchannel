@@ -6,14 +6,6 @@ use Kchannel\Classes\Config\Database;
 
 class TCategory
 {
-    //columns
-    public $category_id;
-    public $category_name;
-    public $created_at;
-    public $created_account_id;
-    public $updated_at;
-    public $updated_account_id;
-
     /**
      * Fetch all category of database and 
      * @param void

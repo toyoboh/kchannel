@@ -6,7 +6,6 @@ import CreatePageParentName            from "../component/CreatePageParentName";
 import CreateRule                      from "../component/CreateRule";
 import DescriptionIcon                 from "@material-ui/icons/Description";
 import ErrorMessage                    from "../component/ErrorMessage";
-import ExplanationForm                 from "../component/ExplanationForm";
 import InputPlusButton                 from "../component/InputPlusButton";
 import PageTitle                       from "../component/PageTitle";
 import React, { useEffect, useState }  from "react";
@@ -27,16 +26,14 @@ function CreateThread() {
     
     // State
     // csrf token
-    const [csrfToken, setCsrfToken]                               = useState("");
+    const [csrfToken, setCsrfToken]                 = useState("");
     // Board Information
-    const [boardInformation, setBoardInformation]                 = useState([]);
+    const [boardInformation, setBoardInformation]   = useState([]);
     // Input item
-    const [inputThreadName, setInputThreadName]                   = useState("");
-    const [inputThreadExplanation, setInputThreadExplanation]     = useState("");
+    const [inputThreadName, setInputThreadName]     = useState("");
     // Error Message
-    const [existsMessage, setExistsMessage]                       = useState("");
-    const [threadNameMessage, setThreadNameMessage]               = useState("");
-    const [threadExplanationMessage, setThreadExplanationMessage] = useState("");
+    const [existsMessage, setExistsMessage]         = useState("");
+    const [threadNameMessage, setThreadNameMessage] = useState("");
 
     // Set csrf token
     useEffect(() => {
@@ -82,11 +79,10 @@ function CreateThread() {
         if(!validationCheck()) return;
 
         axios[URL.createThread.method](URL.createThread.url, {
-            board_id          : boardId,
-            thread_name       : inputThreadName,
-            thread_explanation: inputThreadExplanation,
-            account_id        : user.account_id,
-            csrf_token        : csrfToken
+            board_id   : boardId,
+            thread_name: inputThreadName,
+            account_id : user.account_id,
+            csrf_token : csrfToken
         })
         .then((res) => {
             if(res.data.success) {
@@ -102,20 +98,13 @@ function CreateThread() {
 
     const validationCheck = () => {
         const threadNameCheckResult = threadNameValidation();
-        const threadExplanationCheckResult = threadExplanationValidation();
 
-        return threadNameCheckResult && threadExplanationCheckResult;
+        return threadNameCheckResult;
     }
 
     const threadNameValidation = () => {
         if(!Validation.checkNotEmpty(inputThreadName, setThreadNameMessage)) return false;
         if(!Validation.checkSpecifiedNumberOfCharacters(inputThreadName, 1, 100, setThreadNameMessage)) return false;
-
-        return true;
-    }
-
-    const threadExplanationValidation = () => {
-        if(!Validation.checkNotEmpty(inputThreadExplanation, setThreadExplanationMessage)) return false;
 
         return true;
     }
@@ -172,21 +161,6 @@ function CreateThread() {
                         {threadNameMessage !== "" &&
                             <div className="error-content">
                                 <ErrorMessage text={ threadNameMessage } />
-                            </div>
-                        }
-                    </div>
-
-                    <div className="explanation-content">
-                        <div className="form-item-title">説明</div>
-                        
-                        <ExplanationForm
-                            value={ inputThreadExplanation }
-                            changeFunction={ setInputThreadExplanation }
-                        />
-
-                        {threadExplanationMessage !== "" &&
-                            <div className="error-content">
-                                <ErrorMessage text={ threadExplanationMessage } />
                             </div>
                         }
                     </div>

@@ -6,17 +6,6 @@ use Kchannel\Classes\Config\Database;
 
 class TBoard
 {
-    //columns
-    public $category_id;
-    public $board_id;
-    public $board_name;
-    public $board_board_explanation;
-    public $board_rule;
-    public $created_at;
-    public $created_user_id;
-    public $updated_at;
-    public $updated_user_id;
-
     /**
      * Fetch boards included in the category
      * @param string $category_id 
@@ -156,22 +145,19 @@ class TBoard
      * @param integer $account_id
      * @param integer $category_id
      * @param string  $baord_name
-     * @param string  $board_explanation
      * @return array
      */
-    public function create($account_id, $category_id, $board_name, $board_explanation) {
+    public function create($account_id, $category_id, $board_name) {
         $query = "INSERT INTO
                         t_boards(
                             category_id,
                             board_name,
-                            board_explanation,
                             created_account_id,
                             updated_account_id
                         )
                     VALUES(
                         :category_id,
                         :board_name,
-                        :board_explanation,
                         :created_account_id,
                         :updated_account_id
                     )
@@ -179,7 +165,6 @@ class TBoard
         $use_query_item = [
             "category_id"        => $category_id,
             "board_name"         => $board_name,
-            "board_explanation"  => $board_explanation,
             "created_account_id" => $account_id,
             "updated_account_id" => $account_id
         ];

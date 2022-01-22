@@ -18,14 +18,12 @@ if(!isset($posts["csrf_token"]))        exit;
 if(!isset($posts["account_id"]))        exit;
 if(!isset($posts["category_id"]))       exit;
 if(!isset($posts["board_name"]))        exit;
-if(!isset($posts["board_explanation"])) exit;
 
 // Set received parameter
 $csrf_token        = $posts["csrf_token"];
 $account_id        = $posts["account_id"];
 $category_id       = $posts["category_id"];
 $board_name        = $posts["board_name"];
-$board_explanation = $posts["board_explanation"];
 
 // Define the response array
 $res_result;
@@ -45,7 +43,7 @@ $select_count = $t_board->checkSameNameExists($category_id, $board_name);
 
 $insert_success = false;
 if($select_count <= 0) {
-    $insert_count = $t_board->create($account_id, $category_id, $board_name, $board_explanation);
+    $insert_count = $t_board->create($account_id, $category_id, $board_name);
 
     $insert_success = $insert_count > 0;
 }

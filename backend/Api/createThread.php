@@ -16,17 +16,15 @@ $posts      = json_decode($json_posts, true);
 
 // check receive data
 if(!isset($posts["csrf_token"]))         exit;
-if(!isset($posts["account_id"]))                 exit;
+if(!isset($posts["account_id"]))         exit;
 if(!isset($posts["board_id"]))           exit;
 if(!isset($posts["thread_name"]))        exit;
-if(!isset($posts["thread_explanation"])) exit;
 
 // Set received parameter
-$csrf_token         = $posts["csrf_token"];
-$account_id                 = $posts["account_id"];
-$board_id           = $posts["board_id"];
-$thread_name        = $posts["thread_name"];
-$thread_explanation = $posts["thread_explanation"];
+$csrf_token  = $posts["csrf_token"];
+$account_id  = $posts["account_id"];
+$board_id    = $posts["board_id"];
+$thread_name = $posts["thread_name"];
 
 // Define the response array
 $res_result;
@@ -46,7 +44,7 @@ $select_count = $t_thread->checkSameNameExists($board_id, $thread_name);
 
 $insert_success = false;
 if($select_count <= 0) {
-    $insert_count   = $t_thread->create($account_id, $board_id, $thread_name, $thread_explanation);
+    $insert_count   = $t_thread->create($account_id, $board_id, $thread_name);
 
     $insert_success = $insert_count > 0;
 }

@@ -6,7 +6,6 @@ import CommentItem                            from "../component/CommentItem";
 import CommentListTitle                       from "../component/CommentListTitle";
 import DisplayProcess                         from "../tool/DisplayProcess";
 import ErrorMessage                           from "../component/ErrorMessage";
-import Explanation                            from "../component/Explanation";
 import NoContent                              from "../component/NoContent";
 import React, { useEffect, useState, useRef } from "react";
 import URL                                    from "../info/Url";
@@ -67,12 +66,7 @@ function CommentList() {
         .then((res) => {
             if(res.data.success) {
                 setThreadExists(true);
-
-                // Perform line break processing in thread explanation.
-                const tempThreadInformation = res.data.data.thread_information;
-                tempThreadInformation.thread_explanation = DisplayProcess.replaceLineFeed(tempThreadInformation.thread_explanation);
-
-                setThreadInformation(tempThreadInformation);
+                setThreadInformation(res.data.data.thread_information);
             } else {
                 setThreadExists(false);
                 setThreadInformation([]);
@@ -250,14 +244,6 @@ function CommentList() {
 
                     <div className="breadcrumb-navigation-container">
                         <BreadcrumbNavigation />
-                    </div>
-
-                    <div className="explanation-container">
-                        <Explanation 
-                            content={ threadInformation.thread_explanation }
-                            createdAt={ threadInformation.created_at }
-                            createdUserName={ threadInformation.created_user_name }
-                        />
                     </div>
 
                     <div className="total-comment-container">

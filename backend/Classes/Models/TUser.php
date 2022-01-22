@@ -6,18 +6,6 @@ use Kchannel\Classes\Config\Database;
 
 class TUser
 {
-    // columns
-    public $user_id;
-    public $user_name;
-    public $main_address;
-    public $password;
-    public $password_token;
-    public $auth;
-    public $created_at;
-    public $updated_at;
-    public $last_login_at;
-    public $deleted_at;
-
     public function getUserProfile($user_id) {
         $query = "SELECT
                     users.account_id     AS account_id,

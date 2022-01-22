@@ -18,10 +18,6 @@
     margin-bottom: 16px;
 }
 
-.comment-list > .wrapper > .explanation-container {
-    margin-bottom: 16px;
-}
-
 .comment-list > .wrapper > .total-comment-container {
     color: var(--black-2);
     font-size: 14px;
