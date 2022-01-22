@@ -146,7 +146,7 @@ class TUser
         $database->connect();
         $stmt = $database->executeQuery($query, $use_query_item);
 
-        return $stmt->rowCount() > 0;
+        return $stmt->rowCount();
     }
 
     /**
@@ -171,7 +171,7 @@ class TUser
         $database->connect();
         $stmt = $database->executeQuery($query, $use_query_item);
 
-        return $stmt->rowCount() > 0;
+        return $stmt->rowCount();
     }
 
     /**
@@ -211,7 +211,10 @@ class TUser
         $database->connect();
         $stmt = $database->executeQuery($query, $use_query_item);
 
-        return $stmt->rowCount() > 0;
+        return array(
+            $stmt->rowCount(),
+            $database->lastId()
+        );
     }
 
     /**
@@ -225,7 +228,7 @@ class TUser
         ;";
 
         $use_query_item = [
-            "created_account_id" => $account_id
+            "account_id" => $account_id
         ];
 
         $database = new Database();

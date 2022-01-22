@@ -18,6 +18,10 @@ if($_SERVER["REQUEST_METHOD"] !== "POST") {
 $json_posts = file_get_contents("php://input");
 $posts      = json_decode($json_posts, true);
 
+// check received parameter
+if(!isset($posts["csrf_token"])) exit;
+if(!isset($posts["token"]))      exit;
+
 // Set received parameter
 $csrf_token = $posts["csrf_token"];
 $token      = $posts["token"];
@@ -37,13 +41,13 @@ if(!$session->checkMatch($csrf_token, "csrf_token")) {
 }
 
 // Get temporary users information
-$t_temporary_user = new TTemporaryUser();
-$temp_user        = $t_temporary_user->getUserInformation($token);
+$t_temporary_user               = new TTemporaryUser();
+list($select_count, $temp_user) = $t_temporary_user->getUserInformation($token);
 
 // Exit if the token is not valid.
-if(empty($temp_user)) {
+if(!$select_count) {
     $res_result["success"] = false;
-    $res_result["message"] = "有効ではないトークンです。";
+    $res_result["message"] = "有効ではないリンクです。";
     echo json_encode($res_result);
     exit;
 }
@@ -67,12 +71,15 @@ if($t_user->checkMailAddressExists($mail_address)) {
 
 // User account registration
 $t_user_detail       = new TUserDetail();
-$registration_result = $t_user->register($user_id, $user_name, $mail_address, $hash_password, $auth);
-$detail_result       = $t_user_detail->initialRegistration($user_id);
+list($user_insert_count, $account_id) = $t_user->register($user_id, $user_name, $mail_address, $hash_password, $auth);
+$detail_insert_count                  = $t_user_detail->initialRegistration($account_id);
 
-if($registration_result) {
+if($user_insert_count && $detail_insert_count) {
     $t_temporary_user->deleteRecordWithMatchMailAddress($mail_address);
     $res_result["success"] = true;
+} else {
+    $res_result["message"] = "システムエラー。ユーザ情報が正常に登録できませんでした。";
+    $res_result["success"] = false;
 }
 
 echo json_encode($res_result);

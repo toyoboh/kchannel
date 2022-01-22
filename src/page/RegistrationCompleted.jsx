@@ -31,12 +31,14 @@ function RegistrationCompleted() {
     }, [])
 
     useEffect(() => {
+        if(csrfToken === "" || token === "") return;
+        
         axios[URL.accountRegistration.method](URL.accountRegistration.url, {
-            token          : token,
-            csrf_token     : csrfToken,
-            withCredentials: true
+            token     : token,
+            csrf_token: csrfToken
         })
         .then((res) => {
+            console.log(res);
             if(res.data.success) {
                 setIsExpire(false);
             } else {

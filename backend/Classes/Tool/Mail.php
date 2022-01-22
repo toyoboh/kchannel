@@ -35,7 +35,7 @@ class Mail
         // Set email message
         $message  = "{$user_name}様\n";
         $message .= "\n";
-        $message .= "『Kちゃんねる』運営でございます。\n";
+        $message .= "『Kちゃんねる』です。\n";
         $message .= "\n";
         $message .= "この度はユーザー登録依頼をいただきまして、ありがとうございます。\n";
         $message .= "\n";

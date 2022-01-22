@@ -6,19 +6,19 @@ use Kchannel\Classes\Config\Database;
 
 class TUserDetail
 {
-    public function initialRegistration($user_id) {
+    public function initialRegistration($account_id) {
         $query = "INSERT INTO
                     t_user_details(
-                        user_id,
+                        account_id,
                         introduction
                     ) VALUES (
-                        :user_id,
+                        :account_id,
                         :introduction
                     )
         ;";
 
         $use_query_item = [
-            "user_id"      => $user_id,
+            "account_id"      => $account_id,
             "introduction" => "" // default
         ];
 
@@ -26,6 +26,6 @@ class TUserDetail
         $database->connect();
         $stmt = $database->executeQuery($query, $use_query_item);
 
-        return $stmt->rowCount() > 0;
+        return $stmt->rowCount();
     }
 }

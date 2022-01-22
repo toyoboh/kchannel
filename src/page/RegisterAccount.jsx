@@ -1,13 +1,13 @@
-import React, { useEffect, useState } from "react";
-import { useHistory } from "react-router-dom";
-import axios from "axios";
 import "../css/RegisterAccount.css";
-import ErrorMessage from "../component/ErrorMessage";
-import Validation from "../tool/Validation";
-import URL from "../info/Url";
-import VisibilityIcon from "@material-ui/icons/Visibility";
-import VisibilityOffIcon from "@material-ui/icons/VisibilityOff";
-import UILink from "../component/ui/UILink";
+import axios                          from "axios";
+import ErrorMessage                   from "../component/ErrorMessage";
+import React, { useEffect, useState } from "react";
+import UILink                         from "../component/ui/UILink";
+import URL                            from "../info/Url";
+import { useHistory }                 from "react-router-dom";
+import Validation                     from "../tool/Validation";
+import VisibilityIcon                 from "@material-ui/icons/Visibility";
+import VisibilityOffIcon              from "@material-ui/icons/VisibilityOff";
 
 function RegisterAccount() {
     // history
@@ -59,15 +59,13 @@ function RegisterAccount() {
         if(!validationCheck()) return;
 
         axios[URL.temporaryRegistration.method](URL.temporaryRegistration.url, {
-            csrf_token: csrfToken,
+            csrf_token  : csrfToken,
             mail_address: inputMailAddress,
-            user_id: inputUserId,
-            user_name: inputUserName,
-            password: inputPassword,
-            withCredentails: true
+            user_id     : inputUserId,
+            user_name   : inputUserName,
+            password    : inputPassword
         })
         .then((res) => {
-            console.log(res.data);
             if(res.data.success) {
                 history.push("/temporaryRegistrationCompleted");
             } else {

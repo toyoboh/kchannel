@@ -37,7 +37,7 @@ class TTemporaryUser
         $database->connect();
         $stmt = $database->executeQuery($query, $use_query_item);
 
-        return $stmt->rowCount() > 0;
+        return $stmt->rowCount();
     }
 
     /**
@@ -65,7 +65,10 @@ class TTemporaryUser
         $database->connect();
         $stmt = $database->executeQuery($query, $use_query_item);
 
-        return $stmt->fetch();
+        return array(
+            $stmt->rowCount(),
+            $stmt->fetch()
+        );
     }
 
     /**
@@ -106,7 +109,7 @@ class TTemporaryUser
         $database->connect();
         $stmt = $database->executeQuery($query, $use_query_item);
 
-        return $stmt->rowCount() > 0;
+        return $stmt->rowCount();
     }
 
     /**
