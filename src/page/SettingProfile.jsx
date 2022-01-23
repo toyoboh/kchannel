@@ -1,11 +1,12 @@
-import React, { useEffect, useState } from "react";
-import { Link, useHistory } from "react-router-dom";
-import axios from "axios";
 import "../css/SettingProfile.css";
-import { useUserContext } from "../context/User";
-import ErrorMessage from "../component/ErrorMessage";
-import Validation from "../tool/Validation";
-import URL from "../info/Url";
+import axios                          from "axios";
+import ErrorMessage                   from "../component/ErrorMessage";
+import React, { useEffect, useState } from "react";
+import UIButton                       from "../component/ui/UIButton";
+import URL                            from "../info/Url";
+import { useHistory }                 from "react-router-dom";
+import { useUserContext }             from "../context/User";
+import Validation                     from "../tool/Validation";
 
 function SettingProfile() {
     const history                                       = useHistory();
@@ -109,6 +110,10 @@ function SettingProfile() {
         // TODO: add validation
         return true;
     }
+
+    const cancel = () => {
+        history.push("/profile/" + userInformation.user_id)
+    }
     
     return(
         <div className="setting-profile">
@@ -121,12 +126,16 @@ function SettingProfile() {
                 ) : (
                     <>
                         <div className="button-content">
-                            <button className="cancel-button">
-                                <Link to={ "/profile/" + userInformation.user_id }>
-                                    キャンセル
-                                </Link>
-                            </button>
-                            <button className="save-button" onClick={ updateUserProfile }>保存する</button>
+                            <UIButton
+                                colorkind="red"
+                                onClick={ cancel }
+                                type="light"
+                            >キャンセル</UIButton>
+
+                            <UIButton
+                                colorkind="green"
+                                onClick={ updateUserProfile }
+                            >保存する</UIButton>
                         </div>
 
                         <div className="user-icon-content">
@@ -139,11 +148,6 @@ function SettingProfile() {
                                     名前
                                 </div>
                                 <div className="item-content">
-                                    {userNameMessage !== "" &&
-                                        <div className="error-content">
-                                            <ErrorMessage text={ userNameMessage } />
-                                        </div>
-                                    }
                                     <input 
                                         className="user-name-input"
                                         value={ inputUserName }
@@ -151,6 +155,11 @@ function SettingProfile() {
                                         type="text"
                                         placeholder="名前を追加する"
                                     />
+                                    {userNameMessage !== "" &&
+                                        <div className="error-content">
+                                            <ErrorMessage text={ userNameMessage } />
+                                        </div>
+                                    }
                                 </div>
                             </div>
 
@@ -159,17 +168,17 @@ function SettingProfile() {
                                     自己紹介
                                 </div>
                                 <div className="item-content">
-                                    {introductionMessage !== "" &&
-                                        <div className="error-content">
-                                            <ErrorMessage text={ introductionMessage } />
-                                        </div>
-                                    }
                                     <textarea
                                         className="introduction-textarea"
                                         value={ inputIntroduction }
                                         onChange={ (e) => setInputIntroduction(e.target.value) }
                                         placeholder="自己紹介を追加する"
                                     ></textarea>
+                                    {introductionMessage !== "" &&
+                                        <div className="error-content">
+                                            <ErrorMessage text={ introductionMessage } />
+                                        </div>
+                                    }
                                 </div>
                             </div>
                         </div>

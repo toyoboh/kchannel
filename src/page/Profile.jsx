@@ -1,11 +1,14 @@
-import React, { useState, useEffect } from "react";
-import { useParams, Link } from "react-router-dom";
-import axios from "axios";
 import "../css/Profile.css";
-import { useUserContext } from "../context/User";
-import URL from "../info/Url";
+import axios                          from "axios";
+import React, { useState, useEffect } from "react";
+import UIButton                       from "../component/ui/UIButton";
+import URL                            from "../info/Url";
+import { useParams, useHistory }      from "react-router-dom";
+import { useUserContext }             from "../context/User";
 
 function Profile() {
+    const history                               = useHistory();
+
     const { userId }                            = useParams();
 
     const { user, setUser }                     = useUserContext();
@@ -52,6 +55,10 @@ function Profile() {
         })
     }
 
+    const moveUpdatePage = () => {
+        history.push("/setting/profile");
+    }
+
     return(
         <div className="profile">
             <div className="wrapper">
@@ -65,16 +72,16 @@ function Profile() {
                         {/* Display only when user id of the logged-in user and the user id on the profile page match */}
                         {user.user_id === userInformation.user_id &&
                         <div className="button-content">
-                            <button
-                                className="logout-button"
+                            <UIButton
                                 onClick={ logout }
-                            >
-                                ログアウト
-                            </button>
+                                type="light"
+                            >ログアウト</UIButton>
 
-                            <button className="update-button">
-                                <Link to="/setting/profile">編集する</Link>
-                            </button>
+                            <UIButton
+                                className="update-button"
+                                colorkind="blue"
+                                onClick={ moveUpdatePage }
+                            >編集する</UIButton>
                         </div>
                         }
 

@@ -1,5 +1,4 @@
 .setting-profile {
-    background-color: var(--base-color);
     min-height: var(--page-min-height);
     padding: 20px 16px;
     width: 100%;
@@ -14,22 +13,7 @@
 .setting-profile > .wrapper > .button-content {
     display: flex;
     justify-content: space-between;
-    margin-bottom: 20px;
-}
-
-.setting-profile > .wrapper > .button-content > .cancel-button {
-    background-color: var(--accent-color);
-    border-radius: 13px;
-    color: white;
-    font-size: 14px;
-    padding: 6px 18px;
-}
-
-.setting-profile > .wrapper > .button-content > .save-button {
-    border: 1px solid black;
-    border-radius: 13px;
-    font-size: 14px;
-    padding: 6px 18px;
+    margin-bottom: 36px;
 }
 
 .setting-profile > .wrapper > .user-icon-content {
@@ -54,7 +38,7 @@
 
 .setting-profile > .wrapper > .user-main-content > .user-name-content {
     align-items: center;
-    border-bottom: 2px solid white;
+    border-bottom: 2px solid var(--black-6);
     display: flex;
     padding-bottom: 8px;
     padding-top: 8px;
@@ -76,7 +60,7 @@
 
 .setting-profile > .wrapper > .user-main-content > .introduction-content {
     align-items: center;
-    border-bottom: 2px solid white;
+    border-bottom: 2px solid var(--black-6);
     display: flex;
     padding-bottom: 8px;
     padding-top: 8px;
