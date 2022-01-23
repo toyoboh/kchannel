@@ -1,7 +1,7 @@
 import "../css/CreateCategory.css";
+import AddCircleOutlineOutlinedIcon   from "@material-ui/icons/AddCircleOutlineOutlined";
 import axios                          from "axios";
 import BackLink                       from "../component/BackLink";
-import AddCircleOutlineOutlinedIcon   from "@material-ui/icons/AddCircleOutlineOutlined";
 import CategoryIcon                   from "@material-ui/icons/Category";
 import CreateRule                     from "../component/CreateRule";
 import ErrorMessage                   from "../component/ErrorMessage";
@@ -128,9 +128,7 @@ function CreateCategory() {
                         <UIButton
                             colorkind="green"
                             onClick={ createCategory }
-                        >
-                            <AddCircleOutlineOutlinedIcon />
-                            Add
+                        ><AddCircleOutlineOutlinedIcon />追加
                         </UIButton>
                     </div>
 

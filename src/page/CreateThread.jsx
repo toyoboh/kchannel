@@ -1,4 +1,5 @@
 import "../css/CreateBoard.css";
+import AddCircleOutlineOutlinedIcon    from "@material-ui/icons/AddCircleOutlineOutlined";
 import axios                           from "axios";
 import BackLink                        from "../component/BackLink";
 import BorderColorIcon                 from "@material-ui/icons/BorderColor";
@@ -171,9 +172,7 @@ function CreateThread() {
                         <UIButton
                             colorkind="green"
                             onClick={ createThread }
-                        >
-                            <span><BorderColorIcon /></span>
-                            <span>button</span>
+                        ><AddCircleOutlineOutlinedIcon />追加
                         </UIButton>
                     </div>
 
