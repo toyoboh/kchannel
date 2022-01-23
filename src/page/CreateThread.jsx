@@ -2,7 +2,6 @@ import "../css/CreateBoard.css";
 import AddCircleOutlineOutlinedIcon    from "@material-ui/icons/AddCircleOutlineOutlined";
 import axios                           from "axios";
 import BackLink                        from "../component/BackLink";
-import BorderColorIcon                 from "@material-ui/icons/BorderColor";
 import CreatePageParentName            from "../component/CreatePageParentName";
 import CreateRule                      from "../component/CreateRule";
 import DescriptionIcon                 from "@material-ui/icons/Description";
