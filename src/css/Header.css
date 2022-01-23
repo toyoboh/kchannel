@@ -1,5 +1,6 @@
 .header {
-    background-color: var(--accent-color);
+    background-color: white;
+    border-bottom: 1px solid var(--black-6);
     position: sticky;
     top: 0px;
     width: 100%;
@@ -18,29 +19,27 @@
 
 .header > .header-wrapper > .header-item-wrapper > .header-item {
     align-items: center;
-    color: white;
     display: flex;
     font-size: 18px;
     font-weight: 900;
-    height: 50px;
     justify-content: center;
     width: 100%;
 }
 
 @media(max-width: 480px) {
     .header > .header-wrapper > .header-item-wrapper > .header-item {
-        height: 50px;
+        height: 49px;
     }
 }
 
 @media(min-width: 481px) and (max-width: 1000px) {
     .header > .header-wrapper > .header-item-wrapper > .header-item {
-        height: 60px;
+        height: 59px;
     }
 }
 
 @media(min-width: 1001px) {
     .header > .header-wrapper > .header-item-wrapper > .header-item {
-        height: 60px;
+        height: 59px;
     }
 }
