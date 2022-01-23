@@ -83,79 +83,85 @@ function Login() {
     return(
         <div className="login">
             
-            <div className="form">
-                <p className="app-name">
+            <div className="container">
+
+                <h1 className="app-name">
                     Kちゃんねる
-                </p>
+                </h1>
+            
+                <div className="form">
 
-                <div className="input-item-content user-content">
-                    <p className="title">メールアドレス、ユーザID</p>
-                    <input
-                        type="text"
-                        className="input input-user-info"
-                        defaultValue={ inputUserInfo }
-                        onChange={ (e) => setInputUserInfo(e.target.value) }
-                    />
-                    
-                </div>
-
-                <div className="input-item-content password-content">
-                    <p className="title">パスワード</p>
-                    <div className="input-password-content">
+                    <div className="input-item-content user-content">
+                        <p className="title">メールアドレス、ユーザID</p>
                         <input
-                            type={ switchInputType }
-                            className="input input-password"
-                            defaultValue={ inputPassword }
-                            onChange={ (e) => setInputPassword(e.target.value) }
+                            type="text"
+                            className="input input-user-info"
+                            defaultValue={ inputUserInfo }
+                            onChange={ (e) => setInputUserInfo(e.target.value) }
                         />
-                        {passwordCheckbox
-                        ?<VisibilityIcon    onClick={ () => setPasswordCheckbox(prev => !prev)} />
-                        :<VisibilityOffIcon onClick={ () => setPasswordCheckbox(prev => !prev)} />
+                        
+                    </div>
+
+                    <div className="input-item-content password-content">
+                        <p className="title">パスワード</p>
+                        <div className="input-password-content">
+                            <input
+                                type={ switchInputType }
+                                className="input input-password"
+                                defaultValue={ inputPassword }
+                                onChange={ (e) => setInputPassword(e.target.value) }
+                            />
+                            {passwordCheckbox
+                            ?<VisibilityIcon    onClick={ () => setPasswordCheckbox(prev => !prev)} />
+                            :<VisibilityOffIcon onClick={ () => setPasswordCheckbox(prev => !prev)} />
+                            }
+                        </div>
+                    </div>
+
+                    <div className="auto-login-content">
+                        <input
+                            type="checkbox"
+                            id="autoLoginCheckbox"
+                            className="checkbox"
+                            defaultValue={ isAutoLogin }
+                            onChange={ () => setIsAutoLogin(prev => !prev) }
+                        />
+
+                        <label
+                            className="label"
+                            htmlFor="autoLoginCheckbox"
+                        >次回から自動ログイン</label>
+                    </div>
+
+                    <div className="login-button-content">
+                        {inputUserInfo === "" || inputPassword === "" ?
+                        <button className="button disable">ログイン</button>
+                        :
+                        <button className="button enable" onClick={ login }>ログイン</button>
                         }
                     </div>
-                </div>
 
-                <div className="auto-login-content">
-                    <input
-                        type="checkbox"
-                        id="autoLoginCheckbox"
-                        className="checkbox"
-                        defaultValue={ isAutoLogin }
-                        onChange={ () => setIsAutoLogin(prev => !prev) }
-                    />
-
-                    <label
-                        className="label"
-                        htmlFor="autoLoginCheckbox"
-                    >次回から自動ログイン</label>
-                </div>
-
-                <div className="login-button-content">
-                    {inputUserInfo === "" || inputPassword === "" ?
-                    <button className="button disable">ログイン</button>
-                    :
-                    <button className="button enable" onClick={ login }>ログイン</button>
+                    {loginErrorMessage !== "" &&
+                    <div className="error-content">
+                        <ErrorMessage text={ loginErrorMessage } />
+                    </div>
                     }
+
+                    <p className="or-content">
+                        または
+                    </p>
+
+                    <p className="create-link-content">
+                        <UILink
+                            to="/registerAccount"
+                            underline="true"
+                            sizekind="small"
+                        >アカウントを作成する</UILink>
+                    </p>
                 </div>
 
-                {loginErrorMessage !== "" &&
-                <div className="error-content">
-                    <ErrorMessage text={ loginErrorMessage } />
-                </div>
-                }
-
-                <p className="or-content">
-                    または
-                </p>
-
-                <p className="create-link-content">
-                    <UILink
-                        to="/registerAccount"
-                        underline="true"
-                        sizekind="small"
-                    >アカウントを作成する</UILink>
-                </p>
             </div>
+
         </div>
     )
 }

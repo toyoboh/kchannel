@@ -112,96 +112,100 @@ function RegisterAccount() {
 
     return(
         <div className="register-account">
-            <div className="form">
-                <p className="app-name">
+            <div className="container">
+
+                <h1 className="app-name">
                     Kちゃんねる
-                </p>
+                </h1>
 
-                <div className="input-item-content mail-address-content">
-                    <p className="title">メールアドレス</p>
-                    <input
-                        type="text"
-                        className="input input-mail-address"
-                        defaultValue={ inputMailAddress }
-                        onChange={ (e) => setInputMailAddress(e.target.value) }
-                    />
-                    {mailAddressMessage !== "" &&
-                    <div className="error">
-                        <ErrorMessage text={ mailAddressMessage } />
-                    </div>
-                    }
-                </div>
-
-                <div className="input-item-content user-id-content">
-                    <p className="title">ユーザID</p>
-                    <input
-                        type="text"
-                        className="input input-user-id"
-                        defaultValue={ inputUserId }
-                        onChange={ (e) => setInputUserId(e.target.value) }
-                    />
-                    {userIdMessage !== "" &&
-                    <div className="error">
-                        <ErrorMessage text={ userIdMessage } />
-                    </div>
-                    }
-                </div>
-
-                <div className="input-item-content user-name-content">
-                    <p className="title">ユーザ名</p>
-                    <input
-                        type="text"
-                        className="input input-user-name"
-                        defaultValue={ inputUserName }
-                        onChange={ (e) => setInputUserName(e.target.value) }
-                    />
-                    {userNameMessage !== "" &&
-                    <div className="error">
-                        <ErrorMessage text={ userNameMessage } />
-                    </div>
-                    }
-                </div>
-
-                <div className="input-item-content password-content">
-                    <p className="title">パスワード</p>
-                    <div className="input-password-content">
+                <div className="form">
+                    <div className="input-item-content mail-address-content">
+                        <p className="title">メールアドレス</p>
                         <input
-                            type={ switchInputType }
-                            className="input input-password"
-                            defaultValue={ inputPassword }
-                            onChange={ (e) => setInputPassword(e.target.value) }
+                            type="text"
+                            className="input input-mail-address"
+                            defaultValue={ inputMailAddress }
+                            onChange={ (e) => setInputMailAddress(e.target.value) }
                         />
-                        {passwordCheckbox
-                        ?<VisibilityIcon    onClick={ () => setPasswordCheckbox(prev => !prev)} />
-                        :<VisibilityOffIcon onClick={ () => setPasswordCheckbox(prev => !prev)} />
+                        {mailAddressMessage !== "" &&
+                        <div className="error">
+                            <ErrorMessage text={ mailAddressMessage } />
+                        </div>
                         }
                     </div>
-                    {passwordMessage !== "" &&
-                    <div className="error">
-                        <ErrorMessage text={ passwordMessage } />
+
+                    <div className="input-item-content user-id-content">
+                        <p className="title">ユーザID</p>
+                        <input
+                            type="text"
+                            className="input input-user-id"
+                            defaultValue={ inputUserId }
+                            onChange={ (e) => setInputUserId(e.target.value) }
+                        />
+                        {userIdMessage !== "" &&
+                        <div className="error">
+                            <ErrorMessage text={ userIdMessage } />
+                        </div>
+                        }
                     </div>
-                    }
+
+                    <div className="input-item-content user-name-content">
+                        <p className="title">ユーザ名</p>
+                        <input
+                            type="text"
+                            className="input input-user-name"
+                            defaultValue={ inputUserName }
+                            onChange={ (e) => setInputUserName(e.target.value) }
+                        />
+                        {userNameMessage !== "" &&
+                        <div className="error">
+                            <ErrorMessage text={ userNameMessage } />
+                        </div>
+                        }
+                    </div>
+
+                    <div className="input-item-content password-content">
+                        <p className="title">パスワード</p>
+                        <div className="input-password-content">
+                            <input
+                                type={ switchInputType }
+                                className="input input-password"
+                                defaultValue={ inputPassword }
+                                onChange={ (e) => setInputPassword(e.target.value) }
+                            />
+                            {passwordCheckbox
+                            ?<VisibilityIcon    onClick={ () => setPasswordCheckbox(prev => !prev)} />
+                            :<VisibilityOffIcon onClick={ () => setPasswordCheckbox(prev => !prev)} />
+                            }
+                        </div>
+                        {passwordMessage !== "" &&
+                        <div className="error">
+                            <ErrorMessage text={ passwordMessage } />
+                        </div>
+                        }
+                    </div>
+
+                    <div className="register-button-content">
+                        {inputMailAddress !== "" && inputUserId !== "" && inputUserName !== "" && inputPassword !== "" ?
+                        <button className="button enable" onClick={ register }>登録する</button>
+                        :
+                        <button className="button disable">登録する</button>
+                        }
+                    </div>
+
+                    <p className="or-content">
+                        または
+                    </p>
+
+                    <p className="login-link-content">
+                        <UILink
+                            to="/login"
+                            underline="true"
+                            sizekind="small"
+                        >アカウントをお持ちの方はこちらへ</UILink>
+                    </p>
                 </div>
 
-                <div className="register-button-content">
-                    {inputMailAddress !== "" && inputUserId !== "" && inputUserName !== "" && inputPassword !== "" ?
-                    <button className="button enable" onClick={ register }>登録する</button>
-                    :
-                    <button className="button disable">登録する</button>
-                    }
-                </div>
-
-                <p className="or-content">
-                    または
-                </p>
-
-                <p className="login-link-content">
-                    <UILink
-                        to="/login"
-                        underline="true"
-                        sizekind="small"
-                    >アカウントをお持ちの方はこちらへ</UILink>
-                </p>
             </div>
         </div>
     )

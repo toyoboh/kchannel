@@ -1,62 +1,72 @@
 .register-account {
+    background: linear-gradient(120deg, #2980B9, #8E44AD);
     display: flex;
     height: 100vh;
     align-items: center;
     justify-content: center;
 }
 
-.register-account > .form {
-    box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.1);
+.register-account > .container {
+    background-color: white;
+    border-radius: 16px;
     max-width: 800px;
-    padding: 32px 16px;
     width: 90%;
 }
 
-.register-account > .form > .app-name {
-    margin-bottom: 32px;
+.register-account > .container > .app-name {
+    border-bottom: 1px solid var(--black-5);
+    color: var(--black-2);
+    font-size: 18px;
+    font-weight: bold;
     text-align: center;
+    padding: 16px 0px;
 }
 
-.register-account > .form > .input-item-content {
+.register-account > .container > .form {
+    padding: 32px 16px;
+}
+
+.register-account > .container > .form > .input-item-content {
     border: 1px solid #aaa;
     border-radius: 4px;
     padding: 4px 8px;
 }
 
-.register-account > .form > .input-item-content {
+.register-account > .container > .form > .input-item-content {
     margin-bottom: 16px;
 }
 
-.register-account > .form > .input-item-content > .input {
+.register-account > .container > .form > .input-item-content > .input {
     background-color: var(--base-color);
     font-size: 16px;
     width: 100%;
 }
 
-.register-account > .form > .input-item-content .input:focus {
+.register-account > .container > .form > .input-item-content .input:focus {
     outline: none;
 }
 
-.register-account > .form > .password-content > .input-password-content {
+.register-account > .container > .form > .password-content > .input-password-content {
     display: flex;
 }
 
-.register-account > .form > .password-content > .input-password-content .input {
+.register-account > .container > .form > .password-content > .input-password-content .input {
     background-color: var(--base-color);
     flex: 1;
     font-size: 16px;
 }
-.register-account > .form > .password-content > .input-password-content .MuiSvgIcon-root {
+.register-account > .container > .form > .password-content > .input-password-content .MuiSvgIcon-root {
     font-size: 16px;
     margin-left: 4px;
 }
 
-.register-account > .form > .register-button-content {
+.register-account > .container > .form > .register-button-content {
     margin-bottom: 16px;
 }
 
-.register-account > .form > .register-button-content > .button {
+.register-account > .container > .form > .register-button-content > .button {
     border-radius: 4px;
+    color: white;
     font-size: 14px;
     letter-spacing: 0.5px;
     padding-bottom: 8px;
@@ -65,91 +75,92 @@
     width: 100%;
 }
 
-.register-account > .form > .register-button-content > .enable {
-    background-color: var(--green-a);
+.register-account > .container > .form > .register-button-content > .enable {
+    background-color: var(--green-2);
 }
 
-.register-account > .form > .register-button-content > .disable {
-    background-color: var(--green-b);
+.register-account > .container > .form > .register-button-content > .disable {
+    background-color: var(--green-6);
 }
 
-.register-account > .form > .or-content {
+.register-account > .container > .form > .or-content {
     align-items: center;
+    color: var(--black-2);
     display: flex;
     font-size: 14px;
     margin-bottom: 16px;
 }
 
-.register-account > .form > .or-content:before,
-.register-account > .form > .or-content:after {
-    background-color: black;
+.register-account > .container > .form > .or-content:before,
+.register-account > .container > .form > .or-content:after {
+    background-color: var(--black-2);
     content: "";
     flex-grow: 1;
     height: 1px;
 }
 
-.register-account > .form > .or-content:before {
+.register-account > .container > .form > .or-content:before {
     margin-right: 14px;
 }
 
-.register-account > .form > .or-content:after {
+.register-account > .container > .form > .or-content:after {
     margin-left: 14px;
 }
 
-.register-account > .form > .login-link-content {
+.register-account > .container > .form > .login-link-content {
     text-align: center;
 }
 
 @media(max-width: 480px) {
-    .register-account > .form > .app-name {
+    .register-account > .container > .form > .app-name {
         font-size: 16px;
     }
 
-    .register-account > .form > .input-item-content > .title {
+    .register-account > .container > .form > .input-item-content > .title {
         font-size: 10px;
     }
 
-    .register-account > .form > .password-display-content > .label {
+    .register-account > .container > .form > .password-display-content > .label {
         font-size: 12px;
     }
 
-    .register-account > .form > .login-link-content {
+    .register-account > .container > .form > .login-link-content {
         font-size: 12px;
     }
 }
 
 @media(min-width: 481px) and (max-width: 1000px) {
-    .register-account > .form > .app-name {
+    .register-account > .container > .form > .app-name {
         font-size: 18px;
     }
 
-    .register-account > .form > .input-item-content > .title {
+    .register-account > .container > .form > .input-item-content > .title {
         font-size: 12px;
     }
 
-    .register-account > .form > .password-display-content > .label {
+    .register-account > .container > .form > .password-display-content > .label {
         font-size: 14px;
     }
 
-    .register-account > .form > .login-link-content {
+    .register-account > .container > .form > .login-link-content {
         font-size: 14px;
     }
 }
 
 @media(min-width: 1001px) {
-    .register-account > .form > .app-name {
+    .register-account > .container > .form > .app-name {
         font-size: 20px;
     }
 
-    .register-account > .form > .input-item-content > .title {
+    .register-account > .container > .form > .input-item-content > .title {
         font-size: 12px;
     }
 
-    .register-account > .form > .password-display-content > .label {
+    .register-account > .container > .form > .password-display-content > .label {
         font-size: 14px;
     }
 
-    .register-account > .form > .login-link-content {
+    .register-account > .container > .form > .login-link-content {
         font-size: 14px;
     }
 }
