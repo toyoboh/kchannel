@@ -37,8 +37,12 @@ body {
 
     --green-1: #44A514;
     --green-2: #67C23A;
-    --green-3: #d6f5c6;
-    --green-4: #F0F9EB;
+    --green-3: #7ec959;
+    --green-4: #94df6f;
+    --green-5: #a6e487;
+    --green-6: #d6f5c6;
+    --green-7: #def3d3;
+    --green-8: #F0F9EB;
 
     --blue-1: #007FFE;
     --blue-2: #409EFF;
@@ -53,12 +57,14 @@ body {
     --orange-b: #FAECD8;
     --orange-c: #FDF6EC;
 
-    --red-1: #F43737;
+    --red-1: #d35c5c;
     --red-2: #F56C6C;
     --red-3: #F07F7F;
     --red-4: #F29898;
     --red-5: #EEAFAF;
-    --red-6: #f2cccc;
+    --red-6: #fbc4c4;
+    --red-7: #f2cccc;
+    --red-8: #fef0f0;
 }
 
 @media(max-width: 480px) {

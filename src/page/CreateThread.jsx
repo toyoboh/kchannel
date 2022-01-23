@@ -6,9 +6,10 @@ import CreatePageParentName            from "../component/CreatePageParentName";
 import CreateRule                      from "../component/CreateRule";
 import DescriptionIcon                 from "@material-ui/icons/Description";
 import ErrorMessage                    from "../component/ErrorMessage";
-import InputPlusButton                 from "../component/InputPlusButton";
 import PageTitle                       from "../component/PageTitle";
 import React, { useEffect, useState }  from "react";
+import UIButton                        from "../component/ui/UIButton";
+import UIInput                         from "../component/ui/UIInput";
 import URL                             from "../info/Url";
 import { useParams, Link, useHistory } from "react-router-dom";
 import { useUserContext }              from "../context/User";
@@ -150,12 +151,13 @@ function CreateThread() {
                     <div className="name-content">
                         <div className="form-item-title">スレッド名</div>
 
-                        <InputPlusButton
-                            value={ inputThreadName }
-                            changeFunction={ setInputThreadName }
-                            buttonFunction={ createThread }
-                            Icon={ BorderColorIcon }
-                        />
+                        <div className="input-content">
+                            <UIInput
+                                defaultValue={ inputThreadName }
+                                onChange={ (e) => setInputThreadName(e.target.value) }
+                                placeholder="スレッド名"
+                            />
+                        </div>
 
                         {/* Show only if the message is not an empty string. */}
                         {threadNameMessage !== "" &&
@@ -163,6 +165,16 @@ function CreateThread() {
                                 <ErrorMessage text={ threadNameMessage } />
                             </div>
                         }
+                    </div>
+
+                    <div className="button-content">
+                        <UIButton
+                            colorkind="green"
+                            onClick={ createThread }
+                        >
+                            <span><BorderColorIcon /></span>
+                            <span>button</span>
+                        </UIButton>
                     </div>
 
                 </div>

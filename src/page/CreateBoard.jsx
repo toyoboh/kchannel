@@ -5,10 +5,11 @@ import BorderColorIcon                 from "@material-ui/icons/BorderColor";
 import CreatePageParentName            from "../component/CreatePageParentName";
 import CreateRule                      from "../component/CreateRule";
 import ErrorMessage                    from "../component/ErrorMessage";
-import InputPlusButton                 from "../component/InputPlusButton";
 import PageTitle                       from "../component/PageTitle";
 import React, { useEffect, useState }  from "react";
 import ReceiptIcon                     from "@material-ui/icons/Receipt";
+import UIButton                        from "../component/ui/UIButton";
+import UIInput                         from "../component/ui/UIInput";
 import URL                             from "../info/Url";
 import { useParams, Link, useHistory } from "react-router-dom";
 import { useUserContext }              from "../context/User";
@@ -152,18 +153,29 @@ function CreateBoard() {
                             <div className="name-content">
                                 <div className="form-item-title">掲示板名</div>
 
-                                <InputPlusButton
-                                    value={ inputBoardName }
-                                    changeFunction={ setInputBoardName }
-                                    buttonFunction={ createBoard }
-                                    Icon={ BorderColorIcon }
-                                />
+                                <div className="input-content">
+                                    <UIInput
+                                        defaultValue={ inputBoardName }
+                                        onChange={ (e) => setInputBoardName(e.target.value) }
+                                        placeholder="掲示板名"
+                                    />
+                                </div>
 
                                 {boardNameMessage !== "" &&
                                     <div className="error-content">
                                         <ErrorMessage text={ boardNameMessage } />
                                     </div>
                                 }
+                            </div>
+
+                            <div className="button-content">
+                                <UIButton
+                                    colorkind="green"
+                                    onClick={ createBoard }
+                                >
+                                    <span><BorderColorIcon /></span>
+                                    <span>button</span>
+                                </UIButton>
                             </div>
 
                         </div>

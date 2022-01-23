@@ -24,16 +24,20 @@
 
 /* form */
 .create-category > .wrapper > .form-content > .name-content {
-    margin-bottom: 4px;
+    margin-bottom: 8px;
 }
 
-.create-category > .wrapper > .form-content > .name-content .form-item-title {
+.create-category > .wrapper > .form-content > .name-content > .form-item-title {
     font-size: 14px;
     margin-bottom: 4px;
 }
 
-.create-category > .wrapper > .form-content > .name-content > .input-plus-button {
-    margin-bottom: 4px;
+.create-category > .wrapper > .form-content > .name-content > .input-content {
+    margin-bottom: 8px;
+}
+
+.create-category > .wrapper > .form-content > .button-content {
+    text-align: right;
 }
 
 @media(max-width: 480px) {

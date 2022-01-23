@@ -1,13 +1,14 @@
 import "../css/CreateCategory.css";
 import axios                          from "axios";
 import BackLink                       from "../component/BackLink";
-import BorderColorIcon                from "@material-ui/icons/BorderColor";
+import AddCircleOutlineOutlinedIcon   from "@material-ui/icons/AddCircleOutlineOutlined";
 import CategoryIcon                   from "@material-ui/icons/Category";
 import CreateRule                     from "../component/CreateRule";
 import ErrorMessage                   from "../component/ErrorMessage";
-import InputPlusButton                from "../component/InputPlusButton";
 import PageTitle                      from "../component/PageTitle";
 import React, { useEffect, useState } from "react";
+import UIButton                       from "../component/ui/UIButton";
+import UIInput                        from "../component/ui/UIInput";
 import URL                            from "../info/Url";
 import { useHistory }                 from "react-router-dom";
 import { useUserContext }             from "../context/User";
@@ -108,19 +109,29 @@ function CreateCategory() {
                     <div className="name-content">
                         <div className="form-item-title">カテゴリー名</div>
                         
-                        <InputPlusButton
-                            value={ inputCategoryName }
-                            changeFunction={ setInputCategoryName }
-                            buttonFunction={ createCategory }
-                            Icon={ BorderColorIcon }
-                        />
+                        <div className="input-content">
+                            <UIInput
+                                defaultValue={ inputCategoryName }
+                                onChange={ (e) => setInputCategoryName(e.target.value) }
+                                placeholder="カテゴリー名"
+                            />
+                        </div>
 
-                        {/* Show only if the message is not an empty string. */}
                         {categoryNameMessage !== "" &&
-                            <div className="error-content">
-                                <ErrorMessage text={ categoryNameMessage } />
-                            </div>
+                        <div className="error-content">
+                            <ErrorMessage text={ categoryNameMessage } />
+                        </div>
                         }
+                    </div>
+
+                    <div className="button-content">
+                        <UIButton
+                            colorkind="green"
+                            onClick={ createCategory }
+                        >
+                            <AddCircleOutlineOutlinedIcon />
+                            Add
+                        </UIButton>
                     </div>
 
                 </div>
