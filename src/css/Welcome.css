@@ -1,13 +1,116 @@
-
-
-@media(max-width: 480px) {
+.welcome {
 
 }
 
-@media(min-width: 481px) and (max-width: 1000px) {
+.welcome > .header {
+    background-blend-mode:lighten;
+    background-color:rgba(255, 255, 255, 0.1);
+    background-image: url("../img/welcome/img1.jpg");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    border: none;
+    height: 100vh;
+    width: 100vw;
+}
+
+.welcome > .header > .wrapper {
+    height: 100%;
+    margin: 0px auto;
+    max-width: 1000px;
+    position: relative;
+}
+
+.welcome > .header > .wrapper > .box {
+    left: 50%;
+    max-width: 400px;
+    position: absolute;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    width: 50%;
+}
+
+.welcome > .header > .wrapper > .box > .app-name {
+    color: white;
+    font-size: 36px;
+    font-weight: bold;
+    letter-spacing: 2px;
+    margin-bottom: 48px;
+    text-align: center;
+}
+
+.welcome > .header > .wrapper > .box > .app-description {
+    color: white;
+    font-size: 14px;
+    margin-bottom: 64px;
+}
+
+.welcome > .header > .wrapper > .box > .button-container {
+
+}
+
+.welcome > .header > .wrapper > .box > .button-container .button {
+    align-items: center;
+    display: flex;
+    justify-content: center;
+    padding: 10px 30px;
+}
+
+.welcome > .header > .wrapper > .box > .button-container .signin {
+    background-color: var(--blue-2);
+    border: 2px solid var(--blue-2);
+    color: white;
+    font-weight: bold;
+}
+
+.welcome > .header > .wrapper > .box > .button-container .signin:hover {
+    background-color: rgba(0, 0, 0, 0);
+    border: 2px solid var(--blue-2);
+    color: var(--blue-2);
+    transition: 0.2s;
+}
+
+.welcome > .header > .wrapper > .box > .button-container .signup {
+    border: 2px solid var(--green-2);
+    color: var(--green-2);
+    font-weight: bold;
+}
+
+.welcome > .header > .wrapper > .box > .button-container .signup:hover {
+    background-color: var(--green-2);
+    color: white;
+    font-weight: bold;
+    transition: 0.2s;
+}
+
+.welcome > .header > .wrapper > .box > .button-container .button > .MuiSvgIcon-root {
+    font-size: 16px;
+    margin-right: 4px;
+}
+
+
+@media(max-width: 1000px) {
+    .welcome > .header > .wrapper > .box > .button-container > .button {
+        width: 100%;
+    }
     
+    .welcome > .header > .wrapper > .box > .button-container > .signin {
+        margin-bottom: 20px;
+    }
 }
 
 @media(min-width: 1001px) {
-    
+    .welcome > .header > .wrapper > .box > .app-description {
+        text-align: center;
+    }
+
+    .welcome > .header > .wrapper > .box > .button-container {
+        display: flex;
+        justify-content: space-between;
+    }
+
+    .welcome > .header > .wrapper > .box > .button-container {
+        display: flex;
+        justify-content: space-between;
+    }
 }
