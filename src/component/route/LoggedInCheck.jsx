@@ -15,7 +15,6 @@ function LoggedInCheck() {
     useEffect(() => {
         axios[URL.loggedInCheck.method](URL.loggedInCheck.url)
         .then((res) => {
-            console.log(res)
             if(res.data.success) {
                 setUser({
                     account_id: res.data.data.account_id,

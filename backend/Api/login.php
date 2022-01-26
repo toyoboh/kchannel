@@ -4,6 +4,7 @@ require __DIR__ . "/../Info/settingHeader.php";
 require __DIR__ . "/../../vendor/autoload.php";
 
 use Kchannel\Classes\Models\TUser;
+use Kchannel\Classes\Models\TAutoLogin;
 use Kchannel\Classes\Tool\Session;
 use Kchannel\Classes\Tool\Token;
 use Kchannel\Classes\Tool\Cookie;
@@ -81,17 +82,17 @@ $session->set("user_name" , $user_name);
 
 if($is_auto_login) {
     // create auto login token
-    $t_token = new Token();
-    $auto_login_token = $t_token->autoLoginToken();
+    $t_token              = new Token();
+    $new_auto_login_token = $t_token->autoLoginToken();
 
     // register in DB
-    $t_user->removeAllAutoLoginToken($account_id);
-    $insert_count = $t_user->registrationAutoLoginToken($account_id, $auto_login_token);
+    $t_auto_login = new TAutoLogin();
+    $insert_count = $t_auto_login->register($account_id, $new_auto_login_token);
 
     // register in cookie
     if($insert_count > 0) {
         $t_cookie = new Cookie();
-        $t_cookie->registrationAutoLoginToken($auto_login_token);
+        $t_cookie->registrationAutoLoginToken($new_auto_login_token);
     } else {
         // HACK: add error proccess
     }

@@ -7,6 +7,7 @@ use Kchannel\Classes\Tool\Cookie;
 use Kchannel\Classes\Tool\Session;
 use Kchannel\Classes\Tool\Token;
 use Kchannel\Classes\Models\TUser;
+use Kchannel\Classes\Models\TAutoLogin;
 
 if($_SERVER["REQUEST_METHOD"] !== "POST") {
     exit;
@@ -61,19 +62,21 @@ if($session->checkExists("account_id") && isset($_COOKIE["auto_login_token"])) {
     $t_user->updateAtLogin($account_id);
 
     // DBのトークン削除
-    $t_user->removeAllAutoLoginToken($account_id);
+    $old_auto_login_token = $_COOKIE["auto_login_token"];
+    $t_auto_login         = new TAutoLogin();
+    $t_auto_login->remove($old_auto_login_token);
 
     // 新しいトークンの作成
-    $t_token          = new Token();
-    $auto_login_token = $t_token->autoLoginToken();
+    $t_token              = new Token();
+    $new_auto_login_token = $t_token->autoLoginToken();
 
     // DBへの新規トークン登録
-    $insert_count = $t_user->registrationAutoLoginToken($account_id, $auto_login_token);
+    $insert_count = $t_auto_login->register($account_id, $new_auto_login_token);
 
     // Cookieへの新規トークン登録
     if($insert_count > 0) {
         $t_cookie = new Cookie();
-        $t_cookie->registrationAutoLoginToken($auto_login_token);
+        $t_cookie->registrationAutoLoginToken($new_auto_login_token);
     }
     
     // response data
@@ -92,11 +95,11 @@ if($session->checkExists("account_id") && isset($_COOKIE["auto_login_token"])) {
 // 上記はまちがい！！！端末の時間設定がおかしい可能性もあるので、DBのcreate_atを見る必要がある
 if(!$session->checkExists("account_id") && isset($_COOKIE["auto_login_token"])) {
     // get auto_login_token of the cookie
-    $browser_auto_login_token = $_COOKIE["auto_login_token"];
+    $old_auto_login_token = $_COOKIE["auto_login_token"];
 
     // Get information about users that match the token
-    $t_user = new TUser();
-    list($select_count, $user_information) = $t_user->selectAutoLoginUserInformation($browser_auto_login_token);
+    $t_auto_login              = new TAutoLogin();
+    list($select_count, $user) = $t_auto_login->getUser($old_auto_login_token);
 
     // Exit if there is no acquisition information
     if($select_count <= 0) {
@@ -105,11 +108,14 @@ if(!$session->checkExists("account_id") && isset($_COOKIE["auto_login_token"])) 
         exit;
     }
 
+    // Remove old token
+    $t_auto_login->remove($old_auto_login_token);
+
     // set user information
-    $account_id       = $user_information["account_id"];
-    $user_id          = $user_information["user_id"];
-    $user_name        = $user_information["user_name"];
-    $token_created_at = $user_information["token_created_at"];
+    $account_id       = $user["account_id"];
+    $user_id          = $user["user_id"];
+    $user_name        = $user["user_name"];
+    $token_created_at = $user["token_created_at"];
 
     // expiry of the auto login token
     $token_created_datetime = new DateTime($token_created_at);
@@ -125,22 +131,20 @@ if(!$session->checkExists("account_id") && isset($_COOKIE["auto_login_token"])) 
     }
 
     // update last login date at time.
+    $t_user = new TUser();
     $t_user->updateAtLogin($account_id);
-
-    // Remove all tokens held by the ID
-    $t_user->removeAllAutoLoginToken($account_id);
     
     // 新しいトークンの作成
-    $t_token          = new Token();
-    $auto_login_token = $t_token->autoLoginToken();
+    $t_token              = new Token();
+    $new_auto_login_token = $t_token->autoLoginToken();
     
     // DBへの新規トークン登録
-    $insert_count = $t_user->registrationAutoLoginToken($account_id, $auto_login_token);
+    $insert_count = $t_auto_login->register($account_id, $new_auto_login_token);
     
     // Cookieへの新規トークン登録
     if($insert_count > 0) {
         $t_cookie = new Cookie();
-        $t_cookie->registrationAutoLoginToken($auto_login_token);
+        $t_cookie->registrationAutoLoginToken($new_auto_login_token);
     }
     
     // set session
