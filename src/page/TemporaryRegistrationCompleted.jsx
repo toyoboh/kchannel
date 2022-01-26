@@ -4,20 +4,21 @@ import "../css/TemporaryRegistrationCompleted.css";
 function TemporaryRegistrationCompleted() {
     return(
         <div className="temporary-registration-completed">
-            <div className="main">
-                <div className="app-name-content">
-                    <p className="app-name">Kちゃんねる</p>
-                </div>
+            <div className="container">
+                <h1 className="app-name">
+                    Kちゃんねる
+                </h1>
 
-                <div className="message-content">
-                    <p className="item">ユーザ登録(仮)ありがとうございます。ユーザ登録用のURLをメールにて送信しました。</p>
+                <div className="box">
+                    <p className="message">この度はユーザ登録（仮）頂きありがとうございます。</p>
 
-                    <p className="item not-done">現時点ではユーザ登録は完了していません。</p>
+                    <p className="message">ユーザ登録用のリンクをメールにて送信致しました。</p>
+                    
+                    <p className="message caution">※現時点ではユーザ登録は完了していません。</p>
 
-                    <p className="item">
-                        メールをご確認の上、メール本文中のURLをクリックし、本登録を完了してください。<br />
-                        ※リンクの有効期限は24時間です。
-                    </p>
+                    <p className="message">メールをご確認の上、本文中のリンクにアクセス頂くことで本登録が完了となります。</p>
+                        
+                    <p className="message">また、リンクの有効期限はユーザ登録（仮）完了から24時間となります。</p>
                 </div>
             </div>
         </div>

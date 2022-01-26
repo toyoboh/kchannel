@@ -1,42 +1,42 @@
 .temporary-registration-completed {
+    background: linear-gradient(120deg, #2980B9, #8E44AD);
     display: flex;
     height: 100vh;
     align-items: center;
     justify-content: center;
 }
 
-.temporary-registration-completed > .main {
-    border: 1px solid black;
+.temporary-registration-completed > .container {
+    background-color: white;
+    border-radius: 16px;
     max-width: 800px;
     width: 90%;
 }
 
-.temporary-registration-completed > .main > .app-name-content {
-    background-color: var(--base-color);
-    border-bottom: 1px solid black;
-    padding-bottom: 8px;
-    padding-top: 8px;
-}
-
-.temporary-registration-completed > .main > .app-name-content > .app-name {
-    font-size: 16px;
+.temporary-registration-completed > .container > .app-name {
+    border-bottom: 1px solid var(--black-5);
+    color: var(--black-2);
+    font-size: 18px;
+    font-weight: bold;
     text-align: center;
+    padding: 16px 0px;
 }
 
-.temporary-registration-completed > .main > .message-content {
-    padding: 16px 8px;
+.temporary-registration-completed > .container > .box {
+    padding: 32px 16px;
 }
 
-.temporary-registration-completed > .main > .message-content > .item {
+.temporary-registration-completed > .container > .box > .message {
+    color: var(--black-2);
+    margin-bottom: 8px;
+}
+
+.temporary-registration-completed > .container > .box > .caution {
+    background-color: var(--red-8);
+    border: 1px solid var(--red-2);
+    color: var(--red-2);
     font-size: 14px;
-}
-
-.temporary-registration-completed > .main > .message-content > .item:not(:last-of-type) {
-    margin-bottom: 12px;
-}
-
-.temporary-registration-completed > .main > .message-content > .login-link-content {
-    text-align: center;
+    padding: 8px 16px;
 }
 
 @media(max-width: 480px) {
