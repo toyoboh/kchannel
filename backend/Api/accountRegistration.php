@@ -57,7 +57,7 @@ $user_id       = $temp_user["user_id"];
 $user_name     = $temp_user["user_name"];
 $mail_address  = $temp_user["mail_address"];
 $hash_password = $temp_user["password"];
-$auth          = 0; // default auth level of the user.
+$authority     = 0; // default authority of the user.
 
 $t_user = new TUser();
 
@@ -71,7 +71,7 @@ if($t_user->checkMailAddressExists($mail_address)) {
 
 // User account registration
 $t_user_detail       = new TUserDetail();
-list($user_insert_count, $account_id) = $t_user->register($user_id, $user_name, $mail_address, $hash_password, $auth);
+list($user_insert_count, $account_id) = $t_user->register($user_id, $user_name, $mail_address, $hash_password, $authority);
 $detail_insert_count                  = $t_user_detail->initialRegistration($account_id);
 
 if($user_insert_count && $detail_insert_count) {

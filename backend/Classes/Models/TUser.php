@@ -170,20 +170,20 @@ class TUser
      * @param string $hash_password
      * @return boolean
      */
-    public function register($user_id, $user_name, $mail_address, $hash_password, $auth) {
+    public function register($user_id, $user_name, $mail_address, $hash_password, $authority) {
         $query = "INSERT INTO
                     t_users(
                         user_id,
                         user_name,
                         mail_address,
                         password,
-                        auth
+                        authority
                     ) VALUES(
                         :user_id,
                         :user_name,
                         :mail_address,
                         :password,
-                        :auth
+                        :authority
                     )
         ;";
 
@@ -192,7 +192,7 @@ class TUser
             "user_name"    => $user_name,
             "mail_address" => $mail_address,
             "password"     => $hash_password,
-            "auth"         => $auth
+            "authority"         => $authority
         ];
 
         $database = new Database();
