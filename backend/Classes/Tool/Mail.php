@@ -30,16 +30,16 @@ class Mail
         $site_origin    = $ini_array[$key]["origin"];
 
         // Set the subject of the email
-        $mail_subject   = "【Kちゃんねる】ユーザー登録のご確認";
+        $mail_subject   = "【Kちゃんねる】ユーザ登録のご確認";
 
         // Set email message
         $message  = "{$user_name}様\n";
         $message .= "\n";
         $message .= "『Kちゃんねる』です。\n";
         $message .= "\n";
-        $message .= "この度はユーザー登録（仮）頂きありがとうございます。\n";
+        $message .= "この度はユーザ登録（仮）頂きありがとうございます。\n";
         $message .= "\n";
-        $message .= "現在は仮登録の状態です。\n";
+        $message .= "※現在は仮登録の状態です。\n";
         $message .= "本会員登録を完了するには下記URLにアクセスしてください。\n";
         $message .= "\n";
         $message .= "===============================================\n";
@@ -56,7 +56,7 @@ class Mail
         $message .= "===============================================\n";
         $message .= "\n";
         $message .= "Kちゃんねる\n";
-        $message .= "http://www.kchannel.jp/\n";
+        $message .= "https://www.kchannel.jp/\n";
 
         // Set header information(from mail address)
         $headers = "From: info@kchannel.jp";
