@@ -187,9 +187,9 @@ function RegisterAccount() {
 
                     <div className="register-button-content">
                         {inputMailAddress !== "" && inputUserId !== "" && inputUserName !== "" && inputPassword !== "" ?
-                        <button className="button enable" onClick={ register }>登録する</button>
+                        <button className="button enable" onClick={ register }>登録</button>
                         :
-                        <button className="button disable">登録する</button>
+                        <button className="button disable">登 録</button>
                         }
                     </div>
 
