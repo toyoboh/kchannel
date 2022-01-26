@@ -37,7 +37,7 @@ class Mail
         $message .= "\n";
         $message .= "『Kちゃんねる』です。\n";
         $message .= "\n";
-        $message .= "この度はユーザー登録依頼をいただきまして、ありがとうございます。\n";
+        $message .= "この度はユーザー登録（仮）頂きありがとうございます。\n";
         $message .= "\n";
         $message .= "現在は仮登録の状態です。\n";
         $message .= "本会員登録を完了するには下記URLにアクセスしてください。\n";
