@@ -39,13 +39,12 @@ class TTemporaryUser
                     user_id,
                     user_name,
                     mail_address,
-                    password
+                    password,
+                    created_at
                 FROM
                     t_temporary_users
                 WHERE
                     token = :token
-                AND
-                    created_at >= DATE_SUB(NOW(), INTERVAL 1 DAY)
         ;";
 
         $use_query_item = [

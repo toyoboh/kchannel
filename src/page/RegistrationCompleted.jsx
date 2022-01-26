@@ -3,15 +3,20 @@ import { Link, useParams } from "react-router-dom";
 import axios from "axios";
 import "../css/RegistrationCompleted.css";
 import URL from "../info/Url";
+import UIButton from "../component/ui/UIButton";
+import { useHistory } from "react-router-dom";
 
 function RegistrationCompleted() {
+    const history                   = useHistory();
+
     // Parameter
     const { token }                 = useParams();
 
     // State
     const [csrfToken, setCsrfToken] = useState("");
-    const [isExpire, setIsExpire]   = useState(true);
+    const [isEnable, setIsEnable]   = useState(false);
     const [message, setMessage]     = useState("");
+    const [isLoading, setIsLoading] = useState(true);
 
     // Set csrf token
     useEffect(() => {
@@ -38,46 +43,63 @@ function RegistrationCompleted() {
             csrf_token: csrfToken
         })
         .then((res) => {
-            console.log(res);
             if(res.data.success) {
-                setIsExpire(false);
+                setIsEnable(true);
             } else {
-                setIsExpire(true);
+                setIsEnable(false);
                 setMessage(res.data.message);
             }
+            setIsLoading(false);
         })
         .catch((err) => {
             console.log(err);
         })
     }, [csrfToken, token]);
 
+    const goToLogin = () => {
+        history.push("/login");
+    }
+
     return(
         <div className="registration-completed">
-            <div className="main">
-                <div className="app-name-content">
-                    <p className="app-name">Kちゃんねる</p>
+            <div className="container">
+                <h1 className="app-name">
+                    Kちゃんねる
+                </h1>
+
+                <div className="box">
+                    {isLoading ? (
+
+                    <p>確認中...</p>
+
+                    ) : (<>
+                        {isEnable ? (<>
+
+                        <p className="message">この度はユーザ登録頂きありがとうございます。</p>
+
+                        <p className="message">ぜひお楽しみください！</p>
+                        
+                        <div className="button-content">
+                            <UIButton
+                                colorkind="blue"
+                                onClick={ goToLogin }
+                            >Sign in</UIButton>
+                        </div>
+
+                        </>) : (<>
+
+                        <p className="message caution">{ message }</p>
+
+                        <p className="message">
+                            <Link
+                                className="link"
+                                to="/registerAccount"
+                            >こちら</Link>から再度ユーザ登録ください。
+                        </p>
+
+                        </>)}
+                    </>)}
                 </div>
-
-                {isExpire ? (
-                <div className="message-content">
-                    <p className="item">{ message }</p>
-
-                    <p className="item">再度ユーザ登録をしてください。</p>
-
-                    <p className="item login-link-content">
-                        <Link to="/registerAccount">登録する</Link>
-                    </p>
-                </div>
-                ) : (
-                <div className="message-content">
-                    <p className="item">ユーザ登録が完了しました。</p>
-
-                    <p className="item login-link-content">
-                        <Link to="/login">続けてログイン</Link>
-                    </p>
-                </div>
-                )
-                }
             </div>
         </div>
     )

@@ -132,6 +132,7 @@ const UIButton = styled.button`
     font-size: ${props => getFontSize(props.sizekind)};
     margin: 0px;
     padding: ${props => getPadding(props.sizekind)};
+    text-align: center;
 
     &:hover {
         background-color: ${props => getBackgroundColor(props.type, props.colorkind, "hover")};

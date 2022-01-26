@@ -52,6 +52,20 @@ if(!$select_count) {
     exit;
 }
 
+// check expire of the token
+// Exit if it is outside the expiration.
+$temp_user_created_datetime = new DateTime($temp_user["created_at"]);
+$temp_user_token_expire     = $temp_user_created_datetime->modify("+1 days");
+
+$now_datetime               = new DateTime();
+
+if($temp_user_token_expire < $now_datetime) {
+    $res_result["success"] = false;
+    $res_result["message"] = "有効期限切れのリンクです。";
+    echo json_encode($res_result);
+    exit;
+}
+
 // Define each information of the user.
 $user_id       = $temp_user["user_id"];
 $user_name     = $temp_user["user_name"];
@@ -81,5 +95,6 @@ if($user_insert_count && $detail_insert_count) {
     $res_result["message"] = "システムエラー。ユーザ情報が正常に登録できませんでした。";
     $res_result["success"] = false;
 }
+
 
 echo json_encode($res_result);
