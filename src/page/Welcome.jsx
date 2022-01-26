@@ -14,10 +14,9 @@ function Welcome() {
     const goToRegisterAccount = () => {
         history.push("/registerAccount");
     }
+
     return(
         <div className="welcome">
-            {/* <p>Kちゃんねる welcome page</p>
-            <p><UILink to="/login" underline="true">login</UILink></p> */}
             
             <header className="header">
                 <div className="wrapper">

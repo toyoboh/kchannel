@@ -4,7 +4,7 @@
 
 .welcome > .header {
     background-blend-mode:lighten;
-    background-color:rgba(255, 255, 255, 0.1);
+    background-color:rgba(255, 255, 255, 0.2);
     background-image: url("../img/welcome/img1.jpg");
     background-position: center;
     background-repeat: no-repeat;
@@ -57,16 +57,17 @@
 }
 
 .welcome > .header > .wrapper > .box > .button-container .signin {
-    background-color: var(--blue-2);
+    /* background-color: var(--blue-2);
     border: 2px solid var(--blue-2);
-    color: white;
+    color: white; */
+    border: 2px solid var(--blue-2);
+    color: var(--blue-2);
     font-weight: bold;
 }
 
 .welcome > .header > .wrapper > .box > .button-container .signin:hover {
-    background-color: rgba(0, 0, 0, 0);
-    border: 2px solid var(--blue-2);
-    color: var(--blue-2);
+    background-color: var(--blue-2);
+    color: white;
     transition: 0.2s;
 }
 
