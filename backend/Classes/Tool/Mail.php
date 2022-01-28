@@ -18,19 +18,22 @@ class Mail
     public function mainRegistrationGuidance($to_mail_address, $user_name, $token) {
         // Set the key used to read the setting information.
         // HACK: not cool
+        $ini_file_path;
         $key;
         if($_SERVER["HTTP_HOST"] === "api.kchannel.jp") {
-            $key = "kchannel_origin_main";
+            $ini_file_path = __DIR__ . "/../../../../../kchannel/Info/info.ini";
+            $key           = "kchannel_origin_main";
         } else {
-            $key = "kchannel_origin_test";
+            $ini_file_path = __DIR__ . "/../../Info/info.ini";
+            $key           = "kchannel_origin_test";
         }
 
         // Set the origin information of the "Kちゃんねる" site
-        $ini_array      = parse_ini_file(__DIR__ . "/../../Info/info.ini", true);
-        $site_origin    = $ini_array[$key]["origin"];
+        $ini_array    = parse_ini_file($ini_file_path, true);
+        $site_origin  = $ini_array[$key]["origin"];
 
         // Set the subject of the email
-        $mail_subject   = "【Kちゃんねる】ユーザ登録のご確認";
+        $mail_subject = "【Kちゃんねる】ユーザ登録のご確認";
 
         // Set email message
         $message  = "{$user_name}様\n";
