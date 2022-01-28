@@ -101,13 +101,14 @@ function SettingProfile() {
 
     const userNameValidation = () => {
         if(!Validation.checkNotEmpty(inputUserName, setUserNameMessage)) return false;
-        if(!Validation.checkSpecifiedNumberOfCharacters(inputIntroduction, 1, 50, setIntroductionMessage)) return false;
+        if(!Validation.checkSpecifiedNumberOfCharacters(inputUserName, 1, 50, setIntroductionMessage)) return false;
 
         return true;
     }
 
     const introductionValidation = () => {
         // TODO: add validation
+        if(!Validation.checkSpecifiedNumberOfCharacters(inputIntroduction, 0, 500, setIntroductionMessage)) return false;
         return true;
     }
 
