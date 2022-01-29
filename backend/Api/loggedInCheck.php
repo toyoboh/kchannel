@@ -31,12 +31,14 @@ if($session->checkExists("account_id") && !isset($_COOKIE["auto_login_token"])) 
     $account_id = $session->get("account_id");
     $user_id    = $session->get("user_id");
     $user_name  = $session->get("user_name");
+    $authority  = $session->get("authority");
 
     // response data
     $res_result["success"]            = true;
     $res_result["data"]["account_id"] = $account_id;
     $res_result["data"]["user_id"]    = $user_id;
     $res_result["data"]["user_name"]  = $user_name;
+    $res_result["data"]["authority"]  = $authority;
     
     // update last login date at time.
     $t_user = new TUser();
@@ -56,6 +58,7 @@ if($session->checkExists("account_id") && isset($_COOKIE["auto_login_token"])) {
     $account_id = $session->get("account_id");
     $user_id    = $session->get("user_id");
     $user_name  = $session->get("user_name");
+    $authority  = $session->get("authority");
 
     // update last login date at time.
     $t_user = new TUser();
@@ -84,15 +87,15 @@ if($session->checkExists("account_id") && isset($_COOKIE["auto_login_token"])) {
     $res_result["data"]["account_id"] = $account_id;
     $res_result["data"]["user_id"]    = $user_id;
     $res_result["data"]["user_name"]  = $user_name;
+    $res_result["data"]["authority"]  = $authority;
 
     // returns
     echo json_encode($res_result);
     exit;
 }
 
-// セッション情報はないがクッキー情報はある人、
-// セッション情報がある時点で直近でログインしたと思われるので、クッキーの期限確認は不要
-// 上記はまちがい！！！端末の時間設定がおかしい可能性もあるので、DBのcreate_atを見る必要がある
+// セッション情報はないがクッキー情報はある人
+// DBに存在するtokenに登録日時が有効期限内(現在は2週間)ならログイン成功
 if(!$session->checkExists("account_id") && isset($_COOKIE["auto_login_token"])) {
     // get auto_login_token of the cookie
     $old_auto_login_token = $_COOKIE["auto_login_token"];
@@ -115,6 +118,7 @@ if(!$session->checkExists("account_id") && isset($_COOKIE["auto_login_token"])) 
     $account_id       = $user["account_id"];
     $user_id          = $user["user_id"];
     $user_name        = $user["user_name"];
+    $authority        = $user["authority"];
     $token_created_at = $user["token_created_at"];
 
     // expiry of the auto login token
@@ -152,12 +156,14 @@ if(!$session->checkExists("account_id") && isset($_COOKIE["auto_login_token"])) 
     $session->set("account_id", $account_id);
     $session->set("user_id", $user_id);
     $session->set("user_name", $user_name);
+    $session->set("authority", $authority);
     
     // formatting response data
     $res_result["success"]            = true;
     $res_result["data"]["account_id"] = $account_id;
     $res_result["data"]["user_id"]    = $user_id;
     $res_result["data"]["user_name"]  = $user_name;
+    $res_result["data"]["authority"]  = $authority;
 
     // returns
     echo json_encode($res_result);

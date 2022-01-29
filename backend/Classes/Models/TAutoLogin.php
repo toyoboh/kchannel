@@ -50,6 +50,7 @@ class TAutoLogin
                     TU.daccount_id AS account_id,
                     TU.user_id     AS user_id,
                     TU.user_name   AS user_name,
+                    TU.authority   AS authority,
                     TAL.created_at AS token_created_at
                 FROM
                     t_auto_login TAL

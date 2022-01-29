@@ -68,7 +68,8 @@ class TUser
                     account_id,
                     user_id,
                     user_name,
-                    password
+                    password,
+                    authority
                 FROM
                     t_users
                 WHERE

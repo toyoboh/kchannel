@@ -67,11 +67,13 @@ if(!password_verify($plaintext_password, $hash_password)) {
 // When login is successful
 // TODO: Needs processing in case of failure.
 
-// update last login date at time.
+// Define each variable of user information
 $account_id = $user_information["account_id"];
 $user_id    = $user_information["user_id"];
 $user_name  = $user_information["user_name"];
+$authority  = $user_information["authority"];
 
+// update last login date at time.
 $t_user->updateAtLogin($account_id);
 
 // Set session information
@@ -79,6 +81,7 @@ $session->regenerate();
 $session->set("account_id", $account_id);
 $session->set("user_id"   , $user_id);
 $session->set("user_name" , $user_name);
+$session->set("authority" , $authority);
 
 if($is_auto_login) {
     // create auto login token
@@ -103,6 +106,7 @@ $res_result["success"]            = true;
 $res_result["data"]["account_id"] = $account_id;
 $res_result["data"]["user_id"]    = $user_id;
 $res_result["data"]["user_name"]  = $user_name;
+$res_result["data"]["authority"]  = $authority;
 
 
 echo json_encode($res_result);

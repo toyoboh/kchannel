@@ -68,6 +68,7 @@ function Login() {
                     account_id: res.data.data.account_id,
                     user_id   : res.data.data.user_id,
                     user_name : res.data.data.user_name,
+                    authority : res.data.data.authority,
                     is_auth   : true
                 });
                 history.push("/categoryList");
