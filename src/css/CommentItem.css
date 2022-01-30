@@ -15,6 +15,7 @@
     color: var(--black-2);
     font-size: 16px;
     margin-bottom: 4px;
+    word-break: break-word;
 }
 
 .comment-item > .comment-footer {
