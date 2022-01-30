@@ -139,9 +139,9 @@ function SettingProfile() {
                             >保存する</UIButton>
                         </div>
 
-                        <div className="user-icon-content">
+                        {/* <div className="user-icon-content">
                             <div className="user-icon"></div>
-                        </div>
+                        </div> */}
 
                         <div className="user-main-content">
                             <div className="user-name-content">

@@ -8,10 +8,11 @@ class TUser
 {
     public function getUserProfile($user_id) {
         $query = "SELECT
-                    users.account_id     AS account_id,
-                    users.user_id        AS user_id,
-                    users.user_name      AS user_name,
-                    details.introduction AS introduction
+                    users.account_id                         AS account_id,
+                    users.user_id                            AS user_id,
+                    users.user_name                          AS user_name,
+                    DATE_FORMAT(users.created_at, '%Y年%m月') AS created_at,
+                    details.introduction                     AS introduction
                 FROM
                     t_users users
                 INNER JOIN

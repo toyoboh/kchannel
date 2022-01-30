@@ -28,19 +28,36 @@
 }
 
 .profile > .wrapper > .user-main-content > .user-name {
-    font-size: 16px;
-    font-weight: 600;
+    color: var(--black-2);
+    font-size: 18px;
+    font-weight: bold;
     margin-bottom: 12px;
 }
 
 .profile > .wrapper > .user-main-content > .user-id {
-    font-size: 12px;
+    color: var(--black-3);
+    font-size: 14px;
     margin-bottom: 12px;
 }
 
 .profile > .wrapper > .user-main-content > .introduction {
-    font-size: 14px;
+    font-size: 16px;
+    margin-bottom: 12px;
 }
+
+.profile > .wrapper > .user-main-content > .registration-date {
+    align-items: center;
+    color: var(--black-3);
+    font-size: 14px;
+    display: flex;
+}
+
+.profile > .wrapper > .user-main-content > .registration-date > .MuiSvgIcon-root {
+    font-size: 16px;
+    margin-right: 4px;
+}
+
+
 
 @media(max-width: 480px) {
 

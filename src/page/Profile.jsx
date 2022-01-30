@@ -1,6 +1,7 @@
 import "../css/Profile.css";
 import axios                          from "axios";
 import React, { useState, useEffect } from "react";
+import ScheduleOutlinedIcon           from "@material-ui/icons/ScheduleOutlined";
 import UIButton                       from "../component/ui/UIButton";
 import URL                            from "../info/Url";
 import { useParams, useHistory }      from "react-router-dom";
@@ -85,19 +86,27 @@ function Profile() {
                         </div>
                         }
 
-                        <div className="user-icon-content">
+                        {/* <div className="user-icon-content">
                             <div className="user-icon"></div>
-                        </div>
+                        </div> */}
 
                         <div className="user-main-content">
                             <div className="user-name">
                                 { userInformation.user_name }
                             </div>
+
                             <div className="user-id">
-                                { userInformation.user_id }
+                                @{ userInformation.user_id }
                             </div>
+
+                            {userInformation.introduction &&
                             <div className="introduction">
                                 { userInformation.introduction }
+                            </div>
+                            }
+
+                            <div className="registration-date">
+                                <ScheduleOutlinedIcon />{ userInformation.created_at}に登録されました
                             </div>
                         </div>
                     </>
