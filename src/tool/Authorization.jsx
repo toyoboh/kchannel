@@ -9,11 +9,11 @@ export default class Authorization
     }
 
     createCategory() {
-        return this.can([1, 2]);
+        return this.can([2]);
     }
 
     createBoard() {
-        return this.can([1, 2]);
+        return this.can([2]);
     }
 
     createThread() {
