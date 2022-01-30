@@ -71,7 +71,7 @@ $user_id       = $temp_user["user_id"];
 $user_name     = $temp_user["user_name"];
 $mail_address  = $temp_user["mail_address"];
 $hash_password = $temp_user["password"];
-$authority     = 0; // default authority of the user.
+$authority     = 1; // default authority of the user.
 
 $t_user = new TUser();
 
