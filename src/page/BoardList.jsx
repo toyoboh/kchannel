@@ -1,4 +1,5 @@
 import "../css/BoardList.css";
+import Authorization from "../tool/Authorization";
 import axios                          from "axios";
 import BreadcrumbNavigation           from "../component/BreadcrumbNavigation";
 import Card                           from "../component/Card";
@@ -10,23 +11,26 @@ import ReceiptIcon                    from "@material-ui/icons/Receipt";
 import UISearchInput                  from "../component/ui/UISearchInput";
 import URL                            from "../info/Url";
 import { useParams }                  from "react-router-dom";
+import { useUserContext }             from "../context/User";
 
 function BoardList() {
-    // category id received by parameter
-    const { categoryId } = useParams();
+    const { user }                              = useUserContext();
+    const authorization                         = new Authorization(user.authority);
 
+    // category id received by parameter
+    const { categoryId }                        = useParams();
     // state
-    const [csrfToken, setCsrfToken] = useState("");
+    const [csrfToken, setCsrfToken]             = useState("");
     // initial
-    const [initialLoading, setInitialLoading] = useState(true);
-    const [categoryExists, setCategoryExists] = useState(false);
+    const [initialLoading, setInitialLoading]   = useState(true);
+    const [categoryExists, setCategoryExists]   = useState(false);
     // board
-    const [boards, setBoards] = useState([]);
-    const [boardCount, setBoardCount] = useState(0);
+    const [boards, setBoards]                   = useState([]);
+    const [boardCount, setBoardCount]           = useState(0);
     // input item
     const [inputSearchWord, setInputSearchWord] = useState("");
     // message
-    const [contentMessage, setContentMessage] = useState("");
+    const [contentMessage, setContentMessage]   = useState("");
 
     // Set csrf token
     useEffect(() => {
@@ -153,12 +157,14 @@ function BoardList() {
                         <BreadcrumbNavigation />
                     </div>
 
+                    {authorization.createBoard() &&
                     <div className="create-link-content">
                         <CreateLink
                             path={ "/createBoard/" + categoryId }
                             title="掲示板作成ページに移動する"
                         />
                     </div>
+                    }
 
                     <div className="search-content">
                         <UISearchInput

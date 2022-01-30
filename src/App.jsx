@@ -1,27 +1,33 @@
-import React from "react";
-import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import "./css/App.css";
-import Header from "./component/Header";
-import Home from "./page/Home";
-import CategoryList from "./page/CategoryList";
-import BoardList from "./page/BoardList";
-import ThreadList from "./page/ThreadList";
-import CommentList from "./page/CommentList";
-import Profile from "./page/Profile";
-import SettingProfile from "./page/SettingProfile";
-import CreateCategory from "./page/CreateCategory";
-import CreateBoard from "./page/CreateBoard";
-import CreateThread from "./page/CreateThread";
-import Login from "./page/Login";
-import RegisterAccount from "./page/RegisterAccount";
-import PrivateRoute from "./component/route/PrivateRoute";
-import PublicRoute from "./component/route/PublicRoute";
-import RegistrationCompleted from "./page/RegistrationCompleted";
-import TemporaryRegistrationCompleted from "./page/TemporaryRegistrationCompleted";
-import ERROR404 from "./page/ERROR404";
-import Welcome from "./page/Welcome";
+import Authorization                              from "./tool/Authorization";
+import BoardList                                  from "./page/BoardList";
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import CategoryList                               from "./page/CategoryList";
+import ClientError                                from "./page/ClientError";
+import CommentList                                from "./page/CommentList";
+import CreateBoard                                from "./page/CreateBoard";
+import CreateCategory                             from "./page/CreateCategory";
+import CreateThread                               from "./page/CreateThread";
+import Header                                     from "./component/Header";
+import Home                                       from "./page/Home";
+import Login                                      from "./page/Login";
+import PrivateRoute                               from "./component/route/PrivateRoute";
+import Profile                                    from "./page/Profile";
+import PublicRoute                                from "./component/route/PublicRoute";
+import React                                      from "react";
+import RegistrationCompleted                      from "./page/RegistrationCompleted";
+import RegisterAccount                            from "./page/RegisterAccount";
+import SettingProfile                             from "./page/SettingProfile";
+import TemporaryRegistrationCompleted             from "./page/TemporaryRegistrationCompleted";
+import ThreadList                                 from "./page/ThreadList";
+import { useUserContext }                         from "./context/User";
+import Welcome                                    from "./page/Welcome";
 
 function App() {
+    const { user } = useUserContext();
+
+    const authorization = new Authorization(user.authority);
+
     return (
         <div className="app">
             <Router>
@@ -53,18 +59,30 @@ function App() {
                     </PrivateRoute>
 
                     <PrivateRoute path="/createCategory">
-                        <Header />
-                        <CreateCategory />
+                        {authorization.createCategory() ? (<>
+                            <Header />
+                            <CreateCategory />
+                        </>) : (
+                            <ClientError errorCode="401" />
+                        )}
                     </PrivateRoute>
 
                     <PrivateRoute path="/createBoard/:categoryId">
-                        <Header />
-                        <CreateBoard />
+                        {authorization.createCategory() ? (<>
+                            <Header />
+                            <CreateBoard />
+                        </>) : (
+                            <ClientError errorCode="401" />
+                        )}
                     </PrivateRoute>
 
                     <PrivateRoute path="/createThread/:boardId">
-                        <Header />
-                        <CreateThread />
+                        {authorization.createCategory() ? (<>
+                            <Header />
+                            <CreateThread />
+                        </>) : (
+                            <ClientError errorCode="401" />
+                        )}
                     </PrivateRoute>
 
                     <PrivateRoute path="/categoryList">
@@ -87,7 +105,11 @@ function App() {
                         <CommentList />
                     </PrivateRoute>
 
-                    <Route component={ ERROR404 } />
+                    <Route>
+                        <ClientError 
+                            errorCode={ 404 }
+                        />
+                    </Route>
                 </Switch>
             </Router>
         </div>

@@ -1,4 +1,5 @@
 import "../css/ThreadList.css";
+import Authorization                  from "../tool/Authorization";
 import axios                          from "axios";
 import BreadcrumbNavigation           from "../component/BreadcrumbNavigation";
 import Card                           from "../component/Card";
@@ -10,24 +11,28 @@ import React, { useState, useEffect } from "react";
 import UISearchInput                  from "../component/ui/UISearchInput";
 import URL                            from "../info/Url";
 import { useParams }                  from "react-router-dom";
+import { useUserContext }             from "../context/User";
 
 function ThreadList() {
+    const { user }                              = useUserContext();
+    const authorization                         = new Authorization(user.authority);
+
     // board id received by parameter
-    const { boardId } = useParams();
+    const { boardId }                           = useParams();
 
     // state
     // CSRF token
-    const [csrfToken, setCsrfToken] = useState("");
+    const [csrfToken, setCsrfToken]             = useState("");
     // initial process
-    const [initialLoading, setInitialLoading]       = useState(true);
-    const [boardExists, setBoardExists]           = useState(false);
+    const [initialLoading, setInitialLoading]   = useState(true);
+    const [boardExists, setBoardExists]         = useState(false);
     // thread information
-    const [threads, setThreads] = useState([]);
-    const [threadCount, setThreadCount] = useState(0);
+    const [threads, setThreads]                 = useState([]);
+    const [threadCount, setThreadCount]         = useState(0);
     // input item
     const [inputSearchWord, setInputSearchWord] = useState("");
     // content message
-    const [contentMessage, setContentMessage] = useState("");
+    const [contentMessage, setContentMessage]   = useState("");
 
     // Set csrf token
     useEffect(() => {
@@ -163,12 +168,14 @@ function ThreadList() {
                             <BreadcrumbNavigation />
                         </div>
 
+                        {authorization.createThread() &&
                         <div className="create-link-content">
                             <CreateLink
                                 path={ "/createThread/" + boardId }
                                 title="スレッド作成ページに移動する"
                                 />
                         </div>
+                        }
 
                         <div className="search-content">
                             <UISearchInput

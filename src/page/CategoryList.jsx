@@ -1,4 +1,5 @@
 import "../css/CategoryList.css";
+import Authorization                  from "../tool/Authorization";
 import axios                          from "axios";
 import Card                           from "../component/Card";
 import CategoryIcon                   from "@material-ui/icons/Category";
@@ -7,8 +8,12 @@ import PageTitle                      from "../component/PageTitle";
 import React, { useState, useEffect } from "react";
 import UISearchInput                  from "../component/ui/UISearchInput";
 import URL                            from "../info/Url";
+import { useUserContext }             from "../context/User";
 
 function CategoryList() {
+    const { user }                            = useUserContext();
+    const authorization                       = new Authorization(user.authority);
+    
     // state
     // initail loaging
     const [initialLoading, setInitialLoading] = useState(true);
@@ -106,12 +111,14 @@ function CategoryList() {
                     <PageTitle Icon={ CategoryIcon } title="カテゴリー" />
                 </div>
 
+                {authorization.createCategory() &&
                 <div className="create-link-content">
                     <CreateLink
                         path="/createCategory"
                         title="カテゴリー作成ページに移動する"
                     />
                 </div>
+                }
 
                 <div className="search-content">
                     <UISearchInput
