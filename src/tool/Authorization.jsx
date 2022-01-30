@@ -1,4 +1,4 @@
-class Auth
+class Authorization
 {
     constructor(authority) {
         this.authority = authority;
@@ -29,4 +29,4 @@ class Auth
     }
 }
 
-export default new Auth();
+export default Authorization;
