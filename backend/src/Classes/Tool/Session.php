@@ -82,6 +82,8 @@ class Session {
      * @return boolean
      */
     public function checkMatch($item, $key) {
+        if(!$this->checkExists($key)) return false;
+        
         return $item === $_SESSION[$key];
     }
 }
