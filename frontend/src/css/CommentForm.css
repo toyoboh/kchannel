@@ -3,12 +3,14 @@
 }
 
 .comment-form > .comment-textarea {
-    background-color: var(--white-1);
-    border: solid 1px var(--black-5);
+    border: solid 1px var(--black-6);
+    border-radius: 4px;
+    caret-color: var(--black-2);
+    color: var(--black-2);
     font-size: 16px;
     height: 150px;
     margin-bottom: 12px;
-    padding: 6px;
+    padding: 6px 12px;
     width: 100%;
 }
 
