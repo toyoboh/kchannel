@@ -11,7 +11,7 @@ import { Link } from "react-router-dom";
 function Card({ title, count, createdAt, createdUserName, path, Icon }) {
     return(
         <div className="card">
-            <Link to={ path }>
+            <Link className="link" to={ path }>
                 <div className="card-header">
                     <div className="header-created-at">
                         { createdAt }

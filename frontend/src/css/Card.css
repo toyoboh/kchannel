@@ -1,5 +1,4 @@
 .card {
-    padding: 16px 8px;
     width: 100%;
 }
 
@@ -7,41 +6,46 @@
     background-color: var(--black-9);
 }
 
-.card-header {
+.card > .link {
+    display: block;
+    padding: 16px 8px;
+}
+
+.card > .link > .card-header {
     margin-bottom: 8px;
 }
 
-.card-header > .header-created-at {
+.card > .link > .card-header > .header-created-at {
     color: var(--green-1);
     font-size: 12px;
     font-weight: 200;
 }
 
-.card-header > .header-created-user-name {
+.card > .link > .card-header > .header-created-user-name {
     font-size: 12px;
 }
 
-.card-body {
+.card > .link > .card-body {
     align-items: center;
     display: flex;
     justify-content: space-between;
 }
 
-.card-body > .body-title {
+.card > .link > .card-body > .body-title {
     color: var(--black-2);
     flex: 1;
     font-weight: bold;
     word-break: break-word;
 }
 
-.card-body > .body-count {
+.card > .link > .card-body > .body-count {
     color: var(--black-2);
     font-size: 14px;
     text-align: right;
     width: 50px;
 }
 
-.card-body > .body-count > .MuiSvgIcon-root {
+.card > .link > .card-body > .body-count > .MuiSvgIcon-root {
     color: var(--black-2);
     font-size: 18px;
     margin-right: 2px;
