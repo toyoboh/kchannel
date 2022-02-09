@@ -39,7 +39,7 @@ class Database
         $info_file_path;
         if($_SERVER["HTTP_HOST"] === "api.kchannel.jp") {
             $key = "kchannel_db_main";
-            $info_file_path = __DIR__ . "/../../../../../kchannel/Info/info.ini";
+            $info_file_path = __DIR__ . "/../../../../../../kchannel/Info/info.ini";
         } else {
             $key = "kchannel_db_test";
             $info_file_path = __DIR__ . "/../../Info/info.ini";
