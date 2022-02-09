@@ -9,7 +9,7 @@ const Header = () => {
     const { user } = useUserContext();
 
     return(
-        <div className="header">
+        <div className="top-header">
             <div className="wrapper">
                 <ul className="items">
                     <li className="item">
