@@ -10,23 +10,23 @@ const Header = () => {
 
     return(
         <div className="header">
-            <div className="header-wrapper">
-                <ul className="header-item-wrapper">
-                    <Link className="header-item" to="/categoryList">
-                        <li>
-                            <DvrIcon />
-                        </li>
-                    </Link>
-                    <Link className="header-item" to="/home">
-                        <li>
+            <div className="wrapper">
+                <ul className="items">
+                    <li className="item">
+                        <Link className="link" to="/categoryList">
+                            <span><DvrIcon /></span>
+                        </Link>
+                    </li>
+                    <li className="item">
+                        <Link className="link" to="/home">
                             Kちゃんねる
-                        </li>
-                    </Link>
-                    <Link className="header-item" to={ "/profile/" + user.user_id }>
-                        <li>
+                        </Link>
+                    </li>
+                    <li className="item">
+                        <Link className="link" to={ "/profile/" + user.user_id }>
                             <PersonOutlineIcon />
-                        </li>
-                    </Link>
+                        </Link>
+                    </li>
                 </ul>
             </div>
         </div>
