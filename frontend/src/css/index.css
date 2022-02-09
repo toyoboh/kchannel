@@ -1,26 +1,9 @@
 body {
     font-family: "Hannotate SC", sans-serif;
     font-size: 16px;
-    /* --base-color: #F2F2F2;
-    --sub-color: #ffd5e5;
-    --main-color: #593442;
-    --accent-color: #F2A7C3; */
-    
-    /* グレー系（青） */
-    --base-color: #F2F0F0;
-    --sub-color: #b9c3cc;
-    --main-color: #72808C;
-    --accent-color: #394A59;
-
-    /* 黒系 */
-    /* --base-color: #eee;
-    --sub-color: #ccc;
-    --main-color: #666;
-    --accent-color: #333; */
-
+    overflow: scroll;
     
     --error-color: #F06060;
-
     --blue: #007FFF;
 
     --black-1: #000000;
