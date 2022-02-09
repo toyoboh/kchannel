@@ -4,10 +4,11 @@ import axios                          from "axios";
 import BreadcrumbNavigation           from "../component/BreadcrumbNavigation";
 import Card                           from "../component/Card";
 import CreateLink                     from "../component/CreateLink";
+import DescriptionOutlinedIcon        from "@material-ui/icons/DescriptionOutlined";
 import NoContent                      from "../component/NoContent";
 import PageTitle                      from "../component/PageTitle";
 import React, { useState, useEffect } from "react";
-import ReceiptIcon                    from "@material-ui/icons/Receipt";
+import ReceiptOutlinedIcon                    from "@material-ui/icons/ReceiptOutlined";
 import UISearchInput                  from "../component/ui/UISearchInput";
 import URL                            from "../info/Url";
 import { useParams }                  from "react-router-dom";
@@ -133,6 +134,7 @@ function BoardList() {
                     count={ board.thread_count }
                     createdAt={ board.created_at }
                     path={ "/threadList/" + board.board_id }
+                    Icon={ DescriptionOutlinedIcon }
                     />;
         })
     }
@@ -150,7 +152,7 @@ function BoardList() {
                     ) : (<>
 
                     <div className="board-list-title">
-                        <PageTitle Icon={ ReceiptIcon } title="掲示板" />
+                        <PageTitle Icon={ ReceiptOutlinedIcon } title="掲示板" />
                     </div>
 
                     <div className="breadcrumb-navigation-container">

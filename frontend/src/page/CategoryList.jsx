@@ -2,10 +2,11 @@ import "../css/CategoryList.css";
 import Authorization                  from "../tool/Authorization";
 import axios                          from "axios";
 import Card                           from "../component/Card";
-import CategoryIcon                   from "@material-ui/icons/Category";
+import CategoryOutlinedIcon           from "@material-ui/icons/CategoryOutlined";
 import CreateLink                     from "../component/CreateLink";
 import PageTitle                      from "../component/PageTitle";
 import React, { useState, useEffect } from "react";
+import ReceiptOutlinedIcon                    from "@material-ui/icons/ReceiptOutlined";
 import UISearchInput                  from "../component/ui/UISearchInput";
 import URL                            from "../info/Url";
 import { useUserContext }             from "../context/User";
@@ -94,6 +95,7 @@ function CategoryList() {
                     count={ category.board_count }
                     createdAt={ category.created_at }
                     path={ "/boardList/" + category.category_id }
+                    Icon={ ReceiptOutlinedIcon }
                 />
             )
         })
@@ -108,7 +110,7 @@ function CategoryList() {
                 ) : (<>
 
                 <div className="title-content">
-                    <PageTitle Icon={ CategoryIcon } title="カテゴリー" />
+                    <PageTitle Icon={ CategoryOutlinedIcon } title="カテゴリー" />
                 </div>
 
                 {authorization.createCategory() &&

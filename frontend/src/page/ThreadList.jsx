@@ -5,6 +5,7 @@ import BreadcrumbNavigation           from "../component/BreadcrumbNavigation";
 import Card                           from "../component/Card";
 import CreateLink                     from "../component/CreateLink";
 import DescriptionIcon                from "@material-ui/icons/Description";
+import MessageOutlinedIcon            from "@material-ui/icons/MessageOutlined";
 import NoContent                      from "../component/NoContent";
 import PageTitle                      from "../component/PageTitle";
 import React, { useState, useEffect } from "react";
@@ -141,6 +142,7 @@ function ThreadList() {
                     createdAt={ thread.created_at }
                     createdUserName={ thread.created_user_name }
                     path={ "/commentList/" + thread.thread_id }
+                    Icon={ MessageOutlinedIcon }
                     />;
         })
     }
