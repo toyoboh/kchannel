@@ -2,7 +2,7 @@
     background-color: var(--black-9);
     box-shadow: 0px 0px 4px var(--black-5);
     margin-bottom: 16px; /* 本当はコメントリストページで指定したい */
-    padding: 6px;
+    padding: 8px;
 }
 
 .comment-item > .comment-header {
