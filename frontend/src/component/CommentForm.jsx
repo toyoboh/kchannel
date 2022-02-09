@@ -1,5 +1,6 @@
 import React from "react";
 import "../css/CommentForm.css";
+import UIButton from "./ui/UIButton";
 
 function CommentForm({ refItem, value, changeFunction, clickFunction }) {
     return(
@@ -11,10 +12,11 @@ function CommentForm({ refItem, value, changeFunction, clickFunction }) {
                 onChange={ (e) => changeFunction(e.target.value) }
             ></textarea>
 
-            <button
+            <UIButton
                 className="button"
+                colorkind="blue"
                 onClick={ clickFunction }
-            >投稿</button>
+            >投稿</UIButton>
         </div>
     )
 }
