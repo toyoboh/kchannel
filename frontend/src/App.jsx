@@ -68,7 +68,7 @@ function App() {
                     </PrivateRoute>
 
                     <PrivateRoute path="/createBoard/:categoryId">
-                        {authorization.createCategory() ? (<>
+                        {authorization.createBoard() ? (<>
                             <Header />
                             <CreateBoard />
                         </>) : (
@@ -77,7 +77,7 @@ function App() {
                     </PrivateRoute>
 
                     <PrivateRoute path="/createThread/:boardId">
-                        {authorization.createCategory() ? (<>
+                        {authorization.createThread() ? (<>
                             <Header />
                             <CreateThread />
                         </>) : (
