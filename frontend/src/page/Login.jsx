@@ -20,8 +20,8 @@ function Login() {
     // csrf token
     const [csrfToken, setCsrfToken]                 = useState("");
     // Input item
-    const [inputUserInfo, setInputUserInfo]         = useState(""); //test_user_id
-    const [inputPassword, setInputPassword]         = useState(""); //password
+    const [inputUserInfo, setInputUserInfo]         = useState("test_user_id"); //test_user_id
+    const [inputPassword, setInputPassword]         = useState("test_user_password"); //password
     const [switchInputType, setSwitchInputType]     = useState("password");
     const [passwordCheckbox, setPasswordCheckbox]   = useState(false);
     const [isAutoLogin, setIsAutoLogin]             = useState(false);

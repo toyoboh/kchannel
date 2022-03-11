@@ -24,7 +24,7 @@ if($select_count > 0) {
     $res_data["data"]["boards"] = $boards;
 } else {
     $res_data["success"]        = false;
-    $res_data["message"]        = "このカテゴリーにはまだ掲示板がありません。初めての掲示板をつくりましょう！";
+    $res_data["message"]        = "このカテゴリーにはまだ掲示板がありません。";
     $res_data["data"]["boards"] = array();
 }
 

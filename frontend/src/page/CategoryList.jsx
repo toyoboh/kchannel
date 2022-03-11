@@ -69,8 +69,6 @@ function CategoryList() {
         })
         .then((res) => {
             if(res.data.success) {
-                console.log(searchWord)
-                console.log(res.data.data.categories)
                 setCategories(res.data.data.categories);
                 setMessage("");
             } else {
